@@ -1,6 +1,6 @@
 ﻿import { SupabaseClient } from '@supabase/supabase-js';
-import { NavigateFunction } from 'react-router-dom';
 import { SubscriptionFormValues } from '@/types/subscription';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface ProcessDirectSubscriptionParams {
   values: SubscriptionFormValues;
@@ -10,7 +10,7 @@ interface ProcessDirectSubscriptionParams {
   existingSubscription: any;
   normalizedWebsiteUrl: string | null;
   supabase: SupabaseClient;
-  navigate: NavigateFunction;
+  navigate: AppRouterInstance;
   toast: ({ title, description, variant }: { title: string; description: string; variant?: 'default' | 'destructive' }) => void;
 }
 
@@ -84,6 +84,6 @@ export const processDirectSubscription = async ({
   });
 
   const updateParam = existingSubscription ? "&update=true" : "";
-  router.push(`/success?subscription_id=${subscriptionId}&points=${totalPoints}${updateParam}`);
+  navigate.push(`/success?subscription_id=${subscriptionId}&points=${totalPoints}${updateParam}`);
 };
 

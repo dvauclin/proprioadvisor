@@ -14,8 +14,7 @@ import MultipleDevisModal from "@/components/favoris/MultipleDevisModal";
 const Favoris = () => {
   const {
     favorites,
-    clearFavorites,
-    removeFromFavorites
+    clearFavorites
   } = useFavorites();
   const {
     toast
@@ -106,7 +105,7 @@ const Favoris = () => {
           {safeFavorites.map(favorite => favorite.conciergerie ? <ComparisonCard key={favorite.id} formule={favorite} conciergerie={favorite.conciergerie} onDevisClick={() => handleSingleDevisRequest(favorite.id, favorite.conciergerie!.id)} /> : null)}
         </div>}
 
-      <DevisModal open={showSingleDevisModal} onOpenChange={setShowSingleDevisModal} selectedFormule={selectedFormule} formuleData={selectedFormuleData} />
+      <DevisModal open={showSingleDevisModal} onOpenChange={setShowSingleDevisModal} selectedFormule={selectedFormule} formuleData={selectedFormuleData || null} />
 
       <MultipleDevisModal open={showMultipleDevisModal} onOpenChange={setShowMultipleDevisModal} favorites={safeFavorites} />
     </div>;

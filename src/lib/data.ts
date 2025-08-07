@@ -84,7 +84,6 @@ export const getAllConciergeries = async (): Promise<Conciergerie[]> => {
     const latestSubscription = auroraConciergerie.subscriptions?.[0];
     console.log("🌟 FOUND Aurora Conciergerie:", {
       nom: auroraConciergerie.nom,
-      score: auroraConciergerie.score,
       scoreManuel: auroraConciergerie.score_manuel,
       totalPoints: latestSubscription?.total_points,
       effectiveScore: auroraConciergerie.score_manuel ?? (latestSubscription?.total_points || 0),
@@ -102,9 +101,8 @@ export const getAllConciergeries = async (): Promise<Conciergerie[]> => {
   // 🔍 DIAGNOSTIC: Log all conciergeries with effective scores
   console.log("🔍 ALL CONCIERGERIES EFFECTIVE SCORES:");
   transformedData.forEach(c => {
-    const latestSubscription = c.subscriptions?.[0];
-    const effectiveScore = c.scoreManuel ?? (latestSubscription?.total_points || 0);
-    console.log(`  - ${c.nom}: effectiveScore=${effectiveScore} (scoreManuel=${c.scoreManuel}, totalPoints=${latestSubscription?.total_points}), createdAt=${c.createdAt}`);
+    const effectiveScore = c.scoreManuel ?? 0;
+    console.log(`  - ${c.nom}: effectiveScore=${effectiveScore} (scoreManuel=${c.scoreManuel}), createdAt=${c.createdAt}`);
   });
   
   return transformedData;

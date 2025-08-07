@@ -1,9 +1,8 @@
 
 import { useState, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { FormValues } from "@/hooks/useInscriptionSchema";
 
-export const useVilleSelection = (form: UseFormReturn<FormValues>) => {
+export const useVilleSelection = <T extends { villesIds: string[] }>(form: UseFormReturn<T>) => {
   const [selectedVillesIds, setSelectedVillesIds] = useState<string[]>([]);
 
   const handleVilleSelection = (villeId: string) => {
@@ -18,7 +17,7 @@ export const useVilleSelection = (form: UseFormReturn<FormValues>) => {
 
   // Mise à jour des villesIds dans le formulaire à chaque changement de sélection
   useEffect(() => {
-    form.setValue("villesIds", selectedVillesIds);
+    (form as any).setValue("villesIds", selectedVillesIds);
   }, [selectedVillesIds, form]);
 
   return {

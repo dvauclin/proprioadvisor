@@ -15,13 +15,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Link from "next/link";
 
 const Subscription = () => {
+  // Récupération des données de souscription
   const {
     conciergerieId,
     conciergerieName,
     conciergerieEmail,
     existingSubscription,
     currentMonthlyPayment,
-    renewalDay,
     isLoadingSubscriptionData
   } = useSubscriptionData();
   const { user } = useAuth();

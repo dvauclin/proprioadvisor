@@ -64,6 +64,7 @@ const useFormField = () => {
     isSubmitting: false,
     isValidating: false,
     isValid: false,
+    isReady: false,
     submitCount: 0,
     dirtyFields: {},
     touchedFields: {},

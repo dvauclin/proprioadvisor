@@ -96,7 +96,7 @@ const MapRenderer: React.FC<MapRendererProps> = ({
             // Close all other popups first
             popupsRef.current.forEach(p => p.remove());
             
-            if (!popupOnMap) {
+            if (!popupOnMap && ville.longitude && ville.latitude) {
               popup.setLngLat([ville.longitude, ville.latitude]).addTo(map.current!);
               // Notify parent that a city has been selected
               handleVilleSelect(ville.slug);

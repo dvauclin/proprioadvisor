@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, ArrowLeft } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 const ResetPassword = () => {
@@ -17,8 +17,7 @@ const ResetPassword = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isValidSession, setIsValidSession] = useState(false);
-  
-  const searchParams = useSearchParams();
+
   const { updatePassword } = useAuth();
   const router = useRouter();
 
@@ -59,11 +58,7 @@ const ResetPassword = () => {
         setError(error.message);
       } else {
         // Rediriger vers la page d'accueil après succès
-        router.push('/', { 
-          state: { 
-            message: 'Votre mot de passe a été mis à jour avec succès' 
-          }
-        });
+        router.push('/');
       }
     } catch (error: any) {
       setError('Une erreur est survenue lors de la mise à jour du mot de passe');

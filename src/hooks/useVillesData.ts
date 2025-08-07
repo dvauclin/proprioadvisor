@@ -57,7 +57,7 @@ export const useVillesData = () => {
           villeMereId: ville.ville_mere_id || undefined,
           region: cityRegions[ville.nom.toLowerCase()] || 'autre', // Add region for filtering
           villesLiees: ville.villes_liees || [], // Include linked cities
-          createdAt: ville.created_at
+          createdAt: ville.created_at || undefined
         }));
 
         setVilles(villesData);

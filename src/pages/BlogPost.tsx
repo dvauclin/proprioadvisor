@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import StructuredData from "@/components/seo/StructuredData";
 import { createArticleStructuredData, createBreadcrumbStructuredData } from "@/utils/structuredDataHelpers";
@@ -90,7 +89,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
   
   const extendedArticle = article as any;
   const articleImage = article.image ? getValidImageUrl(article.image) || undefined : undefined;
-  const canonicalUrl = `https://proprioadvisor.fr/${slug}`;
+
   const breadcrumbItems = [{
     label: "Accueil",
     href: "/"

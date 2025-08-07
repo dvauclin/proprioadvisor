@@ -100,8 +100,6 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
     urlAvis: conciergerie.url_avis || '',
     // Note: villes relation is not available in current schema
     villes: [],
-    // Add subscriptions
-    subscriptions: conciergerie.subscriptions || [],
     // Add creation date
     createdAt: conciergerie.created_at,
   };

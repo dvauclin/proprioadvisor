@@ -252,7 +252,7 @@ export const useEditConciergerieForm = ({
         locationLinge: data.location_linge as 'inclus' | 'optionnel' | 'obligatoire' || 'inclus',
         prixLocationLinge: data.prix_location_linge || 0,
         fraisSupplementaireLocation: data.frais_supplementaire_location || 0,
-        createdAt: data.created_at
+        createdAt: data.created_at || undefined
       };
 
       setFormules([...formules, newFormule]);
@@ -329,7 +329,7 @@ export const useEditConciergerieForm = ({
         locationLinge: data.location_linge as 'inclus' | 'optionnel' | 'obligatoire' || 'inclus',
         prixLocationLinge: data.prix_location_linge || 0,
         fraisSupplementaireLocation: data.frais_supplementaire_location || 0,
-        createdAt: data.created_at
+        createdAt: data.created_at || undefined
       };
       
       setFormules(updatedFormules);

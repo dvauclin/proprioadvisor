@@ -18,7 +18,7 @@ export const getLeads = async (): Promise<Lead[]> => {
     const { data: conciergerie, error: conciergerieError } = await supabase
       .from('conciergeries')
       .select('id')
-      .eq('mail', user.email)
+      .eq('mail', user.email || '')
       .single();
 
     if (conciergerieError || !conciergerie) {
@@ -80,12 +80,12 @@ export const getLeads = async (): Promise<Lead[]> => {
       nom: lead.nom,
       telephone: lead.telephone,
       mail: lead.mail,
-      formuleId: lead.formule_id,
-      message: lead.message,
-      date: lead.date,
-      dateVue: lead.date_vue,
-      plusieursLogements: lead.plusieurs_logements,
-      residencePrincipale: lead.residence_principale,
+      formuleId: lead.formule_id || undefined,
+      message: lead.message || undefined,
+      date: lead.date || undefined,
+      dateVue: lead.date_vue || undefined,
+      plusieursLogements: lead.plusieurs_logements || undefined,
+      residencePrincipale: lead.residence_principale || undefined,
       // Ajout des nouvelles propriétés
       formuleNom: lead.formules?.nom,
       conciergerieNom: lead.formules?.conciergeries?.nom
@@ -186,12 +186,12 @@ export const getAllLeads = async (): Promise<Lead[]> => {
       nom: lead.nom,
       telephone: lead.telephone,
       mail: lead.mail,
-      formuleId: lead.formule_id,
-      message: lead.message,
-      date: lead.date,
-      dateVue: lead.date_vue,
-      plusieursLogements: lead.plusieurs_logements,
-      residencePrincipale: lead.residence_principale,
+      formuleId: lead.formule_id || undefined,
+      message: lead.message || undefined,
+      date: lead.date || undefined,
+      dateVue: lead.date_vue || undefined,
+      plusieursLogements: lead.plusieurs_logements || undefined,
+      residencePrincipale: lead.residence_principale || undefined,
       formuleNom: lead.formules?.nom,
       conciergerieNom: lead.formules?.conciergeries?.nom
     }));

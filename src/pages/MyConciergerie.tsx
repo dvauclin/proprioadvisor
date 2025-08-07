@@ -1,20 +1,16 @@
 ﻿"use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useToast } from '@/components/ui/use-toast';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Edit, Trash2, Plus, CheckCircle, XCircle, Star, Users, Calendar, DollarSign, Phone, Mail, Globe } from 'lucide-react';
+
 
 import { Conciergerie, Formule } from '@/types';
-import { transformFormuleFromDB } from '@/services/conciergerieTransformService';
+
 import EditConciergerieForm from '@/components/admin/EditConciergerieForm';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { supabase } from '@/integrations/supabase/client';
 import { Loader2 } from 'lucide-react';
 import { saveConciergerie } from '@/services/conciergerieService';

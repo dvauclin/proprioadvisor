@@ -4,8 +4,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Avis } from '@/types';
 import StarRating from './StarRating';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { format } from 'date-fns/format';
+import { fr } from 'date-fns/locale/fr';
 
 interface AvisModalProps {
   isOpen: boolean;

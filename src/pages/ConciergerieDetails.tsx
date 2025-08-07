@@ -3,12 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Loader2, ChevronLeft, MapPin, Clock, Euro, Star, ExternalLink, Phone } from "lucide-react";
+import { Loader2, Star, ExternalLink, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ConciergerieLogoDisplay from "@/components/ui/ConciergerieLogoDisplay";
 import AvisDisplay from "@/components/ui/comparison-card/AvisDisplay";
 import { getAllConciergeries, getAllVilles } from "@/lib/data";
-import { findConciergerieBySlug, createConciergerieSlug } from "@/utils/conciergerieUtils";
+import { findConciergerieBySlug } from "@/utils/conciergerieUtils";
 import { supabase } from "@/integrations/supabase/client";
 import StructuredData from "@/components/seo/StructuredData";
 import { createConciergerieDetailsStructuredData } from "@/utils/structuredDataHelpers";
@@ -30,9 +30,9 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
   const [conciergerie, setConciergerie] = React.useState<any>(null);
   const [formules, setFormules] = React.useState<any[]>([]);
   const [error, setError] = React.useState<string | null>(null);
-  const [villes, setVilles] = React.useState<any[]>([]);
+
   const [conciergerieVilles, setConciergerieVilles] = React.useState<any[]>([]);
-  const [hasAvis, setHasAvis] = React.useState(false);
+
   const [averageRating, setAverageRating] = React.useState<number | undefined>();
   const [reviewCount, setReviewCount] = React.useState<number>(0);
   const [structuredDataDetails, setStructuredDataDetails] = React.useState<any>(null);
@@ -80,11 +80,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
             setAverageRating(avgRating);
           }
 
-          // Check if there are validated avis for this conciergerie
-          const {
-            data: avisDataForCheck
-          } = await supabase.from('avis').select('id').eq('conciergerie_id', foundConciergerie.id).eq('valide', true);
-          setHasAvis(!!(avisDataForCheck && avisDataForCheck.length > 0));
+
 
           // Fetch subscription data for this conciergerie
           const {
@@ -154,7 +150,6 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
 
           // Fetch villes data
           const allVilles = await getAllVilles();
-          setVilles(allVilles);
 
           // Get conciergerie's villes
           if (foundConciergerie.villesIds && foundConciergerie.villesIds.length > 0) {
@@ -166,7 +161,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
 
           // Generate structured data
           const generateStructuredData = async () => {
-            const structuredData = createConciergerieDetailsStructuredData(foundConciergerie, formulesData || []);
+            const structuredData = createConciergerieDetailsStructuredData(foundConciergerie, formules || []);
             setStructuredDataDetails(structuredData);
           };
           generateStructuredData();
@@ -454,7 +449,6 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
         <div id="avis-clients-section" className="mt-8">
           <AvisDisplay
             conciergerieId={conciergerie.id}
-            conciergerieName={conciergerie.nom}
           />
         </div>
       </div>

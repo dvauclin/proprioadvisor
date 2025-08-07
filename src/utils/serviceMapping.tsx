@@ -1,15 +1,13 @@
 
 import React from 'react';
 import { 
-  Trash, 
-  MessageCircle, 
   Camera, 
   DoorClosed, 
   ShoppingBag, 
   Headphones, 
   Undo, 
   Shirt, 
-  Wrench
+  Wrench 
 } from 'lucide-react';
 
 // Maps service IDs to their display labels

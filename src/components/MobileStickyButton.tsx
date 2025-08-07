@@ -3,14 +3,12 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Heart, Trash2, Send, Plus } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/contexts/AuthContext";
-import DevisModal from "@/components/conciergerie/DevisModal";
-import { Conciergerie, Formule } from "@/types";
 
 const MobileStickyButton = () => {
-  const { favorites, removeFromFavorites, favoritesCount } = useFavorites();
+  const { favoritesCount } = useFavorites();
   const { user } = useAuth();
   const [isVisible, setIsVisible] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);

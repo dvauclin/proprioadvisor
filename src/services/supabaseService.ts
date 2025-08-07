@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { Lead, Ville, Article, ImageFile, Avis, ContactMessage } from "@/types";
+import { Ville } from "@/types";
 
 // Re-export services from other files
 export * from './conciergerieService';

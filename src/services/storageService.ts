@@ -102,7 +102,7 @@ export const uploadImage = async (file: File, bucket: string = 'images'): Promis
   }
 };
 
-export const deleteImage = async (path: string, bucket: string = 'images'): Promise<{ success: boolean; error?: string }> => {
+export const deleteImage = async (path: string): Promise<{ success: boolean; error?: string }> => {
   try {
     const { error } = await supabase.storage
       .from('images')

@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ExternalLink, Mail, Calendar, CreditCard, Star } from "lucide-react";
+// Import des icônes utilisées
+import { CheckCircle, Mail, Calendar, CreditCard, Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface SubscriptionDetails {
@@ -42,11 +43,9 @@ const SubscriptionSuccess = () => {
       try {
         if (!searchParams) return;
         
-        const sessionId = searchParams.get('session_id');
+  
         const subscriptionId = searchParams.get('subscription_id');
-        const points = searchParams.get('points');
-        const isNew = searchParams.get('new') === 'true';
-        const isFree = searchParams.get('free') === 'true';
+
 
         if (!subscriptionId) {
           setError("Aucun identifiant de souscription trouvé");

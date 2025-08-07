@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { getRecentArticles, getAllVilles } from "@/lib/data";
-import { Article, Ville } from "@/types";
+import { getRecentArticles } from "@/lib/data";
+import { Article } from "@/types";
 import HeroSection from "@/components/home/HeroSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import RecentArticlesSection from "@/components/home/RecentArticlesSection";
@@ -16,7 +16,7 @@ import { createBreadcrumbStructuredData } from "@/utils/structuredDataHelpers";
 const Index: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedVille, setSelectedVille] = useState<string | null>(null);
+  const [selectedVille] = useState<string | null>(null);
   const { villes: allVilles } = useVillesData();
 
   useEffect(() => {

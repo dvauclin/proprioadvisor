@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, ReactNode } from 'react';
 
 // Déclaration de type pour dataLayer
 declare global {

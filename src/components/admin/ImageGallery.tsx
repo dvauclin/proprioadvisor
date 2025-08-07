@@ -115,7 +115,7 @@ const ImageGallery: React.FC = () => {
 
   const handleDelete = async (id: string, name: string) => {
     try {
-      await deleteImage(id, 'images');
+      await deleteImage(id);
       toast({
         title: "Image supprimée",
         description: `${name} a été supprimée avec succès`,

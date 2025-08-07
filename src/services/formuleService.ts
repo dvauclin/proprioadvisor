@@ -59,6 +59,6 @@ export const getFormulesByVilleId = async (villeId: string): Promise<(Formule & 
   }
 };
 
-export const filterFormules = (formules: (Formule & { conciergerie?: Conciergerie })[], filters: any) => {
+export const filterFormules = (formules: (Formule & { conciergerie?: Conciergerie })[]) => {
   return formules;
 };

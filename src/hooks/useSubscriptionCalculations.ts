@@ -127,7 +127,7 @@ export const useSubscriptionCalculations = ({
 
   // Watch for any option changes and recalculate
   useEffect(() => {
-    const subscription = form.watch((value, { name, type }) => {
+    const subscription = form.watch((_, { name, type }) => {
       // Only trigger a full recalculation when necessary
       if (!calculationInProgress.current) {
         // Check if the change is in options

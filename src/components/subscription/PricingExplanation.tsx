@@ -5,13 +5,11 @@ import { Info } from 'lucide-react';
 interface PricingExplanationProps {
   currentAmount: number;
   selectedAmount: number;
-  useCustomAmount: boolean;
 }
 
 export const PricingExplanation: React.FC<PricingExplanationProps> = ({
   currentAmount,
-  selectedAmount,
-  useCustomAmount
+  selectedAmount
 }) => {
   const getExplanation = () => {
     // If no custom amount is selected, use default calculation

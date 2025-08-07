@@ -32,7 +32,7 @@ export const triggerWebhook = async (data: any) => {
         const responseText = await response.text();
         console.log("📄 Response body:", responseText);
       } catch (textError) {
-        console.log("⚠️ Could not read response body:", textError.message);
+        console.log("⚠️ Could not read response body:", (textError as Error)?.message);
       }
     } else {
       console.warn("⚠️ Response not OK:", response.status, response.statusText);

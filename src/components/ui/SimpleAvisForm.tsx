@@ -11,13 +11,11 @@ import { Loader2 } from "lucide-react";
 
 interface SimpleAvisFormProps {
   conciergerieId: string;
-  conciergerieName?: string;
   onSuccess?: () => void;
 }
 
 export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({ 
   conciergerieId, 
-  conciergerieName,
   onSuccess 
 }) => {
   const [emetteur, setEmetteur] = useState("");

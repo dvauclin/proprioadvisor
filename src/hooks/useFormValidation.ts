@@ -14,7 +14,7 @@ export const useFormValidation = (form: UseFormReturn<FormValues>, selectedVille
       const hasEmail = value.mail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.mail);
       
       // No longer require villes selection - allow empty array
-      setIsStepOneValid(hasName && hasEmail);
+      setIsStepOneValid(Boolean(hasName && hasEmail));
     });
     
     return () => subscription.unsubscribe();

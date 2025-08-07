@@ -50,8 +50,8 @@ const TestListing: React.FC = () => {
             <p><strong>Nom:</strong> {villeData.nom}</p>
             <p><strong>Slug:</strong> {villeData.slug}</p>
             <p><strong>Description:</strong> {villeData.description}</p>
-            <p><strong>Latitude:</strong> {villeData.latitude}</p>
-            <p><strong>Longitude:</strong> {villeData.longitude}</p>
+            <p><strong>Latitude:</strong> {villeData.latitude || 'Non définie'}</p>
+            <p><strong>Longitude:</strong> {villeData.longitude || 'Non définie'}</p>
           </div>
         </div>
       )}

@@ -59,7 +59,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
     <div className="mb-4">
       <div className="flex items-start gap-3 mb-2">
         <ConciergerieLogoDisplay 
-          logoUrl={conciergerie.logo} 
+          logoUrl={conciergerie.logo || null} 
           altText={conciergerie.nom || "Logo conciergerie"} 
           size="md" 
         />

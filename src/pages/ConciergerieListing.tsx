@@ -2,7 +2,6 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DevisModal from "@/components/conciergerie/DevisModal";
@@ -41,8 +40,7 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
     breadcrumbItems,
     getLastUpdateDate,
     pageDescription,
-    formules,
-    selectedFormule
+    formules
   } = useConciergerieListingLogic(ville);
   
   // Show loading for ville data
@@ -92,7 +90,7 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
         formules={formules}
         filteredFormules={filteredFormules}
         formulesLoading={formulesLoading}
-        onDevisRequest={(formuleId: string, conciergerieId: string) => {
+        onDevisRequest={(formuleId: string) => {
           const formule = formules.find(f => f.id === formuleId);
           const conciergerie = formule?.conciergerie;
           if (formule && conciergerie) {

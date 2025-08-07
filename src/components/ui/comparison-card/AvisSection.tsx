@@ -98,7 +98,6 @@ const AvisSection: React.FC<AvisSectionProps> = ({
           </DialogHeader>
           <SimpleAvisForm 
             conciergerieId={conciergerieId}
-            conciergerieName={conciergerieName}
             onSuccess={handleAvisSuccess}
           />
         </DialogContent>

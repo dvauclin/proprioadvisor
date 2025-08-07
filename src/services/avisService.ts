@@ -21,11 +21,11 @@ export const getAvisByConciergerie = async (conciergerieId: string): Promise<Avi
       conciergerieId: avis.conciergerie_id,
       userId: undefined,
       emetteur: avis.emetteur,
-      date: avis.date,
+      date: avis.date || undefined,
       note: avis.note,
-      commentaire: avis.commentaire,
+      commentaire: avis.commentaire || '',
       valide: avis.valide,
-      createdAt: avis.created_at
+      createdAt: avis.created_at || undefined
     }));
   } catch (error) {
     console.error("Unexpected error fetching avis:", error);

@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import React, { useRef } from "react";
-import Link from "next/link";
 import { useInscriptionForm } from "@/hooks/useInscriptionForm";
 import InscriptionLayout from "@/components/inscription/InscriptionLayout";
 import InscriptionFormContainer from "@/components/inscription/InscriptionFormContainer";
@@ -44,6 +43,14 @@ const Inscription = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Adapter for handleLogoChange to match expected event handler signature
+  const handleLogoChangeAdapter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      handleLogoChange(file);
+    }
+  };
+
   return (
     <InscriptionLayout onScrollToForm={scrollToForm}>
       <div ref={formRef}>
@@ -51,15 +58,15 @@ const Inscription = () => {
           {step === 1 ? (
             <InscriptionStepOneForm 
               form={form}
-              logoPreview={logoPreview}
-              handleLogoChange={handleLogoChange}
+              logoPreview={logoPreview || ''}
+              handleLogoChange={handleLogoChangeAdapter}
               villes={villes}
               selectedVillesIds={selectedVillesIds}
               villesLoading={villesLoading}
               handleVilleSelection={handleVilleSelection}
               handleStepOne={handleStepOne}
-              isStepOneValid={isStepOneValid}
-              isUploadingLogo={isUploadingLogo}
+              isStepOneValid={Boolean(isStepOneValid)}
+              isUploadingLogo={Boolean(isUploadingLogo)}
             />
           ) : (
             <StepTwo
@@ -74,7 +81,7 @@ const Inscription = () => {
         </InscriptionFormContainer>
       </div>
       
-      <InscriptionInfoSections onScrollToForm={scrollToForm} />
+      <InscriptionInfoSections />
     </InscriptionLayout>
   );
 };

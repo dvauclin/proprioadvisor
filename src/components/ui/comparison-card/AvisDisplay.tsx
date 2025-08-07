@@ -5,14 +5,13 @@ import { Avis } from '@/types';
 import StarRating from '../StarRating';
 import { SimpleAvisForm } from '../SimpleAvisForm';
 import { getAvisByConciergerie } from '@/services/avisService';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { format } from 'date-fns/format';
+import { fr } from 'date-fns/locale/fr';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface AvisDisplayProps {
   conciergerieId: string;
-  conciergerieName: string;
 }
 
 const generateRandomDate = (): Date => {
@@ -24,8 +23,7 @@ const generateRandomDate = (): Date => {
 };
 
 const AvisDisplay: React.FC<AvisDisplayProps> = ({
-  conciergerieId,
-  conciergerieName
+  conciergerieId
 }) => {
   const [avis, setAvis] = useState<Avis[]>([]);
   const [isAvisFormOpen, setIsAvisFormOpen] = useState(false);
@@ -127,7 +125,6 @@ const AvisDisplay: React.FC<AvisDisplayProps> = ({
           </DialogHeader>
           <SimpleAvisForm 
             conciergerieId={conciergerieId}
-            conciergerieName={conciergerieName}
             onSuccess={handleAvisSuccess}
           />
         </DialogContent>

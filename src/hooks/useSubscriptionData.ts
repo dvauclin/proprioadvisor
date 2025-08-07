@@ -18,8 +18,8 @@ export const useSubscriptionData = () => {
   const [isLoadingSubscriptionData, setIsLoadingSubscriptionData] = useState<boolean>(true);
 
   useEffect(() => {
-    const idFromUrl = searchParams.get('conciergerieId');
-    const subscriptionIdFromUrl = searchParams.get('subscriptionId');
+    const idFromUrl = searchParams?.get('conciergerieId');
+    const subscriptionIdFromUrl = searchParams?.get('subscriptionId');
 
     setIsLoadingSubscriptionData(true);
 
@@ -35,7 +35,7 @@ export const useSubscriptionData = () => {
           const { data: userConciergerie, error: userConciergerieError } = await supabase
             .from('conciergeries')
             .select('id, nom, mail')
-            .eq('mail', user.email)
+            .eq('mail', user.email || '')
             .single();
 
           if (userConciergerieError) {
@@ -122,9 +122,8 @@ export const useSubscriptionData = () => {
       } catch (error) {
         console.error("[useSubscriptionData] Error processing subscription data fetches:", error);
         console.error("[useSubscriptionData] Error details:", {
-          message: error?.message,
-          cause: error?.cause,
-          stack: error?.stack
+          message: (error as Error)?.message,
+          stack: (error as Error)?.stack
         });
         toast({
           title: "Erreur",

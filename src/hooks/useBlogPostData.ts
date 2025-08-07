@@ -19,7 +19,10 @@ export const useBlogPostData = (slug: string | undefined) => {
           const fetchedArticle = await getArticleBySlug(slug);
           
           if (fetchedArticle && fetchedArticle.image) {
-            fetchedArticle.image = getValidImageUrl(fetchedArticle.image);
+            const validImageUrl = getValidImageUrl(fetchedArticle.image);
+            if (validImageUrl) {
+              fetchedArticle.image = validImageUrl;
+            }
           }
           
           setArticle(fetchedArticle);
@@ -28,7 +31,10 @@ export const useBlogPostData = (slug: string | undefined) => {
             const fetchedRecentArticles = await getRecentArticles(3);
             fetchedRecentArticles.forEach(article => {
               if (article.image) {
-                article.image = getValidImageUrl(article.image);
+                const validImageUrl = getValidImageUrl(article.image);
+                if (validImageUrl) {
+                  article.image = validImageUrl;
+                }
               }
             });
             setRecentArticles(fetchedRecentArticles.filter(a => a.slug !== slug));

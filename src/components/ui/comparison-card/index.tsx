@@ -31,8 +31,8 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
 }) => {
 
 
-  // NEW LOGIC: Use effective score (scoreManuel or total_points) instead of calculated score
-  const effectiveScore = conciergerie.scoreManuel ?? (subscription?.total_points || 0);
+  // NEW LOGIC: Use effective score (scoreManuel) instead of calculated score
+  const effectiveScore = conciergerie.scoreManuel ?? 0;
   const isNotRecommended = effectiveScore <= 0;
 
   // Ensure tva is properly typed

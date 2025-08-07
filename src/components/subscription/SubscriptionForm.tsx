@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Loader2 } from "lucide-react";
@@ -9,12 +9,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { VisibilityOptionsSection } from "@/components/subscription/VisibilityOptionsSection";
 import { PaidPlanOptionsSection } from "@/components/subscription/PaidPlanOptionsSection";
 import { PasswordForm } from "@/components/subscription/PasswordForm";
-import { useSubscriptionCalculations } from "@/hooks/useSubscriptionCalculations";
 import { useSubscriptionSubmit } from "@/hooks/useSubscriptionSubmit";
 import { useFormPreFill } from "@/hooks/useFormPreFill";
 import { createSubscriptionSchema } from "@/schemas/subscriptionSchemaFactory";
 import { SubscriptionFormValues } from "@/types/subscription";
-import { useCustomAmountLogic } from "@/hooks/useCustomAmountLogic"; // New import
 
 interface SubscriptionFormProps {
   existingSubscription: any;
@@ -28,8 +26,6 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   conciergerieEmail,
   currentMonthlyPayment
 }) => {
-  const [totalPoints, setTotalPoints] = useState(0);
-  const lastValidCustomAmount = useRef<string>("5");
   const subscriptionSchema = useMemo(() => {
     return createSubscriptionSchema(!!existingSubscription, !!conciergerieEmail);
   }, [existingSubscription, conciergerieEmail]);
@@ -82,7 +78,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   return <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-100 px-[12px] py-[12px]">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubscription)} className="space-y-6 md:space-y-6 space-y-3">
-          <VisibilityOptionsSection form={form} currentPoints={currentPoints} conciergerieId={conciergerieId} currentMonthlyPayment={currentMonthlyPayment} renewalDay={existingSubscription?.subscription_renewal_day} />
+          <VisibilityOptionsSection form={form} currentPoints={currentPoints} currentMonthlyPayment={currentMonthlyPayment} renewalDay={existingSubscription?.subscription_renewal_day} />
 
           <PaidPlanOptionsSection form={form} isPaid={isPaidPlan} />
 

@@ -10,15 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Eye, Edit, Trash2, Plus, CheckCircle, XCircle } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { getConciergeriesToValidate, getValidatedConciergeries, getAllVilles, getAllArticles, validateConciergerie, rejectConciergerie, addArticle, updateArticle, deleteArticle, addVille, updateVille, deleteVille, uploadImage, getAllImages, deleteImage, addCities, saveConciergerie, deleteConciergerie, getContactMessages, updateContactMessageStatus, deleteContactMessage, getAllSubscriptions } from "@/services/supabaseService";
+import { getConciergeriesToValidate, getValidatedConciergeries, getAllVilles, getAllArticles, validateConciergerie, rejectConciergerie, addArticle, updateArticle, deleteArticle, addVille, updateVille, deleteVille, uploadImage, getAllImages, deleteImage, saveConciergerie, deleteConciergerie, getContactMessages, updateContactMessageStatus, deleteContactMessage, getAllSubscriptions } from "@/services/supabaseService";
 import { getAllLeads } from "@/services/leadService";
 import { supabase } from "@/integrations/supabase/client";
-import { Conciergerie, Lead, Ville, Article, Formule, Avis, ContactMessage } from "@/types";
+import { Conciergerie, Lead, Ville, Article, Formule } from "@/types";
 import EditConciergerieForm from "@/components/admin/EditConciergerieForm";
 import ArticleForm from "@/components/admin/ArticleForm";
 import VilleForm from "@/components/admin/VilleForm";
 import VillesManager from "@/components/admin/VillesManager";
-import ImageGallery from "@/components/admin/ImageGallery";
 import CityPopulator from "@/components/admin/CityPopulator";
 import SubscriptionLinkGenerator from "@/components/admin/SubscriptionLinkGenerator";
 import LeadDetailsDialog from "@/components/admin/LeadDetailsDialog";
@@ -216,8 +215,7 @@ const Admin = () => {
     queryFn: getAllLeads
   });
   const {
-    data: villes = [],
-    isLoading: loadingVilles
+    data: villes = []
   } = useQuery({
     queryKey: ["villes"],
     queryFn: getAllVilles
@@ -230,8 +228,7 @@ const Admin = () => {
     queryFn: getAllArticles
   });
   const {
-    data: images = [],
-    isLoading: loadingImages
+    data: images = []
   } = useQuery({
     queryKey: ["images"],
     queryFn: getAllImages
@@ -581,10 +578,7 @@ const Admin = () => {
   const handleDeleteVille = async (id: string) => {
     await deleteVilleMutation.mutateAsync(id);
   };
-  const handleEditVille = (ville: Ville) => {
-    setEditingVille(ville);
-    setShowVilleForm(true);
-  };
+
 
   // Image management functions
   const uploadImageMutation = useMutation({
@@ -605,7 +599,7 @@ const Admin = () => {
     }
   });
   const deleteImageMutation = useMutation({
-    mutationFn: (fileName: string) => deleteImage(fileName, 'images'),
+    mutationFn: (fileName: string) => deleteImage(fileName),
     // Use 'images' bucket for admin gallery
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -630,20 +624,8 @@ const Admin = () => {
     deleteImageMutation.mutate(fileName);
   };
 
-  // City population functions
-  const addCitiesMutation = useMutation({
-    mutationFn: (cityNames: string[]) => addCities(cityNames),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["villes"]
-      });
-      toast({
-        title: "Villes ajoutées",
-        description: "Les villes ont été ajoutées avec succès"
-      });
-    }
-  });
-  const handleAddCities = (count: number) => {
+
+  const handleAddCities = () => {
     // This function receives the count of cities added and triggers a refresh
     queryClient.invalidateQueries({
       queryKey: ["villes"]
@@ -798,7 +780,7 @@ const Admin = () => {
                           Détails
                         </Button>
                         <Badge variant="outline">
-                          {new Date(lead.date).toLocaleDateString()}
+                          {lead.date ? new Date(lead.date as string).toLocaleDateString() : 'N/A'}
                         </Badge>
                       </div>
                     </div>
@@ -858,7 +840,7 @@ const Admin = () => {
                             </div>
                           </TableCell>
                           <TableCell>
-                            {new Date(avisItem.date || avisItem.created_at).toLocaleDateString()}
+                            {(avisItem.date || avisItem.created_at) ? new Date(avisItem.date || avisItem.created_at || '').toLocaleDateString() : 'N/A'}
                           </TableCell>
                           <TableCell>
                             <Badge variant={avisItem.valide ? "default" : "secondary"}>
@@ -980,7 +962,7 @@ const Admin = () => {
                         <h3 className="font-semibold">{article.titre}</h3>
                         <p className="text-sm text-gray-600">{article.excerpt}</p>
                         <Badge variant="outline" className="mt-2">
-                          {new Date(article.datePublication).toLocaleDateString()}
+                          {article.datePublication ? new Date(article.datePublication).toLocaleDateString() : 'N/A'}
                         </Badge>
                       </div>
                       <div className="flex gap-2">

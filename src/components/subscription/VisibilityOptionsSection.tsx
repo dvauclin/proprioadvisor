@@ -3,21 +3,16 @@ import { UseFormReturn } from 'react-hook-form';
 import { FormField, FormItem, FormLabel, FormControl } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { Info } from 'lucide-react';
 import { SubscriptionFormValues } from '@/types/subscription';
-import { BacklinkInfoDialog } from './BacklinkInfoDialog';
-import { GMBInfoDialog } from './GMBInfoDialog';
 interface VisibilityOptionsSectionProps {
   form: UseFormReturn<SubscriptionFormValues>;
   currentPoints: number;
-  conciergerieId?: string;
   currentMonthlyPayment?: number;
   renewalDay?: number | null;
 }
 export const VisibilityOptionsSection: React.FC<VisibilityOptionsSectionProps> = ({
   form,
   currentPoints,
-  conciergerieId,
   currentMonthlyPayment,
   renewalDay
 }) => {
@@ -61,7 +56,7 @@ export const VisibilityOptionsSection: React.FC<VisibilityOptionsSectionProps> =
         <p className={`text-xs mt-2 ${currentPoints === 0 ? 'text-red-600' : 'text-blue-600'}`}>
           {currentPoints === 0 ? "Avec 0 point vous ne serez pas considéré comme une conciergerie partenaire. Les clients ne pourront pas vous contacter et vous serez placé tout en bas des listings. Votre visibilité est quasi nulle. Il faut au moins 1 point pour être considéré comme une conciergerie partenaire." : "Si une autre conciergerie de votre ville a moins de points elle sera positionnée derrière, si elle en a plus elle sera positionnée devant. Plus vous avez de points, plus vous maximisez votre visibilité."}
         </p>
-        {currentMonthlyPayment > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) !== currentMonthlyPayment && <div className="mt-3">
+        {currentMonthlyPayment && currentMonthlyPayment > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) !== currentMonthlyPayment && <div className="mt-3">
             <p className="text-sm font-medium text-green-700">
               Nouvel abonnement : {form.watch("customAmount")}€/mois (abonnement actuel : {currentMonthlyPayment}€/mois)
             </p>
@@ -69,12 +64,12 @@ export const VisibilityOptionsSection: React.FC<VisibilityOptionsSectionProps> =
                 Renouvellement le {renewalDay} de chaque mois
               </p>}
           </div>}
-        {currentMonthlyPayment > 0 && !form.watch("useCustomAmount") && <div className="mt-3">
+        {currentMonthlyPayment && currentMonthlyPayment > 0 && !form.watch("useCustomAmount") && <div className="mt-3">
             <p className="text-sm font-medium text-red-700">
               Annulation de l'abonnement : {currentMonthlyPayment}€/mois
             </p>
           </div>}
-        {currentMonthlyPayment > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) === currentMonthlyPayment && <div className="mt-3">
+        {currentMonthlyPayment && currentMonthlyPayment > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) === currentMonthlyPayment && <div className="mt-3">
             <p className="text-sm font-medium text-green-700">
               Montant de l'abonnement : {currentMonthlyPayment}€/mois
             </p>

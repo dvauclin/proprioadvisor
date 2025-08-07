@@ -39,7 +39,7 @@ export const getAllVilles = async (): Promise<Ville[]> => {
       departementNom: ville.departement_nom || '',
       villeMereId: ville.ville_mere_id || undefined,
       villesLiees: ville.villes_liees || [],
-      createdAt: ville.created_at
+      createdAt: ville.created_at || undefined
     }));
 
     console.log("✅ getAllVilles: Transformed data:", transformedData);
@@ -76,7 +76,7 @@ export const getVilleBySlug = async (slug: string): Promise<Ville | null> => {
       departementNom: data.departement_nom || '',
       villeMereId: data.ville_mere_id || undefined,
       villesLiees: data.villes_liees || [],
-      createdAt: data.created_at
+      createdAt: data.created_at || undefined
     };
   } catch (error) {
     console.error("Unexpected error fetching ville by slug:", error);
@@ -118,7 +118,7 @@ export const addVille = async (ville: Omit<Ville, 'id'>): Promise<Ville> => {
     departementNom: data.departement_nom || '',
     villeMereId: data.ville_mere_id || undefined,
     villesLiees: data.villes_liees || [],
-    createdAt: data.created_at
+    createdAt: data.created_at || undefined
   };
 };
 
@@ -157,7 +157,7 @@ export const updateVille = async (ville: Ville): Promise<Ville> => {
     departementNom: data.departement_nom || '',
     villeMereId: data.ville_mere_id || undefined,
     villesLiees: data.villes_liees || [],
-    createdAt: data.created_at
+    createdAt: data.created_at || undefined
   };
 };
 

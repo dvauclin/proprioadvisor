@@ -1,4 +1,5 @@
-import { Article, Conciergerie, Formule, Ville } from '@/types';
+// Helpers pour générer les données structurées JSON-LD
+import { Conciergerie, Formule, Ville } from '@/types';
 import { getAvisByConciergerie } from '@/services/avisService';
 
 const BASE_URL = 'https://proprioadvisor.fr';

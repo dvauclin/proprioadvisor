@@ -71,7 +71,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
         </div>
       </div>
       
-      {showCurrentPaymentInfo && <PricingExplanation currentAmount={currentMonthlyPayment} selectedAmount={selectedAmount} useCustomAmount={useCustomAmount} />}
+      {showCurrentPaymentInfo && <PricingExplanation currentAmount={currentMonthlyPayment} selectedAmount={selectedAmount} />}
       
       <p className="text-sm text-gray-600 italic mt-3">C'est un système d'enchères au plus offrant pour apparaître en haut des listings et obtenir plus de visibilité sur Proprioadvisor, Google et ChatGPT.</p>
     </div>;
