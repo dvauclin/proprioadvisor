@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui-kit/button';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui-kit/dialog';
+import { isBot } from '@/utils/botDetection';
 
 const CookieConsent: React.FC = () => {
   const { cookieConsent, hasResponded, updateCookieConsent } = useCookieConsent();
@@ -172,21 +173,6 @@ const CookieConsent: React.FC = () => {
     </Dialog>
   );
 };
-
-// Fonction pour détecter les bots
-function isBot(): boolean {
-  if (typeof window === 'undefined') return true;
-  
-  const userAgent = window.navigator.userAgent.toLowerCase();
-  const botPatterns = [
-    'bot', 'crawler', 'spider', 'scraper', 'googlebot', 'bingbot', 'slurp',
-    'duckduckbot', 'baiduspider', 'yandexbot', 'facebookexternalhit', 'twitterbot',
-    'rogerbot', 'linkedinbot', 'embedly', 'quora link preview', 'showyoubot',
-    'outbrain', 'pinterest', 'slackbot', 'vkShare', 'W3C_Validator'
-  ];
-  
-  return botPatterns.some(pattern => userAgent.includes(pattern));
-}
 
 export default CookieConsent;
 
