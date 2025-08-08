@@ -178,7 +178,7 @@ const SubscriptionSuccess = () => {
                   {conciergerie.mail}
                 </p>
                 {conciergerie.validated && (
-                  <p className="text-green-600 text-sm mt-1">? Conciergerie validée</p>
+                  <p className="text-green-600 text-sm mt-1">✔ Conciergerie validée</p>
                 )}
               </div>
             )}
@@ -214,8 +214,8 @@ const SubscriptionSuccess = () => {
 
 
 
-                {/* Prochain renouvellement */}
-                {subscription.subscription_renewal_day && (
+                {/* Prochain renouvellement - seulement pour les abonnements payants */}
+                {subscription.subscription_renewal_day && subscription.monthly_amount > 0 && (
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-blue-900 mb-2">Prochain renouvellement :</h4>
                     <p className="text-blue-700">

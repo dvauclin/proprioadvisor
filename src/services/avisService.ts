@@ -40,7 +40,7 @@ export const addAvis = async (avisData: {
   commentaire?: string;
 }): Promise<{ success: boolean; error?: string }> => {
   try {
-    console.log("xa Tentative d'ajout d'avis via Edge Function:", avisData);
+    console.log("Tentative d'ajout d'avis via Edge Function:", avisData);
 
     // Validation des données côté client
     if (!avisData.conciergerieId?.trim()) {
@@ -72,14 +72,14 @@ export const addAvis = async (avisData: {
     }
 
     if (!data.success) {
-      console.error("R 0chec fonction Edge:", data.error);
+      console.error("Échec fonction Edge:", data.error);
       return { 
         success: false, 
         error: data.error || "Erreur lors de l'envoi de votre avis." 
       };
     }
     
-    console.log("S& Avis ajouté avec succès via Edge Function:", data);
+    console.log("Avis ajouté avec succès via Edge Function:", data);
     return { success: true };
     
   } catch (error) {

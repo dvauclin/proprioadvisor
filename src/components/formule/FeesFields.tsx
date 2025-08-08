@@ -28,7 +28,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Frais de ménage (/heure)</FormLabel>
+                <FormLabel>Frais de ménage (€/heure)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 
@@ -55,7 +55,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Frais de démarrage ()</FormLabel>
+                <FormLabel>Frais de démarrage (€)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 
@@ -83,7 +83,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Abonnement mensuel ()</FormLabel>
+                <FormLabel>Abonnement mensuel (€)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 
@@ -110,7 +110,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Frais supplémentaire par location ()</FormLabel>
+                <FormLabel>Frais supplémentaires par location (€)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 

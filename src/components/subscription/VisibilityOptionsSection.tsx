@@ -38,7 +38,7 @@ export const VisibilityOptionsSection: React.FC<VisibilityOptionsSectionProps> =
               {form.watch("useCustomAmount") && <FormField control={form.control} name="customAmount" render={({
           field: amountField
         }) => <FormItem className="ml-8 md:ml-8 ml-4">
-                      <FormLabel>Montant mensuel (en )</FormLabel>
+                      <FormLabel>Montant mensuel (en €)</FormLabel>
                       <FormControl>
                         <div className="flex items-center">
                           <Input type="number" min={1} value={amountField.value} onChange={amountField.onChange} placeholder="5" className="w-24" />
@@ -56,7 +56,7 @@ export const VisibilityOptionsSection: React.FC<VisibilityOptionsSectionProps> =
         <p className={`text-xs mt-2 ${currentPoints === 0 ? 'text-red-600' : 'text-blue-600'}`}>
           {currentPoints === 0 ? "Avec 0 point vous ne serez pas considéré comme une conciergerie partenaire. Les clients ne pourront pas vous contacter et vous serez placé tout en bas des listings. Votre visibilité est quasi nulle. Il faut au moins 1 point pour être considéré comme une conciergerie partenaire." : "Si une autre conciergerie de votre ville a moins de points elle sera positionnée derrière, si elle en a plus elle sera positionnée devant. Plus vous avez de points, plus vous maximisez votre visibilité."}
         </p>
-        {currentMonthlyPayment && currentMonthlyPayment > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) !== currentMonthlyPayment && <div className="mt-3">
+        {(currentMonthlyPayment ?? 0) > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) !== currentMonthlyPayment && <div className="mt-3">
             <p className="text-sm font-medium text-green-700">
               Nouvel abonnement : {form.watch("customAmount")}/mois (abonnement actuel : {currentMonthlyPayment}/mois)
             </p>
@@ -64,12 +64,12 @@ export const VisibilityOptionsSection: React.FC<VisibilityOptionsSectionProps> =
                 Renouvellement le {renewalDay} de chaque mois
               </p>}
           </div>}
-        {currentMonthlyPayment && currentMonthlyPayment > 0 && !form.watch("useCustomAmount") && <div className="mt-3">
+        {(currentMonthlyPayment ?? 0) > 0 && !form.watch("useCustomAmount") && <div className="mt-3">
             <p className="text-sm font-medium text-red-700">
               Annulation de l'abonnement : {currentMonthlyPayment}/mois
             </p>
           </div>}
-        {currentMonthlyPayment && currentMonthlyPayment > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) === currentMonthlyPayment && <div className="mt-3">
+        {(currentMonthlyPayment ?? 0) > 0 && form.watch("useCustomAmount") && Number(form.watch("customAmount")) === currentMonthlyPayment && <div className="mt-3">
             <p className="text-sm font-medium text-green-700">
               Montant de l'abonnement : {currentMonthlyPayment}/mois
             </p>

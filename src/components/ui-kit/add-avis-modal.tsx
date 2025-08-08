@@ -42,17 +42,17 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
     }
 
     if (!emetteur.trim()) {
-      toast.error('a️ Veuillez saisir votre nom');
+      toast.error('Veuillez saisir votre nom');
       return;
     }
 
     if (note === 0) {
-      toast.error('a️ Veuillez donner une note');
+      toast.error('Veuillez donner une note');
       return;
     }
 
     if (note < 1 || note > 5) {
-      toast.error('a️ La note doit être comprise entre 1 et 5');
+      toast.error('La note doit être comprise entre 1 et 5');
       return;
     }
 
@@ -74,19 +74,19 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
       });
 
       if (result.success) {
-        toast.success('x}0 Votre avis a été soumis et sera examiné avant publication');
+        toast.success("Votre avis a été soumis et sera examiné avant publication");
         setEmetteur('');
         setNote(0);
         setCommentaire('');
         onClose();
         onAvisAdded();
       } else {
-        console.error('R 0chec de l\'ajout d\'avis:', result.error);
-        toast.error(`R ${result.error || 'Erreur lors de l\'envoi de votre avis'}`);
+        console.error("Échec de l'ajout d'avis:", result.error);
+        toast.error(result.error || "Erreur lors de l'envoi de votre avis");
       }
     } catch (error) {
-      console.error('x Erreur lors de la soumission de l\'avis:', error);
-      toast.error('x Erreur inattendue lors de l\'envoi de votre avis. Veuillez réessayer.');
+      console.error("Erreur lors de la soumission de l'avis:", error);
+      toast.error("Erreur inattendue lors de l'envoi de votre avis. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -180,7 +180,7 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
               disabled={isSubmitting || !emetteur.trim() || note === 0}
               className=""
             >
-              {isSubmitting ? 'x Envoi...' : 'x Publier l\'avis'}
+              {isSubmitting ? 'Envoi...' : "Publier l'avis"}
             </Button>
           </div>
         </form>

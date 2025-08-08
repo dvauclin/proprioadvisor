@@ -15,7 +15,7 @@ export const StickyRecap: React.FC<StickyRecapProps> = ({
       <div className="w-px h-4 bg-gray-300"></div>
       <div className="flex items-center gap-2">
         <span className="text-gray-600">Abonnement</span>
-        <span className="font-semibold text-blue-600">{totalMonthlyFee}â‚¬/mois</span>
+        <span className="font-semibold text-blue-600">{totalMonthlyFee} €/mois</span>
       </div>
     </div>;
 };

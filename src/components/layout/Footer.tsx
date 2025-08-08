@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               <Link href="/favoris" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Mes favoris</Link>
               <Link href="/blog" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Blog</Link>
               <Link href="/annuaire" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Annuaire conciergerie</Link>
-              <Link href="/a-propos" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">ì propos</Link>
+              <Link href="/a-propos" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">À propos</Link>
               <Link href="/contact" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Contact</Link>
               <Link href="/inscription" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Inscrire ma conciergerie</Link>
               <Link href="/trouver-des-clients-conciergerie-airbnb" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Trouver des clients conciergerie Airbnb</Link>

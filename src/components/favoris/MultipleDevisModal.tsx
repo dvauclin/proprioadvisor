@@ -15,7 +15,7 @@ import { Input } from "@/components/ui-kit/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui-kit/form";
 import { Checkbox } from "@/components/ui-kit/checkbox";
 import { Separator } from "@/components/ui-kit/separator";
-import { useToast } from "@/components/ui-kit/use-toast";
+import { toast } from "sonner";
 import { submitLead } from "@/services/leadService";
 import { supabase } from "@/integrations/supabase/client";
 import { triggerWebhook } from "@/utils/webhookService";
@@ -81,7 +81,6 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
   onOpenChange,
   favorites
 }) => {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<FormValues>({
@@ -171,20 +170,13 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
         timestamp: new Date().toISOString()
       });
 
-      toast({
-        title: "Demandes envoyées !",
-        description: `Vos demandes de devis ont été envoyées à ${selectedFormules.length} conciergerie${selectedFormules.length > 1 ? 's' : ''}`,
-      });
+      toast.success("Votre demande de devis a été envoyée avec succès");
 
       onOpenChange(false);
       form.reset();
 
     } catch (error) {
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue lors de l'envoi de vos demandes",
-        variant: "destructive"
-      });
+      toast.error("Une erreur est survenue lors de l'envoi de vos demandes");
     } finally {
       setIsSubmitting(false);
     }

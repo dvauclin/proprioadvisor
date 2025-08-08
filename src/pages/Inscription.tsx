@@ -40,7 +40,7 @@ const Inscription = () => {
   };
 
   const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Désactivé pour éviter le scroll automatique vers le bas lors d'interactions
   };
 
   // Adapter for handleLogoChange to match expected event handler signature

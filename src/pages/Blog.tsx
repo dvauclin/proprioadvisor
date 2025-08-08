@@ -50,7 +50,7 @@ const Blog: React.FC = () => {
   return <div className="py-[32px]">
       <Head>
         <title>Blog | Proprioadvisor</title>
-        <meta name="description" content="Dï¿½couvrez nos articles et conseils sur la gestion locative courte durï¿½e" />
+        <meta name="description" content="Découvrez nos articles et conseils sur la gestion locative courte durée" />
         <link rel="canonical" href="https://proprioadvisor.fr/blog" />
       </Head>
       
@@ -63,7 +63,7 @@ const Blog: React.FC = () => {
           <header className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Blog</h1>
             <p className="text-gray-600 text-lg">
-              Dï¿½couvrez nos articles et conseils sur la gestion locative courte durï¿½e
+              Découvrez nos articles et conseils sur la gestion locative courte durée
             </p>
           </header>
           
@@ -91,7 +91,7 @@ const Blog: React.FC = () => {
                         {article.image ? <img src={article.image} alt={`Image d'illustration pour l'article : ${article.titre}`} className="w-full h-48 md:h-full object-cover" onError={e => {
                     console.error("Erreur de chargement d'image blog:", article.image);
                     e.currentTarget.src = "/placeholder.svg";
-                    e.currentTarget.alt = "Image par dï¿½faut - Article sans illustration";
+                    e.currentTarget.alt = "Image par défaut - Article sans illustration";
                     e.currentTarget.classList.add("bg-gray-100");
                   }} loading="lazy" /> : <div className="w-full h-48 md:h-full bg-gray-100 flex items-center justify-center" role="img" aria-label="Aucune image disponible pour cet article">
                             <span className="text-gray-400">Pas d'image</span>

@@ -384,7 +384,7 @@ export const createConciergerieDetailsStructuredData = async (
   // Construire un priceRange valide
   let priceRange = "Sur devis";
   if (formules.length > 0 && formules[0].commission && formules[0].commission > 0) {
-    priceRange = `ì partir de ${formules[0].commission}% de commission`;
+    priceRange = `À partir de ${formules[0].commission}% de commission`;
   }
   
   const structuredData: any = {
