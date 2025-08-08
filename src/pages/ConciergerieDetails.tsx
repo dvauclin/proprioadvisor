@@ -1,22 +1,22 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Loader2, Star, ExternalLink, Phone } from "lucide-react";
 import { Button } from "@/components/ui-kit/button";
-import ConciergerieLogoDisplay from "@/components/ui-kit/ConciergerieLogoDisplay";
-import AvisDisplay from "@/components/ui-kit/comparison-card/AvisDisplay";
+import ConciergerieLogoDisplay from "@/components/ui-kit/conciergerie-logo-display";
+import AvisDisplay from "@/components/ui-kit/comparison-card/avis-display";
 import { getAllConciergeries, getAllVilles } from "@/lib/data";
 import { findConciergerieBySlug } from "@/utils/conciergerieUtils";
 import { supabase } from "@/integrations/supabase/client";
 import StructuredData from "@/components/seo/StructuredData";
 import { createConciergerieDetailsStructuredData } from "@/utils/structuredDataHelpers";
-import CommissionSection from "@/components/ui-kit/comparison-card/CommissionSection";
-import DurationSection from "@/components/ui-kit/comparison-card/DurationSection";
-import FeesSection from "@/components/ui-kit/comparison-card/FeesSection";
-import ServicesSection from "@/components/ui-kit/comparison-card/ServicesSection";
-import FavoriteButton from "@/components/ui-kit/FavoriteButton";
+import CommissionSection from "@/components/ui-kit/comparison-card/commission-section";
+import DurationSection from "@/components/ui-kit/comparison-card/duration-section";
+import FeesSection from "@/components/ui-kit/comparison-card/fees-section";
+import ServicesSection from "@/components/ui-kit/comparison-card/services-section";
+import FavoriteButton from "@/components/ui-kit/favorite-button";
 import DevisModal from "@/components/conciergerie/DevisModal";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui-kit/tooltip";
 
@@ -63,7 +63,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
         // Check if conciergerie exists
         if (!foundConciergerie) {
           console.log("=== CONCIERGERIE NOT FOUND ===");
-          setError("Conciergerie non trouv�e");
+          setError("Conciergerie non trouvï¿½e");
         } else {
           console.log("Conciergerie found:", foundConciergerie.nom);
           console.log("Conciergerie ID:", foundConciergerie.id);
@@ -168,7 +168,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
         }
       } catch (err) {
         console.error("Error fetching conciergerie details:", err);
-        setError("Erreur lors du chargement des d�tails");
+        setError("Erreur lors du chargement des dï¿½tails");
       } finally {
         setLoading(false);
       }
@@ -230,10 +230,10 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Conciergerie non trouv�e</h1>
+          <h1 className="text-3xl font-bold mb-4">Conciergerie non trouvï¿½e</h1>
           <p className="text-gray-600 mb-6">{error || "Cette conciergerie n'existe pas."}</p>
           <Button onClick={() => router.push('/')}>
-            Retour � l'accueil
+            Retour ï¿½ l'accueil
           </Button>
         </div>
       </div>
@@ -247,7 +247,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
       <div className="container mx-auto px-4 py-8">
         {/* Contenu principal - Layout avec effet sticky */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Colonne gauche - Logo, titre, note, villes + Crit�res d'acceptation (STICKY) */}
+          {/* Colonne gauche - Logo, titre, note, villes + Critï¿½res d'acceptation (STICKY) */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               {/* Logo, titre, note et villes */}
@@ -268,7 +268,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                       {conciergerie.nom}
                     </h1>
                     
-                    {/* Pictogrammes t�l�phone et site web */}
+                    {/* Pictogrammes tï¿½lï¿½phone et site web */}
                     <div className="flex items-center gap-1">
                       {subscription?.website_url && subscription?.website_link && (
                         <TooltipProvider>
@@ -345,15 +345,15 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                 </div>
               </div>
 
-              {/* Crit�res d'acceptation */}
-              <h2 className="text-2xl font-bold mb-6">Crit�res d'acceptation</h2>
+              {/* Critï¿½res d'acceptation */}
+              <h2 className="text-2xl font-bold mb-6">Critï¿½res d'acceptation</h2>
               
-              {/* Crit�res en 2 colonnes avec ordre pr�cis */}
+              {/* Critï¿½res en 2 colonnes avec ordre prï¿½cis */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <div>
                     <span className="text-gray-600 text-sm">Zone couverte</span>
-                    <p className="font-medium">{conciergerie.zoneCouverte || 'Non sp�cifi�e'}</p>
+                    <p className="font-medium">{conciergerie.zoneCouverte || 'Non spï¿½cifiï¿½e'}</p>
                   </div>
                   
                   <div>
@@ -362,14 +362,14 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                   </div>
                   
                   <div>
-                    <span className="text-gray-600 text-sm">Accepte r�sidence principale</span>
+                    <span className="text-gray-600 text-sm">Accepte rï¿½sidence principale</span>
                     <p className="font-medium">{conciergerie.accepteResidencePrincipale ? 'Oui' : 'Non'}</p>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-gray-600 text-sm">Type de logement accept�</span>
+                    <span className="text-gray-600 text-sm">Type de logement acceptï¿½</span>
                     <p className="font-medium">{getPropertyTypeLabel(conciergerie.typeLogementAccepte)}</p>
                   </div>
                   
@@ -401,7 +401,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                         tva={conciergerie.tva} 
                       />
                       
-                      {/* Dur�e d'engagement - Identique aux listings */}
+                      {/* Durï¿½e d'engagement - Identique aux listings */}
                       <DurationSection dureeGestionMin={formule.dureeGestionMin} />
                       
                       {/* Autres frais - Identique aux listings */}
@@ -445,7 +445,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           </div>
         </div>
 
-        {/* Section Avis - Section fille uniquement (sans section m�re) */}
+        {/* Section Avis - Section fille uniquement (sans section mï¿½re) */}
         <div id="avis-clients-section" className="mt-8">
           <AvisDisplay
             conciergerieId={conciergerie.id}
@@ -481,5 +481,6 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
 };
 
 export default ConciergerieDetails;
+
 
 

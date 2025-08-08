@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Heart, Trash2, Send } from "lucide-react";
@@ -6,7 +6,7 @@ import { Button } from "@/components/ui-kit/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui-kit/card";
 import Head from "next/head";
 import { useFavorites } from "@/contexts/FavoritesContext";
-import ComparisonCard from "@/components/ui-kit/ComparisonCard";
+import ComparisonCard from "@/components/ui-kit/comparison-card";
 import DevisModal from "@/components/conciergerie/DevisModal";
 import { useToast } from "@/components/ui-kit/use-toast";
 import MultipleDevisModal from "@/components/favoris/MultipleDevisModal";
@@ -26,7 +26,7 @@ const Favoris = () => {
     conciergerieId: string;
   } | null>(null);
 
-  // Vérification de sécurité pour favorites
+  // VÃ©rification de sÃ©curitÃ© pour favorites
   const safeFavorites = Array.isArray(favorites) ? favorites : [];
   const favoritesCount = safeFavorites.length;
 
@@ -42,7 +42,7 @@ const Favoris = () => {
     if (favoritesCount === 0) {
       toast({
         title: "Aucun favori",
-        description: "Vous devez d'abord ajouter des formules à vos favoris",
+        description: "Vous devez d'abord ajouter des formules Ã  vos favoris",
         variant: "destructive"
       });
       return;
@@ -53,8 +53,8 @@ const Favoris = () => {
   const handleClearFavorites = () => {
     clearFavorites();
     toast({
-      title: "Favoris supprimés",
-      description: "Tous vos favoris ont été supprimés"
+      title: "Favoris supprimÃ©s",
+      description: "Tous vos favoris ont Ã©tÃ© supprimÃ©s"
     });
   };
 
@@ -95,7 +95,7 @@ const Favoris = () => {
           <CardContent>
             <div className="space-y-4">
               <Heart className="h-16 w-16 text-gray-300 mx-auto" />
-              <p className="text-gray-500 max-w-md mx-auto">Parcourez nos conciergeries Airbnb et ajoutez vos formules préférées en cliquant sur l'icône cœur pour pouvoir contacter plusieurs conciergeries en même temps.</p>
+              <p className="text-gray-500 max-w-md mx-auto">Parcourez nos conciergeries Airbnb et ajoutez vos formules prÃ©fÃ©rÃ©es en cliquant sur l'icÃ´ne cÅ“ur pour pouvoir contacter plusieurs conciergeries en mÃªme temps.</p>
               <Button asChild>
                 <a href="https://proprioadvisor.fr">Rechercher une conciergerie</a>
               </Button>
@@ -112,3 +112,4 @@ const Favoris = () => {
 };
 
 export default Favoris;
+

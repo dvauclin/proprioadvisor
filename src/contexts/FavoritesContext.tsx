@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Formule, Conciergerie } from '@/types';
@@ -93,3 +93,4 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({ children }
     </FavoritesContext.Provider>
   );
 };
+

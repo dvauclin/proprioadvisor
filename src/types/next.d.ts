@@ -1,4 +1,4 @@
-/// <reference types="next" />
+﻿/// <reference types="next" />
 /// <reference types="next/image-types/global" />
 
 declare module '*.svg' {
@@ -30,3 +30,4 @@ declare module '*.webp' {
   const content: string
   export default content
 } 
+

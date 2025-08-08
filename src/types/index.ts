@@ -1,4 +1,4 @@
-export interface User {
+﻿export interface User {
   id: string;
   email: string;
   nom?: string;
@@ -198,3 +198,4 @@ export interface Subscription {
   created_at: string;
   updated_at: string;
 }
+

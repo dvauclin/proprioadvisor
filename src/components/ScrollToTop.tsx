@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
@@ -10,3 +10,4 @@ const ScrollToTop = () => {
 };
 
 export default ScrollToTop;
+

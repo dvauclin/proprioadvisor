@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 
 interface RenewalDayDisplayProps {
@@ -14,7 +14,7 @@ export const RenewalDayDisplay: React.FC<RenewalDayDisplayProps> = ({
 
   const getRenewalText = () => {
     if (isCurrentPaymentInfo) {
-      return `(renouvelé le ${renewalDay} de chaque mois)`;
+      return `(renouvelÃ© le ${renewalDay} de chaque mois)`;
     } else {
       return `Prochain renouvellement : le ${renewalDay} de chaque mois`;
     }
@@ -46,3 +46,4 @@ export const RenewalDayDisplay: React.FC<RenewalDayDisplayProps> = ({
     </div>
   );
 };
+

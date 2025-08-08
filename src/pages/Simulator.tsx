@@ -1,4 +1,4 @@
-"use client";
+ï»¿"use client";
 
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
@@ -132,7 +132,7 @@ const Simulator = () => {
         break;
     }
 
-    // Area multiplier - Increment of 5% for every 10 m²
+    // Area multiplier - Increment of 5% for every 10 mÂ²
     const areaMultiplier = 1 + Math.floor(values.area / 10) * 0.05;
 
     // Bedrooms multiplier - CORRECTED CALCULATIONS
@@ -180,7 +180,7 @@ const Simulator = () => {
     const conciergeNetHigh = conciergeRevenueHigh - conciergeCostHigh;
 
     // Step 6: Management time
-    const managementTimeWithoutConcierge = "5 à 8 heures par semaine";
+    const managementTimeWithoutConcierge = "5 Ã  8 heures par semaine";
     
     setResults({
       baseNightlyRate: baseRate,
@@ -238,8 +238,8 @@ const Simulator = () => {
 
   return <div className="py-[32px]">
       <Head>
-        <title>Estimation revenu Airbnb | Simulateur gratuit & immédiat</title>
-        <meta name="description" content="Estimez gratuitement et immédiatement vos revenus potentiels sur Airbnb avec notre simulateur." />
+        <title>Estimation revenu Airbnb | Simulateur gratuit & immÃ©diat</title>
+        <meta name="description" content="Estimez gratuitement et immÃ©diatement vos revenus potentiels sur Airbnb avec notre simulateur." />
       </Head>
       
       <StructuredData data={createSimulatorStructuredData()} />
@@ -248,14 +248,14 @@ const Simulator = () => {
         <div className="text-center mb-10">
           <h1 className="text-3xl font-bold mb-4">Simulateur de revenus Airbnb</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Estimez vos revenus potentiels en location courte durée sur Airbnb en fonction de votre localisation, 
-            des caractéristiques de votre bien et de la période de l'année.
+            Estimez vos revenus potentiels en location courte durÃ©e sur Airbnb en fonction de votre localisation, 
+            des caractÃ©ristiques de votre bien et de la pÃ©riode de l'annÃ©e.
           </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Paramètres du bien</h2>
+            <h2 className="text-xl font-semibold mb-4">ParamÃ¨tres du bien</h2>
             
             <Form {...form}>
               <form className="space-y-6" onSubmit={e => e.preventDefault()}>
@@ -264,21 +264,21 @@ const Simulator = () => {
                   <FormField control={form.control} name="region" render={({
                   field
                 }) => <FormItem>
-                        <FormLabel>Région</FormLabel>
+                        <FormLabel>RÃ©gion</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Sélectionnez une région" />
+                              <SelectValue placeholder="SÃ©lectionnez une rÃ©gion" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="idf">Île-de-France</SelectItem>
+                            <SelectItem value="idf">ÃŽle-de-France</SelectItem>
                             <SelectItem value="paca">PACA / Corse</SelectItem>
-                            <SelectItem value="ara">Auvergne-Rhône-Alpes</SelectItem>
+                            <SelectItem value="ara">Auvergne-RhÃ´ne-Alpes</SelectItem>
                             <SelectItem value="bretagne">Bretagne</SelectItem>
                             <SelectItem value="nouvelleaquitaine">Nouvelle-Aquitaine</SelectItem>
                             <SelectItem value="occitanie">Occitanie</SelectItem>
-                            <SelectItem value="other">Autre région</SelectItem>
+                            <SelectItem value="other">Autre rÃ©gion</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormItem>} />
@@ -290,7 +290,7 @@ const Simulator = () => {
                           <FormControl>
                             <input type="checkbox" checked={field.value} onChange={e => field.onChange(e.target.checked)} className="form-checkbox rounded" />
                           </FormControl>
-                          <FormLabel className="cursor-pointer">Ville balnéaire</FormLabel>
+                          <FormLabel className="cursor-pointer">Ville balnÃ©aire</FormLabel>
                         </FormItem>} />
                      
                     <FormField control={form.control} name="cityPopulation" render={({
@@ -310,13 +310,13 @@ const Simulator = () => {
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Sélectionnez un emplacement" />
+                              <SelectValue placeholder="SÃ©lectionnez un emplacement" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="centreville">Centre-ville</SelectItem>
                             <SelectItem value="historique">Quartier historique</SelectItem>
-                            <SelectItem value="residentiel">Quartier résidentiel</SelectItem>
+                            <SelectItem value="residentiel">Quartier rÃ©sidentiel</SelectItem>
                             <SelectItem value="banlieue">Banlieue</SelectItem>
                             <SelectItem value="rural">Zone rurale</SelectItem>
                           </SelectContent>
@@ -335,7 +335,7 @@ const Simulator = () => {
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Sélectionnez un type" />
+                              <SelectValue placeholder="SÃ©lectionnez un type" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
@@ -351,7 +351,7 @@ const Simulator = () => {
                     <FormField control={form.control} name="area" render={({
                     field
                   }) => <FormItem>
-                          <FormLabel>Superficie (m²)</FormLabel>
+                          <FormLabel>Superficie (mÂ²)</FormLabel>
                           <FormControl>
                             <Input type="number" min="10" step="5" {...field} onChange={e => field.onChange(Number(e.target.value))} />
                           </FormControl>
@@ -389,7 +389,7 @@ const Simulator = () => {
           <div>
             {results && <Tabs defaultValue="simulation" className="w-full">
                 <TabsList className="grid grid-cols-2 mb-4">
-                  <TabsTrigger value="simulation">Revenus estimés</TabsTrigger>
+                  <TabsTrigger value="simulation">Revenus estimÃ©s</TabsTrigger>
                   <TabsTrigger value="comparison">Avec conciergerie</TabsTrigger>
                 </TabsList>
                 
@@ -398,13 +398,13 @@ const Simulator = () => {
                     <CardHeader>
                       <CardTitle>Estimation de vos revenus Airbnb</CardTitle>
                       <CardDescription>
-                        Basée sur les paramètres de votre bien et leur impact sur le prix de la nuitée
+                        BasÃ©e sur les paramÃ¨tres de votre bien et leur impact sur le prix de la nuitÃ©e
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div className="grid grid-cols-2 gap-4">
                         <div className="p-4 bg-gray-50 rounded-lg">
-                          <p className="text-sm text-gray-500 mb-1">Prix nuitée moyenne</p>
+                          <p className="text-sm text-gray-500 mb-1">Prix nuitÃ©e moyenne</p>
                           <p className="text-lg font-medium">{formatCurrency(results.adjustedNightlyRate)}</p>
                         </div>
                         <div className="p-4 bg-gray-50 rounded-lg">
@@ -414,9 +414,9 @@ const Simulator = () => {
                       </div>
                        
                       <div>
-                        <h3 className="text-lg font-semibold mb-4">Revenu mensuel estimé</h3>
+                        <h3 className="text-lg font-semibold mb-4">Revenu mensuel estimÃ©</h3>
                         <div className="p-6 bg-gray-100 rounded-lg text-center">
-                          <p className="text-sm text-gray-500 mb-2">Fourchette estimée</p>
+                          <p className="text-sm text-gray-500 mb-2">Fourchette estimÃ©e</p>
                           <p className="text-3xl font-bold text-brand-chartreuse">
                             {formatCurrency(results.monthlyRevenueLow)} - {formatCurrency(results.monthlyRevenueHigh)}
                           </p>
@@ -424,7 +424,7 @@ const Simulator = () => {
                       </div>
                        
                       <div>
-                        <h3 className="text-lg font-semibold mb-2">Temps de gestion estimé</h3>
+                        <h3 className="text-lg font-semibold mb-2">Temps de gestion estimÃ©</h3>
                         <p className="text-gray-700">{results.managementTimeWithoutConcierge}</p>
                       </div>
                     </CardContent>
@@ -436,7 +436,7 @@ const Simulator = () => {
                     <CardHeader>
                       <CardTitle>Comparaison avec conciergerie</CardTitle>
                       <CardDescription>
-                        Découvrez l'impact d'une conciergerie sur vos revenus Airbnb
+                        DÃ©couvrez l'impact d'une conciergerie sur vos revenus Airbnb
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
@@ -456,14 +456,14 @@ const Simulator = () => {
                       </div>
                        
                       <div>
-                        <h3 className="text-lg font-semibold mb-2">Détail avec conciergerie</h3>
+                        <h3 className="text-lg font-semibold mb-2">DÃ©tail avec conciergerie</h3>
                         <div className="space-y-3">
                           <div className="flex justify-between p-2 bg-gray-50 rounded">
                             <span>Revenus bruts</span>
                             <span>{formatCurrency(results.conciergeRevenueLow)} - {formatCurrency(results.conciergeRevenueHigh)}</span>
                           </div>
                           <div className="flex justify-between p-2 bg-gray-50 rounded">
-                            <span>Coûts conciergerie (20%)</span>
+                            <span>CoÃ»ts conciergerie (20%)</span>
                             <span>-{formatCurrency(results.conciergeCostLow)} - {formatCurrency(results.conciergeCostHigh)}</span>
                           </div>
                           <div className="flex justify-between p-2 font-medium">
@@ -503,4 +503,5 @@ const Simulator = () => {
 };
 
 export default Simulator;
+
 

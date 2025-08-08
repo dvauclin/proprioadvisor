@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from 'react';
 import { Article } from '@/types';
@@ -15,7 +15,7 @@ const ClientArticleWrapper: React.FC<ClientArticleWrapperProps> = ({
 }) => {
   const [processedContent, setProcessedContent] = useState<string>('');
 
-  // Fonction pour créer un ID à partir du texte
+  // Fonction pour crÃ©er un ID Ã  partir du texte
   const slugify = (text: string): string => {
     return text.toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
   };
@@ -37,25 +37,25 @@ const ClientArticleWrapper: React.FC<ClientArticleWrapperProps> = ({
     }
   }, [article.contenu]);
 
-  // Gérer le scroll vers l'ancre au chargement de la page
+  // GÃ©rer le scroll vers l'ancre au chargement de la page
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash && processedContent) {
       const hash = window.location.hash.substring(1);
       const element = document.getElementById(hash);
       
       if (element) {
-        // Attendre que le contenu soit chargé et que le DOM soit stable
+        // Attendre que le contenu soit chargÃ© et que le DOM soit stable
         setTimeout(() => {
           const header = document.querySelector('header');
-          const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par défaut plus élevée
+          const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par dÃ©faut plus Ã©levÃ©e
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplémentaire
+          const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplÃ©mentaire
           
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
           });
-        }, 200); // Délai plus long pour s'assurer que tout est chargé
+        }, 200); // DÃ©lai plus long pour s'assurer que tout est chargÃ©
       }
     }
   }, [processedContent]);
@@ -70,3 +70,4 @@ const ClientArticleWrapper: React.FC<ClientArticleWrapperProps> = ({
 };
 
 export default ClientArticleWrapper; 
+

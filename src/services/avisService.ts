@@ -1,4 +1,4 @@
-
+﻿
 import { supabase } from "@/integrations/supabase/client";
 import { Avis } from "@/types";
 
@@ -8,7 +8,7 @@ export const getAvisByConciergerie = async (conciergerieId: string): Promise<Avi
       .from('avis')
       .select('*')
       .eq('conciergerie_id', conciergerieId)
-      .eq('valide', true) // Seuls les avis validés sont visibles
+      .eq('valide', true) // Seuls les avis validÃ©s sont visibles
       .order('date', { ascending: false });
     
     if (error) {
@@ -40,9 +40,9 @@ export const addAvis = async (avisData: {
   commentaire?: string;
 }): Promise<{ success: boolean; error?: string }> => {
   try {
-    console.log("🚀 Tentative d'ajout d'avis via Edge Function:", avisData);
+    console.log("ðŸš€ Tentative d'ajout d'avis via Edge Function:", avisData);
 
-    // Validation des données côté client
+    // Validation des donnÃ©es cÃ´tÃ© client
     if (!avisData.conciergerieId?.trim()) {
       return { success: false, error: "L'identifiant de la conciergerie est requis" };
     }
@@ -53,7 +53,7 @@ export const addAvis = async (avisData: {
       return { success: false, error: "Une note entre 1 et 5 est requise" };
     }
 
-    // Appeler la fonction Edge au lieu d'insérer directement
+    // Appeler la fonction Edge au lieu d'insÃ©rer directement
     const { data, error } = await supabase.functions.invoke('submit-avis', {
       body: {
         conciergerieId: avisData.conciergerieId,
@@ -64,29 +64,30 @@ export const addAvis = async (avisData: {
     });
 
     if (error) {
-      console.error("❌ Erreur fonction Edge:", error);
+      console.error("âŒ Erreur fonction Edge:", error);
       return { 
         success: false, 
-        error: "Erreur lors de l'envoi de votre avis. Veuillez réessayer." 
+        error: "Erreur lors de l'envoi de votre avis. Veuillez rÃ©essayer." 
       };
     }
 
     if (!data.success) {
-      console.error("❌ Échec fonction Edge:", data.error);
+      console.error("âŒ Ã‰chec fonction Edge:", data.error);
       return { 
         success: false, 
         error: data.error || "Erreur lors de l'envoi de votre avis." 
       };
     }
     
-    console.log("✅ Avis ajouté avec succès via Edge Function:", data);
+    console.log("âœ… Avis ajoutÃ© avec succÃ¨s via Edge Function:", data);
     return { success: true };
     
   } catch (error) {
-    console.error("💥 Erreur inattendue:", error);
+    console.error("ðŸ’¥ Erreur inattendue:", error);
     return { 
       success: false, 
-      error: "Une erreur inattendue s'est produite. Veuillez réessayer." 
+      error: "Une erreur inattendue s'est produite. Veuillez rÃ©essayer." 
     };
   }
 };
+

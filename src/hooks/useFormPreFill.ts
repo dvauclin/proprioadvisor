@@ -1,4 +1,4 @@
-
+﻿
 import { useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { SubscriptionFormValues } from '@/types/subscription';
@@ -35,3 +35,4 @@ export const useFormPreFill = ({ form, existingSubscription }: UseFormPreFillPro
     }
   }, [existingSubscription, form]);
 };
+

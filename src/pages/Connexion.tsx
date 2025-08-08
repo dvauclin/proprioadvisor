@@ -1,4 +1,4 @@
-"use client";
+ï»¿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -70,13 +70,13 @@ const Connexion = () => {
       const { error } = await resetPassword(email);
       
       if (error) {
-        setError('Erreur lors de l\'envoi de l\'email de réinitialisation');
+        setError("Erreur lors de l'envoi de l'email de rÃƒÂ©initialisation");
       } else {
-        setSuccess('Un email de réinitialisation a été envoyé à votre adresse email');
+        setSuccess('Un email de rÃƒÂ©initialisation a ÃƒÂ©tÃƒÂ© envoyÃƒÂ© ÃƒÂ  votre adresse email');
         setShowResetForm(false);
       }
     } catch (error: any) {
-      setError('Une erreur est survenue lors de la réinitialisation');
+      setError('Une erreur est survenue lors de la rÃƒÂ©initialisation');
     } finally {
       setIsLoading(false);
     }
@@ -99,12 +99,12 @@ const Connexion = () => {
             <span className="text-lg font-semibold">PROPRIOADVISOR</span>
           </Link>
           <h2 className="text-3xl font-bold text-gray-900">
-            {showResetForm ? 'Réinitialiser le mot de passe' : 'Connexion'}
+            {showResetForm ? 'RÃƒÂ©initialiser le mot de passe' : 'Connexion'}
           </h2>
           <p className="mt-2 text-gray-600">
             {showResetForm 
-              ? 'Saisissez votre email pour recevoir un lien de réinitialisation'
-              : 'Connectez-vous à votre compte pour gérer votre conciergerie'
+              ? 'Saisissez votre email pour recevoir un lien de rÃƒÂ©initialisation'
+              : 'Connectez-vous ÃƒÂ  votre compte pour gÃƒÂ©rer votre conciergerie'
             }
           </p>
         </div>
@@ -122,7 +122,7 @@ const Connexion = () => {
                   >
                     <ArrowLeft className="h-4 w-4" />
                   </Button>
-                  Mot de passe oublié
+                  Mot de passe oubliÃƒÂ©
                 </div>
               ) : (
                 'Se connecter'
@@ -130,8 +130,8 @@ const Connexion = () => {
             </CardTitle>
             <CardDescription>
               {showResetForm 
-                ? 'Nous vous enverrons un email pour réinitialiser votre mot de passe'
-                : 'Entrez vos identifiants pour accéder à votre espace'
+                ? 'Nous vous enverrons un email pour rÃƒÂ©initialiser votre mot de passe'
+                : 'Entrez vos identifiants pour accÃƒÂ©der ÃƒÂ  votre espace'
               }
             </CardDescription>
           </CardHeader>
@@ -156,7 +156,7 @@ const Connexion = () => {
                       Envoi en cours...
                     </>
                   ) : (
-                    'Envoyer le lien de réinitialisation'
+                    'Envoyer le lien de rÃƒÂ©initialisation'
                   )}
                 </Button>
               </form>
@@ -181,7 +181,7 @@ const Connexion = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    placeholder="••••••••"
+                    placeholder="********"
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
@@ -201,7 +201,7 @@ const Connexion = () => {
                     onClick={() => setShowResetForm(true)}
                     className="text-sm text-primary hover:underline"
                   >
-                    Mot de passe oublié ?
+                    Mot de passe oubliÃƒÂ© ?
                   </button>
                 </div>
               </form>
@@ -224,7 +224,7 @@ const Connexion = () => {
                 <p className="text-sm text-gray-600">
                   Pas encore de compte ?{' '}
                   <Link href="/inscription" className="text-primary hover:underline">
-                    Créer une conciergerie
+                    CrÃƒÂ©er une conciergerie
                   </Link>
                 </p>
               </div>
@@ -237,6 +237,7 @@ const Connexion = () => {
 };
 
 export default Connexion;
+
 
 
 

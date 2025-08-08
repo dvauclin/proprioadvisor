@@ -1,5 +1,7 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import PrendreRdv from '@/pages/PrendreRdv'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Prendre Rendez-vous | Proprioadvisor',
@@ -18,3 +20,4 @@ export const metadata: Metadata = {
 export default function PrendreRdvPage() {
   return <PrendreRdv />
 } 
+

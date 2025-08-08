@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
+import React, { Suspense } from 'react'
 import Subscription from '@/pages/Subscription'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Abonnement | Proprioadvisor',
@@ -16,5 +19,10 @@ export const metadata: Metadata = {
 }
 
 export default function SubscriptionPage() {
-  return <Subscription />
+  return (
+    <Suspense fallback={null}>
+      <Subscription />
+    </Suspense>
+  )
 } 
+

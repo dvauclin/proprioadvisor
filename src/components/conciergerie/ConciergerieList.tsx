@@ -1,11 +1,11 @@
-
+﻿
 import React from "react";
 import { Formule, Conciergerie } from "@/types";
 
-// Type étendu pour les formules avec conciergerie
+// Type Ã©tendu pour les formules avec conciergerie
 type FormuleWithConciergerie = Formule & { conciergerie?: Conciergerie };
 
-import ComparisonCard from "@/components/ui-kit/ComparisonCard";
+import ComparisonCard from "@/components/ui-kit/comparison-card";
 import { Button } from "@/components/ui-kit/button";
 
 interface ConciergerieListProps {
@@ -29,12 +29,12 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
       <div className="text-center py-10">
         <p className="text-gray-600">
           {allFormulesCount === 0 
-            ? "Aucune conciergerie n'est encore enregistrée pour cette ville." 
-            : "Aucune conciergerie ne correspond à vos critères de recherche."}
+            ? "Aucune conciergerie n'est encore enregistrÃ©e pour cette ville." 
+            : "Aucune conciergerie ne correspond Ã  vos critÃ¨res de recherche."}
         </p>
         {allFormulesCount > 0 && (
           <Button variant="outline" onClick={onResetFilters} className="mt-4">
-            Réinitialiser les filtres
+            RÃ©initialiser les filtres
           </Button>
         )}
       </div>
@@ -90,3 +90,4 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
 };
 
 export default ConciergerieList;
+

@@ -1,4 +1,4 @@
-// Types pour les utilitaires
+﻿// Types pour les utilitaires
 
 export interface DebounceOptions {
   leading?: boolean
@@ -91,3 +91,4 @@ export interface ApiErrorConfig {
   status?: number
   details?: any
 } 
+

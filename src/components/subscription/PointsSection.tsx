@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { SubscriptionFormValues } from '@/types/subscription';
 import { UseFormReturn } from 'react-hook-form';
@@ -23,19 +23,19 @@ export const PointsSection: React.FC<PointsSectionProps> = ({
 
   const getPointsMessage = () => {
     if (backlinkSelected && gmbSelected) {
-      return "Vous avez déjà 10 points car vous avez déclaré accepter d'ajouter des liens sur votre page d'accueil et sur votre fiche Google.";
+      return "Vous avez dÃ©jÃ  10 points car vous avez dÃ©clarÃ© accepter d'ajouter des liens sur votre page d'accueil et sur votre fiche Google.";
     } else if (backlinkSelected) {
-      return "Vous avez déjà 5 points car vous avez déclaré accepter d'ajouter un lien sur votre page d'accueil.";
+      return "Vous avez dÃ©jÃ  5 points car vous avez dÃ©clarÃ© accepter d'ajouter un lien sur votre page d'accueil.";
     } else if (gmbSelected) {
-      return "Vous avez déjà 5 points car vous avez déclaré accepter d'ajouter un lien sur votre fiche Google.";
+      return "Vous avez dÃ©jÃ  5 points car vous avez dÃ©clarÃ© accepter d'ajouter un lien sur votre fiche Google.";
     } else {
-      return "Vous pourriez avoir déjà 5 points si vous acceptiez d'ajouter un lien sur votre page d'accueil.";
+      return "Vous pourriez avoir dÃ©jÃ  5 points si vous acceptiez d'ajouter un lien sur votre page d'accueil.";
     }
   };
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4">
-      <h3 className="font-semibold text-lg mb-3">Système de points et positionnement</h3>
+      <h3 className="font-semibold text-lg mb-3">SystÃ¨me de points et positionnement</h3>
       
       <div className="space-y-3 mb-4">
         <div className="bg-blue-50 p-3 rounded-lg">
@@ -52,7 +52,7 @@ export const PointsSection: React.FC<PointsSectionProps> = ({
             <span className="font-semibold">Points de paiement :</span> {paymentPoints} points
           </p>
           <p className="text-gray-600 text-xs mt-1">
-            En payant <span className="font-bold text-amber-600">{totalMonthlyFee}€/mois</span>, vous obtenez {paymentPoints} points supplémentaires.
+            En payant <span className="font-bold text-amber-600">{totalMonthlyFee}â‚¬/mois</span>, vous obtenez {paymentPoints} points supplÃ©mentaires.
           </p>
         </div>
         
@@ -62,11 +62,11 @@ export const PointsSection: React.FC<PointsSectionProps> = ({
           </p>
           {totalPoints === 0 ? (
             <p className="text-red-600 text-sm mt-2 font-medium">
-              Avec 0 point vous ne serez pas considéré comme une conciergerie partenaire. Les clients ne pourront pas vous contacter et vous serez placé tout en bas des listings. Votre visibilité est quasi nulle. Il faut au moins 1 point pour être considéré comme une conciergerie partenaire.
+              Avec 0 point vous ne serez pas considÃ©rÃ© comme une conciergerie partenaire. Les clients ne pourront pas vous contacter et vous serez placÃ© tout en bas des listings. Votre visibilitÃ© est quasi nulle. Il faut au moins 1 point pour Ãªtre considÃ©rÃ© comme une conciergerie partenaire.
             </p>
           ) : (
             <p className="text-gray-600 text-xs mt-1">
-              Ce score définira votre position dans les listings.
+              Ce score dÃ©finira votre position dans les listings.
             </p>
           )}
         </div>
@@ -74,10 +74,11 @@ export const PointsSection: React.FC<PointsSectionProps> = ({
       
       {totalPoints > 0 && (
         <p className="text-sm text-gray-600 italic">
-          C'est simple, si une autre conciergerie de votre ville a moins de points elle sera positionnée derrière, 
-          si elle en a plus elle sera positionnée devant.
+          C'est simple, si une autre conciergerie de votre ville a moins de points elle sera positionnÃ©e derriÃ¨re, 
+          si elle en a plus elle sera positionnÃ©e devant.
         </p>
       )}
     </div>
   );
 };
+

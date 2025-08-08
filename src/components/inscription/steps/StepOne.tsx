@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { Ville } from "@/types";
@@ -49,7 +49,7 @@ const StepOne: React.FC<StepOneProps> = ({
       {/* Options d'acceptation */}
       <AcceptanceOptionsSection form={form} />
 
-      {/* Méthode de calcul et TVA */}
+      {/* MÃ©thode de calcul et TVA */}
       <CommissionCalculationSection form={form} />
 
       {/* Score - Admin only field */}
@@ -69,3 +69,4 @@ const StepOne: React.FC<StepOneProps> = ({
 };
 
 export default StepOne;
+

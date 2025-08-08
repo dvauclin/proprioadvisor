@@ -1,8 +1,8 @@
-
+﻿
 import React from "react";
 import { Button } from "@/components/ui-kit/button";
 import { Filter as FilterIcon } from "lucide-react";
-import Breadcrumbs from "@/components/ui-kit/Breadcrumbs";
+import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 import ConciergerieFilters from "@/components/conciergerie/ConciergerieFilters";
 import { Filter, Ville } from "@/types";
 
@@ -41,7 +41,7 @@ const ConciergerieListingHeader: React.FC<ConciergerieListingHeaderProps> = ({
           
           <div className="text-center">
             <h1 className="text-3xl font-bold mb-4">
-              {ville?.nom ? `Conciergeries Airbnb à ${ville.nom.charAt(0).toUpperCase() + ville.nom.slice(1)}` : `Conciergeries Airbnb à ${villeSlug ? villeSlug.charAt(0).toUpperCase() + villeSlug.slice(1) : villeSlug}`}
+              {ville?.nom ? `Conciergeries Airbnb Ã  ${ville.nom.charAt(0).toUpperCase() + ville.nom.slice(1)}` : `Conciergeries Airbnb Ã  ${villeSlug ? villeSlug.charAt(0).toUpperCase() + villeSlug.slice(1) : villeSlug}`}
             </h1>
             {pageDescription && (
               <div className="text-gray-600 max-w-3xl mx-auto mb-4">
@@ -49,7 +49,7 @@ const ConciergerieListingHeader: React.FC<ConciergerieListingHeaderProps> = ({
               </div>
             )}
             <div className="text-sm text-gray-500 mb-4">
-              <p>Dernière mise à jour : {getLastUpdateDate()}</p>
+              <p>DerniÃ¨re mise Ã  jour : {getLastUpdateDate()}</p>
             </div>
           </div>
         </div>
@@ -80,3 +80,4 @@ const ConciergerieListingHeader: React.FC<ConciergerieListingHeaderProps> = ({
 };
 
 export default ConciergerieListingHeader;
+

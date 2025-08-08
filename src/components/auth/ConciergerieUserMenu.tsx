@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -78,7 +78,7 @@ const ConciergerieUserMenu = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Se d�connecter</span>
+          <span>Se déconnecter</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -86,6 +86,7 @@ const ConciergerieUserMenu = () => {
 };
 
 export default ConciergerieUserMenu;
+
 
 
 

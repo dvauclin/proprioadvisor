@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,7 +10,7 @@ const TestFormules = () => {
   React.useEffect(() => {
     const testFormules = async () => {
       try {
-        console.log("🧪 Testing formules...");
+        console.log("ðŸ§ª Testing formules...");
         
         // Test 1: Get all formules
         const { data: allFormules, error: allError } = await supabase
@@ -18,8 +18,8 @@ const TestFormules = () => {
           .select('*')
           .limit(5);
         
-        console.log("📊 All formules:", allFormules);
-        console.log("❌ All formules error:", allError);
+        console.log("ðŸ“Š All formules:", allFormules);
+        console.log("âŒ All formules error:", allError);
         
         // Test 2: Get all conciergeries
         const { data: allConciergeries, error: conciergeriesError } = await supabase
@@ -27,21 +27,21 @@ const TestFormules = () => {
           .select('id, nom')
           .limit(5);
         
-        console.log("🏢 All conciergeries:", allConciergeries);
-        console.log("❌ Conciergeries error:", conciergeriesError);
+        console.log("ðŸ¢ All conciergeries:", allConciergeries);
+        console.log("âŒ Conciergeries error:", conciergeriesError);
         
         // Test 3: Get formules for a specific conciergerie (if we have one)
         if (allConciergeries && allConciergeries.length > 0) {
           const testConciergerieId = allConciergeries[0].id;
-          console.log("🔍 Testing formules for conciergerie:", testConciergerieId);
+          console.log("ðŸ” Testing formules for conciergerie:", testConciergerieId);
           
           const { data: specificFormules, error: specificError } = await supabase
             .from('formules')
             .select('*')
             .eq('conciergerie_id', testConciergerieId);
           
-          console.log("🎯 Formules for specific conciergerie:", specificFormules);
-          console.log("❌ Specific formules error:", specificError);
+          console.log("ðŸŽ¯ Formules for specific conciergerie:", specificFormules);
+          console.log("âŒ Specific formules error:", specificError);
           
           setResults({
             allFormules,
@@ -57,7 +57,7 @@ const TestFormules = () => {
         }
         
              } catch (error) {
-         console.error("❌ Test error:", error);
+         console.error("âŒ Test error:", error);
          setResults({ error: error instanceof Error ? error.message : 'Unknown error' });
        } finally {
         setLoading(false);
@@ -115,3 +115,4 @@ const TestFormules = () => {
 };
 
 export default TestFormules; 
+

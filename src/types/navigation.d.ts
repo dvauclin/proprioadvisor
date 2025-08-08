@@ -1,4 +1,4 @@
-// Types pour la navigation
+﻿// Types pour la navigation
 
 export interface NavigationItem {
   name: string
@@ -33,3 +33,4 @@ export interface SocialLink {
   href: string
   icon: React.ComponentType<{ className?: string }>
 } 
+

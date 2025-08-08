@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import StructuredData from './StructuredData';
 
 const OrganizationStructuredData = () => {
@@ -8,7 +8,7 @@ const OrganizationStructuredData = () => {
     name: 'ProprioAdvisor',
     url: 'https://proprioadvisor.fr',
     logo: 'https://proprioadvisor.fr/logo.png',
-    description: 'Comparateur de conciergeries Airbnb pour les propriétaires',
+    description: 'Comparateur de conciergeries Airbnb pour les propriÃ©taires',
     sameAs: [
       'https://twitter.com/proprioadvisor',
       'https://linkedin.com/company/proprioadvisor'
@@ -24,3 +24,4 @@ const OrganizationStructuredData = () => {
 };
 
 export default OrganizationStructuredData; 
+

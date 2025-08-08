@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ interface InscriptionFormData {
   urlAvis?: string;
 }
 
-// Type �tendu pour inclure l'id
+// Type Ã©tendu pour inclure l'id
 interface FormuleWithId extends FormuleFormData {
   id: string;
 }
@@ -86,18 +86,18 @@ export const useInscriptionForm = () => {
   const handleStepOne = useCallback(async (data: InscriptionFormData) => {
     setLoading(true);
     try {
-      // Validation et traitement de l'�tape 1
+      // Validation et traitement de l'Ã©tape 1
       console.log("Step 1 data:", data);
       setStep(2);
       
-      // Scroll vers le haut lors du changement d'�tape
+      // Scroll vers le haut lors du changement d'Ã©tape
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     } catch (error) {
       console.error("Error in step 1:", error);
-      toast.error("Erreur lors de la validation de l'�tape 1");
+      toast.error("Erreur lors de la validation de l'Ã©tape 1");
     } finally {
       setLoading(false);
     }
@@ -122,7 +122,7 @@ export const useInscriptionForm = () => {
       reader.readAsDataURL(file);
     } catch (error) {
       console.error("Error uploading logo:", error);
-      toast.error("Erreur lors du t�l�chargement du logo");
+      toast.error("Erreur lors du tÃ©lÃ©chargement du logo");
     } finally {
       setIsUploadingLogo(false);
     }
@@ -144,8 +144,8 @@ export const useInscriptionForm = () => {
     try {
       const formData = form.getValues();
       
-      console.log("?? handleSubmit: Form data:", formData);
-      console.log("?? handleSubmit: Selected villes IDs:", selectedVillesIds);
+      console.log("handleSubmit: Form data:", formData);
+      console.log("handleSubmit: Selected villes IDs:", selectedVillesIds);
       
       const insertData = {
         nom: formData.nom,
@@ -165,9 +165,9 @@ export const useInscriptionForm = () => {
         villes_ids: selectedVillesIds
       };
       
-      console.log("?? handleSubmit: Insert data:", insertData);
+      console.log("handleSubmit: Insert data:", insertData);
       
-      // Cr�er la conciergerie - ajust� pour correspondre au sch�ma de la DB
+      // CrÃ©er la conciergerie - ajustÃ© pour correspondre au schÃ©ma de la DB
       const { data: conciergerie, error: conciergerieError } = await supabase
         .from('conciergeries')
         .insert([insertData])
@@ -175,19 +175,19 @@ export const useInscriptionForm = () => {
         .single();
 
       if (conciergerieError) {
-        console.error("? handleSubmit: Conciergerie error:", conciergerieError);
-        console.error("? handleSubmit: Error details:", {
+        console.error("handleSubmit: Conciergerie error:", conciergerieError);
+        console.error("handleSubmit: Error details:", {
           message: conciergerieError.message,
           details: conciergerieError.details,
           hint: conciergerieError.hint,
           code: conciergerieError.code
         });
-        toast.error("Erreur lors de la cr�ation de la conciergerie");
+        toast.error("Erreur lors de la crÃ©ation de la conciergerie");
         return { success: false, error: conciergerieError };
       }
 
-      console.log("? handleSubmit: Conciergerie cr��e avec succ�s:", conciergerie);
-      toast.success("Inscription r�ussie ! Vous allez �tre redirig� vers la page de souscription.");
+      console.log("handleSubmit: Conciergerie crÃ©Ã©e avec succÃ¨s:", conciergerie);
+      toast.success("Inscription rÃ©ussie ! Vous allez Ãªtre redirigÃ© vers la page de souscription.");
       
       // Redirection vers la page de souscription avec l'ID de la conciergerie
       router.push(`/subscription?conciergerieId=${conciergerie.id}`);
@@ -201,7 +201,7 @@ export const useInscriptionForm = () => {
     }
   }, [form, signUp, router, selectedVillesIds]);
 
-  // Validation de l'�tape 1
+  // Validation de l'Ã©tape 1
   const isStepOneValid = form.watch("nom") && 
                         form.watch("mail") && 
                         form.watch("nomContact") &&
@@ -210,7 +210,7 @@ export const useInscriptionForm = () => {
   // Wrapper pour setStep qui inclut le scroll vers le haut
   const setStepWithScroll = useCallback((newStep: number) => {
     setStep(newStep);
-    // Scroll vers le haut lors du changement d'�tape
+    // Scroll vers le haut lors du changement d'Ã©tape
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -237,5 +237,6 @@ export const useInscriptionForm = () => {
     isUploadingLogo
   };
 };
+
 
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { FormuleFormData } from "@/components/formule/FormuleFormSchema";
@@ -33,7 +33,7 @@ const StepTwo: React.FC<StepTwoProps> = ({
     formule: FormuleFormData;
   } | null>(null);
 
-  // Vérification de sécurité pour formules
+  // VÃ©rification de sÃ©curitÃ© pour formules
   const safeFormules = Array.isArray(formules) ? formules : [];
   const formulesCount = safeFormules.length;
 
@@ -72,16 +72,16 @@ const StepTwo: React.FC<StepTwoProps> = ({
         <div className="flex items-center mb-2">
           <ListPlus className="mr-2 h-5 w-5 text-gray-600" />
           <h2 className="text-xl font-semibold">
-            Gérer les formules
+            GÃ©rer les formules
           </h2>
         </div>
         <p className="text-gray-600 mb-4">
-          Vous avez ajouté {formulesCount} formule(s). Veuillez ajouter au moins une formule.
+          Vous avez ajoutÃ© {formulesCount} formule(s). Veuillez ajouter au moins une formule.
         </p>
 
         {formulesCount > 0 && (
           <div className="mb-6 space-y-2">
-            <h3 className="font-medium">Formules ajoutées :</h3>
+            <h3 className="font-medium">Formules ajoutÃ©es :</h3>
             <div className="space-y-2">
               {safeFormules.map((formule, index) => (
                 <div key={index} className="p-3 border rounded bg-gray-50 flex justify-between items-center">
@@ -89,7 +89,7 @@ const StepTwo: React.FC<StepTwoProps> = ({
                     <p className="font-medium">{formule.nom}</p>
                     <p className="text-sm text-gray-600">
                       Commission : {formule.commission}% | 
-                      Durée min : {formule.dureeGestionMin} mois
+                      DurÃ©e min : {formule.dureeGestionMin} mois
                     </p>
                   </div>
                   <div className="flex space-x-2">
@@ -149,3 +149,4 @@ const StepTwo: React.FC<StepTwoProps> = ({
 };
 
 export default StepTwo;
+

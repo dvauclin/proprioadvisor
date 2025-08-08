@@ -1,4 +1,4 @@
-// Types pour les erreurs
+﻿// Types pour les erreurs
 
 export interface BaseError {
   name: string
@@ -208,3 +208,4 @@ export interface ErrorBoundaryState {
   hasError: boolean
   error?: Error
 } 
+

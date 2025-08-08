@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
@@ -26,7 +26,7 @@ export const ReapproOptions: React.FC<ReapproOptionsProps> = ({
         name="fraisReapprovisionnement"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Frais de réapprovisionnement</FormLabel>
+            <FormLabel>Frais de rÃ©approvisionnement</FormLabel>
             <Select 
               value={field.value}
               onValueChange={(value: "inclus" | "reel" | "forfait") => {
@@ -35,11 +35,11 @@ export const ReapproOptions: React.FC<ReapproOptionsProps> = ({
               }}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Sélectionnez une option" />
+                <SelectValue placeholder="SÃ©lectionnez une option" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="inclus">Inclus</SelectItem>
-                <SelectItem value="reel">Coût réel refacturé</SelectItem>
+                <SelectItem value="reel">CoÃ»t rÃ©el refacturÃ©</SelectItem>
                 <SelectItem value="forfait">Forfait mensuel</SelectItem>
               </SelectContent>
             </Select>
@@ -58,7 +58,7 @@ export const ReapproOptions: React.FC<ReapproOptionsProps> = ({
             
             return (
               <FormItem>
-                <FormLabel>Forfait mensuel réappro. (€)</FormLabel>
+                <FormLabel>Forfait mensuel rÃ©appro. (â‚¬)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -82,3 +82,4 @@ export const ReapproOptions: React.FC<ReapproOptionsProps> = ({
 };
 
 export default ReapproOptions;
+

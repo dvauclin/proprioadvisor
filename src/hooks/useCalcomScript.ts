@@ -1,4 +1,4 @@
-
+﻿
 import { useEffect } from 'react';
 
 export const useCalcomScript = () => {
@@ -45,3 +45,4 @@ export const useCalcomScript = () => {
     };
   }, []);
 };
+

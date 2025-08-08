@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -46,10 +46,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-            Trouvez la <span className="text-brand-chartreuse">conciergerie Airbnb</span> idéale pour votre bien
+            Trouvez la <span className="text-brand-chartreuse">conciergerie Airbnb</span> idÃ©ale pour votre bien
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-lg mx-auto">
-            Comparez gratuitement les offres des conciergeries Airbnb en France et optimisez la gestion de votre location courte durée
+            Comparez gratuitement les offres des conciergeries Airbnb en France et optimisez la gestion de votre location courte durÃ©e
           </p>
           
           <div className="max-w-md mx-auto mb-8">
@@ -88,3 +88,4 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
 };
 
 export default HeroSection;
+

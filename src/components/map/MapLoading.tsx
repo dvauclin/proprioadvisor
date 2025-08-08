@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 
 const MapLoading: React.FC = () => {
@@ -10,3 +10,4 @@ const MapLoading: React.FC = () => {
 };
 
 export default MapLoading;
+

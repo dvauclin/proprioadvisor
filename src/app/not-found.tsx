@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import NotFound from '@/pages/NotFound'
 
 export const metadata: Metadata = {
-  title: 'Page Non Trouvée | Proprioadvisor',
+  title: 'Page Non TrouvÃ©e | Proprioadvisor',
   description: 'La page que vous recherchez n\'existe pas',
   robots: {
     index: false,
@@ -13,3 +13,4 @@ export const metadata: Metadata = {
 export default function NotFoundPage() {
   return <NotFound />
 } 
+

@@ -1,4 +1,4 @@
-
+﻿
 import { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { supabase } from "@/integrations/supabase/client";
@@ -34,8 +34,8 @@ export const useMapbox = () => {
           }
           setLoading(false);
         } catch (err) {
-          console.error('Erreur lors de la récupération du token Mapbox:', err);
-          setError('Erreur de connexion à Mapbox');
+          console.error('Erreur lors de la rÃ©cupÃ©ration du token Mapbox:', err);
+          setError('Erreur de connexion Ã  Mapbox');
           setLoading(false);
         }
       };
@@ -45,3 +45,4 @@ export const useMapbox = () => {
 
   return { mapboxToken, loading, error, setMapboxToken };
 };
+

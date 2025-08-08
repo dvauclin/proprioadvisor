@@ -1,4 +1,4 @@
-
+﻿
 import { useState, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormValues } from "@/hooks/useInscriptionSchema";
@@ -24,3 +24,4 @@ export const useFormValidation = (form: UseFormReturn<FormValues>, selectedVille
     isStepOneValid
   };
 };
+

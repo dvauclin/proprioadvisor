@@ -1,4 +1,4 @@
-// Types pour les composants UI
+﻿// Types pour les composants UI
 
 export interface ButtonProps {
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
@@ -165,3 +165,4 @@ export interface AccordionProps {
   className?: string
   collapsible?: boolean
 } 
+

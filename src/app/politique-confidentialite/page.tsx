@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import PolitiqueConfidentialite from '@/pages/PolitiqueConfidentialite'
 
 export const metadata: Metadata = {
-  title: 'Politique de Confidentialité | Proprioadvisor',
-  description: 'Politique de confidentialité de Proprioadvisor',
-  keywords: ['confidentialité', 'privacy', 'données personnelles', 'rgpd'],
+  title: 'Politique de ConfidentialitÃ© | Proprioadvisor',
+  description: 'Politique de confidentialitÃ© de Proprioadvisor',
+  keywords: ['confidentialitÃ©', 'privacy', 'donnÃ©es personnelles', 'rgpd'],
   openGraph: {
-    title: 'Politique de Confidentialité | Proprioadvisor',
-    description: 'Politique de confidentialité de Proprioadvisor',
+    title: 'Politique de ConfidentialitÃ© | Proprioadvisor',
+    description: 'Politique de confidentialitÃ© de Proprioadvisor',
     url: 'https://proprioadvisor.com/politique-confidentialite',
   },
   alternates: {
@@ -18,3 +18,4 @@ export const metadata: Metadata = {
 export default function PolitiqueConfidentialitePage() {
   return <PolitiqueConfidentialite />
 } 
+

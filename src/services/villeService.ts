@@ -1,9 +1,9 @@
-
+﻿
 import { supabase } from "@/integrations/supabase/client";
 import { Ville } from "@/types";
 
 export const getAllVilles = async (): Promise<Ville[]> => {
-  console.log("🔍 getAllVilles: Starting Supabase query...");
+  console.log("ðŸ” getAllVilles: Starting Supabase query...");
   
   try {
     const { data, error } = await supabase
@@ -11,20 +11,20 @@ export const getAllVilles = async (): Promise<Ville[]> => {
       .select('*')
       .order('nom', { ascending: true });
     
-    console.log("🔍 getAllVilles: Supabase response:", { data, error });
-    console.log("🔍 getAllVilles: Data length:", data?.length || 0);
+    console.log("ðŸ” getAllVilles: Supabase response:", { data, error });
+    console.log("ðŸ” getAllVilles: Data length:", data?.length || 0);
     
     if (error) {
-      console.error("❌ getAllVilles: Error fetching villes:", error);
+      console.error("âŒ getAllVilles: Error fetching villes:", error);
       return [];
     }
     
     if (!data || data.length === 0) {
-      console.warn("⚠️ getAllVilles: No villes found in database");
+      console.warn("âš ï¸ getAllVilles: No villes found in database");
       return [];
     }
     
-    console.log("✅ getAllVilles: Successfully fetched", data?.length || 0, "villes");
+    console.log("âœ… getAllVilles: Successfully fetched", data?.length || 0, "villes");
     
     const transformedData = data.map(ville => ({
       id: ville.id,
@@ -42,10 +42,10 @@ export const getAllVilles = async (): Promise<Ville[]> => {
       createdAt: ville.created_at || undefined
     }));
 
-    console.log("✅ getAllVilles: Transformed data:", transformedData);
+    console.log("âœ… getAllVilles: Transformed data:", transformedData);
     return transformedData;
   } catch (error) {
-    console.error("❌ getAllVilles: Unexpected error fetching villes:", error);
+    console.error("âŒ getAllVilles: Unexpected error fetching villes:", error);
     return [];
   }
 };
@@ -169,3 +169,4 @@ export const deleteVille = async (id: string): Promise<void> => {
 
   if (error) throw error;
 };
+

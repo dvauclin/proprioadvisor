@@ -1,24 +1,24 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllArticles, getArticleBySlug } from '@/services/supabaseService'
 import ArticleHeader from '@/components/blog/ArticleHeader'
 import ClientArticleWrapper from '@/components/blog/ClientArticleWrapper'
-import Breadcrumbs from '@/components/ui-kit/Breadcrumbs'
+import Breadcrumbs from '@/components/ui-kit/breadcrumbs'
 
 export async function generateMetadata(): Promise<Metadata> {
   const article = await getArticleBySlug('trouver-des-clients-conciergerie-airbnb');
   
   if (!article) {
     return {
-      title: 'Article non trouvé | ProprioAdvisor',
-      description: 'Cet article n\'existe pas ou a été supprimé.',
+      title: 'Article non trouvÃ© | ProprioAdvisor',
+      description: 'Cet article n\'existe pas ou a Ã©tÃ© supprimÃ©.',
     };
   }
 
   return {
     title: `${article.titre} | ProprioAdvisor`,
     description: article.excerpt || article.titre,
-    keywords: ['conciergerie airbnb', 'trouver clients', 'développement commercial', 'marketing conciergerie', 'clients propriétaires'],
+    keywords: ['conciergerie airbnb', 'trouver clients', 'dÃ©veloppement commercial', 'marketing conciergerie', 'clients propriÃ©taires'],
     openGraph: {
       title: article.titre,
       description: article.excerpt || article.titre,
@@ -45,7 +45,7 @@ export default async function TrouverClientsPage() {
     notFound();
   }
 
-  // Récupérer les articles similaires (exclure l'article actuel)
+  // RÃ©cupÃ©rer les articles similaires (exclure l'article actuel)
   const allArticles = await getAllArticles();
   const relatedArticles = allArticles
     .filter(a => a.id !== article.id)
@@ -97,3 +97,4 @@ export default async function TrouverClientsPage() {
     </div>
   );
 } 
+

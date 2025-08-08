@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Simulator from '@/pages/Simulator'
 
 export const metadata: Metadata = {
@@ -18,3 +18,4 @@ export const metadata: Metadata = {
 export default function SimulateurPage() {
   return <Simulator />
 } 
+

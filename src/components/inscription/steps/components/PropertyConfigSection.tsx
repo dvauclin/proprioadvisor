@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
@@ -31,14 +31,14 @@ const PropertyConfigSection: React.FC<PropertyConfigSectionProps> = ({ form }) =
           name="typeLogementAccepte"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type de logement accepté</FormLabel>
+              <FormLabel>Type de logement acceptÃ©</FormLabel>
               <FormControl>
                 <Select
                   value={field.value}
                   onValueChange={field.onChange}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Sélectionnez un type" />
+                    <SelectValue placeholder="SÃ©lectionnez un type" />
                   </SelectTrigger>
                   <SelectContent>
                     {propertyTypeOptions.map(option => (
@@ -59,7 +59,7 @@ const PropertyConfigSection: React.FC<PropertyConfigSectionProps> = ({ form }) =
           name="superficieMin"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Superficie minimale (m²)</FormLabel>
+              <FormLabel>Superficie minimale (mÂ²)</FormLabel>
               <FormControl>
                 <Input type="number" min="0" {...field} />
               </FormControl>
@@ -87,3 +87,4 @@ const PropertyConfigSection: React.FC<PropertyConfigSectionProps> = ({ form }) =
 };
 
 export default PropertyConfigSection;
+

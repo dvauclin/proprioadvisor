@@ -1,4 +1,4 @@
-
+ï»¿
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/integrations/supabase/client';
@@ -29,7 +29,7 @@ export const useSubscriptionSubmit = ({
   const [loading, setLoading] = useState(false);
 
   const handleSubscription = async (values: SubscriptionFormValues) => {
-    console.log("handleSubscription appelé avec:", values);
+    console.log("handleSubscription appelÃƒÂ© avec:", values);
     
     if (!conciergerieId) {
       toast({ title: "Erreur", description: "ID de conciergerie manquant.", variant: "destructive" });
@@ -43,7 +43,7 @@ export const useSubscriptionSubmit = ({
       const amountInCents = totalMonthlyFee * 100;
       
       if (totalMonthlyFee < 0) {
-        toast({ title: "Erreur", description: "Le montant ne peut pas être négatif.", variant: "destructive" });
+        toast({ title: "Erreur", description: "Le montant ne peut pas ÃƒÂªtre nÃƒÂ©gatif.", variant: "destructive" });
         setLoading(false);
         return;
       }
@@ -88,11 +88,11 @@ export const useSubscriptionSubmit = ({
         phone_number_value: values.phoneNumberValue || null
       };
 
-      // Si c'est une souscription gratuite (pas d'abonnement payant coché), traiter directement
+      // Si c'est une souscription gratuite (pas d'abonnement payant cochÃƒÂ©), traiter directement
       if (!values.useCustomAmount || totalMonthlyFee === 0) {
-        console.log("Souscription gratuite détectée, traitement direct sans Stripe");
+        console.log("Souscription gratuite dÃƒÂ©tectÃƒÂ©e, traitement direct sans Stripe");
         
-        // Si on a une souscription existante qui était payante, il faut d'abord annuler l'abonnement Stripe
+        // Si on a une souscription existante qui ÃƒÂ©tait payante, il faut d'abord annuler l'abonnement Stripe
         if (existingSubscription && existingSubscription.stripe_subscription_id && existingSubscription.monthly_amount > 0) {
           console.log("Annulation de l'abonnement Stripe existant");
           try {
@@ -111,7 +111,7 @@ export const useSubscriptionSubmit = ({
               return;
             }
             
-            console.log("Abonnement Stripe annulé avec succès");
+            console.log("Abonnement Stripe annulÃƒÂ© avec succÃƒÂ¨s");
           } catch (cancelError) {
             console.error("Erreur lors de l'annulation de l'abonnement:", cancelError);
             toast({
@@ -125,7 +125,7 @@ export const useSubscriptionSubmit = ({
         }
         
         // Traiter la souscription gratuite directement
-        // Vérifier s'il existe déjà une souscription pour cette conciergerie
+        // VÃƒÂ©rifier s'il existe dÃƒÂ©jÃƒÂ  une souscription pour cette conciergerie
         const { data: existingData } = await supabase
           .from('subscriptions')
           .select('id')
@@ -136,7 +136,7 @@ export const useSubscriptionSubmit = ({
         let isUpdate = false;
 
         if (existingData) {
-          // Mettre à jour la souscription existante
+          // Mettre ÃƒÂ  jour la souscription existante
           const { error: updateError } = await supabase
             .from('subscriptions')
             .update({
@@ -155,7 +155,7 @@ export const useSubscriptionSubmit = ({
           subscriptionId = existingData.id;
           isUpdate = true;
         } else {
-          // Créer une nouvelle souscription
+          // CrÃƒÂ©er une nouvelle souscription
           const { data: insertData, error: insertError } = await supabase
             .from('subscriptions')
             .insert({
@@ -177,7 +177,7 @@ export const useSubscriptionSubmit = ({
           isUpdate = false;
         }
 
-        // Auto-validate conciergerie for free subscription
+        // Auto-validation conciergerie pour la souscription gratuite
         try {
           const { data: conciergerie } = await supabase
             .from('conciergeries')
@@ -201,9 +201,7 @@ export const useSubscriptionSubmit = ({
           console.error("Error during conciergerie validation for free subscription:", error);
         }
         
-        // Ne pas mettre à jour le score_manuel - ce champ doit rester modifiable manuellement uniquement
-        
-        // Déclencher le webhook
+        // DÃƒÂ©clencher le webhook
         try {
           await triggerWebhook({
             type: 'subscription_update',
@@ -215,10 +213,10 @@ export const useSubscriptionSubmit = ({
             is_free: true
           });
         } catch (webhookError) {
-          console.error("Erreur lors du déclenchement du webhook:", webhookError);
+          console.error("Erreur lors du dÃƒÂ©clenchement du webhook:", webhookError);
         }
 
-        // Rediriger vers la page de succès avec tous les paramètres
+        // Rediriger vers la page de succÃƒÂ¨s avec tous les paramÃƒÂ¨tres
         const params = new URLSearchParams({
           subscription_id: subscriptionId,
           points: totalPoints.toString(),
@@ -255,7 +253,7 @@ export const useSubscriptionSubmit = ({
         console.error("Error creating checkout:", error);
         toast({
           title: "Erreur",
-          description: "Impossible de créer la session de paiement.",
+          description: "Impossible de crÃƒÂ©er la session de paiement.",
           variant: "destructive"
         });
         setLoading(false);
@@ -265,7 +263,7 @@ export const useSubscriptionSubmit = ({
       console.log("Checkout response:", data);
 
       if (data?.url) {
-        // Déclencher le webhook pour les souscriptions payantes
+        // DÃƒÂ©clencher le webhook pour les souscriptions payantes
         try {
           await triggerWebhook({
             type: 'subscription_checkout',
@@ -275,14 +273,13 @@ export const useSubscriptionSubmit = ({
             checkout_url: data.url
           });
         } catch (webhookError) {
-          console.error("Erreur lors du déclenchement du webhook:", webhookError);
+          console.error("Erreur lors du dÃƒÂ©clenchement du webhook:", webhookError);
         }
         
-        // If it's a redirect to success page (free subscription), navigate directly
+        // Redirect to URL
         if (data.url.includes('/success')) {
           window.location.href = data.url;
         } else {
-          // For paid subscriptions, redirect to Stripe
           window.location.href = data.url;
         }
       } else {
@@ -305,4 +302,5 @@ export const useSubscriptionSubmit = ({
 
   return { handleSubscription, loading };
 };
+
 

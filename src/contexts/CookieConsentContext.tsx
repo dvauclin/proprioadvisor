@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import React, { createContext, ReactNode } from 'react';
 
-// Déclaration de type pour dataLayer
+// DÃ©claration de type pour dataLayer
 declare global {
   interface Window {
     dataLayer?: any[];
@@ -46,7 +46,7 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
   const [cookieConsent, setCookieConsent] = React.useState<CookiePreferences>(defaultConsent);
   const [hasResponded, setHasResponded] = React.useState<boolean>(false);
 
-  // Charger les préférences de cookies depuis localStorage lors de l'initialisation - client only
+  // Charger les prÃ©fÃ©rences de cookies depuis localStorage lors de l'initialisation - client only
   React.useEffect(() => {
     const storedConsent = localStorage.getItem('cookieConsent');
     if (storedConsent) {
@@ -55,7 +55,7 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
         setCookieConsent(parsedConsent);
         setHasResponded(true);
         
-        // Réappliquer le consentement au chargement de la page - client only
+        // RÃ©appliquer le consentement au chargement de la page - client only
         if (parsedConsent.analytics) {
           enableAnalytics();
         }
@@ -63,19 +63,19 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
           enableMarketing();
         }
       } catch (error) {
-        console.error('Erreur lors du chargement des préférences de cookies:', error);
+        console.error('Erreur lors du chargement des prÃ©fÃ©rences de cookies:', error);
       }
     }
   }, []);
 
   const updateCookieConsent = (preferences: CookiePreferences) => {
-    console.log('Mise à jour du consentement cookies:', preferences);
+    console.log('Mise Ã  jour du consentement cookies:', preferences);
     setCookieConsent(preferences);
     setHasResponded(true);
     
     localStorage.setItem('cookieConsent', JSON.stringify(preferences));
 
-    // Activer ou désactiver les scripts en fonction des préférences via GTM - client only
+    // Activer ou dÃ©sactiver les scripts en fonction des prÃ©fÃ©rences via GTM - client only
     if (preferences.analytics) {
       enableAnalytics();
     } else {
@@ -101,7 +101,7 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
   const enableAnalytics = () => {
     console.log('Activation des cookies analytiques');
     
-    // Envoyer l'événement à GTM
+    // Envoyer l'Ã©vÃ©nement Ã  GTM
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -112,9 +112,9 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
   };
 
   const disableAnalytics = () => {
-    console.log('Désactivation des cookies analytiques');
+    console.log('DÃ©sactivation des cookies analytiques');
     
-    // Envoyer l'événement à GTM
+    // Envoyer l'Ã©vÃ©nement Ã  GTM
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -127,7 +127,7 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
   const enableMarketing = () => {
     console.log('Activation des cookies marketing');
     
-    // Envoyer l'événement à GTM
+    // Envoyer l'Ã©vÃ©nement Ã  GTM
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -138,9 +138,9 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
   };
 
   const disableMarketing = () => {
-    console.log('Désactivation des cookies marketing');
+    console.log('DÃ©sactivation des cookies marketing');
     
-    // Envoyer l'événement à GTM
+    // Envoyer l'Ã©vÃ©nement Ã  GTM
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -163,3 +163,4 @@ export const CookieConsentProvider: React.FC<CookieConsentProviderProps> = ({ ch
     </CookieConsentContext.Provider>
   );
 };
+

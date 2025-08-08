@@ -1,9 +1,9 @@
-
+﻿
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui-kit/dialog';
 import { Button } from '@/components/ui-kit/button';
 import { Avis } from '@/types';
-import StarRating from './StarRating';
+import StarRating from '@/components/ui-kit/star-rating';
 import { format } from 'date-fns/format';
 import { fr } from 'date-fns/locale/fr';
 
@@ -101,3 +101,4 @@ const AvisModal: React.FC<AvisModalProps> = ({
 };
 
 export default AvisModal;
+

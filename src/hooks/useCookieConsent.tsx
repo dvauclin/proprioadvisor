@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from 'react';
 import { CookieConsentContext } from '@/contexts/CookieConsentContext';
@@ -12,3 +12,4 @@ export const useCookieConsent = () => {
   
   return context;
 };
+

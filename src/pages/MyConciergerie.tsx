@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -47,7 +47,7 @@ const MyConciergerie = () => {
   const handleSave = async (data: Conciergerie & { formules: Formule[], deletedFormulesIds?: string[] }) => {
     try {
       await saveConciergerie(data);
-      toast.success("Modifications enregistr�es avec succ�s!");
+      toast.success('Modifications enregistrÃ©es avec succÃ¨s !');
       await queryClient.invalidateQueries({ queryKey: ['my-conciergerie', user?.email] });
       navigate.push('/subscription');
     } catch (error: any) {
@@ -86,9 +86,9 @@ const MyConciergerie = () => {
         <div className="container mx-auto py-10 text-center">
             <Card className="max-w-md mx-auto">
                 <CardHeader>
-                    <CardTitle>Aucune conciergerie trouv�e</CardTitle>
+                    <CardTitle>Aucune conciergerie trouvÃ©e</CardTitle>
                     <CardDescription>
-                        Aucune conciergerie n'est associ�e � votre compte.
+                        Aucune conciergerie n'est associÃ©e Ã  votre compte.
                     </CardDescription>
                 </CardHeader>
             </Card>
@@ -111,6 +111,7 @@ const MyConciergerie = () => {
 };
 
 export default MyConciergerie;
+
 
 
 

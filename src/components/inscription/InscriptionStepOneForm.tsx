@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import { Form } from "@/components/ui-kit/form";
 import { Button } from "@/components/ui-kit/button";
@@ -58,3 +58,4 @@ const InscriptionStepOneForm: React.FC<InscriptionStepOneFormProps> = ({
 };
 
 export default InscriptionStepOneForm;
+

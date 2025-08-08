@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { Info } from 'lucide-react';
 
@@ -18,14 +18,14 @@ export const PricingExplanation: React.FC<PricingExplanationProps> = ({
     if (currentAmount === finalSelectedAmount) {
       if (currentAmount === 0) {
         return {
-          icon: "🟰",
+          icon: "ðŸŸ°",
           title: "Maintien abonnement gratuit",
           description: "Vous resterez sur un abonnement gratuit."
         };
       } else {
         return {
-          icon: "🟰",
-          title: "Montant inchangé",
+          icon: "ðŸŸ°",
+          title: "Montant inchangÃ©",
           description: "Vous conserverez votre abonnement actuel."
         };
       }
@@ -34,32 +34,32 @@ export const PricingExplanation: React.FC<PricingExplanationProps> = ({
     if (finalSelectedAmount > currentAmount) {
       if (currentAmount === 0) {
         return {
-          icon: "⬆️",
-          title: "Passage de gratuit à payant",
-          description: "Vous passerez à un abonnement payant. Un paiement sera demandé après la mise à jour de votre souscription."
+          icon: "â¬†ï¸",
+          title: "Passage de gratuit Ã  payant",
+          description: "Vous passerez Ã  un abonnement payant. Un paiement sera demandÃ© aprÃ¨s la mise Ã  jour de votre souscription."
         };
       } else {
         return {
-          icon: "⬆️",
-          title: "Montant sélectionné supérieur",
-          description: "Vous augmenterez le montant de votre abonnement. Un ajustement au prorata sera calculé pour le mois en cours. Le nouveau montant total sera facturé lors de votre prochaine échéance mensuelle."
+          icon: "â¬†ï¸",
+          title: "Montant sÃ©lectionnÃ© supÃ©rieur",
+          description: "Vous augmenterez le montant de votre abonnement. Un ajustement au prorata sera calculÃ© pour le mois en cours. Le nouveau montant total sera facturÃ© lors de votre prochaine Ã©chÃ©ance mensuelle."
         };
       }
     }
     
     if (finalSelectedAmount === 0 && currentAmount > 0) {
       return {
-        icon: "⛔",
-        title: "Passage de payant à gratuit",
-        description: "Vous passerez à un abonnement gratuit. Votre abonnement payant en cours sera résilié, et vous ne serez plus facturé à partir d'aujourd'hui. Vous conservez votre visibilité gratuite selon les options activées."
+        icon: "â›”",
+        title: "Passage de payant Ã  gratuit",
+        description: "Vous passerez Ã  un abonnement gratuit. Votre abonnement payant en cours sera rÃ©siliÃ©, et vous ne serez plus facturÃ© Ã  partir d'aujourd'hui. Vous conservez votre visibilitÃ© gratuite selon les options activÃ©es."
       };
     }
     
     // finalSelectedAmount < currentAmount && finalSelectedAmount > 0
     return {
-      icon: "⬇️",
-      title: "Montant sélectionné inférieur",
-      description: "Vous diminuerez le montant de votre abonnement. Un avoir correspondant à la différence sera automatiquement déduit de votre prochaine facture. Le nouveau tarif réduit prend effet immédiatement."
+      icon: "â¬‡ï¸",
+      title: "Montant sÃ©lectionnÃ© infÃ©rieur",
+      description: "Vous diminuerez le montant de votre abonnement. Un avoir correspondant Ã  la diffÃ©rence sera automatiquement dÃ©duit de votre prochaine facture. Le nouveau tarif rÃ©duit prend effet immÃ©diatement."
     };
   };
 
@@ -80,3 +80,4 @@ export const PricingExplanation: React.FC<PricingExplanationProps> = ({
     </div>
   );
 };
+

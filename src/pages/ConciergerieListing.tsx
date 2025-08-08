@@ -1,4 +1,4 @@
-
+﻿
 "use client";
 
 import React from "react";
@@ -58,10 +58,10 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
       <div className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center py-10">
-            <h1 className="text-3xl font-bold mb-4">Destination non trouv�e</h1>
-            <p className="text-gray-600 mb-6">Nous n'avons pas trouv� la destination que vous recherchez.</p>
+            <h1 className="text-3xl font-bold mb-4">Destination non trouvÃ©e</h1>
+            <p className="text-gray-600 mb-6">Nous n'avons pas trouvÃ© la destination que vous recherchez.</p>
             <div className="flex gap-4">
-              <Button>Retour � l'accueil</Button>
+              <Button>Retour Ã  l'accueil</Button>
             </div>
           </div>
         </div>
@@ -126,5 +126,6 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
 };
 
 export default ConciergerieListing;
+
 
 

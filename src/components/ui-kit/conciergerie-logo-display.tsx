@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import { AspectRatio } from "./aspect-ratio";
 
@@ -62,3 +62,4 @@ const ConciergerieLogoDisplay: React.FC<ConciergerieLogoDisplayProps> = ({
 };
 
 export default ConciergerieLogoDisplay;
+

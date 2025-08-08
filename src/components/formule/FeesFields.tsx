@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
@@ -28,7 +28,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Frais de ménage (€/heure)</FormLabel>
+                <FormLabel>Frais de mÃ©nage (â‚¬/heure)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 
@@ -55,7 +55,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Frais de démarrage (€)</FormLabel>
+                <FormLabel>Frais de dÃ©marrage (â‚¬)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 
@@ -83,7 +83,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Abonnement mensuel (€)</FormLabel>
+                <FormLabel>Abonnement mensuel (â‚¬)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 
@@ -110,7 +110,7 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
             
             return (
               <FormItem>
-                <FormLabel>Frais supplémentaire par location (€)</FormLabel>
+                <FormLabel>Frais supplÃ©mentaire par location (â‚¬)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 
@@ -134,3 +134,4 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
 };
 
 export default FeesFields;
+

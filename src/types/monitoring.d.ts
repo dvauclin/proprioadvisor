@@ -1,4 +1,4 @@
-// Types pour le monitoring
+﻿// Types pour le monitoring
 
 export interface Metric {
   name: string
@@ -293,3 +293,4 @@ export interface LogService {
   query: (filters?: Record<string, any>, limit?: number) => Promise<LogEntry[]>
   export: (filters?: Record<string, any>, format?: 'json' | 'csv') => Promise<string>
 } 
+

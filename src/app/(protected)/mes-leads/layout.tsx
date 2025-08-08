@@ -1,12 +1,12 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Mes Leads | Proprioadvisor',
-  description: 'Gérez vos leads de conciergerie sur Proprioadvisor',
+  description: 'GÃ©rez vos leads de conciergerie sur Proprioadvisor',
   keywords: ['leads', 'conciergerie', 'gestion', 'airbnb'],
   openGraph: {
     title: 'Mes Leads | Proprioadvisor',
-    description: 'Gérez vos leads de conciergerie sur Proprioadvisor',
+    description: 'GÃ©rez vos leads de conciergerie sur Proprioadvisor',
     url: 'https://proprioadvisor.com/mes-leads',
   },
   alternates: {
@@ -21,3 +21,4 @@ export default function MesLeadsLayout({
 }) {
   return children
 }
+

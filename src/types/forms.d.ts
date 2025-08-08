@@ -1,4 +1,4 @@
-// Types pour les formulaires
+﻿// Types pour les formulaires
 
 export interface LoginFormData {
   email: string
@@ -65,3 +65,4 @@ export interface FilterFormData {
   services: string[]
   disponibilite: boolean
 } 
+

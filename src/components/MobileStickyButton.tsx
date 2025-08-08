@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -50,7 +50,7 @@ const MobileStickyButton = () => {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       {favoritesCount === 0 && !user ? (
-        // Bouton "Ajouter conciergerie" seulement si pas de favoris ET pas connecté
+        // Bouton "Ajouter conciergerie" seulement si pas de favoris ET pas connectÃ©
         <Button
           asChild
           className="rounded-full shadow-lg bg-brand-chartreuse hover:bg-brand-chartreuse/90 text-black"
@@ -78,3 +78,4 @@ const MobileStickyButton = () => {
 };
 
 export default MobileStickyButton;
+

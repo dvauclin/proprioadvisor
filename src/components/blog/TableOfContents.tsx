@@ -1,4 +1,4 @@
-
+﻿
 import React, { useEffect, useState } from 'react';
 
 export interface Heading {
@@ -12,7 +12,7 @@ interface TableOfContentsProps {
 }
 
 const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
-  const [headerHeight, setHeaderHeight] = useState(64); // Valeur par défaut
+  const [headerHeight, setHeaderHeight] = useState(64); // Valeur par dÃ©faut
   const [activeHeading, setActiveHeading] = useState<string>('');
 
   // Calculer dynamiquement la hauteur du header
@@ -28,17 +28,17 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
     // Calculer au chargement
     calculateHeaderHeight();
 
-    // Recalculer si la fenêtre change de taille
+    // Recalculer si la fenÃªtre change de taille
     window.addEventListener('resize', calculateHeaderHeight);
     return () => window.removeEventListener('resize', calculateHeaderHeight);
   }, []);
 
-  // Détecter l'heading actif lors du scroll
+  // DÃ©tecter l'heading actif lors du scroll
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + headerHeight + 20; // 20px de marge
 
-      // Trouver l'heading le plus proche du haut de l'écran
+      // Trouver l'heading le plus proche du haut de l'Ã©cran
       let currentHeading = '';
       for (let i = headings.length - 1; i >= 0; i--) {
         const element = document.getElementById(headings[i].id);
@@ -69,14 +69,14 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
     if (element) {
       // Calculer la position avec l'offset du header
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplémentaire
+      const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplÃ©mentaire
       
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
 
-      // Mettre à jour l'URL sans recharger la page
+      // Mettre Ã  jour l'URL sans recharger la page
       const url = new URL(window.location.href);
       url.hash = id;
       window.history.pushState({}, '', url.toString());
@@ -111,3 +111,4 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
 };
 
 export default TableOfContents;
+

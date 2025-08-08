@@ -1,4 +1,4 @@
-
+﻿
 export const isBot = (): boolean => {
   // Return true in SSR mode (no window)
   if (typeof window === 'undefined') {
@@ -44,14 +44,15 @@ export const getEmergencyMetaData = (pathname: string) => {
     
     return {
       title: `Conciergerie Airbnb ${cityName} | Proprioadvisor`,
-      description: `Trouvez la meilleure conciergerie Airbnb à ${cityName}. Comparaison des tarifs et services pour optimiser vos revenus locatifs.`,
+      description: `Trouvez la meilleure conciergerie Airbnb Ã  ${cityName}. Comparaison des tarifs et services pour optimiser vos revenus locatifs.`,
       canonical: `https://proprioadvisor.fr${pathname}`
     };
   }
   
   return {
     title: 'Proprioadvisor | Comparateur de conciergeries Airbnb',
-    description: 'Trouvez la meilleure conciergerie pour votre bien en location courte durée',
+    description: 'Trouvez la meilleure conciergerie pour votre bien en location courte durÃ©e',
     canonical: `https://proprioadvisor.fr${pathname}`
   };
 };
+

@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -87,3 +87,4 @@ const LongDescriptionSection: React.FC<LongDescriptionSectionProps> = ({ descrip
 };
 
 export default LongDescriptionSection;
+

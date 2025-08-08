@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Finalisation from '@/pages/Finalisation'
 
 export const metadata: Metadata = {
@@ -18,3 +18,4 @@ export const metadata: Metadata = {
 export default function FinalisationPage() {
   return <Finalisation />
 } 
+

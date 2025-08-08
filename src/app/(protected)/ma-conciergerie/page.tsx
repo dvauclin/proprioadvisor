@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import MyConciergerie from '@/pages/MyConciergerie'
 
 export const metadata: Metadata = {
   title: 'Ma Conciergerie | Proprioadvisor',
-  description: 'Gérez votre conciergerie sur Proprioadvisor',
-  keywords: ['conciergerie', 'gestion', 'airbnb', 'propriétaire'],
+  description: 'GÃ©rez votre conciergerie sur Proprioadvisor',
+  keywords: ['conciergerie', 'gestion', 'airbnb', 'propriÃ©taire'],
   openGraph: {
     title: 'Ma Conciergerie | Proprioadvisor',
-    description: 'Gérez votre conciergerie sur Proprioadvisor',
+    description: 'GÃ©rez votre conciergerie sur Proprioadvisor',
     url: 'https://proprioadvisor.com/ma-conciergerie',
   },
   alternates: {
@@ -18,3 +18,4 @@ export const metadata: Metadata = {
 export default function MaConciergeriePage() {
   return <MyConciergerie />
 } 
+

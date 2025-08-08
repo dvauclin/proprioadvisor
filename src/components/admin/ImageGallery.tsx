@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -59,7 +59,7 @@ const ImageGallery: React.FC = () => {
         if (file.size > 5 * 1024 * 1024) {
           toast({
             title: "Erreur",
-            description: `${file.name} dépasse la taille maximale de 5MB`,
+            description: `${file.name} dÃ©passe la taille maximale de 5MB`,
             variant: "destructive",
           });
           continue;
@@ -84,8 +84,8 @@ const ImageGallery: React.FC = () => {
           console.log("Upload successful:", { name: result.name, url: result.url, path: result.path });
           
           toast({
-            title: "Image téléchargée",
-            description: `${file.name} a été téléchargée avec succès`,
+            title: "Image tÃ©lÃ©chargÃ©e",
+            description: `${file.name} a Ã©tÃ© tÃ©lÃ©chargÃ©e avec succÃ¨s`,
           });
           
           // Refresh the images list to get the latest state
@@ -95,7 +95,7 @@ const ImageGallery: React.FC = () => {
           console.error("Upload failed:", result.error);
           toast({
             title: "Erreur",
-            description: `Impossible de télécharger ${file.name}: ${result.error || "Erreur inconnue"}`,
+            description: `Impossible de tÃ©lÃ©charger ${file.name}: ${result.error || "Erreur inconnue"}`,
             variant: "destructive",
           });
         }
@@ -105,7 +105,7 @@ const ImageGallery: React.FC = () => {
       setUploadError("Une erreur inconnue est survenue");
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors du téléchargement",
+        description: "Une erreur est survenue lors du tÃ©lÃ©chargement",
         variant: "destructive",
       });
     } finally {
@@ -117,8 +117,8 @@ const ImageGallery: React.FC = () => {
     try {
       await deleteImage(id);
       toast({
-        title: "Image supprimée",
-        description: `${name} a été supprimée avec succès`,
+        title: "Image supprimÃ©e",
+        description: `${name} a Ã©tÃ© supprimÃ©e avec succÃ¨s`,
       });
       // Refresh the images list
       await fetchImages();
@@ -135,8 +135,8 @@ const ImageGallery: React.FC = () => {
   const copyUrl = (url: string) => {
     navigator.clipboard.writeText(url);
     toast({
-      title: "URL copiée",
-      description: "L'URL de l'image a été copiée dans le presse-papiers",
+      title: "URL copiÃ©e",
+      description: "L'URL de l'image a Ã©tÃ© copiÃ©e dans le presse-papiers",
     });
   };
 
@@ -153,7 +153,7 @@ const ImageGallery: React.FC = () => {
       <div>
         <h3 className="text-lg font-semibold mb-2">Galerie d'images</h3>
         <p className="text-sm text-gray-600 mb-4">
-          Téléchargez et gérez les images pour votre site
+          TÃ©lÃ©chargez et gÃ©rez les images pour votre site
         </p>
       </div>
 
@@ -163,10 +163,10 @@ const ImageGallery: React.FC = () => {
           <div className="mt-4">
             <Label htmlFor="file-upload" className="cursor-pointer">
               <span className="mt-2 block text-sm font-medium text-gray-900">
-                Télécharger des images
+                TÃ©lÃ©charger des images
               </span>
               <span className="mt-1 block text-xs text-gray-500">
-                PNG, JPG, GIF jusqu'à 5MB
+                PNG, JPG, GIF jusqu'Ã  5MB
               </span>
             </Label>
             <Input
@@ -191,7 +191,7 @@ const ImageGallery: React.FC = () => {
       {uploading && (
         <div className="flex items-center justify-center p-4">
           <Loader2 className="h-6 w-6 animate-spin mr-2" />
-          <span>Téléchargement en cours...</span>
+          <span>TÃ©lÃ©chargement en cours...</span>
         </div>
       )}
 
@@ -237,7 +237,7 @@ const ImageGallery: React.FC = () => {
 
       {images.length === 0 && !loading && (
         <div className="text-center py-8">
-          <p className="text-gray-500">Aucune image téléchargée</p>
+          <p className="text-gray-500">Aucune image tÃ©lÃ©chargÃ©e</p>
         </div>
       )}
     </div>
@@ -245,3 +245,4 @@ const ImageGallery: React.FC = () => {
 };
 
 export default ImageGallery;
+

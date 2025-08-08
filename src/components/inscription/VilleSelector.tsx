@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui-kit/input";
 import { Search } from "lucide-react";
 
-// Type optimisé pour les villes dans le sélecteur
+// Type optimisÃ© pour les villes dans le sÃ©lecteur
 interface VilleSelectorItem {
   id: string;
   nom: string;
@@ -36,7 +36,7 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
   const form = useFormContext();
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Optimisation du filtrage et tri avec useMemo pour éviter les recalculs
+  // Optimisation du filtrage et tri avec useMemo pour Ã©viter les recalculs
   const filteredAndSortedVilles = useMemo(() => {
     let filtered = villes;
     
@@ -49,7 +49,7 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
       );
     }
     
-    // Tri optimisé par département puis par nom
+    // Tri optimisÃ© par dÃ©partement puis par nom
     return [...filtered].sort((a, b) => {
       const deptA = a.departementNumero || '';
       const deptB = b.departementNumero || '';
@@ -80,7 +80,7 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     type="text"
-                    placeholder="Rechercher une ville ou un département..."
+                    placeholder="Rechercher une ville ou un dÃ©partement..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10 border-0 shadow-none focus-visible:ring-0"
@@ -94,7 +94,7 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
                   <div className="py-2 text-center">Chargement des villes...</div>
                 ) : filteredAndSortedVilles.length === 0 ? (
                   <div className="py-2 text-center text-gray-500">
-                    {searchTerm ? "Aucune ville trouvée" : "Aucune ville disponible"}
+                    {searchTerm ? "Aucune ville trouvÃ©e" : "Aucune ville disponible"}
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -130,7 +130,7 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
             <FormControl>
               <Input
                 {...field}
-                placeholder="Ex: Paris et sa banlieue, Côte d'Azur..."
+                placeholder="Ex: Paris et sa banlieue, CÃ´te d'Azur..."
               />
             </FormControl>
             <FormMessage />
@@ -142,3 +142,4 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
 };
 
 export default VilleSelector;
+

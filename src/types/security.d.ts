@@ -1,4 +1,4 @@
-// Types pour la sécurité
+﻿// Types pour la sÃ©curitÃ©
 
 export interface SecurityConfig {
   cors: CorsConfig
@@ -328,3 +328,4 @@ export interface SecurityStats {
   topThreats: string[]
   riskScore: number
 } 
+

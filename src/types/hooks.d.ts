@@ -1,4 +1,4 @@
-// Types pour les hooks
+﻿// Types pour les hooks
 
 export interface UseLocalStorageOptions<T> {
   defaultValue?: T
@@ -169,3 +169,4 @@ export interface UseMutationResult<T, V> {
   mutateAsync: (variables: V) => Promise<T>
   reset: () => void
 } 
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -102,8 +102,8 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
     try {
       await onSave(formData as Ville);
       toast({
-        title: "Succès",
-        description: ville ? "Ville modifiée avec succès" : "Ville ajoutée avec succès"
+        title: "SuccÃ¨s",
+        description: ville ? "Ville modifiÃ©e avec succÃ¨s" : "Ville ajoutÃ©e avec succÃ¨s"
       });
       onCancel();
     } catch (error) {
@@ -179,7 +179,7 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
             </div>
 
             <div>
-              <Label htmlFor="departementNumero">Numéro de département</Label>
+              <Label htmlFor="departementNumero">NumÃ©ro de dÃ©partement</Label>
               <Input
                 id="departementNumero"
                 value={formData.departementNumero || ""}
@@ -189,7 +189,7 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
             </div>
 
             <div>
-              <Label htmlFor="departementNom">Nom du département</Label>
+              <Label htmlFor="departementNom">Nom du dÃ©partement</Label>
               <Input
                 id="departementNom"
                 value={formData.departementNom || ""}
@@ -240,7 +240,7 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
               id="descriptionLongue"
               value={formData.descriptionLongue || ""}
               onChange={(e) => handleInputChange("descriptionLongue", e.target.value)}
-              placeholder="Description détaillée de la ville"
+              placeholder="Description dÃ©taillÃ©e de la ville"
               rows={5}
             />
           </div>
@@ -251,21 +251,21 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
               id="titleSeo"
               value={formData.titleSeo || ""}
               onChange={(e) => handleInputChange("titleSeo", e.target.value)}
-              placeholder="Titre optimisé pour le SEO"
+              placeholder="Titre optimisÃ© pour le SEO"
             />
           </div>
 
           <div>
-            <Label htmlFor="villeMereId">Ville mère</Label>
+            <Label htmlFor="villeMereId">Ville mÃ¨re</Label>
             <Select
               value={formData.villeMereId || "none"}
               onValueChange={(value) => handleInputChange("villeMereId", value === "none" ? undefined : value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Sélectionner une ville mère" />
+                <SelectValue placeholder="SÃ©lectionner une ville mÃ¨re" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="none">Aucune ville mère</SelectItem>
+                <SelectItem value="none">Aucune ville mÃ¨re</SelectItem>
                 {allVilles
                   .filter(v => v.id !== ville?.id)
                   .map((v) => (
@@ -278,15 +278,15 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
           </div>
 
           <div>
-            <Label>Villes liées</Label>
+            <Label>Villes liÃ©es</Label>
             <div className="space-y-2">
               <div className="flex gap-2">
                 <Select value={selectedVille} onValueChange={setSelectedVille}>
                   <SelectTrigger className="flex-1">
-                    <SelectValue placeholder="Sélectionner une ville" />
+                    <SelectValue placeholder="SÃ©lectionner une ville" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="none">Sélectionner une ville</SelectItem>
+                    <SelectItem value="none">SÃ©lectionner une ville</SelectItem>
                     {allVilles
                       .filter(v => v.id !== ville?.id && !formData.villesLiees?.includes(v.id))
                       .map((v) => (
@@ -338,3 +338,4 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
 };
 
 export default VilleForm;
+

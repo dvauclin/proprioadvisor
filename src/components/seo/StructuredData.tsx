@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 
 interface StructuredDataProps {
@@ -24,3 +24,4 @@ const StructuredData: React.FC<StructuredDataProps> = ({ data }) => {
 };
 
 export default StructuredData;
+

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getAllArticles, getArticleBySlug } from '@/services/supabaseService'
 import ArticleHeader from '@/components/blog/ArticleHeader'
 
-import Breadcrumbs from '@/components/ui-kit/Breadcrumbs'
+import Breadcrumbs from '@/components/ui-kit/breadcrumbs'
 import ClientArticleWrapper from '@/components/blog/ClientArticleWrapper'
 
 interface ArticlePageProps {

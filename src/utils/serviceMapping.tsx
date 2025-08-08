@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { 
   Camera, 
@@ -12,15 +12,15 @@ import {
 
 // Maps service IDs to their display labels
 const serviceLabels: Record<string, string> = {
-  'menage': 'Ménage / blanchisserie',
+  'menage': 'MÃ©nage / blanchisserie',
   'checkInOut': 'Check-in / Check-out',
-  'remiseDesClefs': 'Remise des clés en personne',
+  'remiseDesClefs': 'Remise des clÃ©s en personne',
   'gestionAnnonce': 'Gestion de l\'annonce',
   'assistance247': 'Assistance voyageurs 24/7',
   'photosProfessionnelles': 'Photos professionnelles',
-  'reapprovisionnement': 'Réapprovisionnement',
+  'reapprovisionnement': 'RÃ©approvisionnement',
   'fournitureLinge': 'Fourniture de linge',
-  'maintenanceReparations': 'Maintenance et réparations',
+  'maintenanceReparations': 'Maintenance et rÃ©parations',
 };
 
 // Map service IDs to their icons
@@ -72,3 +72,4 @@ export const validateLocationLinge = (value: string | undefined | null): 'option
   }
   return 'inclus';
 };
+

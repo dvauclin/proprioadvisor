@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import Link from "next/link";
 import { CookieSettings } from "@/components/CookieSettings";
@@ -30,8 +30,8 @@ const Footer: React.FC = () => {
               <span className="text-xl font-semibold">PROPRIOADVISOR</span>
             </Link>
             <p className="text-gray-600 text-sm">
-              Le comparateur de conciergeries Airbnb en France le plus complet du marché.
-              Trouvez la conciergerie idéale pour votre bien en location courte durée.
+              Le comparateur de conciergeries Airbnb en France le plus complet du marchÃ©.
+              Trouvez la conciergerie idÃ©ale pour votre bien en location courte durÃ©e.
             </p>
           </section>
           
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               <Link href="/favoris" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Mes favoris</Link>
               <Link href="/blog" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Blog</Link>
               <Link href="/annuaire" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Annuaire conciergerie</Link>
-              <Link href="/a-propos" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">À propos</Link>
+              <Link href="/a-propos" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Ã€ propos</Link>
               <Link href="/contact" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Contact</Link>
               <Link href="/inscription" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Inscrire ma conciergerie</Link>
               <Link href="/trouver-des-clients-conciergerie-airbnb" className="hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Trouver des clients conciergerie Airbnb</Link>
@@ -86,10 +86,10 @@ const Footer: React.FC = () => {
         <div className="mt-10 pt-6 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center">
             {/* Centered legal links */}
-            <nav className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-6 w-full md:w-auto" aria-label="Liens légaux">
-              <Link href="/mentions-legales" className="text-sm text-gray-500 hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Mentions légales</Link>
-              <Link href="/politique-confidentialite" className="text-sm text-gray-500 hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Politique de confidentialité</Link>
-              <Link href="/conditions-utilisation" className="text-sm text-gray-500 hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Conditions Générales d'Utilisation</Link>
+            <nav className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-6 w-full md:w-auto" aria-label="Liens lÃ©gaux">
+              <Link href="/mentions-legales" className="text-sm text-gray-500 hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Mentions lÃ©gales</Link>
+              <Link href="/politique-confidentialite" className="text-sm text-gray-500 hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Politique de confidentialitÃ©</Link>
+              <Link href="/conditions-utilisation" className="text-sm text-gray-500 hover:text-brand-chartreuse focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded">Conditions GÃ©nÃ©rales d'Utilisation</Link>
               <CookieSettings />
             </nav>
             <div className="flex space-x-4 mt-4 md:mt-0">
@@ -141,7 +141,7 @@ const Footer: React.FC = () => {
           {/* Copyright centered below */}
           <div className="mt-4 text-center">
             <div className="text-sm text-gray-500">
-              &copy; {currentYear} ProprioAdvisor. Tous droits réservés.
+              &copy; {currentYear} ProprioAdvisor. Tous droits rÃ©servÃ©s.
             </div>
           </div>
         </div>
@@ -151,3 +151,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+

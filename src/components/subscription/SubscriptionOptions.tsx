@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { FormField, FormItem, FormLabel, FormControl } from '@/components/ui-kit/form';
 import { Checkbox } from '@/components/ui-kit/checkbox';
@@ -23,11 +23,11 @@ export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel className="text-base">
-                Je souhaite apparaître sur les listings
+                Je souhaite apparaÃ®tre sur les listings
                 <span className="ml-2 text-green-600 font-medium">(Gratuit)</span>
               </FormLabel>
               <p className="text-sm text-gray-500">
-                Votre conciergerie est référencée dans les listings des villes sélectionnées sous 24 à 48h
+                Votre conciergerie est rÃ©fÃ©rencÃ©e dans les listings des villes sÃ©lectionnÃ©es sous 24 Ã  48h
               </p>
             </div>
           </FormItem>} />
@@ -42,11 +42,11 @@ export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel className="text-base">
-                Je souhaite pouvoir être contacté
-                <span className="ml-2 text-amber-600 font-medium">(5€/mois)</span>
+                Je souhaite pouvoir Ãªtre contactÃ©
+                <span className="ml-2 text-amber-600 font-medium">(5â‚¬/mois)</span>
               </FormLabel>
                 <p className="text-sm text-gray-500">
-                  <span className="text-blue-600 font-medium">Recommandé</span> - Attirer de nouveaux clients en étant plus visible et en donnant aux visiteurs la possibilité de vous contacter
+                  <span className="text-blue-600 font-medium">RecommandÃ©</span> - Attirer de nouveaux clients en Ã©tant plus visible et en donnant aux visiteurs la possibilitÃ© de vous contacter
                 </p>
             </div>
           </FormItem>} />
@@ -63,7 +63,7 @@ export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
               <div className="space-y-1 leading-none">
                 <FormLabel className="text-base">
                   Je souhaite ajouter un lien vers le site web de la conciergerie
-                  <span className="ml-2 text-amber-600 font-medium">(10€/mois)</span>
+                  <span className="ml-2 text-amber-600 font-medium">(10â‚¬/mois)</span>
                 </FormLabel>
                 <p className="text-sm text-gray-500">
                   Les visiteurs pourront se rendre sur le site web de la conciergerie
@@ -104,8 +104,8 @@ export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
               </FormControl>
               <div className="space-y-1 leading-none">
                 <FormLabel className="text-base">
-                  Je souhaite ajouter un numéro de téléphone de contact
-                  <span className="ml-2 text-amber-600 font-medium">(5€/mois)</span>
+                  Je souhaite ajouter un numÃ©ro de tÃ©lÃ©phone de contact
+                  <span className="ml-2 text-amber-600 font-medium">(5â‚¬/mois)</span>
                 </FormLabel>
                 <p className="text-sm text-gray-500">
                   Les visiteurs pourront vous appeler directement
@@ -115,7 +115,7 @@ export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
             {form.watch("options.phoneNumber") && <FormField control={form.control} name="phoneNumberValue" render={({
         field: phoneField
       }) => <FormItem className="ml-8">
-                    <FormLabel>Numéro de téléphone</FormLabel>
+                    <FormLabel>NumÃ©ro de tÃ©lÃ©phone</FormLabel>
                     <FormControl>
                       <Input {...phoneField} placeholder="01 23 45 67 89" type="tel" />
                     </FormControl>
@@ -135,12 +135,12 @@ export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
                 <div className="flex items-center gap-2">
                   <FormLabel className="text-base">
                     J'accepte d'ajouter un lien vers Proprioadvisor sur la page d'accueil du site de la conciergerie
-                    <span className="ml-2 text-green-600 font-medium">(-5€/mois)</span>
+                    <span className="ml-2 text-green-600 font-medium">(-5â‚¬/mois)</span>
                   </FormLabel>
                   <BacklinkInfoDialog conciergerieId={conciergerieId} />
                 </div>
                 <p className="text-sm text-gray-500">
-                  <span className="text-blue-600 font-medium">Recommandé</span> - Une vérification sera effectuée dans 48h puis une vérification automatique interviendra tous les mois
+                  <span className="text-blue-600 font-medium">RecommandÃ©</span> - Une vÃ©rification sera effectuÃ©e dans 48h puis une vÃ©rification automatique interviendra tous les mois
                 </p>
               </div>
             </div>
@@ -179,14 +179,15 @@ export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
               <div className="flex items-center gap-2">
                 <FormLabel className="text-base">
                   J'accepte d'ajouter la page conciergerie comme Site Web sur Google My Business
-                  <span className="ml-2 text-green-600 font-medium">(-5€/mois)</span>
+                  <span className="ml-2 text-green-600 font-medium">(-5â‚¬/mois)</span>
                 </FormLabel>
                 <GMBInfoDialog conciergerieId={conciergerieId} />
               </div>
                 <p className="text-sm text-gray-500">
-                  Une vérification sera effectuée dans 48h puis une vérification automatique interviendra tous les mois
+                  Une vÃ©rification sera effectuÃ©e dans 48h puis une vÃ©rification automatique interviendra tous les mois
                 </p>
             </div>
           </FormItem>} />
     </div>;
 };
+

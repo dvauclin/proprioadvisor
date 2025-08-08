@@ -1,4 +1,4 @@
-
+﻿
 import { supabase } from "@/integrations/supabase/client";
 import { Subscription } from "@/types";
 
@@ -34,3 +34,4 @@ export const getAllSubscriptions = async (): Promise<SubscriptionWithConciergeri
 
     return transformedData as SubscriptionWithConciergerie[];
 };
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui-kit/button';
@@ -10,7 +10,7 @@ export const CookieSettings: React.FC = () => {
   const { cookieConsent, updateCookieConsent } = useCookieConsent();
   const [open, setOpen] = useState(false);
   const [preferences, setPreferences] = useState({
-    necessary: true, // Toujours activé
+    necessary: true, // Toujours activÃ©
     analytics: cookieConsent.analytics,
     marketing: cookieConsent.marketing,
   });
@@ -18,7 +18,7 @@ export const CookieSettings: React.FC = () => {
   const savePreferences = () => {
     updateCookieConsent({
       ...preferences,
-      necessary: true, // Toujours activé
+      necessary: true, // Toujours activÃ©
     });
     setOpen(false);
   };
@@ -34,14 +34,14 @@ export const CookieSettings: React.FC = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="link" className="text-sm text-gray-500 hover:text-gray-700">
-          Gérer les cookies
+          GÃ©rer les cookies
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Paramètres des cookies</DialogTitle>
+          <DialogTitle>ParamÃ¨tres des cookies</DialogTitle>
           <DialogDescription>
-            Personnalisez vos préférences de cookies. Les cookies nécessaires sont toujours activés.
+            Personnalisez vos prÃ©fÃ©rences de cookies. Les cookies nÃ©cessaires sont toujours activÃ©s.
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
@@ -49,10 +49,10 @@ export const CookieSettings: React.FC = () => {
             <Checkbox id="necessary-dialog" checked disabled />
             <div>
               <label htmlFor="necessary-dialog" className="font-medium cursor-not-allowed">
-                Cookies nécessaires
+                Cookies nÃ©cessaires
               </label>
               <p className="text-sm text-gray-600">
-                Ces cookies sont indispensables au fonctionnement du site et ne peuvent pas être désactivés.
+                Ces cookies sont indispensables au fonctionnement du site et ne peuvent pas Ãªtre dÃ©sactivÃ©s.
               </p>
             </div>
           </div>
@@ -68,7 +68,7 @@ export const CookieSettings: React.FC = () => {
                 Cookies d'analyse
               </label>
               <p className="text-sm text-gray-600">
-                Ces cookies nous permettent d'analyser l'utilisation du site pour en améliorer les performances et les services.
+                Ces cookies nous permettent d'analyser l'utilisation du site pour en amÃ©liorer les performances et les services.
               </p>
             </div>
           </div>
@@ -84,7 +84,7 @@ export const CookieSettings: React.FC = () => {
                 Cookies marketing
               </label>
               <p className="text-sm text-gray-600">
-                Ces cookies sont utilisés pour suivre les visiteurs sur les sites web afin d'afficher des publicités pertinentes.
+                Ces cookies sont utilisÃ©s pour suivre les visiteurs sur les sites web afin d'afficher des publicitÃ©s pertinentes.
               </p>
             </div>
           </div>
@@ -94,10 +94,11 @@ export const CookieSettings: React.FC = () => {
             Annuler
           </Button>
           <Button onClick={savePreferences}>
-            Enregistrer les préférences
+            Enregistrer les prÃ©fÃ©rences
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
+

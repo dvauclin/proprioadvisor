@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -10,7 +10,7 @@ import ArticleHeader from "@/components/blog/ArticleHeader";
 import ArticleContent from "@/components/blog/ArticleContent";
 import ShareSection from "@/components/blog/ShareSection";
 import RecentArticlesSection from "@/components/blog/RecentArticlesSection";
-import Breadcrumbs from "@/components/ui-kit/Breadcrumbs";
+import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 import TableOfContents, { Heading } from "@/components/blog/TableOfContents";
 import FaqSection from "@/components/blog/FaqSection";
 
@@ -54,14 +54,14 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
     }
   }, [article?.contenu]);
 
-  // G�rer le scroll vers l'ancre au chargement de la page
+  // Gï¿½rer le scroll vers l'ancre au chargement de la page
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash.substring(1);
       const element = document.getElementById(hash);
       
       if (element) {
-        // Attendre que le contenu soit charg�
+        // Attendre que le contenu soit chargï¿½
         setTimeout(() => {
           const header = document.querySelector('header');
           const headerHeight = header ? header.getBoundingClientRect().height : 64;
@@ -172,4 +172,5 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
 };
 
 export default BlogPost;
+
 

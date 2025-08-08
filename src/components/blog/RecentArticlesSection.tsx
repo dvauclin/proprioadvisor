@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { Article } from '@/types';
 import RecentArticleCard from './RecentArticleCard';
@@ -27,3 +27,4 @@ const RecentArticlesSection: React.FC<RecentArticlesSectionProps> = ({ articles 
 };
 
 export default RecentArticlesSection;
+

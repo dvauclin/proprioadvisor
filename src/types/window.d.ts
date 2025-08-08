@@ -1,4 +1,4 @@
-
+﻿
 interface Window {
   // Stripe
   Stripe?: any;
@@ -27,3 +27,4 @@ declare global {
 }
 
 export {};
+

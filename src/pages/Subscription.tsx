@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Head from "next/head";
 import React from "react";
@@ -15,7 +15,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Link from "next/link";
 
 const Subscription = () => {
-  // Récupération des données de souscription
+  // RÃ©cupÃ©ration des donnÃ©es de souscription
   const {
     conciergerieId,
     conciergerieName,
@@ -34,7 +34,7 @@ const Subscription = () => {
       </div>;
   }
 
-  // Si aucun conciergerieId n'est trouvé et qu'aucune souscription existante
+  // Si aucun conciergerieId n'est trouvÃ© et qu'aucune souscription existante
   if (!conciergerieId && !existingSubscription) {
     return (
       <div className="bg-gradient-to-b from-white to-gray-50 py-[32px]">
@@ -50,12 +50,12 @@ const Subscription = () => {
                   <AlertCircle className="h-8 w-8 text-red-600" />
                 </div>
                 <CardTitle className="text-2xl font-bold text-gray-900 mb-2">
-                  Conciergerie non trouvée
+                  Conciergerie non trouvÃ©e
                 </CardTitle>
                 <CardDescription className="text-lg">
                   {!user 
-                    ? "Vous devez être connecté pour modifier votre souscription."
-                    : "Aucune conciergerie associée à votre compte n'a été trouvée."
+                    ? "Vous devez Ãªtre connectÃ© pour modifier votre souscription."
+                    : "Aucune conciergerie associÃ©e Ã  votre compte n'a Ã©tÃ© trouvÃ©e."
                   }
                 </CardDescription>
               </CardHeader>
@@ -69,7 +69,7 @@ const Subscription = () => {
                     </Button>
                     <Button variant="outline" className="w-full" size="lg" asChild>
                       <Link href="/inscription">
-                        Créer une conciergerie
+                        CrÃ©er une conciergerie
                       </Link>
                     </Button>
                   </div>
@@ -77,12 +77,12 @@ const Subscription = () => {
                   <div className="space-y-3">
                     <Button className="w-full" size="lg" asChild>
                       <Link href="/inscription">
-                        Créer une conciergerie
+                        CrÃ©er une conciergerie
                       </Link>
                     </Button>
                     <Button variant="outline" className="w-full" size="lg" asChild>
                       <Link href="/">
-                        Retour à l'accueil
+                        Retour Ã  l'accueil
                       </Link>
                     </Button>
                   </div>
@@ -117,3 +117,4 @@ const Subscription = () => {
 };
 
 export default Subscription;
+

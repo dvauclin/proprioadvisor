@@ -1,23 +1,23 @@
-import React from "react";
+﻿import React from "react";
 import { Card, CardContent } from "@/components/ui-kit/card";
 import { Euro, TrendingUp, CheckCircle, Zap, Users } from "lucide-react";
 
 const SubscriptionFAQ: React.FC = () => {
   return (
     <div className="space-y-8 mt-12">
-      {/* Combien coûte ProprioAdvisor */}
+      {/* Combien coÃ»te ProprioAdvisor */}
       <Card className="border-2 border-gray-100">
         <CardContent className="p-8">
           <div className="flex items-center mb-6">
             <Euro className="mr-3 h-8 w-8 text-green-600" />
-            <h2 className="text-2xl font-bold text-gray-900">Combien coûte ProprioAdvisor ?</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Combien coÃ»te ProprioAdvisor ?</h2>
           </div>
           <div className="space-y-4 text-gray-700">
             <p className="text-lg">
-              <strong className="text-green-600">L'inscription et le référencement sont 100% gratuits.</strong> Un abonnement est proposé pour maximiser votre visibilité.
+              <strong className="text-green-600">L'inscription et le rÃ©fÃ©rencement sont 100% gratuits.</strong> Un abonnement est proposÃ© pour maximiser votre visibilitÃ©.
             </p>
             <p>
-              Le montant est à titre indicatif <strong>(5€ à 20€/mois)</strong> car il s'agit d'un système d'enchère flexible : vous êtes libre de saisir un montant plus ou moins élevé selon votre budget et vos objectifs.
+              Le montant est Ã  titre indicatif <strong>(5â‚¬ Ã  20â‚¬/mois)</strong> car il s'agit d'un systÃ¨me d'enchÃ¨re flexible : vous Ãªtes libre de saisir un montant plus ou moins Ã©levÃ© selon votre budget et vos objectifs.
             </p>
             <div className="bg-green-50 p-4 rounded-lg border border-green-200">
               <div className="flex items-center gap-2 mb-2">
@@ -25,7 +25,7 @@ const SubscriptionFAQ: React.FC = () => {
                 <strong className="text-green-800">0% de commission sur vos contrats</strong>
               </div>
               <p className="text-green-700">
-                Aucune commission n'est prélevée si un prospect vous contacte par le biais de ProprioAdvisor. Vous gardez 100% de vos revenus !
+                Aucune commission n'est prÃ©levÃ©e si un prospect vous contacte par le biais de ProprioAdvisor. Vous gardez 100% de vos revenus !
               </p>
             </div>
           </div>
@@ -45,8 +45,8 @@ const SubscriptionFAQ: React.FC = () => {
                 <Users className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-2 text-blue-900">Accès à une clientèle qualifiée</h3>
-                <p className="text-gray-700">ProprioAdvisor est consulté quotidiennement par des propriétaires recherchant activement une conciergerie. <a href="https://proprioadvisor.fr/trouver-des-clients-conciergerie-airbnb" className="text-gray-700 no-underline">Trouvez des clients pour votre conciergerie</a> en recevant des demandes directes via notre plateforme, ou selon vos options, soyez contacté via votre site web et/ou par téléphone.</p>
+                <h3 className="font-semibold text-lg mb-2 text-blue-900">AccÃ¨s Ã  une clientÃ¨le qualifiÃ©e</h3>
+                <p className="text-gray-700">ProprioAdvisor est consultÃ© quotidiennement par des propriÃ©taires recherchant activement une conciergerie. <a href="https://proprioadvisor.fr/trouver-des-clients-conciergerie-airbnb" className="text-gray-700 no-underline">Trouvez des clients pour votre conciergerie</a> en recevant des demandes directes via notre plateforme, ou selon vos options, soyez contactÃ© via votre site web et/ou par tÃ©lÃ©phone.</p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
@@ -54,10 +54,10 @@ const SubscriptionFAQ: React.FC = () => {
                 <Zap className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-2 text-blue-900">Visibilité indirecte sur les IA et ChatGPT</h3>
+                <h3 className="font-semibold text-lg mb-2 text-blue-900">VisibilitÃ© indirecte sur les IA et ChatGPT</h3>
                 <p className="text-gray-700">
-                  Si vous êtes sur ProprioAdvisor alors vos données seront indexées par ChatGPT et autres IA. <strong>Ne pas être référencé = manquer l'opportunité d'être recommandé </strong> 
-                  lorsqu'un internaute questionne l'IA sur la délégation de gestion Airbnb dans votre zone.
+                  Si vous Ãªtes sur ProprioAdvisor alors vos donnÃ©es seront indexÃ©es par ChatGPT et autres IA. <strong>Ne pas Ãªtre rÃ©fÃ©rencÃ© = manquer l'opportunitÃ© d'Ãªtre recommandÃ© </strong> 
+                  lorsqu'un internaute questionne l'IA sur la dÃ©lÃ©gation de gestion Airbnb dans votre zone.
                 </p>
               </div>
             </div>
@@ -69,3 +69,4 @@ const SubscriptionFAQ: React.FC = () => {
 };
 
 export default SubscriptionFAQ;
+

@@ -1,4 +1,4 @@
-// Types pour la configuration
+﻿// Types pour la configuration
 
 export interface AppConfig {
   name: string
@@ -170,3 +170,4 @@ export interface Config {
   features: FeatureConfig
   env: EnvironmentConfig
 } 
+

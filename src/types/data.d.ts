@@ -1,4 +1,4 @@
-// Types pour les données
+﻿// Types pour les donnÃ©es
 
 export interface Ville {
   id: string
@@ -93,3 +93,4 @@ export interface Subscription {
   conciergerieId: string
   conciergerie?: Conciergerie
 } 
+

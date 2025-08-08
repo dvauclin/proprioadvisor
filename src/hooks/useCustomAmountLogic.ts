@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { SubscriptionFormValues } from '@/types/subscription';
@@ -33,7 +33,7 @@ export const useCustomAmountLogic = ({
       if (!isNaN(numValue)) {
         let clampedValue = Math.min(Math.max(0, Math.floor(numValue)), 1000);
         
-        // Si le montant est inférieur au montant par défaut, le corriger automatiquement
+        // Si le montant est infÃ©rieur au montant par dÃ©faut, le corriger automatiquement
         if (clampedValue < defaultAmount) {
           clampedValue = defaultAmount;
         }
@@ -56,7 +56,7 @@ export const useCustomAmountLogic = ({
       const storedCustomAmount = lastValidCustomAmountRef.current;
       let customValue = Number(storedCustomAmount);
       
-      // S'assurer que le montant personnalisé est au moins égal au montant par défaut
+      // S'assurer que le montant personnalisÃ© est au moins Ã©gal au montant par dÃ©faut
       if (customValue < defaultAmount) {
         customValue = defaultAmount;
         form.setValue("customAmount", String(customValue), { shouldValidate: true });
@@ -76,3 +76,4 @@ export const useCustomAmountLogic = ({
 
   return { handleCustomAmountChange, handleToggleCustomAmount };
 };
+

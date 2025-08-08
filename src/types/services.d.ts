@@ -1,4 +1,4 @@
-// Types pour les services
+﻿// Types pour les services
 
 export interface AuthService {
   signIn: (email: string, password: string) => Promise<{ user: User; error?: any }>
@@ -120,3 +120,4 @@ export interface ValidationService {
   isUrl: (value: string) => boolean
   isRequired: (value: any) => boolean
 } 
+

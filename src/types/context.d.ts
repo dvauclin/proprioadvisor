@@ -1,4 +1,4 @@
-// Types pour les contextes
+﻿// Types pour les contextes
 
 export interface AuthContextType {
   user: User | null
@@ -81,3 +81,4 @@ export interface Modal {
   props?: Record<string, any>
   onClose?: () => void
 } 
+

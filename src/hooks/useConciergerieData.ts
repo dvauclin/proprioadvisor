@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { getVilleBySlug, getFormulesByVilleId, getAvisByConciergerie } from "@/services/supabaseService";
 import { Ville, Formule, Conciergerie, Filter } from "@/types";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,13 +24,13 @@ export const useConciergerieData = (villeSlug: string | undefined) => {
         console.log("Fetching ville data for slug:", villeSlug);
         const villeData = await getVilleBySlug(villeSlug);
         if (!villeData) {
-          setError("Ville non trouvée");
+          setError("Ville non trouvÃ©e");
         } else {
           setVille(villeData);
         }
       } catch (err) {
-        console.error("Erreur lors du chargement des données de la ville:", err);
-        setError("Erreur lors du chargement des données de la ville");
+        console.error("Erreur lors du chargement des donnÃ©es de la ville:", err);
+        setError("Erreur lors du chargement des donnÃ©es de la ville");
       } finally {
         setVilleLoading(false);
       }
@@ -57,21 +57,21 @@ export const useConciergerieData = (villeSlug: string | undefined) => {
           .filter(Boolean) as string[];
         
         if (conciergerieIds.length > 0) {
-          console.log("🔍 Fetching subscriptions for conciergerie IDs:", conciergerieIds);
+          console.log("ðŸ” Fetching subscriptions for conciergerie IDs:", conciergerieIds);
           
           const { data: subscriptionsData, error } = await supabase
             .from('subscriptions')
             .select('conciergerie_id, website_url, phone_number_value, website_link, phone_number, total_points, monthly_amount, created_at')
             .in('conciergerie_id', conciergerieIds);
           
-          console.log("📊 Subscriptions result:", { data: subscriptionsData, error });
+          console.log("ðŸ“Š Subscriptions result:", { data: subscriptionsData, error });
           
           if (subscriptionsData) {
             const subscriptionsMap = new Map();
             subscriptionsData.forEach(sub => {
               subscriptionsMap.set(sub.conciergerie_id, sub);
             });
-            console.log("🗺️ Subscriptions map:", subscriptionsMap);
+            console.log("ðŸ—ºï¸ Subscriptions map:", subscriptionsMap);
             setSubscriptions(subscriptionsMap);
           }
 
@@ -131,7 +131,7 @@ export const useConciergerieData = (villeSlug: string | undefined) => {
       results = results.filter(formule => formule.commission <= filters.commissionMax!);
     }
 
-    // Filtre par durée de gestion minimum
+    // Filtre par durÃ©e de gestion minimum
     if (filters.dureeGestionMin && filters.dureeGestionMin > 0) {
       results = results.filter(formule => formule.dureeGestionMin <= filters.dureeGestionMin!);
     }
@@ -150,7 +150,7 @@ export const useConciergerieData = (villeSlug: string | undefined) => {
       results = results.filter(formule => filters.servicesInclus!.every(service => formule.servicesInclus.includes(service)));
     }
 
-    // Filtre par accepte résidence principale
+    // Filtre par accepte rÃ©sidence principale
     if (filters.accepteResidencePrincipale === true) {
       results = results.filter(formule => formule.conciergerie?.accepteResidencePrincipale === true);
     }
@@ -199,3 +199,4 @@ export const useConciergerieData = (villeSlug: string | undefined) => {
     resetFilters
   };
 };
+

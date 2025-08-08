@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
@@ -81,7 +81,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
               <FormControl>
                 <Input 
                   {...field} 
-                  placeholder="Prénom et nom du contact"
+                  placeholder="PrÃ©nom et nom du contact"
                   autoComplete="off"
                   data-lpignore="true"
                 />
@@ -98,7 +98,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
             <FormItem>
               <div className="flex items-center">
                 <Phone className="mr-2 h-4 w-4 text-gray-600" />
-                <FormLabel>Téléphone de contact</FormLabel>
+                <FormLabel>TÃ©lÃ©phone de contact</FormLabel>
               </div>
               <FormControl>
                 <Input 
@@ -162,3 +162,4 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
 };
 
 export default ConciergeInfoSection;
+

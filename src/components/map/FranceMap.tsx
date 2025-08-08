@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import Link from "next/link";
 import { villes } from "@/lib/data";
@@ -126,5 +126,6 @@ const FranceMap: React.FC = () => {
 };
 
 export default FranceMap;
+
 
 

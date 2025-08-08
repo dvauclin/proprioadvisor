@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@supabase/supabase-js';
+﻿import { SupabaseClient } from '@supabase/supabase-js';
 import { SubscriptionFormValues } from '@/types/subscription';
 
 interface InitiateStripeCheckoutParams {
@@ -32,10 +32,10 @@ export const initiateStripeCheckout = async ({
 
   toast({
     title: "Redirection vers Stripe",
-    description: "Vous allez être redirigé vers notre page de paiement sécurisée."
+    description: "Vous allez Ãªtre redirigÃ© vers notre page de paiement sÃ©curisÃ©e."
   });
 
-  console.log("Envoi de la requête à Stripe avec montant:", amount, "et score:", totalPoints);
+  console.log("Envoi de la requÃªte Ã  Stripe avec montant:", amount, "et score:", totalPoints);
 
   const currentUrl = window.location.href;
   const returnUrl = userLoggedIn 
@@ -76,16 +76,17 @@ export const initiateStripeCheckout = async ({
     throw error; // Re-throw to be caught by the main handler
   }
 
-  console.log("Réponse de la fonction create-checkout:", data);
+  console.log("RÃ©ponse de la fonction create-checkout:", data);
   if (data?.url) {
     console.log("Redirection vers:", data.url);
     window.location.href = data.url;
   } else {
     toast({
         title: "Erreur Stripe",
-        description: "URL de paiement non reçue de Stripe.",
+        description: "URL de paiement non reÃ§ue de Stripe.",
         variant: "destructive"
     });
-    throw new Error("URL de paiement non reçue");
+    throw new Error("URL de paiement non reÃ§ue");
   }
 };
+

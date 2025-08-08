@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@supabase/supabase-js';
+﻿import { SupabaseClient } from '@supabase/supabase-js';
 import { AuthContextType } from '@/contexts/AuthContext';
 
 interface HandleUserAuthenticationParams {
@@ -36,15 +36,15 @@ export const handleUserAuthentication = async ({
         console.error("Error creating user:", createUserError);
         toast({
           title: "Avertissement",
-          description: "Impossible de créer le compte utilisateur, mais la souscription continuera.",
+          description: "Impossible de crÃ©er le compte utilisateur, mais la souscription continuera.",
           variant: "destructive"
         });
         return { userLoggedIn: false, errorOccurred: true };
       } else if (newUser.user && !createUserError) {
         await signIn(email, password); // Attempt to sign in again after successful sign-up
         toast({
-          title: "Compte créé et connexion réussie",
-          description: "Vous êtes maintenant connecté à votre compte"
+          title: "Compte crÃ©Ã© et connexion rÃ©ussie",
+          description: "Vous Ãªtes maintenant connectÃ© Ã  votre compte"
         });
         return { userLoggedIn: true, errorOccurred: false };
       } else if (createUserError && createUserError.message.includes('User already registered')) {
@@ -61,8 +61,8 @@ export const handleUserAuthentication = async ({
       }
     } else if (!signInError) {
       toast({
-        title: "Connexion réussie",
-        description: "Vous êtes maintenant connecté à votre compte"
+        title: "Connexion rÃ©ussie",
+        description: "Vous Ãªtes maintenant connectÃ© Ã  votre compte"
       });
       return { userLoggedIn: true, errorOccurred: false };
     } else if (signInError) {
@@ -86,3 +86,4 @@ export const handleUserAuthentication = async ({
   }
   return { userLoggedIn: false, errorOccurred: false }; // Default return if no path matched (should not happen)
 };
+

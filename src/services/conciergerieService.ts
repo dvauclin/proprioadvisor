@@ -1,4 +1,4 @@
-import { supabase } from "@/integrations/supabase/client";
+﻿import { supabase } from "@/integrations/supabase/client";
 import { Conciergerie, Formule } from "@/types";
 import { transformConciergerieFromDB, transformConciergerieForDB, transformFormuleForDB } from "./conciergerieTransformService";
 import { triggerWebhook } from "@/utils/webhookService";
@@ -38,7 +38,7 @@ export const getValidatedConciergeries = async (): Promise<Conciergerie[]> => {
       subscriptions (*)
     `)
     .eq('validated', true);
-    // ❌ REMOVED: .order('nom') - let frontend handle sorting by score
+    // âŒ REMOVED: .order('nom') - let frontend handle sorting by score
 
   if (error) {
     console.error("Error fetching validated conciergeries:", error);
@@ -102,7 +102,7 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
 
     // Trigger webhook after successful validation
     try {
-      console.log("🚀 Triggering validation webhook for:", conciergerie.nom);
+      console.log("ðŸš€ Triggering validation webhook for:", conciergerie.nom);
       
       // Get selected cities data with slug for URL
       const { data: villes } = await supabase
@@ -134,9 +134,9 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
         timestamp: new Date().toISOString(),
       });
 
-      console.log("✅ Validation webhook sent successfully");
+      console.log("âœ… Validation webhook sent successfully");
     } catch (webhookError) {
-      console.error("❌ Webhook error:", webhookError);
+      console.error("âŒ Webhook error:", webhookError);
       // Don't fail the validation if webhook fails
     }
     
@@ -306,3 +306,4 @@ export const deleteConciergerie = async (id: string): Promise<{ success: boolean
     return { success: false, error: "Une erreur inattendue s'est produite" };
   }
 };
+

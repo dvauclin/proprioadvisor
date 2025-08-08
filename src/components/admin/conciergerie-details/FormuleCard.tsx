@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Formule } from "@/types";
 import {
   Card,
@@ -42,9 +42,9 @@ const FormuleCard: React.FC<FormuleCardProps> = ({
     if (!formule.fraisReapprovisionnement || formule.fraisReapprovisionnement === 'inclus') {
       return '';
     } else if (formule.fraisReapprovisionnement === 'reel') {
-      return 'Coût réel refacturé';
+      return 'CoÃ»t rÃ©el refacturÃ©';
     } else if (formule.fraisReapprovisionnement === 'forfait' && formule.forfaitReapprovisionnement) {
-      return `${formule.forfaitReapprovisionnement}€/mois`;
+      return `${formule.forfaitReapprovisionnement}â‚¬/mois`;
     }
     return '';
   };
@@ -56,14 +56,14 @@ const FormuleCard: React.FC<FormuleCardProps> = ({
     } else {
       // Only show (option) for optional items, nothing for mandatory
       const status = formule.locationLinge === 'optionnel' ? ' (option)' : '';
-      return formule.prixLocationLinge > 0 ? `${formule.prixLocationLinge}€/mois${status}` : '';
+      return formule.prixLocationLinge > 0 ? `${formule.prixLocationLinge}â‚¬/mois${status}` : '';
     }
   };
 
   // Helper to format duration display
   const getDurationDisplayText = () => {
     return formule.dureeGestionMin === 0 
-      ? "Pas de durée minimum d'engagement"
+      ? "Pas de durÃ©e minimum d'engagement"
       : `${formule.dureeGestionMin} mois`;
   };
   
@@ -90,7 +90,7 @@ const FormuleCard: React.FC<FormuleCardProps> = ({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Critère</TableHead>
+                <TableHead>CritÃ¨re</TableHead>
                 <TableHead>Valeur</TableHead>
               </TableRow>
             </TableHeader>
@@ -100,32 +100,32 @@ const FormuleCard: React.FC<FormuleCardProps> = ({
                 <TableCell>{formule.commission}%</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">Durée minimale</TableCell>
+                <TableCell className="font-medium">DurÃ©e minimale</TableCell>
                 <TableCell>{getDurationDisplayText()}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">Frais de ménage</TableCell>
-                <TableCell>{formule.fraisMenageHeure}€/h</TableCell>
+                <TableCell className="font-medium">Frais de mÃ©nage</TableCell>
+                <TableCell>{formule.fraisMenageHeure}â‚¬/h</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">Frais de démarrage</TableCell>
-                <TableCell>{formule.fraisDemarrage}€</TableCell>
+                <TableCell className="font-medium">Frais de dÃ©marrage</TableCell>
+                <TableCell>{formule.fraisDemarrage}â‚¬</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium">Abonnement mensuel</TableCell>
-                <TableCell>{formule.abonnementMensuel}€</TableCell>
+                <TableCell>{formule.abonnementMensuel}â‚¬</TableCell>
               </TableRow>
               
               {formule.fraisSupplementaireLocation > 0 && (
                 <TableRow>
                   <TableCell className="font-medium">Frais supp. par location</TableCell>
-                  <TableCell>{formule.fraisSupplementaireLocation}€/location</TableCell>
+                  <TableCell>{formule.fraisSupplementaireLocation}â‚¬/location</TableCell>
                 </TableRow>
               )}
               
               {getReapproDisplayText() && (
                 <TableRow>
-                  <TableCell className="font-medium">Réappro.</TableCell>
+                  <TableCell className="font-medium">RÃ©appro.</TableCell>
                   <TableCell>{getReapproDisplayText()}</TableCell>
                 </TableRow>
               )}
@@ -156,3 +156,4 @@ const FormuleCard: React.FC<FormuleCardProps> = ({
 };
 
 export default FormuleCard;
+

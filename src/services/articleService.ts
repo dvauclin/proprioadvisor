@@ -1,4 +1,4 @@
-import { supabase } from "@/integrations/supabase/client";
+﻿import { supabase } from "@/integrations/supabase/client";
 import { Article } from "@/types";
 
 // NOTE: We use `as any` because the global `Article` type in `src/types` is read-only
@@ -264,3 +264,4 @@ export const deleteArticle = async (id: string): Promise<{ success: boolean; err
     return { success: false, error: "Une erreur inattendue s'est produite" };
   }
 };
+

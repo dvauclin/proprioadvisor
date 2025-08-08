@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -57,3 +57,4 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ onVilleSelect }) => {
 };
 
 export default MapboxMap;
+

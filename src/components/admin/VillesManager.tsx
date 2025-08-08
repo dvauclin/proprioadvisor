@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -37,14 +37,14 @@ const VillesManager: React.FC<VillesManagerProps> = ({ villes, onAdd, onUpdate, 
       if (editingVille) {
         await onUpdate(ville);
         toast({
-          title: "Ville modifiée",
-          description: `La ville "${ville.nom}" a été modifiée avec succès`,
+          title: "Ville modifiÃ©e",
+          description: `La ville "${ville.nom}" a Ã©tÃ© modifiÃ©e avec succÃ¨s`,
         });
       } else {
         await onAdd(ville);
         toast({
-          title: "Ville ajoutée",
-          description: `La ville "${ville.nom}" a été ajoutée avec succès`,
+          title: "Ville ajoutÃ©e",
+          description: `La ville "${ville.nom}" a Ã©tÃ© ajoutÃ©e avec succÃ¨s`,
         });
       }
       setShowForm(false);
@@ -64,8 +64,8 @@ const VillesManager: React.FC<VillesManagerProps> = ({ villes, onAdd, onUpdate, 
       setDeletingId(id);
       await onDelete(id);
       toast({
-        title: "Ville supprimée",
-        description: `La ville "${nom}" a été supprimée avec succès`,
+        title: "Ville supprimÃ©e",
+        description: `La ville "${nom}" a Ã©tÃ© supprimÃ©e avec succÃ¨s`,
       });
     } catch (error) {
       console.error("Error deleting ville:", error);
@@ -119,8 +119,8 @@ const VillesManager: React.FC<VillesManagerProps> = ({ villes, onAdd, onUpdate, 
           <TableHeader>
             <TableRow>
               <TableHead>Nom</TableHead>
-              <TableHead>Département</TableHead>
-              <TableHead>Ville mère</TableHead>
+              <TableHead>DÃ©partement</TableHead>
+              <TableHead>Ville mÃ¨re</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -174,3 +174,4 @@ const VillesManager: React.FC<VillesManagerProps> = ({ villes, onAdd, onUpdate, 
 };
 
 export default VillesManager;
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { z } from "zod";
@@ -18,7 +18,7 @@ import { triggerWebhook } from "@/utils/webhookService";
 // Array of service options with only the requested options
 const serviceOptions = [{
   id: 'menage_blanchisserie',
-  label: 'Ménage / Blanchisserie'
+  label: 'MÃ©nage / Blanchisserie'
 }, {
   id: 'checkin_checkout',
   label: 'Check-in / Check-out'
@@ -27,7 +27,7 @@ const serviceOptions = [{
   label: 'Gestion de l\'annonce'
 }, {
   id: 'creation_annonce',
-  label: 'Création de l\'annonce'
+  label: 'CrÃ©ation de l\'annonce'
 }];
 
 // Array of property types with only the requested options
@@ -39,18 +39,18 @@ const propertyTypes = [{
   label: 'Haut de gamme / Luxe'
 }];
 
-// Schéma de validation du formulaire
+// SchÃ©ma de validation du formulaire
 const formSchema = z.object({
-  nom: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
+  nom: z.string().min(2, "Le nom doit contenir au moins 2 caractÃ¨res"),
   email: z.string().email("Adresse email invalide"),
-  telephone: z.string().min(10, "Numéro de téléphone invalide"),
-  adresse: z.string().min(5, "L'adresse doit contenir au moins 5 caractères"),
-  ville: z.string().min(2, "La ville doit contenir au moins 2 caractères"),
-  superficie: z.coerce.number().min(1, "La superficie doit être positive"),
-  nombreChambres: z.coerce.number().min(0, "Le nombre de chambres doit être positif ou nul"),
+  telephone: z.string().min(10, "NumÃ©ro de tÃ©lÃ©phone invalide"),
+  adresse: z.string().min(5, "L'adresse doit contenir au moins 5 caractÃ¨res"),
+  ville: z.string().min(2, "La ville doit contenir au moins 2 caractÃ¨res"),
+  superficie: z.coerce.number().min(1, "La superficie doit Ãªtre positive"),
+  nombreChambres: z.coerce.number().min(0, "Le nombre de chambres doit Ãªtre positif ou nul"),
   typeBien: z.enum(["standard", "luxe"]),
   dureeEspacementDisposition: z.enum(["moins3mois", "3a6mois", "6a12mois", "plus1an"]),
-  prestationsRecherchees: z.array(z.string()).min(1, "Sélectionnez au moins un service"),
+  prestationsRecherchees: z.array(z.string()).min(1, "SÃ©lectionnez au moins un service"),
   plusieursLogements: z.boolean().default(false),
   residencePrincipale: z.boolean().default(false)
 });
@@ -113,7 +113,7 @@ export const DevisForm: React.FC<DevisFormProps> = ({
       });
       
       if (result.success) {
-        // Récupérer l'email de la conciergerie via jointure
+        // RÃ©cupÃ©rer l'email de la conciergerie via jointure
         const { data: conciergerieData } = await supabase
           .from('formules')
           .select(`
@@ -133,7 +133,7 @@ export const DevisForm: React.FC<DevisFormProps> = ({
           timestamp: new Date().toISOString()
         });
         
-        toast.success("Votre demande de devis a été envoyée avec succès");
+        toast.success("Votre demande de devis a Ã©tÃ© envoyÃ©e avec succÃ¨s");
         form.reset();
         onSuccess();
       } else {
@@ -175,7 +175,7 @@ export const DevisForm: React.FC<DevisFormProps> = ({
           <div className="mt-4 mb-2">
             <p className="flex items-center text-base font-medium">
               <ClipboardList className="h-5 w-5 text-brand-chartreuse mr-2" />
-              Cas spécifiques
+              Cas spÃ©cifiques
             </p>
           </div>
 
@@ -199,17 +199,17 @@ export const DevisForm: React.FC<DevisFormProps> = ({
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <FormLabel className="font-normal">
-                    Confier ma résidence principale
+                    Confier ma rÃ©sidence principale
                   </FormLabel>
                 </FormItem>} />
           </div>
 
-          {/* Services recherchés - 100% width on all screens */}
+          {/* Services recherchÃ©s - 100% width on all screens */}
           <FormField control={form.control} name="prestationsRecherchees" render={() => <FormItem className="w-full">
                 <div className="mb-2">
                   <FormLabel className="flex items-center">
                     <LayoutDashboard className="h-5 w-5 text-brand-chartreuse mr-2" />
-                    Services recherchés
+                    Services recherchÃ©s
                   </FormLabel>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -234,24 +234,24 @@ export const DevisForm: React.FC<DevisFormProps> = ({
 
           {/* Responsive layout for second row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Durée de mise à disposition - 100% on mobile, 50% on desktop */}
+            {/* DurÃ©e de mise Ã  disposition - 100% on mobile, 50% on desktop */}
             <FormField control={form.control} name="dureeEspacementDisposition" render={({
             field
           }) => <FormItem>
                   <FormLabel className="flex items-center">
                     <Clock className="h-5 w-5 text-brand-chartreuse mr-2" />
-                    Durée de mise à disposition
+                    DurÃ©e de mise Ã  disposition
                   </FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez une durée" />
+                        <SelectValue placeholder="SÃ©lectionnez une durÃ©e" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="moins3mois">Moins de 3 mois</SelectItem>
-                      <SelectItem value="3a6mois">De 3 à 6 mois</SelectItem>
-                      <SelectItem value="6a12mois">De 6 à 12 mois</SelectItem>
+                      <SelectItem value="3a6mois">De 3 Ã  6 mois</SelectItem>
+                      <SelectItem value="6a12mois">De 6 Ã  12 mois</SelectItem>
                       <SelectItem value="plus1an">Plus d'un an</SelectItem>
                     </SelectContent>
                   </Select>
@@ -269,7 +269,7 @@ export const DevisForm: React.FC<DevisFormProps> = ({
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez un type" />
+                        <SelectValue placeholder="SÃ©lectionnez un type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -290,7 +290,7 @@ export const DevisForm: React.FC<DevisFormProps> = ({
           }) => <FormItem>
                   <FormLabel className="flex items-center">
                     <Square className="h-5 w-5 text-brand-chartreuse mr-2" />
-                    Superficie (m²)
+                    Superficie (mÂ²)
                   </FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="Surface" min="1" {...field} />
@@ -343,16 +343,16 @@ export const DevisForm: React.FC<DevisFormProps> = ({
                   <FormMessage />
                 </FormItem>} />
 
-            {/* Téléphone - 100% on mobile, 50% on desktop */}
+            {/* TÃ©lÃ©phone - 100% on mobile, 50% on desktop */}
             <FormField control={form.control} name="telephone" render={({
             field
           }) => <FormItem>
                   <FormLabel className="flex items-center">
                     <Phone className="h-5 w-5 text-brand-chartreuse mr-2" />
-                    Téléphone
+                    TÃ©lÃ©phone
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Votre numéro de téléphone" {...field} />
+                    <Input placeholder="Votre numÃ©ro de tÃ©lÃ©phone" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>} />
@@ -374,13 +374,13 @@ export const DevisForm: React.FC<DevisFormProps> = ({
                   <FormMessage />
                 </FormItem>} />
 
-            {/* Nom et prénom - 100% on mobile, 50% on desktop */}
+            {/* Nom et prÃ©nom - 100% on mobile, 50% on desktop */}
             <FormField control={form.control} name="nom" render={({
             field
           }) => <FormItem>
                   <FormLabel className="flex items-center">
                     <User className="h-5 w-5 text-brand-chartreuse mr-2" />
-                    Nom et prénom
+                    Nom et prÃ©nom
                   </FormLabel>
                   <FormControl>
                     <Input placeholder="Votre nom" {...field} />
@@ -401,3 +401,4 @@ export const DevisForm: React.FC<DevisFormProps> = ({
     </div>
   );
 };
+

@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { Badge } from "@/components/ui-kit/badge";
 import { Lead } from "@/types";
@@ -16,7 +16,7 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
   return <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Détails du lead</DialogTitle>
+          <DialogTitle>DÃ©tails du lead</DialogTitle>
         </DialogHeader>
         
         <div className="space-y-4">
@@ -33,7 +33,7 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-sm text-gray-600">Téléphone</h4>
+              <h4 className="font-semibold text-sm text-gray-600">TÃ©lÃ©phone</h4>
               <p>{lead.telephone}</p>
             </div>
             <div>
@@ -58,7 +58,7 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
           <div className="grid grid-cols-3 gap-4">
             <div>
               <h4 className="font-semibold text-sm text-gray-600">Superficie</h4>
-              <p>{lead.superficie} m²</p>
+              <p>{lead.superficie} mÂ²</p>
             </div>
             <div>
               <h4 className="font-semibold text-sm text-gray-600">Chambres</h4>
@@ -71,13 +71,13 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
           </div>
           
           <div>
-            <h4 className="font-semibold text-sm text-gray-600">Durée de mise à disposition</h4>
+            <h4 className="font-semibold text-sm text-gray-600">DurÃ©e de mise Ã  disposition</h4>
             <p>{lead.dureeEspacementDisposition}</p>
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-sm text-gray-600">Résidence principale</h4>
+              <h4 className="font-semibold text-sm text-gray-600">RÃ©sidence principale</h4>
               <Badge variant={lead.residencePrincipale ? "default" : "secondary"}>
                 {lead.residencePrincipale ? "Oui" : "Non"}
               </Badge>
@@ -91,11 +91,11 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
           </div>
           
           <div>
-            <h4 className="font-semibold text-sm text-gray-600">Prestations recherchées</h4>
+            <h4 className="font-semibold text-sm text-gray-600">Prestations recherchÃ©es</h4>
             <div className="flex flex-wrap gap-2 mt-2">
               {lead.prestationsRecherchees && Array.isArray(lead.prestationsRecherchees) ? lead.prestationsRecherchees.map((prestation, index) => <Badge key={index} variant="outline">
                     {prestation}
-                  </Badge>) : <p className="text-sm text-gray-500">Aucune prestation spécifiée</p>}
+                  </Badge>) : <p className="text-sm text-gray-500">Aucune prestation spÃ©cifiÃ©e</p>}
             </div>
           </div>
           
@@ -103,13 +103,13 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
               <div>
                 <h4 className="font-semibold text-sm text-gray-600">Conciergerie</h4>
                 <p className="font-medium text-blue-800">
-                  {lead.conciergerieNom || "Non spécifiée"}
+                  {lead.conciergerieNom || "Non spÃ©cifiÃ©e"}
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold text-sm text-gray-600">Formule</h4>
                 <p className="font-medium text-blue-800">
-                  {lead.formuleNom || "Non spécifiée"}
+                  {lead.formuleNom || "Non spÃ©cifiÃ©e"}
                 </p>
               </div>
             </div>}
@@ -123,3 +123,4 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
     </Dialog>;
 };
 export default LeadDetailsDialog;
+

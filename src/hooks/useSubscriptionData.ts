@@ -1,4 +1,4 @@
-
+﻿
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { supabase } from '@/integrations/supabase/client';
@@ -27,8 +27,8 @@ export const useSubscriptionData = () => {
       try {
         let targetConciergerieId = idFromUrl;
         
-        // Si aucun conciergerieId n'est fourni dans l'URL mais qu'un utilisateur est connect�,
-        // on r�cup�re sa conciergerie
+        // Si aucun conciergerieId n'est fourni dans l'URL mais qu'un utilisateur est connectÃ©,
+        // on rÃ©cupÃ¨re sa conciergerie
         if (!targetConciergerieId && user) {
           console.log("[useSubscriptionData] No conciergerieId in URL, fetching user's conciergerie");
           
@@ -42,7 +42,7 @@ export const useSubscriptionData = () => {
             console.error("Error fetching user's conciergerie:", userConciergerieError);
             toast({
               title: "Erreur",
-              description: "Impossible de r�cup�rer votre conciergerie.",
+              description: "Impossible de rÃ©cupÃ©rer votre conciergerie.",
               variant: "destructive"
             });
             setIsLoadingSubscriptionData(false);
@@ -97,7 +97,7 @@ export const useSubscriptionData = () => {
             console.error("Error checking existing subscription:", subscriptionResult.error);
             toast({
               title: "Erreur de souscription",
-              description: "Impossible de v�rifier la souscription existante.",
+              description: "Impossible de vÃ©rifier la souscription existante.",
               variant: "destructive"
             });
           } else if (subscriptionResult.data) {
@@ -111,7 +111,7 @@ export const useSubscriptionData = () => {
             setRenewalDay(null);
           }
         } else {
-          // Aucun conciergerieId trouv� et aucun utilisateur connect�
+          // Aucun conciergerieId trouvÃ© et aucun utilisateur connectÃ©
           setConciergerieId(null);
           setConciergerieName("");
           setConciergerieEmail("");
@@ -127,7 +127,7 @@ export const useSubscriptionData = () => {
         });
         toast({
           title: "Erreur",
-          description: "Un probl�me est survenu lors du chargement des donn�es.",
+          description: "Un problÃ¨me est survenu lors du chargement des donnÃ©es.",
           variant: "destructive"
         });
       } finally {
@@ -148,4 +148,5 @@ export const useSubscriptionData = () => {
     isLoadingSubscriptionData
   };
 };
+
 

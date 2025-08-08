@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import { Formule } from "@/types";
@@ -22,13 +22,13 @@ const FormulesSection: React.FC<FormulesSectionProps> = ({
   const [debugInfo, setDebugInfo] = useState<string>("");
   const { toast } = useToast();
   
-  // Utilisons une référence pour éviter les notifications en double
+  // Utilisons une rÃ©fÃ©rence pour Ã©viter les notifications en double
   const notificationShown = React.useRef<boolean>(false);
-  // État pour suivre si les formules ont été chargées avec succès
+  // Ã‰tat pour suivre si les formules ont Ã©tÃ© chargÃ©es avec succÃ¨s
   const [formulesLoaded, setFormulesLoaded] = useState<boolean>(false);
   
   useEffect(() => {
-    // Mettre à jour l'état de chargement des formules
+    // Mettre Ã  jour l'Ã©tat de chargement des formules
     if (formules.length > 0 && !formulesLoaded) {
       setFormulesLoaded(true);
     }
@@ -36,12 +36,12 @@ const FormulesSection: React.FC<FormulesSectionProps> = ({
     // Log pour le debug dans la console et dans le composant
     console.log(`Affichage des formules pour conciergerie ${conciergerieId}:`, formules);
     
-    // Éviter les notifications en double en utilisant la référence
+    // Ã‰viter les notifications en double en utilisant la rÃ©fÃ©rence
     if (!notificationShown.current) {
-      // Seulement afficher une notification si le chargement est terminé
+      // Seulement afficher une notification si le chargement est terminÃ©
       if (!loading) {
         if (formules.length === 0) {
-          const message = `Aucune formule trouvée pour la conciergerie ID: ${conciergerieId}`;
+          const message = `Aucune formule trouvÃ©e pour la conciergerie ID: ${conciergerieId}`;
           setDebugInfo(message);
           toast({
             title: "Information",
@@ -49,15 +49,15 @@ const FormulesSection: React.FC<FormulesSectionProps> = ({
             variant: "default",
           });
         } else {
-          const message = `${formules.length} formule(s) trouvée(s) pour l'ID: ${conciergerieId}`;
+          const message = `${formules.length} formule(s) trouvÃ©e(s) pour l'ID: ${conciergerieId}`;
           setDebugInfo(message);
           toast({
-            title: "Succès",
+            title: "SuccÃ¨s",
             description: message,
           });
         }
         
-        // Marquer que la notification a été affichée
+        // Marquer que la notification a Ã©tÃ© affichÃ©e
         notificationShown.current = true;
       }
     }
@@ -90,7 +90,7 @@ const FormulesSection: React.FC<FormulesSectionProps> = ({
         ) : (
           <div className="text-center py-8 text-gray-500 border border-dashed border-gray-300 rounded-md bg-gray-50">
             <Database className="h-8 w-8 mx-auto text-blue-500" />
-            <p className="mt-2">Aucune formule trouvée pour cette conciergerie</p>
+            <p className="mt-2">Aucune formule trouvÃ©e pour cette conciergerie</p>
             <p className="text-sm mt-1">ID de conciergerie: <code className="bg-gray-100 px-1 py-0.5 rounded">{conciergerieId}</code></p>
             
             <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
@@ -104,7 +104,7 @@ const FormulesSection: React.FC<FormulesSectionProps> = ({
         )}
       </div>
       
-      {/* Section de debug pour les développeurs */}
+      {/* Section de debug pour les dÃ©veloppeurs */}
       <Accordion type="single" collapsible className="mt-6">
         <AccordionItem value="debug">
           <AccordionTrigger className="text-sm">
@@ -117,8 +117,8 @@ const FormulesSection: React.FC<FormulesSectionProps> = ({
             <div className="p-4 bg-gray-50 rounded-md text-sm">
               <p><strong>Conciergerie ID:</strong> {conciergerieId}</p>
               <p><strong>Nombre de formules:</strong> {formules.length}</p>
-              <p><strong>État de chargement:</strong> {loading ? "En cours" : "Terminé"}</p>
-              <p><strong>Formules chargées:</strong> {formulesLoaded ? "Oui" : "Non"}</p>
+              <p><strong>Ã‰tat de chargement:</strong> {loading ? "En cours" : "TerminÃ©"}</p>
+              <p><strong>Formules chargÃ©es:</strong> {formulesLoaded ? "Oui" : "Non"}</p>
               <p><strong>Debug info:</strong> {debugInfo}</p>
             </div>
           </AccordionContent>
@@ -129,3 +129,4 @@ const FormulesSection: React.FC<FormulesSectionProps> = ({
 };
 
 export default FormulesSection;
+

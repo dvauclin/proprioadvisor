@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui-kit/button";
 import { Input } from "@/components/ui-kit/input";
 import { Textarea } from "@/components/ui-kit/textarea";
-import StarRating from "@/components/ui-kit/StarRating";
+import StarRating from "@/components/ui-kit/star-rating";
 import { addAvis } from "@/services/avisService";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -47,8 +47,8 @@ export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({
       });
 
       if (result.success) {
-        toast.success("Avis envoyé !", {
-          description: "Votre avis a été envoyé et sera publié après modération."
+        toast.success("Avis envoyÃ© !", {
+          description: "Votre avis a Ã©tÃ© envoyÃ© et sera publiÃ© aprÃ¨s modÃ©ration."
         });
         
         // Reset form
@@ -66,7 +66,7 @@ export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({
       }
     } catch (error) {
       toast.error("Erreur d'envoi", {
-        description: "Une erreur inattendue s'est produite. Veuillez réessayer."
+        description: "Une erreur inattendue s'est produite. Veuillez rÃ©essayer."
       });
     } finally {
       setIsSubmitting(false);
@@ -109,7 +109,7 @@ export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({
           id="commentaire"
           value={commentaire}
           onChange={(e) => setCommentaire(e.target.value)}
-          placeholder="Partagez votre expérience..."
+          placeholder="Partagez votre expÃ©rience..."
           rows={4}
         />
       </div>
@@ -133,3 +133,4 @@ export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({
 };
 
 export default SimpleAvisForm;
+

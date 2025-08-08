@@ -1,4 +1,4 @@
-
+ï»¿
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -18,7 +18,7 @@ import { Skeleton } from '@/components/ui-kit/skeleton';
 const UserMenu = () => {
   const { user, profile, signOut, isAdmin, loading } = useAuth();
 
-  // Skeleton loader pour un chargement plus élégant
+  // Skeleton loader pour un chargement plus Ã©lÃ©gant
   if (loading) {
     return (
       <div className="flex items-center space-x-2">
@@ -89,7 +89,7 @@ const UserMenu = () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={signOut} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />
-            <span>Se déconnecter</span>
+            <span>Se dÃ©connecter</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -101,6 +101,7 @@ const UserMenu = () => {
 };
 
 export default UserMenu;
+
 
 
 

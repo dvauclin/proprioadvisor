@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Blog from '@/pages/Blog'
 
 export const metadata: Metadata = {
   title: 'Blog | Proprioadvisor',
-  description: 'Découvrez nos articles sur la conciergerie Airbnb et la location courte durée',
-  keywords: ['blog', 'conciergerie', 'airbnb', 'articles', 'location courte durée'],
+  description: 'DÃ©couvrez nos articles sur la conciergerie Airbnb et la location courte durÃ©e',
+  keywords: ['blog', 'conciergerie', 'airbnb', 'articles', 'location courte durÃ©e'],
   openGraph: {
     title: 'Blog | Proprioadvisor',
-    description: 'Découvrez nos articles sur la conciergerie Airbnb et la location courte durée',
+    description: 'DÃ©couvrez nos articles sur la conciergerie Airbnb et la location courte durÃ©e',
     url: 'https://proprioadvisor.fr/blog',
   },
   alternates: {
@@ -18,3 +18,4 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return <Blog />
 } 
+

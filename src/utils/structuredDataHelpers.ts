@@ -1,19 +1,19 @@
-// Helpers pour générer les données structurées JSON-LD
+﻿// Helpers pour gÃ©nÃ©rer les donnÃ©es structurÃ©es JSON-LD
 import { Conciergerie, Formule, Ville } from '@/types';
 import { getAvisByConciergerie } from '@/services/avisService';
 
 const BASE_URL = 'https://proprioadvisor.fr';
 
-// Utilitaires pour générer les données structurées JSON-LD
+// Utilitaires pour gÃ©nÃ©rer les donnÃ©es structurÃ©es JSON-LD
 
-// Données structurées pour l'organisation
+// DonnÃ©es structurÃ©es pour l'organisation
 export const createOrganizationStructuredData = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'ProprioAdvisor',
   url: 'https://proprioadvisor.fr',
   logo: 'https://proprioadvisor.fr/logo.png',
-  description: 'Le comparateur de conciergeries Airbnb en France le plus complet du marché',
+  description: 'Le comparateur de conciergeries Airbnb en France le plus complet du marchÃ©',
   sameAs: [
     'https://twitter.com/proprioadvisor',
     'https://linkedin.com/company/proprioadvisor'
@@ -25,7 +25,7 @@ export const createOrganizationStructuredData = () => ({
   }
 });
 
-// Données structurées pour une page web
+// DonnÃ©es structurÃ©es pour une page web
 export const createWebPageStructuredData = (title: string, description: string, url: string) => ({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -39,7 +39,7 @@ export const createWebPageStructuredData = (title: string, description: string, 
   }
 });
 
-// Données structurées pour un article de blog
+// DonnÃ©es structurÃ©es pour un article de blog
 export const createArticleStructuredData = (article: any, imageUrl?: string) => ({
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -66,7 +66,7 @@ export const createArticleStructuredData = (article: any, imageUrl?: string) => 
   }
 });
 
-// Données structurées pour un fil d'Ariane
+// DonnÃ©es structurÃ©es pour un fil d'Ariane
 export const createBreadcrumbStructuredData = (items: Array<{ name: string; url?: string }>) => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -78,7 +78,7 @@ export const createBreadcrumbStructuredData = (items: Array<{ name: string; url?
   })),
 })
 
-// Données structurées pour une FAQ
+// DonnÃ©es structurÃ©es pour une FAQ
 export const createFAQStructuredData = (faqs: Array<{ q: string; a: string }>) => ({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -92,7 +92,7 @@ export const createFAQStructuredData = (faqs: Array<{ q: string; a: string }>) =
   })),
 })
 
-// Données structurées pour une conciergerie
+// DonnÃ©es structurÃ©es pour une conciergerie
 export const createConciergerieStructuredData = (conciergerie: any, formules: any[]) => ({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -121,12 +121,12 @@ export const createConciergerieStructuredData = (conciergerie: any, formules: an
   },
 })
 
-// Données structurées pour une liste de conciergeries
+// DonnÃ©es structurÃ©es pour une liste de conciergeries
 export const createConciergerieListStructuredData = (conciergeries: any[], ville: any) => ({
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: `Conciergeries Airbnb à ${ville.nom}`,
-  description: `Liste des conciergeries Airbnb disponibles à ${ville.nom}`,
+  name: `Conciergeries Airbnb Ã  ${ville.nom}`,
+  description: `Liste des conciergeries Airbnb disponibles Ã  ${ville.nom}`,
   numberOfItems: conciergeries.length,
   itemListElement: conciergeries.map((conciergerie, index) => ({
     '@type': 'ListItem',
@@ -140,13 +140,13 @@ export const createConciergerieListStructuredData = (conciergeries: any[], ville
   })),
 })
 
-// Données structurées pour le site web
+// DonnÃ©es structurÃ©es pour le site web
 export const createWebsiteStructuredData = () => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'ProprioAdvisor',
   url: 'https://proprioadvisor.fr',
-  description: 'Comparateur de conciergeries Airbnb pour les propriétaires',
+  description: 'Comparateur de conciergeries Airbnb pour les propriÃ©taires',
   publisher: {
     '@type': 'Organization',
     name: 'ProprioAdvisor',
@@ -166,14 +166,14 @@ export const createWebsiteStructuredData = () => ({
   ]
 });
 
-// Fonction pour récupérer les avis et calculer la moyenne réelle
+// Fonction pour rÃ©cupÃ©rer les avis et calculer la moyenne rÃ©elle
 const getAvisStatistics = async (conciergerieId: string): Promise<{ averageRating: number; reviewCount: number } | null> => {
   try {
     const avis = await getAvisByConciergerie(conciergerieId);
     if (avis.length === 0) return null;
     
     const totalNotes = avis.reduce((sum, avis) => sum + avis.note, 0);
-    const averageRating = Math.round((totalNotes / avis.length) * 10) / 10; // Arrondir à 1 décimale
+    const averageRating = Math.round((totalNotes / avis.length) * 10) / 10; // Arrondir Ã  1 dÃ©cimale
     
     return {
       averageRating,
@@ -196,7 +196,7 @@ export const createListingStructuredData = async (ville: Ville, formules: (Formu
   // D'abord filtrer les formules valides
   const validFormules = formules.filter(f => f.conciergerie && f.conciergerie.score > 0);
 
-  // Grouper IMMÉDIATEMENT par conciergerie pour éviter les doublons
+  // Grouper IMMÃ‰DIATEMENT par conciergerie pour Ã©viter les doublons
   const conciergeriesMap = new Map<string, {
     conciergerie: Conciergerie;
     formules: Formule[];
@@ -223,33 +223,33 @@ export const createListingStructuredData = async (ville: Ville, formules: (Formu
     }
   });
 
-  // Maintenant trier les conciergeries groupées selon l'ordre d'affichage
+  // Maintenant trier les conciergeries groupÃ©es selon l'ordre d'affichage
   const sortedConciergerieEntries = Array.from(conciergeriesMap.entries()).sort(([, a], [, b]) => {
     const scoreA = a.conciergerie.score || 0;
     const scoreB = b.conciergerie.score || 0;
     
     if (scoreA !== scoreB) {
-      return scoreB - scoreA; // Score décroissant
+      return scoreB - scoreA; // Score dÃ©croissant
     }
     
-    // Si scores égaux, trier par date de création (plus ancien en premier)
+    // Si scores Ã©gaux, trier par date de crÃ©ation (plus ancien en premier)
     const dateA = new Date(a.bestFormule.createdAt || '').getTime();
     const dateB = new Date(b.bestFormule.createdAt || '').getTime();
     return dateA - dateB; // Sort by date ascending (oldest first)
   });
 
-  // Récupérer les statistiques d'avis réelles pour chaque conciergerie
+  // RÃ©cupÃ©rer les statistiques d'avis rÃ©elles pour chaque conciergerie
   const avisPromises = sortedConciergerieEntries.map(([, item]) => 
     getAvisStatistics(item.conciergerie.id)
   );
   const avisStatistics = await Promise.all(avisPromises);
 
-  // Créer un seul élément ItemList unifié avec une entrée unique par conciergerie
+  // CrÃ©er un seul Ã©lÃ©ment ItemList unifiÃ© avec une entrÃ©e unique par conciergerie
   const itemListElement = sortedConciergerieEntries.map(([, item], index) => {
     const { conciergerie, formules, bestFormule } = item;
     const conciergerieSlug = createConciergerieSlug(conciergerie.nom);
     
-    // Construire un priceRange valide avec une longueur appropriée (minimum 12 caractères)
+    // Construire un priceRange valide avec une longueur appropriÃ©e (minimum 12 caractÃ¨res)
     let priceRange = "Sur devis - Contactez-nous";
     if (bestFormule.commission && bestFormule.commission > 0) {
       const minCommission = Math.min(...formules.filter(f => f.commission).map(f => f.commission!));
@@ -258,7 +258,7 @@ export const createListingStructuredData = async (ville: Ville, formules: (Formu
       if (minCommission === maxCommission) {
         priceRange = `Commission de ${minCommission}% sur revenus`;
       } else {
-        priceRange = `Commission de ${minCommission}% à ${maxCommission}% sur revenus`;
+        priceRange = `Commission de ${minCommission}% Ã  ${maxCommission}% sur revenus`;
       }
     }
 
@@ -267,7 +267,7 @@ export const createListingStructuredData = async (ville: Ville, formules: (Formu
 
     // Description incluant toutes les formules disponibles
     const formulesNames = formules.map(f => validateName(f.nom, "Formule standard")).join(', ');
-    const description = `Conciergerie Airbnb ${conciergerie.nom} à ${ville.nom}. Formules disponibles : ${formulesNames}. Service professionnel avec commission à partir de ${bestFormule.commission || 'tarif personnalisé'}.`;
+    const description = `Conciergerie Airbnb ${conciergerie.nom} Ã  ${ville.nom}. Formules disponibles : ${formulesNames}. Service professionnel avec commission Ã  partir de ${bestFormule.commission || 'tarif personnalisÃ©'}.`;
 
     const itemData: any = {
       "@type": "ListItem",
@@ -279,7 +279,7 @@ export const createListingStructuredData = async (ville: Ville, formules: (Formu
         "@type": "LocalBusiness",
         "@id": `${BASE_URL}/conciergerie-details/${conciergerieSlug}`,
         "name": `${conciergerie.nom}`,
-        "description": `Conciergerie Airbnb ${conciergerie.nom}. Gestion complète de votre location courte durée avec un service professionnel et personnalisé à ${ville.nom}. Formules disponibles : ${formulesNames}.`,
+        "description": `Conciergerie Airbnb ${conciergerie.nom}. Gestion complÃ¨te de votre location courte durÃ©e avec un service professionnel et personnalisÃ© Ã  ${ville.nom}. Formules disponibles : ${formulesNames}.`,
         "logo": conciergerie.logo || `${BASE_URL}/placeholder.svg`,
         "url": itemUrl,
         "areaServed": {
@@ -317,14 +317,14 @@ export const createListingStructuredData = async (ville: Ville, formules: (Formu
             "itemOffered": {
               "@type": "Service",
               "name": `Gestion Airbnb - ${validateName(formule.nom, "Formule standard")}`,
-              "description": "Accueil voyageurs, ménage, maintenance, gestion des réservations"
+              "description": "Accueil voyageurs, mÃ©nage, maintenance, gestion des rÃ©servations"
             }
           }))
         }
       }
     };
 
-    // Ajouter aggregateRating SEULEMENT si il y a de vrais avis validés
+    // Ajouter aggregateRating SEULEMENT si il y a de vrais avis validÃ©s
     const avisStats = avisStatistics[index];
     if (avisStats && avisStats.reviewCount > 0) {
       itemData.item.aggregateRating = {
@@ -342,19 +342,19 @@ export const createListingStructuredData = async (ville: Ville, formules: (Formu
   const structuredData: any = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": `Conciergeries Airbnb à ${ville.nom}`,
-    "description": ville.description || `Découvrez les meilleures conciergeries à ${ville.nom} pour gérer votre logement en location courte durée. Comparaison détaillée des services, tarifs et avis clients.`,
+    "name": `Conciergeries Airbnb Ã  ${ville.nom}`,
+    "description": ville.description || `DÃ©couvrez les meilleures conciergeries Ã  ${ville.nom} pour gÃ©rer votre logement en location courte durÃ©e. Comparaison dÃ©taillÃ©e des services, tarifs et avis clients.`,
     "url": `${BASE_URL}/conciergerie/${ville.slug}`,
     "numberOfItems": itemListElement.length,
     "itemListElement": itemListElement,
     "about": {
       "@type": "Thing",
       "name": "Conciergerie Airbnb",
-      "description": "Service de gestion complète pour locations courte durée comprenant l'accueil des voyageurs, le ménage, la maintenance et l'optimisation des revenus locatifs."
+      "description": "Service de gestion complÃ¨te pour locations courte durÃ©e comprenant l'accueil des voyageurs, le mÃ©nage, la maintenance et l'optimisation des revenus locatifs."
     },
     "audience": {
       "@type": "Audience",
-      "audienceType": "Propriétaires de biens immobiliers"
+      "audienceType": "PropriÃ©taires de biens immobiliers"
     },
     "inLanguage": "fr-FR"
   };
@@ -384,7 +384,7 @@ export const createConciergerieDetailsStructuredData = async (
   // Construire un priceRange valide
   let priceRange = "Sur devis";
   if (formules.length > 0 && formules[0].commission && formules[0].commission > 0) {
-    priceRange = `À partir de ${formules[0].commission}% de commission`;
+    priceRange = `Ã€ partir de ${formules[0].commission}% de commission`;
   }
   
   const structuredData: any = {
@@ -392,7 +392,7 @@ export const createConciergerieDetailsStructuredData = async (
     "@type": "LocalBusiness",
     "@id": `${BASE_URL}/conciergerie-details/${createConciergerieSlug(conciergerie.nom)}`,
     "name": conciergerie.nom,
-    "description": `${conciergerie.nom} est une conciergerie spécialisée dans la gestion complète de locations Airbnb. Services incluant accueil voyageurs, ménage professionnel, maintenance, optimisation des revenus et gestion administrative complète.`,
+    "description": `${conciergerie.nom} est une conciergerie spÃ©cialisÃ©e dans la gestion complÃ¨te de locations Airbnb. Services incluant accueil voyageurs, mÃ©nage professionnel, maintenance, optimisation des revenus et gestion administrative complÃ¨te.`,
     "url": `${BASE_URL}/conciergerie-details/${createConciergerieSlug(conciergerie.nom)}`,
     "areaServed": areaServed,
     "serviceType": "Conciergerie Airbnb",
@@ -412,10 +412,10 @@ export const createConciergerieDetailsStructuredData = async (
     structuredData.telephone = conciergerie.telephoneContact;
   }
 
-  // Récupérer les vraies statistiques d'avis
+  // RÃ©cupÃ©rer les vraies statistiques d'avis
   const avisStats = await getAvisStatistics(conciergerie.id);
   
-  // Ajouter aggregateRating SEULEMENT si il y a de vrais avis validés
+  // Ajouter aggregateRating SEULEMENT si il y a de vrais avis validÃ©s
   if (avisStats && avisStats.reviewCount > 0) {
     structuredData.aggregateRating = {
       "@type": "AggregateRating",
@@ -433,7 +433,7 @@ export const createConciergerieDetailsStructuredData = async (
       "itemListElement": formules.map(formule => ({
         "@type": "Offer",
         "name": validateName(formule.nom, "Formule de conciergerie"),
-        "description": `Formule ${validateName(formule.nom, "standard")} - Commission ${formule.commission}%. Service complet de gestion Airbnb incluant tous les aspects opérationnels.`,
+        "description": `Formule ${validateName(formule.nom, "standard")} - Commission ${formule.commission}%. Service complet de gestion Airbnb incluant tous les aspects opÃ©rationnels.`,
         "price": formule.commission || 0,
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock"
@@ -449,7 +449,7 @@ export const createSimulatorStructuredData = () => {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Simulateur de revenus Airbnb",
-    "description": "Estimez gratuitement et immédiatement vos revenus potentiels sur Airbnb avec notre simulateur avancé. Comparaison avec et sans conciergerie, personnalisation selon votre bien.",
+    "description": "Estimez gratuitement et immÃ©diatement vos revenus potentiels sur Airbnb avec notre simulateur avancÃ©. Comparaison avec et sans conciergerie, personnalisation selon votre bien.",
     "url": `${BASE_URL}/simulateur-airbnb`,
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
@@ -460,15 +460,15 @@ export const createSimulatorStructuredData = () => {
       "priceCurrency": "EUR"
     },
     "featureList": [
-      "Estimation des revenus Airbnb personnalisée",
+      "Estimation des revenus Airbnb personnalisÃ©e",
       "Comparaison avec/sans conciergerie",
       "Personnalisation selon votre type de bien",
-      "Résultats instantanés et détaillés",
-      "Analyse de rentabilité complète"
+      "RÃ©sultats instantanÃ©s et dÃ©taillÃ©s",
+      "Analyse de rentabilitÃ© complÃ¨te"
     ],
     "audience": {
       "@type": "Audience",
-      "audienceType": "Propriétaires immobiliers et investisseurs"
+      "audienceType": "PropriÃ©taires immobiliers et investisseurs"
     },
     "inLanguage": "fr-FR"
   };
@@ -488,3 +488,4 @@ const createConciergerieSlug = (nom: string): string => {
     .replace(/-+/g, '-')
     .replace(/^-+|-+$/g, '');
 };
+

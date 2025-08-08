@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
@@ -31,17 +31,17 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
     if (isInFavorites) {
       removeFromFavorites(formule.id);
       toast({
-        title: "Retiré des favoris",
-        description: `${formule.nom} a été retiré de vos favoris`,
+        title: "RetirÃ© des favoris",
+        description: `${formule.nom} a Ã©tÃ© retirÃ© de vos favoris`,
       });
     } else {
       addToFavorites({ ...formule, conciergerie });
       toast({
-        title: "Ajouté aux favoris",
-        description: `${formule.nom} a été ajouté à vos favoris`,
+        title: "AjoutÃ© aux favoris",
+        description: `${formule.nom} a Ã©tÃ© ajoutÃ© Ã  vos favoris`,
       });
       
-      // Déclencher l'animation du cœur flottant sur mobile
+      // DÃ©clencher l'animation du cÅ“ur flottant sur mobile
       if (isMobile) {
         setShowFloatingHeart(true);
         setTimeout(() => setShowFloatingHeart(false), 2000);
@@ -67,7 +67,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
         />
       </Button>
       
-      {/* Animation du cœur flottant pour mobile */}
+      {/* Animation du cÅ“ur flottant pour mobile */}
       {showFloatingHeart && isMobile && (
         <div className="fixed inset-0 pointer-events-none z-50">
           <Heart 
@@ -86,3 +86,4 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 };
 
 export default FavoriteButton;
+

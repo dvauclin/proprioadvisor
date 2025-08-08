@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { ReactNode } from 'react'
 
 interface NextLinkProps {
@@ -49,3 +49,4 @@ export const NextLink: React.FC<NextLinkProps> = ({
     </Link>
   )
 } 
+

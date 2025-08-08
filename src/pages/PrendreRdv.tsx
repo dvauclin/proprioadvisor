@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect } from "react";
 import Head from "next/head";
@@ -58,7 +58,7 @@ const PrendreRdv = () => {
       <Head>
         <title>Prendre rendez-vous | Proprioadvisor</title>
         <meta name="description" content="Prenez rendez-vous avec notre équipe pour discuter de vos besoins en conciergerie Airbnb" />
-        <link rel="canonical" href={`${window.location.origin}/prendre-rdv`} />
+        <link rel="canonical" href="https://proprioadvisor.fr/prendre-rdv" />
       </Head>
       
       <div className="container mx-auto px-4">
@@ -90,3 +90,4 @@ const PrendreRdv = () => {
     </div>;
 };
 export default PrendreRdv;
+

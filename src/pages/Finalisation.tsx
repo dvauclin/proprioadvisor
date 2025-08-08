@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect } from "react";
 import Head from "next/head";
@@ -71,7 +71,7 @@ const Finalisation = () => {
             <h1 className="text-3xl font-bold mb-4">Merci pour votre inscription sur Proprioadvisor</h1>
             
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-left">
-              <p className="text-lg text-gray-700 leading-relaxed">Pour finaliser votre inscription, veuillez prendre rendez-vous pour une rapide discussion pour aborder le référencement de votre conciergerie sur Proprioadvisor. <strong>Sans cet échange, votre inscription ne pourra pas être confirmée.</strong></p>
+              <p className="text-lg text-gray-700 leading-relaxed">Pour finaliser votre inscription, veuillez prendre rendez-vous pour une rapide discussion pour aborder le rÃ©fÃ©rencement de votre conciergerie sur Proprioadvisor. <strong>Sans cet Ã©change, votre inscription ne pourra pas Ãªtre confirmÃ©e.</strong></p>
             </div>
           </div>
 
@@ -89,3 +89,4 @@ const Finalisation = () => {
     </div>;
 };
 export default Finalisation;
+

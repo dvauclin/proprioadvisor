@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Checkbox } from "@/components/ui-kit/checkbox";
@@ -53,11 +53,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         ))}
       </div>
       
-      {/* Services personnalisés */}
+      {/* Services personnalisÃ©s */}
       <div className="mt-4">
         <div className="flex flex-col sm:flex-row gap-2">
           <Input 
-            placeholder="Service personnalisé" 
+            placeholder="Service personnalisÃ©" 
             value={customService} 
             onChange={e => setCustomService(e.target.value)} 
             className="flex-1" 
@@ -76,7 +76,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         
         {customServices.length > 0 && (
           <div className="mt-2 space-y-2">
-            <p className="text-sm font-medium">Services personnalisés ajoutés</p>
+            <p className="text-sm font-medium">Services personnalisÃ©s ajoutÃ©s</p>
             <div className="flex flex-wrap gap-2">
               {customServices.map((service, index) => (
                 <div key={index} className="bg-gray-100 rounded-md px-3 py-1 text-sm flex items-center">
@@ -99,3 +99,4 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 };
 
 export default ServicesSection;
+

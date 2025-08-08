@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { Skeleton } from "@/components/ui-kit/skeleton";
 import { Card, CardContent, CardHeader } from "@/components/ui-kit/card";
@@ -39,3 +39,4 @@ const ConciergerieListSkeleton = () => {
 };
 
 export default ConciergerieListSkeleton;
+

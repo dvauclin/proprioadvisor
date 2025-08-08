@@ -1,4 +1,4 @@
-"use client";
+ï»¿"use client";
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -6,7 +6,7 @@ import { getAllConciergeries, getAllVilles } from "@/lib/data";
 import { Conciergerie, Ville, Formule, Filter } from "@/types";
 import { supabase } from "@/integrations/supabase/client";
 
-// Type étendu pour les formules avec conciergerie
+// Type Ã©tendu pour les formules avec conciergerie
 type FormuleWithConciergerie = Formule & { conciergerie?: Conciergerie };
 
 interface UseConciergerieListingLogicReturn {
@@ -100,7 +100,7 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
   const filteredFormules = formules.filter(formule => {
     // Filter by commission maximum
     if (formule.commission && filters.commissionMax && formule.commission > filters.commissionMax) {
-      console.log("? Formule filtrée par commission:", formule.nom, "commission:", formule.commission, "max:", filters.commissionMax);
+      console.log("? Formule filtrÃ©e par commission:", formule.nom, "commission:", formule.commission, "max:", filters.commissionMax);
       return false;
     }
     
@@ -108,15 +108,15 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     if (filters.typeBien) {
       const conciergerieType = formule.conciergerie?.typeLogementAccepte;
       if (conciergerieType !== 'tous' && conciergerieType !== filters.typeBien) {
-        console.log("? Formule filtrée par type de bien:", formule.nom, "type:", conciergerieType, "filtre:", filters.typeBien);
+        console.log("? Formule filtrÃ©e par type de bien:", formule.nom, "type:", conciergerieType, "filtre:", filters.typeBien);
         return false;
       }
     }
     
-    // Filter by accepte résidence principale
+    // Filter by accepte rÃ©sidence principale
     if (filters.accepteResidencePrincipale === true) {
       if (formule.conciergerie?.accepteResidencePrincipale !== true) {
-        console.log("? Formule filtrée par résidence principale:", formule.nom, "accepte:", formule.conciergerie?.accepteResidencePrincipale);
+        console.log("? Formule filtrÃ©e par rÃ©sidence principale:", formule.nom, "accepte:", formule.conciergerie?.accepteResidencePrincipale);
         return false;
       }
     }
@@ -124,27 +124,27 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     // Filter by accepte gestion partielle
     if (filters.accepteGestionPartielle === true) {
       if (formule.conciergerie?.accepteGestionPartielle !== true) {
-        console.log("? Formule filtrée par gestion partielle:", formule.nom, "accepte:", formule.conciergerie?.accepteGestionPartielle);
+        console.log("? Formule filtrÃ©e par gestion partielle:", formule.nom, "accepte:", formule.conciergerie?.accepteGestionPartielle);
         return false;
       }
     }
     
-    // Filter by durée de mise à disposition (doit être >= durée minimum d'engagement)
+    // Filter by durÃ©e de mise Ã  disposition (doit Ãªtre >= durÃ©e minimum d'engagement)
     if (filters.dureeGestionMin && filters.dureeGestionMin > 0) {
       if (formule.dureeGestionMin > filters.dureeGestionMin) {
-        console.log("? Formule filtrée par durée:", formule.nom, "durée min:", formule.dureeGestionMin, "filtre:", filters.dureeGestionMin);
+        console.log("? Formule filtrÃ©e par durÃ©e:", formule.nom, "durÃ©e min:", formule.dureeGestionMin, "filtre:", filters.dureeGestionMin);
         return false;
       }
     }
     
-    // Filter by services inclus (tous les services cochés doivent être proposés)
+    // Filter by services inclus (tous les services cochÃ©s doivent Ãªtre proposÃ©s)
     if (filters.servicesInclus && filters.servicesInclus.length > 0) {
       const formuleServices = formule.servicesInclus || [];
       const allServicesIncluded = filters.servicesInclus.every((service: string) => 
         formuleServices.includes(service)
       );
       if (!allServicesIncluded) {
-        console.log("? Formule filtrée par services:", formule.nom, "services:", formuleServices, "filtres:", filters.servicesInclus);
+        console.log("? Formule filtrÃ©e par services:", formule.nom, "services:", formuleServices, "filtres:", filters.servicesInclus);
         return false;
       }
     }
@@ -153,16 +153,16 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     if (filters.noteMin && filters.noteMin > 0) {
       const conciergerieScore = formule.conciergerie?.score || 0;
       if (conciergerieScore < filters.noteMin) {
-        console.log("? Formule filtrée par note:", formule.nom, "score:", conciergerieScore, "min:", filters.noteMin);
+        console.log("? Formule filtrÃ©e par note:", formule.nom, "score:", conciergerieScore, "min:", filters.noteMin);
         return false;
       }
     }
     
-    console.log("? Formule acceptée:", formule.nom);
+    console.log("? Formule acceptÃ©e:", formule.nom);
     return true;
   });
   
-  console.log("?? Formules après filtrage:", filteredFormules.length);
+  console.log("?? Formules aprÃ¨s filtrage:", filteredFormules.length);
 
   const handleFilterChange = (filter: string, value: any) => {
     setFilters(prev => ({ ...prev, [filter]: value }));
@@ -194,10 +194,10 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     setShowDevisModal(true);
   };
 
-  // Construire le breadcrumb avec ville mère si présente
+  // Construire le breadcrumb avec ville mÃ¨re si prÃ©sente
   const breadcrumbItems = [];
   
-  // Ajouter la ville mère si elle existe
+  // Ajouter la ville mÃ¨re si elle existe
   if (villeData?.villeMereId) {
     const villeMere = villesData?.find(v => v.id === villeData.villeMereId);
     if (villeMere) {
@@ -214,7 +214,7 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     href: `/conciergerie/${ville}` 
   });
 
-  // Obtenir les villes liées depuis Supabase
+  // Obtenir les villes liÃ©es depuis Supabase
   const linkedCitiesFromSupabase: Ville[] = [];
   if (villeData?.villesLiees && villeData.villesLiees.length > 0) {
     villeData.villesLiees.forEach(villeLieeId => {
@@ -225,14 +225,14 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     });
   }
 
-  // Utiliser la description de Supabase si disponible, sinon description par défaut
+  // Utiliser la description de Supabase si disponible, sinon description par dÃ©faut
   const pageDescription = villeData?.description 
     ? villeData.description
-    : `Découvrez les meilleures conciergeries Airbnb à ${villeData?.nom || ville}. Comparez les services, prix et avis pour choisir la conciergerie idéale.`;
+    : `DÃ©couvrez les meilleures conciergeries Airbnb Ã  ${villeData?.nom || ville}. Comparez les services, prix et avis pour choisir la conciergerie idÃ©ale.`;
 
   const emergencyMetaData = villeData ? null : {
-    title: `Conciergerie Airbnb à ${ville} - Proprioadvisor`,
-    description: `Trouvez la meilleure conciergerie Airbnb à ${ville}. Services personnalisés, prix compétitifs.`
+    title: `Conciergerie Airbnb Ã  ${ville} - Proprioadvisor`,
+    description: `Trouvez la meilleure conciergerie Airbnb Ã  ${ville}. Services personnalisÃ©s, prix compÃ©titifs.`
   };
 
   const getLastUpdateDate = () => {
@@ -242,7 +242,7 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     return lastUpdate.toLocaleDateString('fr-FR');
   };
 
-  // Récupérer les subscriptions avec React Query (SANS DISCRIMINATION)
+  // RÃ©cupÃ©rer les subscriptions avec React Query (SANS DISCRIMINATION)
   const { data: subscriptionsData } = useQuery({
     queryKey: ['subscriptions'],
     queryFn: async () => {
@@ -257,7 +257,7 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
   
-  // Créer la Map des subscriptions
+  // CrÃ©er la Map des subscriptions
   const subscriptionsMap = new Map();
   if (subscriptionsData) {
     subscriptionsData.forEach((subscription: any) => {
@@ -295,5 +295,6 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
 
 export { useConciergerieListingLogic };
 export default useConciergerieListingLogic;
+
 
 

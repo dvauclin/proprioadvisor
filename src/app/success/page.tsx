@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
+import React, { Suspense } from 'react'
 import SubscriptionSuccess from '@/pages/SubscriptionSuccess'
+
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ searchParams }: { searchParams: { updated?: string } }): Promise<Metadata> {
   const isUpdate = searchParams.updated === 'true';
@@ -24,5 +27,10 @@ export async function generateMetadata({ searchParams }: { searchParams: { updat
 }
 
 export default function SuccessPage() {
-  return <SubscriptionSuccess />
+  return (
+    <Suspense fallback={null}>
+      <SubscriptionSuccess />
+    </Suspense>
+  )
 } 
+

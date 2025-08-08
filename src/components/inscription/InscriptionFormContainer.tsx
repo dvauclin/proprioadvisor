@@ -1,4 +1,4 @@
-
+﻿
 import React, { ReactNode } from "react";
 
 interface InscriptionFormContainerProps {
@@ -14,3 +14,4 @@ const InscriptionFormContainer: React.FC<InscriptionFormContainerProps> = ({ chi
 };
 
 export default InscriptionFormContainer;
+

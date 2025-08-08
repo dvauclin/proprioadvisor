@@ -1,4 +1,4 @@
-
+﻿
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
@@ -31,8 +31,8 @@ const ScoreFieldSection: React.FC<ScoreFieldSectionProps> = ({ form }) => {
                   value={field.value ?? ''}
                   onChange={(e) => {
                     const value = parseInt(e.target.value, 10);
-                    // Si le parsage résulte en NaN (ex: pour un champ vide ou invalide),
-                    // on met la valeur du champ à null. Sinon, on utilise le nombre parsé.
+                    // Si le parsage rÃ©sulte en NaN (ex: pour un champ vide ou invalide),
+                    // on met la valeur du champ Ã  null. Sinon, on utilise le nombre parsÃ©.
                     field.onChange(isNaN(value) ? null : value);
                   }}
                   placeholder="Laisser vide pour un calcul automatique"
@@ -48,3 +48,4 @@ const ScoreFieldSection: React.FC<ScoreFieldSectionProps> = ({ form }) => {
 };
 
 export default ScoreFieldSection;
+

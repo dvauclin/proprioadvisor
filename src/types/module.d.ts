@@ -1,4 +1,4 @@
-// Types pour les modules
+﻿// Types pour les modules
 
 declare module '*.module.css' {
   const classes: { [key: string]: string }
@@ -24,3 +24,4 @@ declare module '*.module.styl' {
   const classes: { [key: string]: string }
   export default classes
 } 
+

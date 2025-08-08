@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -18,8 +18,8 @@ const CityPopulator: React.FC<CityPopulatorProps> = ({ onCitiesAdded }) => {
       
       if (result.success) {
         toast({
-          title: "Succès",
-          description: "Les villes ont été ajoutées avec succès !",
+          title: "SuccÃ¨s",
+          description: "Les villes ont Ã©tÃ© ajoutÃ©es avec succÃ¨s !",
         });
         
         // Call the callback function with the count of newly added cities
@@ -34,7 +34,7 @@ const CityPopulator: React.FC<CityPopulatorProps> = ({ onCitiesAdded }) => {
         });
       }
     } catch (error) {
-      console.error("Erreur lors de l'exécution du script :", error);
+      console.error("Erreur lors de l'exÃ©cution du script :", error);
       toast({
         title: "Erreur",
         description: "Une erreur est survenue lors de l'ajout des villes",
@@ -49,7 +49,7 @@ const CityPopulator: React.FC<CityPopulatorProps> = ({ onCitiesAdded }) => {
     <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
       <h2 className="text-xl font-semibold mb-4">Importer les villes</h2>
       <p className="mb-4 text-gray-600">
-        Cliquez sur le bouton ci-dessous pour ajouter les 29 villes prédéfinies à la base de données.
+        Cliquez sur le bouton ci-dessous pour ajouter les 29 villes prÃ©dÃ©finies Ã  la base de donnÃ©es.
       </p>
       <Button 
         onClick={handleAddCities} 
@@ -70,3 +70,4 @@ const CityPopulator: React.FC<CityPopulatorProps> = ({ onCitiesAdded }) => {
 };
 
 export default CityPopulator;
+

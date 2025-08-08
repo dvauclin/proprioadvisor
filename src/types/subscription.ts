@@ -1,4 +1,4 @@
-
+﻿
 export interface SubscriptionFormValues {
   options: {
     basicListing: boolean;
@@ -15,3 +15,4 @@ export interface SubscriptionFormValues {
   password: string;
   confirmPassword: string;
 }
+

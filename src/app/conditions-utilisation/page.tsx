@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import ConditionsUtilisation from '@/pages/ConditionsUtilisation'
 
 export const metadata: Metadata = {
@@ -18,3 +18,4 @@ export const metadata: Metadata = {
 export default function ConditionsUtilisationPage() {
   return <ConditionsUtilisation />
 } 
+

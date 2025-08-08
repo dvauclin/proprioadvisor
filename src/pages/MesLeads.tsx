@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { getLeads, markLeadAsViewed } from '@/services/leadService';
 import { Loader2, Calendar, MapPin, Phone, Mail, User, Home, MessageSquare, Eye } from 'lucide-react';
@@ -27,8 +27,8 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
     mutationFn: markLeadAsViewed,
     onSuccess: () => {
       refetch();
-      toast.success("Lead marqué comme vu", {
-        description: "Votre réactivité contribue à améliorer votre visibilité !"
+      toast.success("Lead marquÃ© comme vu", {
+        description: "Votre rÃ©activitÃ© contribue Ã  amÃ©liorer votre visibilitÃ© !"
       });
     },
     onError: (error: any) => {
@@ -75,7 +75,7 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
           <CardHeader>
             <CardTitle>Mes Leads</CardTitle>
             <CardDescription>
-              Aucun lead reçu pour le moment.
+              Aucun lead reÃ§u pour le moment.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -102,9 +102,9 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
       case 'moins3mois':
         return 'Moins de 3 mois';
       case '3a6mois':
-        return '3 à 6 mois';
+        return '3 Ã  6 mois';
       case '6a12mois':
-        return '6 à 12 mois';
+        return '6 Ã  12 mois';
       case 'plus1an':
         return 'Plus d\'1 an';
       default:
@@ -118,11 +118,11 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Mes Leads</h1>
           <p className="text-muted-foreground mt-2">
-            {leads.length} lead{leads.length > 1 ? 's' : ''} reçu{leads.length > 1 ? 's' : ''}
+            {leads.length} lead{leads.length > 1 ? 's' : ''} reÃ§u{leads.length > 1 ? 's' : ''}
           </p>
           <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-blue-800 text-base">
-              💡 <strong>Astuce :</strong> Marquez vos leads comme "vus" le plus rapidement possible pour faire partie des conciergeries les plus réactives et obtenir un boost de visibilité !
+              ðŸ’¡ <strong>Astuce :</strong> Marquez vos leads comme "vus" le plus rapidement possible pour faire partie des conciergeries les plus rÃ©actives et obtenir un boost de visibilitÃ© !
             </p>
           </div>
         </div>
@@ -147,7 +147,7 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
                   
                   <CardDescription className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
-                    Reçu le {lead.date ? formatDate(lead.date) : 'Date inconnue'}
+                    ReÃ§u le {lead.date ? formatDate(lead.date) : 'Date inconnue'}
                   </CardDescription>
                   
                   <div className="pt-2">
@@ -181,7 +181,7 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
                     </CardTitle>
                     <CardDescription className="flex items-center gap-2 mt-1">
                       <Calendar className="h-4 w-4" />
-                      Reçu le {lead.date ? formatDate(lead.date) : 'Date inconnue'}
+                      ReÃ§u le {lead.date ? formatDate(lead.date) : 'Date inconnue'}
                     </CardDescription>
                   </div>
                   <div className="flex items-center gap-2">
@@ -231,7 +231,7 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
                   {lead.residencePrincipale && (
                     <div className="flex items-center gap-2">
                       <Home className="h-4 w-4 text-muted-foreground" />
-                      <span>Résidence principale</span>
+                      <span>RÃ©sidence principale</span>
                     </div>
                   )}
                 </div>
@@ -242,11 +242,11 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
                   <span>{lead.adresse}, {lead.ville}</span>
                 </div>
 
-                {/* Propriétés du bien */}
+                {/* PropriÃ©tÃ©s du bien */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div>
                     <span className="text-sm text-muted-foreground">Surface</span>
-                    <div className="font-medium">{lead.superficie} m²</div>
+                    <div className="font-medium">{lead.superficie} mÂ²</div>
                   </div>
                   <div>
                     <span className="text-sm text-muted-foreground">Chambres</span>
@@ -257,15 +257,15 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
                     <div className="font-medium">{getTypeLogementLabel(lead.typeBien)}</div>
                   </div>
                   <div>
-                    <span className="text-sm text-muted-foreground">Durée</span>
+                    <span className="text-sm text-muted-foreground">DurÃ©e</span>
                     <div className="font-medium">{getDureeLabel(lead.dureeEspacementDisposition)}</div>
                   </div>
                 </div>
 
-                {/* Services recherchés */}
+                {/* Services recherchÃ©s */}
                 {lead.prestationsRecherchees && lead.prestationsRecherchees.length > 0 && (
                   <div>
-                    <span className="text-sm text-muted-foreground">Services recherchés</span>
+                    <span className="text-sm text-muted-foreground">Services recherchÃ©s</span>
                     <div className="flex flex-wrap gap-2 mt-1">
                       {lead.prestationsRecherchees.map((service, index) => (
                         <Badge key={index} variant="outline">
@@ -293,3 +293,4 @@ const MesLeads: React.FC<MesLeadsProps> = ({ user, authLoading = false }) => {
 };
 
 export default MesLeads;
+

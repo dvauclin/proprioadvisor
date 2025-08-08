@@ -1,4 +1,4 @@
-import {
+﻿import {
   getVilleBySlug,
   getFormulesByVilleId,
   filterFormules,
@@ -35,8 +35,8 @@ export {
 
 // New function to get all conciergeries with their formules
 export const getAllConciergeries = async (): Promise<Conciergerie[]> => {
-  console.log("🔍 getAllConciergeries: Starting Supabase query...");
-  console.log("🔍 getAllConciergeries: Using supabase client:", typeof supabase);
+  console.log("ðŸ” getAllConciergeries: Starting Supabase query...");
+  console.log("ðŸ” getAllConciergeries: Using supabase client:", typeof supabase);
   
   const { data, error } = await supabase
     .from('conciergeries')
@@ -57,7 +57,7 @@ export const getAllConciergeries = async (): Promise<Conciergerie[]> => {
       )
     `);
 
-  console.log("🔍 getAllConciergeries: Supabase response:", { 
+  console.log("ðŸ” getAllConciergeries: Supabase response:", { 
     data: data ? `${data.length} records` : 'null', 
     error: error ? error.message : 'null',
     hasData: !!data,
@@ -65,24 +65,24 @@ export const getAllConciergeries = async (): Promise<Conciergerie[]> => {
   });
 
   if (error) {
-    console.error("❌ getAllConciergeries: Error fetching conciergeries:", error);
+    console.error("âŒ getAllConciergeries: Error fetching conciergeries:", error);
     throw error;
   }
   
   if (!data) {
-    console.log("⚠️ getAllConciergeries: No data returned");
+    console.log("âš ï¸ getAllConciergeries: No data returned");
     return [];
   }
 
-  console.log("✅ getAllConciergeries: Successfully fetched", data.length, "conciergeries");
-  console.log("✅ getAllConciergeries: First record sample:", data[0]);
-  console.log("✅ getAllConciergeries: First record subscriptions:", data[0]?.subscriptions);
+  console.log("âœ… getAllConciergeries: Successfully fetched", data.length, "conciergeries");
+  console.log("âœ… getAllConciergeries: First record sample:", data[0]);
+  console.log("âœ… getAllConciergeries: First record subscriptions:", data[0]?.subscriptions);
   
-  // 🔍 DIAGNOSTIC: Log Aurora Conciergerie specifically
+  // ðŸ” DIAGNOSTIC: Log Aurora Conciergerie specifically
   const auroraConciergerie = data.find(c => c.nom?.toLowerCase().includes('aurora'));
   if (auroraConciergerie) {
     const latestSubscription = auroraConciergerie.subscriptions?.[0];
-    console.log("🌟 FOUND Aurora Conciergerie:", {
+    console.log("ðŸŒŸ FOUND Aurora Conciergerie:", {
       nom: auroraConciergerie.nom,
       scoreManuel: auroraConciergerie.score_manuel,
       totalPoints: latestSubscription?.total_points,
@@ -92,14 +92,14 @@ export const getAllConciergeries = async (): Promise<Conciergerie[]> => {
       formules: auroraConciergerie.formules?.length || 0
     });
   } else {
-    console.log("❌ Aurora Conciergerie NOT FOUND in data");
+    console.log("âŒ Aurora Conciergerie NOT FOUND in data");
   }
   
   const transformedData = data.map(transformConciergerieFromDB);
-  console.log("✅ getAllConciergeries: Transformed data count:", transformedData.length);
+  console.log("âœ… getAllConciergeries: Transformed data count:", transformedData.length);
   
-  // 🔍 DIAGNOSTIC: Log all conciergeries with effective scores
-  console.log("🔍 ALL CONCIERGERIES EFFECTIVE SCORES:");
+  // ðŸ” DIAGNOSTIC: Log all conciergeries with effective scores
+  console.log("ðŸ” ALL CONCIERGERIES EFFECTIVE SCORES:");
   transformedData.forEach(c => {
     const effectiveScore = c.scoreManuel ?? 0;
     console.log(`  - ${c.nom}: effectiveScore=${effectiveScore} (scoreManuel=${c.scoreManuel}), createdAt=${c.createdAt}`);
@@ -114,9 +114,9 @@ export const villes: Ville[] = [
   {
     id: "paris",
     nom: "Paris",
-    description: "La capitale française, connue pour ses monuments emblématiques.",
-    descriptionLongue: "Paris, la ville lumière, capitale de la France et l'une des destinations touristiques les plus visitées au monde.",
-    titleSeo: "Meilleures conciergeries Airbnb à Paris | ProprioAdvisor",
+    description: "La capitale franÃ§aise, connue pour ses monuments emblÃ©matiques.",
+    descriptionLongue: "Paris, la ville lumiÃ¨re, capitale de la France et l'une des destinations touristiques les plus visitÃ©es au monde.",
+    titleSeo: "Meilleures conciergeries Airbnb Ã  Paris | ProprioAdvisor",
     slug: "paris",
     latitude: 48.8566,
     longitude: 2.3522,
@@ -126,8 +126,8 @@ export const villes: Ville[] = [
     id: "lyon",
     nom: "Lyon",
     description: "Capitale gastronomique de la France avec un riche patrimoine historique.",
-    descriptionLongue: "Lyon, troisième ville de France, reconnue pour sa gastronomie exceptionnelle et son patrimoine architectural Renaissance.",
-    titleSeo: "Meilleures conciergeries Airbnb à Lyon | ProprioAdvisor",
+    descriptionLongue: "Lyon, troisiÃ¨me ville de France, reconnue pour sa gastronomie exceptionnelle et son patrimoine architectural Renaissance.",
+    titleSeo: "Meilleures conciergeries Airbnb Ã  Lyon | ProprioAdvisor",
     slug: "lyon",
     latitude: 45.7640,
     longitude: 4.8357,
@@ -137,8 +137,8 @@ export const villes: Ville[] = [
     id: "marseille",
     nom: "Marseille",
     description: "Plus ancienne ville de France et principal port maritime du pays.",
-    descriptionLongue: "Marseille, cité phocéenne fondée en 600 av. J.-C., plus ancienne ville de France et grande métropole méditerranéenne.",
-    titleSeo: "Meilleures conciergeries Airbnb à Marseille | ProprioAdvisor",
+    descriptionLongue: "Marseille, citÃ© phocÃ©enne fondÃ©e en 600 av. J.-C., plus ancienne ville de France et grande mÃ©tropole mÃ©diterranÃ©enne.",
+    titleSeo: "Meilleures conciergeries Airbnb Ã  Marseille | ProprioAdvisor",
     slug: "marseille",
     latitude: 43.2965,
     longitude: 5.3698,
@@ -147,9 +147,9 @@ export const villes: Ville[] = [
   {
     id: "nice",
     nom: "Nice",
-    description: "Ville de la Côte d'Azur connue pour sa Promenade des Anglais.",
-    descriptionLongue: "Nice, perle de la Côte d'Azur, célèbre pour sa Promenade des Anglais et son climat méditerranéen exceptionnel.",
-    titleSeo: "Meilleures conciergeries Airbnb à Nice | ProprioAdvisor",
+    description: "Ville de la CÃ´te d'Azur connue pour sa Promenade des Anglais.",
+    descriptionLongue: "Nice, perle de la CÃ´te d'Azur, cÃ©lÃ¨bre pour sa Promenade des Anglais et son climat mÃ©diterranÃ©en exceptionnel.",
+    titleSeo: "Meilleures conciergeries Airbnb Ã  Nice | ProprioAdvisor",
     slug: "nice",
     latitude: 43.7102,
     longitude: 7.2620,
@@ -158,9 +158,9 @@ export const villes: Ville[] = [
   {
     id: "bordeaux",
     nom: "Bordeaux",
-    description: "Ville du sud-ouest de la France réputée pour son vin et son patrimoine architectural.",
+    description: "Ville du sud-ouest de la France rÃ©putÃ©e pour son vin et son patrimoine architectural.",
     descriptionLongue: "Bordeaux, capitale mondiale du vin, inscrite au patrimoine mondial de l'UNESCO pour son ensemble urbain exceptionnel.",
-    titleSeo: "Meilleures conciergeries Airbnb à Bordeaux | ProprioAdvisor",
+    titleSeo: "Meilleures conciergeries Airbnb Ã  Bordeaux | ProprioAdvisor",
     slug: "bordeaux",
     latitude: 44.8378,
     longitude: -0.5792,
@@ -238,7 +238,7 @@ export const conciergeries: Conciergerie[] = [
     validated: true,
     villeId: "lyon",
     villesIds: ["lyon", "marseille", "bordeaux"],
-    zoneCouverte: "Toute la ville sauf périphérie",
+    zoneCouverte: "Toute la ville sauf pÃ©riphÃ©rie",
     score: 7
   },
   {
@@ -268,7 +268,7 @@ export const formules: Formule[] = [
     conciergerieId: "luxhome",
     commission: 18,
     dureeGestionMin: 6,
-    servicesInclus: ["ménage", "blanchisserie", "checkin", "gestion-annonce", "conciergerie-24-7"],
+    servicesInclus: ["mÃ©nage", "blanchisserie", "checkin", "gestion-annonce", "conciergerie-24-7"],
     fraisMenageHeure: 35,
     fraisDemarrage: 250,
     abonnementMensuel: 0,
@@ -285,7 +285,7 @@ export const formules: Formule[] = [
     conciergerieId: "easystay",
     commission: 15,
     dureeGestionMin: 3,
-    servicesInclus: ["ménage", "checkin", "gestion-annonce"],
+    servicesInclus: ["mÃ©nage", "checkin", "gestion-annonce"],
     fraisMenageHeure: 25,
     fraisDemarrage: 120,
     abonnementMensuel: 0,
@@ -302,7 +302,7 @@ export const formules: Formule[] = [
     conciergerieId: "vipbnb",
     commission: 20,
     dureeGestionMin: 12,
-    servicesInclus: ["ménage", "blanchisserie", "checkin", "gestion-annonce", "conciergerie-24-7", "chef-privé"],
+    servicesInclus: ["mÃ©nage", "blanchisserie", "checkin", "gestion-annonce", "conciergerie-24-7", "chef-privÃ©"],
     fraisMenageHeure: 40,
     fraisDemarrage: 500,
     abonnementMensuel: 0,
@@ -319,7 +319,7 @@ export const formules: Formule[] = [
     conciergerieId: "smarthost",
     commission: 12,
     dureeGestionMin: 1,
-    servicesInclus: ["ménage", "checkin", "gestion-annonce"],
+    servicesInclus: ["mÃ©nage", "checkin", "gestion-annonce"],
     fraisMenageHeure: 20,
     fraisDemarrage: 80,
     abonnementMensuel: 40,
@@ -336,7 +336,7 @@ export const formules: Formule[] = [
     conciergerieId: "smarthost",
     commission: 15,
     dureeGestionMin: 3,
-    servicesInclus: ["ménage", "blanchisserie", "checkin", "gestion-annonce"],
+    servicesInclus: ["mÃ©nage", "blanchisserie", "checkin", "gestion-annonce"],
     fraisMenageHeure: 25,
     fraisDemarrage: 150,
     abonnementMensuel: 0,
@@ -362,16 +362,16 @@ export const articles: Article[] = [
   {
     id: "1",
     titre: "Comment maximiser vos revenus Airbnb avec une conciergerie ?",
-    contenu: "<p>Dans cet article, nous expliquons comment une conciergerie peut vous aider à optimiser votre rentabilité sur Airbnb...</p>",
+    contenu: "<p>Dans cet article, nous expliquons comment une conciergerie peut vous aider Ã  optimiser votre rentabilitÃ© sur Airbnb...</p>",
     image: "/placeholder.svg",
     datePublication: "2025-03-15",
     slug: "maximiser-revenus-airbnb-conciergerie",
-    excerpt: "Découvrez comment augmenter significativement vos revenus locatifs grâce aux services d'une conciergerie professionnelle."
+    excerpt: "DÃ©couvrez comment augmenter significativement vos revenus locatifs grÃ¢ce aux services d'une conciergerie professionnelle."
   },
   {
     id: "2",
     titre: "Les 10 services essentiels qu'une bonne conciergerie doit offrir",
-    contenu: "<p>Quels sont les services indispensables à exiger de votre conciergerie Airbnb ?</p>",
+    contenu: "<p>Quels sont les services indispensables Ã  exiger de votre conciergerie Airbnb ?</p>",
     image: "/placeholder.svg",
     datePublication: "2025-02-28",
     slug: "10-services-essentiels-conciergerie",
@@ -379,37 +379,37 @@ export const articles: Article[] = [
   },
   {
     id: "3",
-    titre: "Comment calculer la rentabilité réelle de votre bien en location courte durée",
-    contenu: "<p>Apprenez à calculer précisément vos marges après frais de conciergerie...</p>",
+    titre: "Comment calculer la rentabilitÃ© rÃ©elle de votre bien en location courte durÃ©e",
+    contenu: "<p>Apprenez Ã  calculer prÃ©cisÃ©ment vos marges aprÃ¨s frais de conciergerie...</p>",
     image: "/placeholder.svg",
     datePublication: "2025-02-10",
     slug: "calculer-rentabilite-location-courte-duree",
-    excerpt: "Tous les détails pour comprendre votre rentabilité après commission, frais de ménage et autres dépenses."
+    excerpt: "Tous les dÃ©tails pour comprendre votre rentabilitÃ© aprÃ¨s commission, frais de mÃ©nage et autres dÃ©penses."
   },
   {
     id: "4",
-    titre: "Comparatif : gestion par soi-même vs conciergerie",
-    contenu: "<p>Faut-il gérer son bien soi-même ou passer par une conciergerie ? Analyse détaillée...</p>",
+    titre: "Comparatif : gestion par soi-mÃªme vs conciergerie",
+    contenu: "<p>Faut-il gÃ©rer son bien soi-mÃªme ou passer par une conciergerie ? Analyse dÃ©taillÃ©e...</p>",
     image: "/placeholder.svg",
     datePublication: "2025-01-22",
     slug: "comparatif-gestion-seul-vs-conciergerie",
-    excerpt: "Autogestion ou conciergerie ? Notre analyse complète pour faire le bon choix selon votre situation."
+    excerpt: "Autogestion ou conciergerie ? Notre analyse complÃ¨te pour faire le bon choix selon votre situation."
   },
   {
     id: "5",
-    titre: "Les nouvelles réglementations pour la location courte durée en 2025",
-    contenu: "<p>Tout ce que vous devez savoir sur les changements légaux concernant la location de courte durée...</p>",
+    titre: "Les nouvelles rÃ©glementations pour la location courte durÃ©e en 2025",
+    contenu: "<p>Tout ce que vous devez savoir sur les changements lÃ©gaux concernant la location de courte durÃ©e...</p>",
     image: "/placeholder.svg",
     datePublication: "2025-01-05",
     slug: "nouvelles-reglementations-location-courte-duree-2025",
-    excerpt: "Restez conforme avec les nouvelles réglementations qui encadrent la location courte durée en France."
+    excerpt: "Restez conforme avec les nouvelles rÃ©glementations qui encadrent la location courte durÃ©e en France."
   }
 ];
 
 export const leads: Lead[] = [
   {
     id: "1",
-    prestationsRecherchees: ["ménage", "checkin", "gestion-annonce"],
+    prestationsRecherchees: ["mÃ©nage", "checkin", "gestion-annonce"],
     dureeEspacementDisposition: "6a12mois",
     superficie: 65,
     nombreChambres: 2,
@@ -424,7 +424,7 @@ export const leads: Lead[] = [
   },
   {
     id: "2",
-    prestationsRecherchees: ["ménage", "checkin", "gestion-annonce", "conciergerie-24-7"],
+    prestationsRecherchees: ["mÃ©nage", "checkin", "gestion-annonce", "conciergerie-24-7"],
     dureeEspacementDisposition: "plus1an",
     superficie: 120,
     nombreChambres: 3,
@@ -438,12 +438,12 @@ export const leads: Lead[] = [
   },
   {
     id: "3",
-    prestationsRecherchees: ["ménage", "gestion-annonce"],
+    prestationsRecherchees: ["mÃ©nage", "gestion-annonce"],
     dureeEspacementDisposition: "3a6mois",
     superficie: 45,
     nombreChambres: 1,
     typeBien: "standard",
-    adresse: "15 rue de la République",
+    adresse: "15 rue de la RÃ©publique",
     ville: "Lyon",
     nom: "Marie Dupont",
     telephone: "0634567890",
@@ -452,3 +452,4 @@ export const leads: Lead[] = [
     date: "2025-03-27"
   }
 ];
+

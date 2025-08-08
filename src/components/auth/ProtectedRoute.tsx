@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -54,7 +54,7 @@ const AdminLoginForm = () => {
             Administration
           </h2>
           <p className="mt-2 text-gray-600">
-            Connectez-vous pour accéder au panneau d'administration
+            Connectez-vous pour accÃ©der au panneau d'administration
           </p>
         </div>
 
@@ -62,7 +62,7 @@ const AdminLoginForm = () => {
           <CardHeader>
             <CardTitle>Connexion administrateur</CardTitle>
             <CardDescription>
-              Saisissez vos identifiants pour accéder à l'administration
+              Saisissez vos identifiants pour accÃ©der Ã  l'administration
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -86,7 +86,7 @@ const AdminLoginForm = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  placeholder="••••••••"
+                  placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                 />
               </div>
               <Button type="submit" className="w-full" disabled={isLoading}>
@@ -147,10 +147,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-900">
-              Accès refusé
+              AccÃ¨s refusÃ©
             </h2>
             <p className="mt-2 text-gray-600">
-              Vous n'avez pas les permissions nécessaires pour accéder à cette page
+              Vous n'avez pas les permissions nÃ©cessaires pour accÃ©der Ã  cette page
             </p>
           </div>
 
@@ -158,18 +158,18 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
             <CardHeader>
               <CardTitle>Permissions insuffisantes</CardTitle>
               <CardDescription>
-                Cette page nécessite des droits d'administrateur
+                Cette page nÃ©cessite des droits d'administrateur
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <Alert>
                   <AlertDescription>
-                    Vous êtes connecté en tant que <strong>{user.email}</strong> mais vous n'avez pas les droits d'administrateur.
+                    Vous Ãªtes connectÃ© en tant que <strong>{user.email}</strong> mais vous n'avez pas les droits d'administrateur.
                   </AlertDescription>
                 </Alert>
                 <Button onClick={() => router.push('/')} className="w-full">
-                  Retour à l'accueil
+                  Retour Ã  l'accueil
                 </Button>
               </div>
             </CardContent>
@@ -183,3 +183,4 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 };
 
 export default ProtectedRoute;
+

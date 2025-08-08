@@ -1,8 +1,8 @@
-
+﻿
 import React from "react";
 import { Formule, Conciergerie } from "@/types";
 
-// Type étendu pour les formules avec conciergerie
+// Type Ã©tendu pour les formules avec conciergerie
 type FormuleWithConciergerie = Formule & { conciergerie?: Conciergerie };
 
 import ConciergerieList from "@/components/conciergerie/ConciergerieList";
@@ -31,7 +31,7 @@ const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
     <div className="container mx-auto px-4">
       {!formulesLoading && ville && (
         <div className="text-sm text-gray-600 mb-4">
-          <strong>{filteredFormules.length}</strong> formule{filteredFormules.length > 1 ? 's' : ''} affichée{filteredFormules.length > 1 ? 's' : ''} sur <strong>{formules.length}</strong>
+          <strong>{filteredFormules.length}</strong> formule{filteredFormules.length > 1 ? 's' : ''} affichÃ©e{filteredFormules.length > 1 ? 's' : ''} sur <strong>{formules.length}</strong>
         </div>
       )}
 
@@ -54,3 +54,4 @@ const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
 };
 
 export default ConciergerieListingContent;
+

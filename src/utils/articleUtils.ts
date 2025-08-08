@@ -1,4 +1,4 @@
-
+﻿
 // Helper function to ensure image URLs are correct
 export const getValidImageUrl = (url: string | null) => {
   if (!url) return null;
@@ -11,3 +11,4 @@ export const getValidImageUrl = (url: string | null) => {
   
   return url;
 };
+

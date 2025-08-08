@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,7 +21,7 @@ import VillesManager from "@/components/admin/VillesManager";
 import CityPopulator from "@/components/admin/CityPopulator";
 import SubscriptionLinkGenerator from "@/components/admin/SubscriptionLinkGenerator";
 import LeadDetailsDialog from "@/components/admin/LeadDetailsDialog";
-import StarRating from "@/components/ui-kit/StarRating";
+import StarRating from "@/components/ui-kit/star-rating";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui-kit/table";
 const Admin = () => {
   const {
@@ -88,7 +88,7 @@ const Admin = () => {
                   error: downloadError
                 } = await supabase.storage.from('conciergerie-logos').download(file.name);
                 if (downloadError) {
-                  errors.push(`Erreur lors du téléchargement de ${file.name}: ${downloadError.message}`);
+                  errors.push(`Erreur lors du tÃ©lÃ©chargement de ${file.name}: ${downloadError.message}`);
                   continue;
                 }
 
@@ -114,7 +114,7 @@ const Admin = () => {
                 movedFromLogosToImages++;
                 console.log(`Moved ${file.name} from conciergerie-logos to images`);
               } catch (error) {
-                errors.push(`Erreur inattendue lors du déplacement de ${file.name}: ${error}`);
+                errors.push(`Erreur inattendue lors du dÃ©placement de ${file.name}: ${error}`);
               }
             }
           }
@@ -131,7 +131,7 @@ const Admin = () => {
                   error: downloadError
                 } = await supabase.storage.from('images').download(file.name);
                 if (downloadError) {
-                  errors.push(`Erreur lors du téléchargement de ${file.name}: ${downloadError.message}`);
+                  errors.push(`Erreur lors du tÃ©lÃ©chargement de ${file.name}: ${downloadError.message}`);
                   continue;
                 }
 
@@ -161,7 +161,7 @@ const Admin = () => {
                 movedFromImagesToLogos++;
                 console.log(`Moved ${file.name} from images to conciergerie-logos as ${cleanFileName}`);
               } catch (error) {
-                errors.push(`Erreur inattendue lors du déplacement de ${file.name}: ${error}`);
+                errors.push(`Erreur inattendue lors du dÃ©placement de ${file.name}: ${error}`);
               }
             }
           }
@@ -170,13 +170,13 @@ const Admin = () => {
           const totalMoved = movedFromLogosToImages + movedFromImagesToLogos;
           if (errors.length === 0) {
             toast({
-              title: "Migration automatique terminée",
-              description: `${totalMoved} fichiers déplacés avec succès`
+              title: "Migration automatique terminÃ©e",
+              description: `${totalMoved} fichiers dÃ©placÃ©s avec succÃ¨s`
             });
           } else {
             toast({
-              title: "Migration automatique terminée avec des erreurs",
-              description: `${totalMoved} fichiers déplacés, ${errors.length} erreurs`,
+              title: "Migration automatique terminÃ©e avec des erreurs",
+              description: `${totalMoved} fichiers dÃ©placÃ©s, ${errors.length} erreurs`,
               variant: "destructive"
             });
           }
@@ -279,8 +279,8 @@ const Admin = () => {
         queryKey: ["validated-conciergeries"]
       });
       toast({
-        title: "Conciergerie validée",
-        description: "La conciergerie a été validée avec succès"
+        title: "Conciergerie validÃ©e",
+        description: "La conciergerie a Ã©tÃ© validÃ©e avec succÃ¨s"
       });
     },
     onError: (error: any) => {
@@ -298,8 +298,8 @@ const Admin = () => {
         queryKey: ["conciergeries-to-validate"]
       });
       toast({
-        title: "Conciergerie rejetée",
-        description: "La conciergerie a été rejetée"
+        title: "Conciergerie rejetÃ©e",
+        description: "La conciergerie a Ã©tÃ© rejetÃ©e"
       });
     },
     onError: (error: any) => {
@@ -323,8 +323,8 @@ const Admin = () => {
       setEditingConciergerie(undefined);
       setEditingFormules([]);
       toast({
-        title: "Conciergerie sauvegardée",
-        description: "Les modifications ont été enregistrées avec succès"
+        title: "Conciergerie sauvegardÃ©e",
+        description: "Les modifications ont Ã©tÃ© enregistrÃ©es avec succÃ¨s"
       });
     },
     onError: (error: any) => {
@@ -342,8 +342,8 @@ const Admin = () => {
         queryKey: ["validated-conciergeries"]
       });
       toast({
-        title: "Conciergerie supprimée",
-        description: "La conciergerie et ses données associées ont été supprimées avec succès"
+        title: "Conciergerie supprimÃ©e",
+        description: "La conciergerie et ses donnÃ©es associÃ©es ont Ã©tÃ© supprimÃ©es avec succÃ¨s"
       });
     },
     onError: (error: any) => {
@@ -368,8 +368,8 @@ const Admin = () => {
         queryKey: ["avis"]
       });
       toast({
-        title: "Avis validé",
-        description: "L'avis a été validé avec succès"
+        title: "Avis validÃ©",
+        description: "L'avis a Ã©tÃ© validÃ© avec succÃ¨s"
       });
     },
     onError: (error: any) => {
@@ -392,8 +392,8 @@ const Admin = () => {
         queryKey: ["avis"]
       });
       toast({
-        title: "Avis rejeté",
-        description: "L'avis a été supprimé"
+        title: "Avis rejetÃ©",
+        description: "L'avis a Ã©tÃ© supprimÃ©"
       });
     },
     onError: (error: any) => {
@@ -420,7 +420,7 @@ const Admin = () => {
         queryKey: ["contact-messages"]
       });
       toast({
-        title: "Message mis à jour avec succès."
+        title: "Message mis Ã  jour avec succÃ¨s."
       });
     },
     onError: (error: any) => {
@@ -438,7 +438,7 @@ const Admin = () => {
         queryKey: ["contact-messages"]
       });
       toast({
-        title: "Message supprimé avec succès."
+        title: "Message supprimÃ© avec succÃ¨s."
       });
     },
     onError: (error: any) => {
@@ -475,8 +475,8 @@ const Admin = () => {
       setShowArticleForm(false);
       setEditingArticle(undefined);
       toast({
-        title: "Article ajouté",
-        description: "L'article a été ajouté avec succès"
+        title: "Article ajoutÃ©",
+        description: "L'article a Ã©tÃ© ajoutÃ© avec succÃ¨s"
       });
     }
   });
@@ -489,8 +489,8 @@ const Admin = () => {
       setShowArticleForm(false);
       setEditingArticle(undefined);
       toast({
-        title: "Article modifié",
-        description: "L'article a été modifié avec succès"
+        title: "Article modifiÃ©",
+        description: "L'article a Ã©tÃ© modifiÃ© avec succÃ¨s"
       });
     }
   });
@@ -501,8 +501,8 @@ const Admin = () => {
         queryKey: ["articles"]
       });
       toast({
-        title: "Article supprimé",
-        description: "L'article a été supprimé avec succès"
+        title: "Article supprimÃ©",
+        description: "L'article a Ã©tÃ© supprimÃ© avec succÃ¨s"
       });
     }
   });
@@ -538,8 +538,8 @@ const Admin = () => {
       setShowVilleForm(false);
       setEditingVille(undefined);
       toast({
-        title: "Ville ajoutée",
-        description: "La ville a été ajoutée avec succès"
+        title: "Ville ajoutÃ©e",
+        description: "La ville a Ã©tÃ© ajoutÃ©e avec succÃ¨s"
       });
     }
   });
@@ -552,8 +552,8 @@ const Admin = () => {
       setShowVilleForm(false);
       setEditingVille(undefined);
       toast({
-        title: "Ville modifiée",
-        description: "La ville a été modifiée avec succès"
+        title: "Ville modifiÃ©e",
+        description: "La ville a Ã©tÃ© modifiÃ©e avec succÃ¨s"
       });
     }
   });
@@ -564,8 +564,8 @@ const Admin = () => {
         queryKey: ["villes"]
       });
       toast({
-        title: "Ville supprimée",
-        description: "La ville a été supprimée avec succès"
+        title: "Ville supprimÃ©e",
+        description: "La ville a Ã©tÃ© supprimÃ©e avec succÃ¨s"
       });
     }
   });
@@ -590,8 +590,8 @@ const Admin = () => {
       });
       setIsUploading(false);
       toast({
-        title: "Image téléchargée",
-        description: "L'image a été téléchargée avec succès"
+        title: "Image tÃ©lÃ©chargÃ©e",
+        description: "L'image a Ã©tÃ© tÃ©lÃ©chargÃ©e avec succÃ¨s"
       });
     },
     onError: () => {
@@ -607,8 +607,8 @@ const Admin = () => {
       });
       setIsDeleting(false);
       toast({
-        title: "Image supprimée",
-        description: "L'image a été supprimée avec succès"
+        title: "Image supprimÃ©e",
+        description: "L'image a Ã©tÃ© supprimÃ©e avec succÃ¨s"
       });
     },
     onError: () => {
@@ -632,7 +632,7 @@ const Admin = () => {
     });
   };
   const handleDeleteConciergerie = (id: string, nom: string) => {
-    if (window.confirm(`Êtes-vous sûr de vouloir supprimer la conciergerie "${nom}" ? Cette action est irréversible et supprimera également toutes les formules associées.`)) {
+    if (window.confirm(`ÃŠtes-vous sÃ»r de vouloir supprimer la conciergerie "${nom}" ? Cette action est irrÃ©versible et supprimera Ã©galement toutes les formules associÃ©es.`)) {
       deleteConciergerieM.mutate(id);
     }
   };
@@ -705,15 +705,15 @@ const Admin = () => {
         <TabsContent value="conciergeries">
           <Card>
             <CardHeader>
-              <CardTitle>Conciergeries validées</CardTitle>
+              <CardTitle>Conciergeries validÃ©es</CardTitle>
               <CardDescription>
-                Gérez les conciergeries validées
+                GÃ©rez les conciergeries validÃ©es
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">
-                  {validatedConciergeries.length} conciergeries validées
+                  {validatedConciergeries.length} conciergeries validÃ©es
                 </h3>
                 <Button onClick={() => setShowEditForm(true)}>
                   <Plus className="h-4 w-4 mr-1" />
@@ -721,7 +721,7 @@ const Admin = () => {
                 </Button>
               </div>
               
-              {loadingValidated ? <p>Chargement...</p> : validatedConciergeries.length === 0 ? <p>Aucune conciergerie validée</p> : validatedConciergeries.map(conciergerie => <div key={conciergerie.id} className="border rounded-lg p-4">
+              {loadingValidated ? <p>Chargement...</p> : validatedConciergeries.length === 0 ? <p>Aucune conciergerie validÃ©e</p> : validatedConciergeries.map(conciergerie => <div key={conciergerie.id} className="border rounded-lg p-4">
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="font-semibold">{conciergerie.nom}</h3>
@@ -732,7 +732,7 @@ const Admin = () => {
                               Score manuel: {conciergerie.scoreManuel}
                             </Badge>}
                           <Badge variant={conciergerie.validated ? "default" : "secondary"}>
-                            {conciergerie.validated ? "Validée" : "En attente"}
+                            {conciergerie.validated ? "ValidÃ©e" : "En attente"}
                           </Badge>
                         </div>
                       </div>
@@ -761,7 +761,7 @@ const Admin = () => {
             <CardHeader>
               <CardTitle>Leads</CardTitle>
               <CardDescription>
-                Consultez les demandes de devis reçues
+                Consultez les demandes de devis reÃ§ues
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -771,13 +771,13 @@ const Admin = () => {
                         <h3 className="font-semibold">{lead.nom}</h3>
                         <p className="text-sm text-gray-600">{lead.mail} - {lead.telephone}</p>
                         <p className="text-sm">Ville: {lead.ville}</p>
-                        <p className="text-sm">Superficie: {lead.superficie}m² - {lead.nombreChambres} chambres</p>
+                        <p className="text-sm">Superficie: {lead.superficie}mÂ² - {lead.nombreChambres} chambres</p>
                         {lead.message}
                       </div>
                       <div className="flex gap-2">
                         <Button size="sm" variant="outline" onClick={() => handleViewLeadDetails(lead)}>
                           <Eye className="h-4 w-4 mr-1" />
-                          Détails
+                          DÃ©tails
                         </Button>
                         <Badge variant="outline">
                           {lead.date ? new Date(lead.date as string).toLocaleDateString() : 'N/A'}
@@ -798,14 +798,14 @@ const Admin = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {loadingAvis ? <p>Chargement...</p> : avis.length === 0 ? <p>Aucun avis trouvé</p> : <div className="space-y-4">
+              {loadingAvis ? <p>Chargement...</p> : avis.length === 0 ? <p>Aucun avis trouvÃ©</p> : <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <h3 className="text-lg font-semibold">
                       {avis.length} avis au total
                     </h3>
                     <div className="flex gap-2">
                       <Badge variant="outline">
-                        {avis.filter(a => a.valide).length} validés
+                        {avis.filter(a => a.valide).length} validÃ©s
                       </Badge>
                       <Badge variant="secondary">
                         {avis.filter(a => !a.valide).length} en attente
@@ -817,7 +817,7 @@ const Admin = () => {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Conciergerie</TableHead>
-                        <TableHead>Émetteur</TableHead>
+                        <TableHead>Ã‰metteur</TableHead>
                         <TableHead>Note</TableHead>
                         <TableHead>Commentaire</TableHead>
                         <TableHead>Date</TableHead>
@@ -844,7 +844,7 @@ const Admin = () => {
                           </TableCell>
                           <TableCell>
                             <Badge variant={avisItem.valide ? "default" : "secondary"}>
-                              {avisItem.valide ? "Validé" : "En attente"}
+                              {avisItem.valide ? "ValidÃ©" : "En attente"}
                             </Badge>
                           </TableCell>
                           <TableCell>
@@ -872,7 +872,7 @@ const Admin = () => {
             <CardHeader>
               <CardTitle>Messages de contact</CardTitle>
               <CardDescription>
-                Gérez les messages reçus depuis le formulaire de contact.
+                GÃ©rez les messages reÃ§us depuis le formulaire de contact.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -899,7 +899,7 @@ const Admin = () => {
                         </TableCell>
                         <TableCell className="hidden lg:table-cell">{new Date(message.created_at).toLocaleDateString()}</TableCell>
                         <TableCell>
-                          {message.is_processed ? <Badge className="bg-green-100 text-green-800 hover:bg-green-200">Traité</Badge> : message.is_read ? <Badge variant="secondary">Lu</Badge> : <Badge>Nouveau</Badge>}
+                          {message.is_processed ? <Badge className="bg-green-100 text-green-800 hover:bg-green-200">TraitÃ©</Badge> : message.is_read ? <Badge variant="secondary">Lu</Badge> : <Badge>Nouveau</Badge>}
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex gap-2 justify-end">
@@ -920,10 +920,10 @@ const Admin = () => {
                         }
                       })}>
                                 <CheckCircle className="h-4 w-4" />
-                                <span className="sr-only">Marquer comme traité</span>
+                                <span className="sr-only">Marquer comme traitÃ©</span>
                               </Button>}
                             <Button size="sm" variant="destructive" onClick={() => {
-                        if (window.confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) deleteMessageMutation.mutate(message.id);
+                        if (window.confirm('ÃŠtes-vous sÃ»r de vouloir supprimer ce message ?')) deleteMessageMutation.mutate(message.id);
                       }}>
                               <Trash2 className="h-4 w-4" />
                               <span className="sr-only">Supprimer</span>
@@ -942,7 +942,7 @@ const Admin = () => {
             <CardHeader>
               <CardTitle>Articles</CardTitle>
               <CardDescription>
-                Gérez les articles du blog
+                GÃ©rez les articles du blog
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -986,7 +986,7 @@ const Admin = () => {
             <CardHeader>
               <CardTitle>Gestion des villes</CardTitle>
               <CardDescription>
-                Gérez les villes disponibles sur la plateforme
+                GÃ©rez les villes disponibles sur la plateforme
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -1007,7 +1007,7 @@ const Admin = () => {
             <CardHeader>
               <CardTitle>Galerie d'images</CardTitle>
               <CardDescription>
-                Gérez les images téléchargées
+                GÃ©rez les images tÃ©lÃ©chargÃ©es
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -1026,7 +1026,7 @@ const Admin = () => {
                     <Button asChild disabled={isUploading}>
                       <span>
                         <Plus className="h-4 w-4 mr-1" />
-                        {isUploading ? "Téléchargement..." : "Télécharger une image"}
+                        {isUploading ? "TÃ©lÃ©chargement..." : "TÃ©lÃ©charger une image"}
                       </span>
                     </Button>
                   </label>
@@ -1066,13 +1066,13 @@ const Admin = () => {
                       <TableHead>Points</TableHead>
                       <TableHead>Statut</TableHead>
                       <TableHead>Date</TableHead>
-                      <TableHead>Détails</TableHead>
+                      <TableHead>DÃ©tails</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {subscriptions.map(sub => <TableRow key={sub.id}>
                         <TableCell className="font-medium">{sub.conciergerie_nom}</TableCell>
-                        <TableCell>{sub.monthly_amount}€</TableCell>
+                        <TableCell>{sub.monthly_amount}â‚¬</TableCell>
                         <TableCell>{sub.total_points}</TableCell>
                         <TableCell>
                           <Badge variant={sub.payment_status === 'completed' ? 'default' : sub.payment_status === 'pending' ? 'secondary' : 'destructive'}>
@@ -1128,3 +1128,4 @@ const Admin = () => {
     </div>;
 };
 export default Admin;
+

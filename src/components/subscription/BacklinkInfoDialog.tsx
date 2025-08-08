@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui-kit/dialog";
@@ -53,8 +53,8 @@ export const BacklinkInfoDialog: React.FC<BacklinkInfoDialogProps> = ({
       await navigator.clipboard.writeText(text);
       setCopiedUrl(text);
       toast({
-        title: "Lien copié",
-        description: `Le lien ${label} a été copié dans le presse-papiers`
+        title: "Lien copiÃ©",
+        description: `Le lien ${label} a Ã©tÃ© copiÃ© dans le presse-papiers`
       });
       setTimeout(() => setCopiedUrl(null), 2000);
     } catch (error) {
@@ -80,9 +80,9 @@ export const BacklinkInfoDialog: React.FC<BacklinkInfoDialogProps> = ({
         
         <div className="space-y-4">
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h3 className="font-semibold text-blue-800 mb-2">Éligibilité</h3>
+            <h3 className="font-semibold text-blue-800 mb-2">Ã‰ligibilitÃ©</h3>
             <p className="text-blue-700">
-              Vous êtes éligible uniquement si vous possédez un site web.
+              Vous Ãªtes Ã©ligible uniquement si vous possÃ©dez un site web.
             </p>
           </div>
 
@@ -90,7 +90,7 @@ export const BacklinkInfoDialog: React.FC<BacklinkInfoDialogProps> = ({
             <h3 className="font-semibold">Instructions de placement</h3>
             <ul className="list-disc list-inside space-y-1 text-gray-700">
               <li>Vous devez placer un lien partenaire sur la page d'accueil de votre site web</li>
-              <li>Ce lien peut être réalisé soit sur le logo Proprioadvisor soit sur du texte (ex: "Proprioadvisor")</li>
+              <li>Ce lien peut Ãªtre rÃ©alisÃ© soit sur le logo Proprioadvisor soit sur du texte (ex: "Proprioadvisor")</li>
               <li>Le lien doit mener vers l'une des pages suivantes :</li>
             </ul>
           </div>
@@ -125,13 +125,13 @@ export const BacklinkInfoDialog: React.FC<BacklinkInfoDialogProps> = ({
             })}
               </div>}
 
-            {/* Page détail */}
+            {/* Page dÃ©tail */}
             {detailPageUrl && <div className="flex items-center justify-between p-3 bg-gray-50 rounded border">
                 <div>
-                  <p className="font-medium">Page détails de votre conciergerie</p>
+                  <p className="font-medium">Page dÃ©tails de votre conciergerie</p>
                   <p className="text-sm text-gray-600 break-all">{detailPageUrl}</p>
                 </div>
-                <Button variant="outline" size="sm" onClick={() => copyToClipboard(detailPageUrl, "page détail")} className="ml-2 flex-shrink-0">
+                <Button variant="outline" size="sm" onClick={() => copyToClipboard(detailPageUrl, "page dÃ©tail")} className="ml-2 flex-shrink-0">
                   {copiedUrl === detailPageUrl ? <CheckCircle className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
                 </Button>
               </div>}
@@ -139,10 +139,11 @@ export const BacklinkInfoDialog: React.FC<BacklinkInfoDialogProps> = ({
 
           <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
             <p className="text-yellow-800 text-sm">
-              <strong>Note :</strong> Une vérification automatique sera effectuée tous les mois pour s'assurer que le lien est toujours présent sur votre page d'accueil.
+              <strong>Note :</strong> Une vÃ©rification automatique sera effectuÃ©e tous les mois pour s'assurer que le lien est toujours prÃ©sent sur votre page d'accueil.
             </p>
           </div>
         </div>
       </DialogContent>
     </Dialog>;
 };
+

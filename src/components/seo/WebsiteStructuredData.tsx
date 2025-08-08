@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import StructuredData from './StructuredData';
 
 const WebsiteStructuredData = () => {
@@ -7,7 +7,7 @@ const WebsiteStructuredData = () => {
     '@type': 'WebSite',
     name: 'ProprioAdvisor',
     url: 'https://proprioadvisor.fr',
-    description: 'Comparateur de conciergeries Airbnb pour les propriétaires',
+    description: 'Comparateur de conciergeries Airbnb pour les propriÃ©taires',
     publisher: {
       '@type': 'Organization',
       name: 'ProprioAdvisor',
@@ -31,3 +31,4 @@ const WebsiteStructuredData = () => {
 };
 
 export default WebsiteStructuredData; 
+

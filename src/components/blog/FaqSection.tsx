@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { Article } from '@/types';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui-kit/accordion";
@@ -24,7 +24,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ article }) => {
 
   return (
     <div className="mt-12">
-      <h2 className="text-2xl font-bold mb-4">Questions fréquentes</h2>
+      <h2 className="text-2xl font-bold mb-4">Questions frÃ©quentes</h2>
       <Accordion type="single" collapsible className="w-full">
         {faqs.map((faq, index) => (
           <AccordionItem value={`item-${index}`} key={index}>
@@ -40,3 +40,4 @@ const FaqSection: React.FC<FaqSectionProps> = ({ article }) => {
 };
 
 export default FaqSection;
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import { Article } from "@/types";
 import { Loader2 } from "lucide-react";
 import StructuredData from "@/components/seo/StructuredData";
 import { createBreadcrumbStructuredData } from "@/utils/structuredDataHelpers";
-import Breadcrumbs from "@/components/ui-kit/Breadcrumbs";
+import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 
 const Blog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,7 +31,7 @@ const Blog: React.FC = () => {
     fetchArticles();
   }, []);
 
-  // V�rification de s�curit� pour articles et filteredArticles
+  // Vï¿½rification de sï¿½curitï¿½ pour articles et filteredArticles
   const safeArticles = Array.isArray(articles) ? articles : [];
   const filteredArticles = safeArticles.filter(article => 
     article.titre.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -50,7 +50,7 @@ const Blog: React.FC = () => {
   return <div className="py-[32px]">
       <Head>
         <title>Blog | Proprioadvisor</title>
-        <meta name="description" content="D�couvrez nos articles et conseils sur la gestion locative courte dur�e" />
+        <meta name="description" content="Dï¿½couvrez nos articles et conseils sur la gestion locative courte durï¿½e" />
         <link rel="canonical" href="https://proprioadvisor.fr/blog" />
       </Head>
       
@@ -63,7 +63,7 @@ const Blog: React.FC = () => {
           <header className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Blog</h1>
             <p className="text-gray-600 text-lg">
-              D�couvrez nos articles et conseils sur la gestion locative courte dur�e
+              Dï¿½couvrez nos articles et conseils sur la gestion locative courte durï¿½e
             </p>
           </header>
           
@@ -91,7 +91,7 @@ const Blog: React.FC = () => {
                         {article.image ? <img src={article.image} alt={`Image d'illustration pour l'article : ${article.titre}`} className="w-full h-48 md:h-full object-cover" onError={e => {
                     console.error("Erreur de chargement d'image blog:", article.image);
                     e.currentTarget.src = "/placeholder.svg";
-                    e.currentTarget.alt = "Image par d�faut - Article sans illustration";
+                    e.currentTarget.alt = "Image par dï¿½faut - Article sans illustration";
                     e.currentTarget.classList.add("bg-gray-100");
                   }} loading="lazy" /> : <div className="w-full h-48 md:h-full bg-gray-100 flex items-center justify-center" role="img" aria-label="Aucune image disponible pour cet article">
                             <span className="text-gray-400">Pas d'image</span>
@@ -125,9 +125,9 @@ const Blog: React.FC = () => {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 13.5V15m-6 4h12a2 2 0 002-2v-12a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <h3 className="text-xl font-medium mb-2">Aucun r�sultat trouv�</h3>
+              <h3 className="text-xl font-medium mb-2">Aucun rï¿½sultat trouvï¿½</h3>
               <p className="text-gray-600">
-                Aucun article ne correspond � votre recherche. Essayez avec d'autres termes.
+                Aucun article ne correspond ï¿½ votre recherche. Essayez avec d'autres termes.
               </p>
             </section>}
         </div>
@@ -136,4 +136,5 @@ const Blog: React.FC = () => {
 };
 
 export default Blog;
+
 

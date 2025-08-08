@@ -1,4 +1,4 @@
-
+﻿
 import { z } from "zod";
 
 export const subscriptionSchema = z.object({
@@ -11,11 +11,11 @@ export const subscriptionSchema = z.object({
     conciergeriePageLink: z.boolean().default(false)
   }),
   customAmount: z.string().optional().refine(val => !val || Number(val) >= 0 && Number(val) <= 1000, {
-    message: "Le montant doit être entre 0€ et 1000€"
+    message: "Le montant doit Ãªtre entre 0â‚¬ et 1000â‚¬"
   }),
   useCustomAmount: z.boolean().default(false),
   websiteUrl: z.string().optional().or(z.literal("")),
-  phoneNumberValue: z.string().min(10, "Le numéro de téléphone doit contenir au moins 10 caractères").optional().or(z.literal("")),
+  phoneNumberValue: z.string().min(10, "Le numÃ©ro de tÃ©lÃ©phone doit contenir au moins 10 caractÃ¨res").optional().or(z.literal("")),
   password: z.string().optional(),
   confirmPassword: z.string().optional()
 }).refine(data => {
@@ -31,6 +31,7 @@ export const subscriptionSchema = z.object({
   }
   return true;
 }, {
-  message: "Les mots de passe ne correspondent pas ou sont trop courts (minimum 6 caractères)",
+  message: "Les mots de passe ne correspondent pas ou sont trop courts (minimum 6 caractÃ¨res)",
   path: ["confirmPassword"]
 });
+

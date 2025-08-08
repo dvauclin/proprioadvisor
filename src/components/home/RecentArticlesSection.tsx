@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -17,7 +17,7 @@ const RecentArticlesSection: React.FC<RecentArticlesSectionProps> = ({ articles,
         <header className="text-center mb-16">
           <h2 id="recent-articles-heading" className="text-3xl font-bold mb-4">Nos derniers articles</h2>
           <p className="text-gray-600 max-w-xl mx-auto">
-            D�couvrez nos conseils et actualit�s sur la location courte dur�e et la gestion de conciergerie
+            DÃ©couvrez nos conseils et actualitÃ©s sur la location courte durÃ©e et la gestion de conciergerie
           </p>
         </header>
         
@@ -85,5 +85,6 @@ const RecentArticlesSection: React.FC<RecentArticlesSectionProps> = ({ articles,
 };
 
 export default RecentArticlesSection;
+
 
 

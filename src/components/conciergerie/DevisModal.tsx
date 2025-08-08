@@ -1,8 +1,8 @@
-
+﻿
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { DevisForm } from "@/components/DevisForm";
-import ConciergerieLogoDisplay from "@/components/ui-kit/ConciergerieLogoDisplay";
+import ConciergerieLogoDisplay from "@/components/ui-kit/conciergerie-logo-display";
 import { Formule, Conciergerie } from "@/types";
 
 interface DevisModalProps {
@@ -50,3 +50,4 @@ const DevisModal: React.FC<DevisModalProps> = ({
 };
 
 export default DevisModal;
+
