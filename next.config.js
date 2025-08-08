@@ -1,5 +1,6 @@
 // Trigger Vercel full rebuild
 /** @type {import('next').NextConfig} */
+const path = require('path')
 const nextConfig = {
   images: {
     domains: ['localhost', 'proprioadvisor.com', 'images.unsplash.com'],
@@ -102,6 +103,11 @@ const nextConfig = {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
+    };
+    // Ensure tsconfig path alias `@/*` works during build (not only in TS type-checker)
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname, 'src'),
     };
     return config;
   },
