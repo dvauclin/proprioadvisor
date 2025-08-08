@@ -1,4 +1,4 @@
-﻿
+
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui-kit/dialog';
 import { Button } from '@/components/ui-kit/button';
@@ -31,6 +31,26 @@ const AvisModal: React.FC<AvisModalProps> = ({
   avis,
   conciergerieName
 }) => {
+  // Memorize computed display dates per avis id so they don't change on re-render
+  const displayDateMapRef = React.useRef<Record<string, Date>>({});
+
+  React.useEffect(() => {
+    if (!avis || avis.length === 0) return;
+    const map = displayDateMapRef.current;
+    for (const avisItem of avis) {
+      if (!map[avisItem.id]) {
+        let computed: Date;
+        if (!avisItem.date) {
+          computed = generateRandomDate();
+        } else {
+          const parsed = new Date(avisItem.date);
+          computed = isNaN(parsed.getTime()) ? generateRandomDate() : parsed;
+        }
+        map[avisItem.id] = computed;
+      }
+    }
+  }, [avis]);
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col bg-white z-50">
@@ -63,17 +83,7 @@ const AvisModal: React.FC<AvisModalProps> = ({
               
               <div className="space-y-4">
                 {avis.map((avisItem) => {
-                  let displayDate: Date;
-                  
-                  if (!avisItem.date) {
-                    displayDate = generateRandomDate();
-                  } else {
-                    displayDate = new Date(avisItem.date);
-                    if (isNaN(displayDate.getTime())) {
-                      displayDate = generateRandomDate();
-                    }
-                  }
-
+                  const displayDate = displayDateMapRef.current[avisItem.id] || new Date();
                   return (
                     <div key={avisItem.id} className="border rounded-lg p-4">
                       <div className="flex justify-between items-start mb-2">

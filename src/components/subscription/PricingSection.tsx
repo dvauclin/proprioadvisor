@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { Input } from '@/components/ui-kit/input';
 import { SubscriptionFormValues } from '@/types/subscription';
@@ -26,11 +26,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const customAmount = form.getValues("customAmount");
   const selectedAmount = useCustomAmount ? Number(customAmount) || 0 : defaultAmount;
   return <div className="border border-gray-200 rounded-lg p-4 mt-6 bg-white">
-      <h3 className="font-semibold text-lg mb-3">Montant Ã  payer</h3>
+      <h3 className="font-semibold text-lg mb-3">Montant à payer</h3>
       
       {showCurrentPaymentInfo && <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
           <p className="text-sm text-blue-800">
-            <span className="font-medium">Montant actuellement payÃ© :</span> {currentMonthlyPayment}â‚¬/mois
+            <span className="font-medium">Montant actuellement payé :</span> {currentMonthlyPayment}/mois
           </p>
           {renewalDay && <div className="mt-2">
               <RenewalDayDisplay renewalDay={renewalDay} isCurrentPaymentInfo={true} />
@@ -43,10 +43,10 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
             <div className={`w-5 h-5 rounded-full border ${!useCustomAmount ? 'bg-green-500 border-green-500' : 'border-gray-300'} mr-2`}>
               {!useCustomAmount && <div className="w-2 h-2 bg-white rounded-full mx-auto mt-1.5"></div>}
             </div>
-            <span className="font-medium">Montant calculÃ© par dÃ©faut</span>
+            <span className="font-medium">Montant calculé par défaut</span>
           </div>
           <p className="text-2xl font-bold ml-7">
-            {defaultAmount}â‚¬<span className="text-sm font-normal text-gray-500">/mois</span>
+            {defaultAmount}<span className="text-sm font-normal text-gray-500">/mois</span>
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
             <div className={`w-5 h-5 rounded-full border ${useCustomAmount ? 'bg-green-500 border-green-500' : 'border-gray-300'} mr-2`}>
               {useCustomAmount && <div className="w-2 h-2 bg-white rounded-full mx-auto mt-1.5"></div>}
             </div>
-            <span className="font-medium">Montant personnalisÃ©</span>
+            <span className="font-medium">Montant personnalisé</span>
           </div>
           
           <div className="ml-7">
@@ -64,7 +64,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
               e.stopPropagation();
               handleToggleCustomAmount(true);
             }} onChange={handleCustomAmountChange} />
-              <span className="text-lg font-medium ml-2">â‚¬<span className="text-sm font-normal text-gray-500">/mois</span></span>
+              <span className="text-lg font-medium ml-2"><span className="text-sm font-normal text-gray-500">/mois</span></span>
             </div>
             
           </div>
@@ -73,7 +73,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
       
       {showCurrentPaymentInfo && <PricingExplanation currentAmount={currentMonthlyPayment} selectedAmount={selectedAmount} />}
       
-      <p className="text-sm text-gray-600 italic mt-3">C'est un systÃ¨me d'enchÃ¨res au plus offrant pour apparaÃ®tre en haut des listings et obtenir plus de visibilitÃ© sur Proprioadvisor, Google et ChatGPT.</p>
+      <p className="text-sm text-gray-600 italic mt-3">C'est un système d'enchères au plus offrant pour apparaître en haut des listings et obtenir plus de visibilité sur Proprioadvisor, Google et ChatGPT.</p>
     </div>;
 };
 

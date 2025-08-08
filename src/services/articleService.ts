@@ -1,4 +1,4 @@
-﻿import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { Article } from "@/types";
 
 // NOTE: We use `as any` because the global `Article` type in `src/types` is read-only

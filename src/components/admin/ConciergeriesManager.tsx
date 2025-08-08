@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -44,7 +44,7 @@ const ConciergeriesManager: React.FC<ConciergeriesManagerProps> = ({ validated }
   });
 
   const handleValidation = async (conciergerieId: string, validate: boolean) => {
-    console.log("ðŸ”¥ VALIDATION CLICKED:", { conciergerieId, validate });
+    console.log("x VALIDATION CLICKED:", { conciergerieId, validate });
     setLoadingStates(prev => ({ ...prev, [conciergerieId]: true }));
     
     try {
@@ -65,7 +65,7 @@ const ConciergeriesManager: React.FC<ConciergeriesManagerProps> = ({ validated }
       }
 
       toast.success(
-        validate ? "Conciergerie validÃ©e avec succÃ¨s" : "Validation de la conciergerie annulÃ©e"
+        validate ? "Conciergerie validée avec succès" : "Validation de la conciergerie annulée"
       );
       
       queryClient.invalidateQueries({ queryKey: ['admin-conciergeries'] });
@@ -99,7 +99,7 @@ const ConciergeriesManager: React.FC<ConciergeriesManagerProps> = ({ validated }
     <div className="space-y-4">
       {conciergeries.length === 0 ? (
         <p className="text-center text-gray-500 py-8">
-          Aucune conciergerie {validated ? 'validÃ©e' : 'en attente de validation'}
+          Aucune conciergerie {validated ? 'validée' : 'en attente de validation'}
         </p>
       ) : (
         <div className="grid gap-4">
@@ -117,7 +117,7 @@ const ConciergeriesManager: React.FC<ConciergeriesManagerProps> = ({ validated }
                     <p className="text-sm text-gray-600">{conciergerie.mail}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <Badge variant={validated ? "default" : "secondary"}>
-                        {validated ? "ValidÃ©e" : "En attente"}
+                        {validated ? "Validée" : "En attente"}
                       </Badge>
                       {conciergerie.formules && conciergerie.formules.length > 0 && (
                         <Badge variant="outline">
@@ -141,7 +141,7 @@ const ConciergeriesManager: React.FC<ConciergeriesManagerProps> = ({ validated }
                     </DialogTrigger>
                     <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                       <DialogHeader>
-                        <DialogTitle>DÃ©tails de la conciergerie</DialogTitle>
+                        <DialogTitle>Détails de la conciergerie</DialogTitle>
                       </DialogHeader>
                       {editingConciergerie && (
                         <EditConciergerieForm

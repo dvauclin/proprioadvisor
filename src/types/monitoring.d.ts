@@ -1,4 +1,4 @@
-﻿// Types pour le monitoring
+// Types pour le monitoring
 
 export interface Metric {
   name: string

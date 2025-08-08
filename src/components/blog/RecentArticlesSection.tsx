@@ -1,4 +1,4 @@
-﻿
+
 import React from 'react';
 import { Article } from '@/types';
 import RecentArticleCard from './RecentArticleCard';

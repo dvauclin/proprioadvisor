@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from 'react';
 import Link from 'next/link';
@@ -11,13 +11,13 @@ const CookieConsent: React.FC = () => {
   const [showDetails, setShowDetails] = React.useState(false);
 
   const [preferences, setPreferences] = React.useState({
-    necessary: true, // Toujours activÃ©
+    necessary: true, // Toujours activé
     analytics: cookieConsent.analytics,
     marketing: cookieConsent.marketing,
   });
 
   // Ne pas afficher pour les bots.
-  // Le dialog est contrÃ´lÃ© par l'Ã©tat `hasResponded`.
+  // Le dialog est contrôlé par l'état `hasResponded`.
   if (isBot()) {
     return null;
   }
@@ -33,13 +33,13 @@ const CookieConsent: React.FC = () => {
   const acceptSelected = () => {
     updateCookieConsent({
       ...preferences,
-      necessary: true, // Toujours activÃ©
+      necessary: true, // Toujours activé
     });
   };
 
   const rejectAll = () => {
     updateCookieConsent({
-      necessary: true, // Toujours activÃ©
+      necessary: true, // Toujours activé
       analytics: false,
       marketing: false,
     });
@@ -52,7 +52,7 @@ const CookieConsent: React.FC = () => {
     }));
   };
 
-  // Si l'utilisateur ferme la modale (Echap, 'X', clic extÃ©rieur), on considÃ¨re cela comme un refus.
+  // Si l'utilisateur ferme la modale (Echap, 'X', clic extérieur), on considère cela comme un refus.
   const handleDialogClose = () => {
     if (!hasResponded) {
       rejectAll();
@@ -65,14 +65,14 @@ const CookieConsent: React.FC = () => {
         {!showDetails ? (
           <div>
             <DialogHeader className="mb-6">
-              <DialogTitle className="text-xl font-semibold mb-3 text-left">Nous respectons votre vie privÃ©e</DialogTitle>
+              <DialogTitle className="text-xl font-semibold mb-3 text-left">Nous respectons votre vie privée</DialogTitle>
               <DialogDescription className="text-gray-600 mb-4 text-left">
-                Ce site utilise des cookies pour amÃ©liorer votre expÃ©rience. Vous pouvez accepter tous les cookies, 
-                les refuser tous ou personnaliser vos prÃ©fÃ©rences.
+                Ce site utilise des cookies pour améliorer votre expérience. Vous pouvez accepter tous les cookies, 
+                les refuser tous ou personnaliser vos préférences.
               </DialogDescription>
               <div className="text-sm text-gray-500 text-left">
                 <Link href="/politique-confidentialite" className="text-blue-600 hover:underline">
-                  Politique de confidentialitÃ©
+                  Politique de confidentialité
                 </Link>
                 {' | '}
                 <Link href="/conditions-utilisation" className="text-blue-600 hover:underline">
@@ -99,16 +99,16 @@ const CookieConsent: React.FC = () => {
         ) : (
           <div>
             <DialogHeader className="mb-6">
-              <DialogTitle className="text-xl font-semibold mb-3 text-left">Personnaliser vos prÃ©fÃ©rences</DialogTitle>
+              <DialogTitle className="text-xl font-semibold mb-3 text-left">Personnaliser vos préférences</DialogTitle>
               <DialogDescription className="text-gray-600 mb-4 text-left">
-                Choisissez les types de cookies que vous acceptez. Les cookies nÃ©cessaires sont toujours activÃ©s.
+                Choisissez les types de cookies que vous acceptez. Les cookies nécessaires sont toujours activés.
               </DialogDescription>
             </DialogHeader>
             
             <div className="space-y-4 mb-6">
               <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div>
-                  <h3 className="font-medium">Cookies nÃ©cessaires</h3>
+                  <h3 className="font-medium">Cookies nécessaires</h3>
                   <p className="text-sm text-gray-600">Essentiels au fonctionnement du site</p>
                 </div>
                 <div className="flex items-center">
@@ -124,7 +124,7 @@ const CookieConsent: React.FC = () => {
               <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div>
                   <h3 className="font-medium">Cookies analytiques</h3>
-                  <p className="text-sm text-gray-600">Nous aident Ã  amÃ©liorer le site</p>
+                  <p className="text-sm text-gray-600">Nous aident à améliorer le site</p>
                 </div>
                 <div className="flex items-center">
                   <input
@@ -139,7 +139,7 @@ const CookieConsent: React.FC = () => {
               <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div>
                   <h3 className="font-medium">Cookies marketing</h3>
-                  <p className="text-sm text-gray-600">UtilisÃ©s pour la publicitÃ© personnalisÃ©e</p>
+                  <p className="text-sm text-gray-600">Utilisés pour la publicité personnalisée</p>
                 </div>
                 <div className="flex items-center">
                   <input
@@ -163,7 +163,7 @@ const CookieConsent: React.FC = () => {
                 className="bg-brand-chartreuse text-black hover:bg-brand-chartreuse/90"
                 onClick={acceptSelected}
               >
-                Accepter la sÃ©lection
+                Accepter la sélection
               </Button>
             </DialogFooter>
           </div>
@@ -173,7 +173,7 @@ const CookieConsent: React.FC = () => {
   );
 };
 
-// Fonction pour dÃ©tecter les bots
+// Fonction pour détecter les bots
 function isBot(): boolean {
   if (typeof window === 'undefined') return true;
   

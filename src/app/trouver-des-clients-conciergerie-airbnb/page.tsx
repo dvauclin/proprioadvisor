@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllArticles, getArticleBySlug } from '@/services/supabaseService'
 import ArticleHeader from '@/components/blog/ArticleHeader'
@@ -10,15 +10,15 @@ export async function generateMetadata(): Promise<Metadata> {
   
   if (!article) {
     return {
-      title: 'Article non trouvÃ© | ProprioAdvisor',
-      description: 'Cet article n\'existe pas ou a Ã©tÃ© supprimÃ©.',
+      title: 'Article non trouvé | ProprioAdvisor',
+      description: 'Cet article n\'existe pas ou a été supprimé.',
     };
   }
 
   return {
     title: `${article.titre} | ProprioAdvisor`,
     description: article.excerpt || article.titre,
-    keywords: ['conciergerie airbnb', 'trouver clients', 'dÃ©veloppement commercial', 'marketing conciergerie', 'clients propriÃ©taires'],
+    keywords: ['conciergerie airbnb', 'trouver clients', 'développement commercial', 'marketing conciergerie', 'clients propriétaires'],
     openGraph: {
       title: article.titre,
       description: article.excerpt || article.titre,
@@ -45,7 +45,7 @@ export default async function TrouverClientsPage() {
     notFound();
   }
 
-  // RÃ©cupÃ©rer les articles similaires (exclure l'article actuel)
+  // Récupérer les articles similaires (exclure l'article actuel)
   const allArticles = await getAllArticles();
   const relatedArticles = allArticles
     .filter(a => a.id !== article.id)

@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import {
@@ -48,7 +48,7 @@ const AdditionalOptions = () => {
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                Accepte les rÃ©sidences principales
+                Accepte les résidences principales
               </FormLabel>
             </div>
           </FormItem>

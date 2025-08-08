@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -30,13 +30,13 @@ const Contact: React.FC = () => {
     try {
       await sendContactMessage(values);
 
-      toast.success("Message envoyÃ© !", {
-        description: "Nous avons bien reÃ§u votre message et reviendrons vers vous rapidement."
+      toast.success("Message envoyé !", {
+        description: "Nous avons bien reçu votre message et reviendrons vers vous rapidement."
       });
       
       form.reset();
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Une erreur est survenue. Veuillez rÃ©essayer plus tard.";
+      const errorMessage = error instanceof Error ? error.message : "Une erreur est survenue. Veuillez réessayer plus tard.";
       toast.error("Erreur d'envoi", {
         description: errorMessage
       });
@@ -47,14 +47,14 @@ const Contact: React.FC = () => {
     <div className="py-16">
       <Head>
         <title>Contact | Proprioadvisor</title>
-        <meta name="description" content="Contactez notre Ã©quipe pour toute question concernant nos services" />
+        <meta name="description" content="Contactez notre équipe pour toute question concernant nos services" />
       </Head>
       
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Contactez-nous</h1>
-            <p className="text-gray-600 text-lg">Une question sur nos services ? N'hÃ©sitez pas Ã  nous contacter via le formulaire ci-dessous ou via contact@proprioadvisor.fr.</p>
+            <p className="text-gray-600 text-lg">Une question sur nos services ? N'hésitez pas à nous contacter via le formulaire ci-dessous ou via contact@proprioadvisor.fr.</p>
           </div>
           
           <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">

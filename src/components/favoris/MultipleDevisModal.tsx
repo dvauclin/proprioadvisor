@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { z } from "zod";
@@ -36,7 +36,7 @@ interface MultipleDevisModalProps {
 // Array of service options - same as DevisForm
 const serviceOptions = [{
   id: 'menage_blanchisserie',
-  label: 'MÃ©nage / Blanchisserie'
+  label: 'Ménage / Blanchisserie'
 }, {
   id: 'checkin_checkout',
   label: 'Check-in / Check-out'
@@ -45,7 +45,7 @@ const serviceOptions = [{
   label: 'Gestion de l\'annonce'
 }, {
   id: 'creation_annonce',
-  label: 'CrÃ©ation de l\'annonce'
+  label: 'Création de l\'annonce'
 }];
 
 // Array of property types - same as DevisForm
@@ -59,19 +59,19 @@ const propertyTypes = [{
 
 // Schema identical to DevisForm
 const formSchema = z.object({
-  nom: z.string().min(2, "Le nom doit contenir au moins 2 caractÃ¨res"),
+  nom: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
   email: z.string().email("Adresse email invalide"),
-  telephone: z.string().min(10, "NumÃ©ro de tÃ©lÃ©phone invalide"),
-  adresse: z.string().min(5, "L'adresse doit contenir au moins 5 caractÃ¨res"),
-  ville: z.string().min(2, "La ville doit contenir au moins 2 caractÃ¨res"),
-  superficie: z.coerce.number().min(1, "La superficie doit Ãªtre positive"),
-  nombreChambres: z.coerce.number().min(0, "Le nombre de chambres doit Ãªtre positif ou nul"),
+  telephone: z.string().min(10, "Numéro de téléphone invalide"),
+  adresse: z.string().min(5, "L'adresse doit contenir au moins 5 caractères"),
+  ville: z.string().min(2, "La ville doit contenir au moins 2 caractères"),
+  superficie: z.coerce.number().min(1, "La superficie doit être positive"),
+  nombreChambres: z.coerce.number().min(0, "Le nombre de chambres doit être positif ou nul"),
   typeBien: z.enum(["standard", "luxe"]),
   dureeEspacementDisposition: z.enum(["moins3mois", "3a6mois", "6a12mois", "plus1an"]),
-  prestationsRecherchees: z.array(z.string()).min(1, "SÃ©lectionnez au moins un service"),
+  prestationsRecherchees: z.array(z.string()).min(1, "Sélectionnez au moins un service"),
   plusieursLogements: z.boolean().default(false),
   residencePrincipale: z.boolean().default(false),
-  selectedFormules: z.array(z.string()).min(1, "Vous devez sÃ©lectionner au moins une formule")
+  selectedFormules: z.array(z.string()).min(1, "Vous devez sélectionner au moins une formule")
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -146,7 +146,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
         });
       }
 
-      // RÃ©cupÃ©rer les emails des conciergeries via jointure
+      // Récupérer les emails des conciergeries via jointure
       const { data: conciergeriesData } = await supabase
         .from('formules')
         .select(`
@@ -172,8 +172,8 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
       });
 
       toast({
-        title: "Demandes envoyÃ©es !",
-        description: `Vos demandes de devis ont Ã©tÃ© envoyÃ©es Ã  ${selectedFormules.length} conciergerie${selectedFormules.length > 1 ? 's' : ''}`,
+        title: "Demandes envoyées !",
+        description: `Vos demandes de devis ont été envoyées à ${selectedFormules.length} conciergerie${selectedFormules.length > 1 ? 's' : ''}`,
       });
 
       onOpenChange(false);
@@ -222,7 +222,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                 name="selectedFormules"
                 render={() => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold">Formules sÃ©lectionnÃ©es ({selectedFormules.length})</FormLabel>
+                    <FormLabel className="text-base font-semibold">Formules sélectionnées ({selectedFormules.length})</FormLabel>
                     <div className="mt-2 space-y-2 max-h-40 overflow-y-auto">
                       {favorites.map(favorite => (
                         <div key={favorite.id} className="flex items-center space-x-2">
@@ -251,7 +251,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
               <div className="mt-4 mb-2">
                 <p className="flex items-center text-base font-medium">
                   <ClipboardList className="h-5 w-5 text-brand-chartreuse mr-2" />
-                  Cas spÃ©cifiques
+                  Cas spécifiques
                 </p>
               </div>
 
@@ -280,7 +280,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                         <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        Confier ma rÃ©sidence principale
+                        Confier ma résidence principale
                       </FormLabel>
                     </FormItem>
                   )}
@@ -296,7 +296,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                     <div className="mb-2">
                       <FormLabel className="flex items-center">
                         <LayoutDashboard className="h-5 w-5 text-brand-chartreuse mr-2" />
-                        Services recherchÃ©s
+                        Services recherchés
                       </FormLabel>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -342,18 +342,18 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                     <FormItem>
                       <FormLabel className="flex items-center">
                         <Clock className="h-5 w-5 text-brand-chartreuse mr-2" />
-                        DurÃ©e de mise Ã  disposition
+                        Durée de mise à disposition
                       </FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="SÃ©lectionnez une durÃ©e" />
+                            <SelectValue placeholder="Sélectionnez une durée" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="moins3mois">Moins de 3 mois</SelectItem>
-                          <SelectItem value="3a6mois">De 3 Ã  6 mois</SelectItem>
-                          <SelectItem value="6a12mois">De 6 Ã  12 mois</SelectItem>
+                          <SelectItem value="3a6mois">De 3 à 6 mois</SelectItem>
+                          <SelectItem value="6a12mois">De 6 à 12 mois</SelectItem>
                           <SelectItem value="plus1an">Plus d'un an</SelectItem>
                         </SelectContent>
                       </Select>
@@ -374,7 +374,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="SÃ©lectionnez un type" />
+                            <SelectValue placeholder="Sélectionnez un type" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -400,7 +400,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                     <FormItem>
                       <FormLabel className="flex items-center">
                         <Square className="h-5 w-5 text-brand-chartreuse mr-2" />
-                        Superficie (mÂ²)
+                        Superficie (m²)
                       </FormLabel>
                       <FormControl>
                         <Input type="number" placeholder="Surface" min="1" {...field} />
@@ -471,10 +471,10 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                     <FormItem>
                       <FormLabel className="flex items-center">
                         <Phone className="h-5 w-5 text-brand-chartreuse mr-2" />
-                        TÃ©lÃ©phone
+                        Téléphone
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="Votre numÃ©ro de tÃ©lÃ©phone" {...field} />
+                        <Input placeholder="Votre numéro de téléphone" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -507,7 +507,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
                     <FormItem>
                       <FormLabel className="flex items-center">
                         <User className="h-5 w-5 text-brand-chartreuse mr-2" />
-                        Nom et prÃ©nom
+                        Nom et prénom
                       </FormLabel>
                       <FormControl>
                         <Input placeholder="Votre nom" {...field} />

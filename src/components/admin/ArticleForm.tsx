@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui-kit/form";
@@ -76,21 +76,21 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
     const file = e.target.files?.[0];
     if (!file) return;
     
-    // VÃ©rifier le type de fichier
+    // Vérifier le type de fichier
     if (!file.type.startsWith('image/')) {
       toast({
         title: "Erreur",
-        description: "Veuillez sÃ©lectionner un fichier image valide",
+        description: "Veuillez sélectionner un fichier image valide",
         variant: "destructive"
       });
       return;
     }
 
-    // VÃ©rifier la taille du fichier (max 5MB)
+    // Vérifier la taille du fichier (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       toast({
         title: "Erreur",
-        description: "L'image ne doit pas dÃ©passer 5MB",
+        description: "L'image ne doit pas dépasser 5MB",
         variant: "destructive"
       });
       return;
@@ -99,7 +99,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
     setUploading(true);
     
     try {
-      // Afficher une prÃ©visualisation temporaire
+      // Afficher une prévisualisation temporaire
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreview(e.target?.result as string);
@@ -112,14 +112,14 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
       if (result.success && result.url) {
         form.setValue("image", result.url);
         toast({
-          title: "Image tÃ©lÃ©chargÃ©e",
-          description: "L'image a Ã©tÃ© tÃ©lÃ©chargÃ©e avec succÃ¨s",
+          title: "Image téléchargée",
+          description: "L'image a été téléchargée avec succès",
         });
       } else {
         setImagePreview(null);
         toast({
           title: "Erreur",
-          description: result.error || "Impossible de tÃ©lÃ©charger l'image",
+          description: result.error || "Impossible de télécharger l'image",
           variant: "destructive"
         });
       }
@@ -128,7 +128,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
       setImagePreview(null);
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors du tÃ©lÃ©chargement",
+        description: "Une erreur est survenue lors du téléchargement",
         variant: "destructive"
       });
     } finally {
@@ -140,8 +140,8 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
     try {
       await onSave(data);
       toast({
-        title: "SuccÃ¨s",
-        description: article ? "Article modifiÃ© avec succÃ¨s" : "Article ajoutÃ© avec succÃ¨s",
+        title: "Succès",
+        description: article ? "Article modifié avec succès" : "Article ajouté avec succès",
       });
     } catch (error) {
       console.error("Error saving article:", error);
@@ -195,7 +195,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
                 <FormLabel>Extrait *</FormLabel>
                 <FormControl>
                   <Textarea 
-                    placeholder="RÃ©sumÃ© court de l'article" 
+                    placeholder="Résumé court de l'article" 
                     rows={3}
                     {...field} 
                   />
@@ -217,14 +217,14 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
               {uploading && (
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  TÃ©lÃ©chargement en cours...
+                  Téléchargement en cours...
                 </div>
               )}
               {imagePreview && (
                 <div className="mt-2">
                   <img 
                     src={imagePreview} 
-                    alt="AperÃ§u" 
+                    alt="Aperçu" 
                     className="w-32 h-32 object-cover rounded border"
                   />
                 </div>
@@ -254,7 +254,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
                 <FormLabel>Contenu *</FormLabel>
                 <FormControl>
                   <Textarea 
-                    placeholder="Contenu de l'article (HTML autorisÃ©)" 
+                    placeholder="Contenu de l'article (HTML autorisé)" 
                     rows={10}
                     {...field} 
                   />
@@ -269,10 +269,10 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
             name="resume"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>RÃ©sumÃ© dÃ©taillÃ©</FormLabel>
+                <FormLabel>Résumé détaillé</FormLabel>
                 <FormControl>
                   <Textarea 
-                    placeholder="RÃ©sumÃ© dÃ©taillÃ© de l'article" 
+                    placeholder="Résumé détaillé de l'article" 
                     rows={4}
                     {...field} 
                   />
@@ -308,7 +308,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
                       <FormItem>
                         <FormControl>
                           <Textarea 
-                            placeholder={`RÃ©ponse ${num}`} 
+                            placeholder={`Réponse ${num}`} 
                             rows={3}
                             {...field} 
                           />
@@ -328,7 +328,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
               </Button>
             )}
             <Button type="submit" disabled={uploading}>
-              {uploading ? "TÃ©lÃ©chargement..." : (article ? "Modifier" : "Ajouter")}
+              {uploading ? "Téléchargement..." : (article ? "Modifier" : "Ajouter")}
             </Button>
           </DialogFooter>
         </form>

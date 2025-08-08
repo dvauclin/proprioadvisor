@@ -1,8 +1,8 @@
-﻿
+
 import React from "react";
 import { Formule, Conciergerie } from "@/types";
 
-// Type Ã©tendu pour les formules avec conciergerie
+// Type étendu pour les formules avec conciergerie
 type FormuleWithConciergerie = Formule & { conciergerie?: Conciergerie };
 
 import ConciergerieList from "@/components/conciergerie/ConciergerieList";
@@ -16,6 +16,8 @@ interface ConciergerieListingContentProps {
   resetFilters: () => void;
   subscriptions: Map<string, any>;
   ville: any;
+  conciergerieRatings?: Map<string, number>;
+  conciergerieReviewCounts?: Map<string, number>;
 }
 
 const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
@@ -25,13 +27,15 @@ const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
   onDevisRequest,
   resetFilters,
   subscriptions,
-  ville
+  ville,
+  conciergerieRatings,
+  conciergerieReviewCounts
 }) => {
   return (
     <div className="container mx-auto px-4">
       {!formulesLoading && ville && (
         <div className="text-sm text-gray-600 mb-4">
-          <strong>{filteredFormules.length}</strong> formule{filteredFormules.length > 1 ? 's' : ''} affichÃ©e{filteredFormules.length > 1 ? 's' : ''} sur <strong>{formules.length}</strong>
+          <strong>{filteredFormules.length}</strong> formule{filteredFormules.length > 1 ? 's' : ''} affichée{filteredFormules.length > 1 ? 's' : ''} sur <strong>{formules.length}</strong>
         </div>
       )}
 
@@ -45,7 +49,9 @@ const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
             allFormulesCount={formules.length} 
             onDevisRequest={onDevisRequest} 
             onResetFilters={resetFilters} 
-            subscriptions={subscriptions} 
+            subscriptions={subscriptions}
+            conciergerieRatings={conciergerieRatings}
+            conciergerieReviewCounts={conciergerieReviewCounts}
           />
         )}
       </section>

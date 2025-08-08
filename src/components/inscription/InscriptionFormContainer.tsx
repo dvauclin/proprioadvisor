@@ -1,4 +1,4 @@
-﻿
+
 import React, { ReactNode } from "react";
 
 interface InscriptionFormContainerProps {

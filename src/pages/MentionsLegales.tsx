@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Head from "next/head";
@@ -11,25 +11,25 @@ const MentionsLegales: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Mentions LÃ©gales | ProprioAdvisor</title>
-        <meta name="description" content="Mentions lÃ©gales de ProprioAdvisor, comparateur de conciergeries Airbnb" />
+        <title>Mentions Légales | ProprioAdvisor</title>
+        <meta name="description" content="Mentions légales de ProprioAdvisor, comparateur de conciergeries Airbnb" />
         <link rel="canonical" href="https://proprioadvisor.fr/mentions-legales" />
       </Head>
 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           <header className="mb-8">
-            <h1 className="text-3xl font-bold">Mentions LÃ©gales</h1>
+            <h1 className="text-3xl font-bold">Mentions Légales</h1>
           </header>
 
           <main className="prose max-w-none">
             <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">Ã‰diteur du site</h2>
-              <p>Le site ProprioAdvisor est Ã©ditÃ© par :</p>
+              <h2 className="text-xl font-semibold mb-4">0diteur du site</h2>
+              <p>Le site ProprioAdvisor est édité par :</p>
               <address className="not-italic">
                 <p>David Vauclin</p>
                 <p>Auto-entrepreneur</p>
-                <p>SiÃ¨ge social : 4 rue Chateauneuf, 06000 Nice</p>
+                <p>Siège social : 4 rue Chateauneuf, 06000 Nice</p>
                 <p>SIRET : 88842323300046</p>
               </address>
               
@@ -38,8 +38,8 @@ const MentionsLegales: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">HÃ©bergement</h2>
-              <p>Le site est hÃ©bergÃ© par :</p>
+              <h2 className="text-xl font-semibold mb-4">Hébergement</h2>
+              <p>Le site est hébergé par :</p>
               <address className="not-italic">
                 <p>Vercel Inc.</p>
                 <p>440 N Barranca Ave #4133, Covina, CA 91723, USA</p>
@@ -47,21 +47,21 @@ const MentionsLegales: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">PropriÃ©tÃ© intellectuelle</h2>
-              <p>L'ensemble de ce site (structure, textes, logos, images, photographies, vidÃ©os, sons, savoir-faire, etc.) est la propriÃ©tÃ© exclusive de ProprioAdvisor ou fait l'objet d'une autorisation d'utilisation. Toute utilisation, reproduction ou reprÃ©sentation, par quelque procÃ©dÃ© que ce soit, et sur quelque support que ce soit, de tout ou partie du site et/ou des Ã©lÃ©ments qui le composent n'est pas autorisÃ©e sans le consentement prÃ©alable de ProprioAdvisor.</p>
+              <h2 className="text-xl font-semibold mb-4">Propriété intellectuelle</h2>
+              <p>L'ensemble de ce site (structure, textes, logos, images, photographies, vidéos, sons, savoir-faire, etc.) est la propriété exclusive de ProprioAdvisor ou fait l'objet d'une autorisation d'utilisation. Toute utilisation, reproduction ou représentation, par quelque procédé que ce soit, et sur quelque support que ce soit, de tout ou partie du site et/ou des éléments qui le composent n'est pas autorisée sans le consentement préalable de ProprioAdvisor.</p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">Limitation de responsabilitÃ©</h2>
-              <p>ProprioAdvisor ne pourra Ãªtre tenu responsable des dommages directs et indirects causÃ©s au matÃ©riel de l'utilisateur, lors de l'accÃ¨s au site, et rÃ©sultant de l'utilisation d'un matÃ©riel ne rÃ©pondant pas aux spÃ©cifications techniques requises, soit de l'apparition d'un bug ou d'une incompatibilitÃ©.</p>
-              <p>ProprioAdvisor ne pourra Ãªtre tenu responsable des dommages indirects consÃ©cutifs Ã  l'utilisation du site.</p>
+              <h2 className="text-xl font-semibold mb-4">Limitation de responsabilité</h2>
+              <p>ProprioAdvisor ne pourra être tenu responsable des dommages directs et indirects causés au matériel de l'utilisateur, lors de l'accès au site, et résultant de l'utilisation d'un matériel ne répondant pas aux spécifications techniques requises, soit de l'apparition d'un bug ou d'une incompatibilité.</p>
+              <p>ProprioAdvisor ne pourra être tenu responsable des dommages indirects consécutifs à l'utilisation du site.</p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold mb-4">Loi applicable et juridiction</h2>
               <p>
-                Les prÃ©sentes mentions lÃ©gales sont soumises Ã  la loi franÃ§aise. En cas de litige, 
-                les tribunaux franÃ§ais seront seuls compÃ©tents.
+                Les présentes mentions légales sont soumises à la loi française. En cas de litige, 
+                les tribunaux français seront seuls compétents.
               </p>
             </section>
           </main>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -15,7 +15,7 @@ const TestVillesPage = () => {
     try {
       const villesData = await getAllVilles();
       setVilles(villesData);
-      setMessage(`ChargÃ© ${villesData.length} villes`);
+      setMessage(`Chargé ${villesData.length} villes`);
     } catch (error) {
       console.error("Erreur lors du chargement des villes:", error);
       setMessage("Erreur lors du chargement des villes");
@@ -30,16 +30,16 @@ const TestVillesPage = () => {
       const testVilles = [
         { nom: "Paris", slug: "paris", description: "Capitale de la France" },
         { nom: "Lyon", slug: "lyon", description: "Capitale des Gaules" },
-        { nom: "Marseille", slug: "marseille", description: "CitÃ© phocÃ©enne" },
+        { nom: "Marseille", slug: "marseille", description: "Cité phocéenne" },
         { nom: "Bordeaux", slug: "bordeaux", description: "Capitale du vin" },
-        { nom: "Nice", slug: "nice", description: "CÃ´te d'Azur" }
+        { nom: "Nice", slug: "nice", description: "Côte d'Azur" }
       ];
 
       for (const ville of testVilles) {
         await addVille(ville);
       }
 
-      setMessage("Villes de test ajoutÃ©es avec succÃ¨s");
+      setMessage("Villes de test ajoutées avec succès");
       await loadVilles(); // Recharger les villes
     } catch (error) {
       console.error("Erreur lors de l'ajout des villes:", error);
@@ -74,7 +74,7 @@ const TestVillesPage = () => {
       )}
 
       <div className="space-y-2">
-        <h2 className="text-lg font-semibold">Villes dans la base de donnÃ©es ({villes.length})</h2>
+        <h2 className="text-lg font-semibold">Villes dans la base de données ({villes.length})</h2>
         {villes.map(ville => (
           <div key={ville.id} className="p-3 border rounded">
             <strong>{ville.nom}</strong> - {ville.description}
@@ -82,7 +82,7 @@ const TestVillesPage = () => {
         ))}
         {villes.length === 0 && (
           <div className="p-3 border rounded text-gray-500">
-            Aucune ville trouvÃ©e
+            Aucune ville trouvée
           </div>
         )}
       </div>

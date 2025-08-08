@@ -1,4 +1,4 @@
-﻿// Types globaux pour Next.js
+// Types globaux pour Next.js
 
 interface Window {
   // Stripe

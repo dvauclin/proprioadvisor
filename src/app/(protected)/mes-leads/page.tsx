@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useAuth } from '@/contexts/AuthContext'
 import MesLeads from '@/pages/MesLeads'
@@ -15,7 +15,7 @@ export default function MesLeadsPage() {
     );
   }
 
-  // Si l'utilisateur n'est pas connectÃ©, rediriger vers la connexion
+  // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
   if (!user) {
     window.location.href = '/connexion';
     return null;

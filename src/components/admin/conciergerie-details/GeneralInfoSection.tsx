@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Conciergerie, Ville } from "@/types";
 
 interface GeneralInfoSectionProps {
@@ -23,7 +23,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
 
   return (
     <div className="mb-6 bg-white p-6 rounded-lg shadow">
-      <h3 className="text-lg font-semibold mb-4">Informations gÃ©nÃ©rales</h3>
+      <h3 className="text-lg font-semibold mb-4">Informations générales</h3>
       
       {isEditing ? (
         <div className="space-y-4">
@@ -64,7 +64,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">TÃ©lÃ©phone du contact</label>
+            <label className="block text-sm font-medium mb-1">Téléphone du contact</label>
             <input
               type="tel"
               className="w-full p-2 border rounded"
@@ -96,7 +96,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               onChange={(e) => updateField && updateField('scoreManuel', e.target.value === '' ? null : parseInt(e.target.value, 10))}
               placeholder="Utilise le score auto"
             />
-            <p className="text-xs text-gray-500 mt-1">Laissez vide pour utiliser le score automatique. Un score nÃ©gatif est possible.</p>
+            <p className="text-xs text-gray-500 mt-1">Laissez vide pour utiliser le score automatique. Un score négatif est possible.</p>
           </div>
           
           {/* Show villes covered with possibility to modify */}
@@ -131,7 +131,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
                   })}
                 </div>
               ) : (
-                <p className="text-sm text-gray-500">Aucune ville sÃ©lectionnÃ©e</p>
+                <p className="text-sm text-gray-500">Aucune ville sélectionnée</p>
               )}
             </div>
 
@@ -153,7 +153,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
                   }}
                   defaultValue=""
                 >
-                  <option value="" disabled>SÃ©lectionner une ville Ã  ajouter</option>
+                  <option value="" disabled>Sélectionner une ville à ajouter</option>
                   {Array.from(villes.values()).map((ville) => (
                     <option 
                       key={ville.id} 
@@ -169,7 +169,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Type de logement acceptÃ©</label>
+            <label className="block text-sm font-medium mb-1">Type de logement accepté</label>
             <select
               className="w-full p-2 border rounded"
               value={conciergerie.typeLogementAccepte || 'tous'}
@@ -182,7 +182,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Superficie minimum (mÂ²)</label>
+            <label className="block text-sm font-medium mb-1">Superficie minimum (m²)</label>
             <input
               type="number"
               className="w-full p-2 border rounded"
@@ -202,14 +202,14 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">DÃ©duction des frais</label>
+            <label className="block text-sm font-medium mb-1">Déduction des frais</label>
             <select
               className="w-full p-2 border rounded"
               value={conciergerie.deductionFrais || 'inclus'}
               onChange={(e) => updateField && updateField('deductionFrais', e.target.value)}
             >
-              <option value="deductTous">Tous les frais dÃ©ductibles</option>
-              <option value="deductMenage">Seulement les frais de mÃ©nage dÃ©ductibles</option>
+              <option value="deductTous">Tous les frais déductibles</option>
+              <option value="deductMenage">Seulement les frais de ménage déductibles</option>
               <option value="inclus">Frais inclus</option>
             </select>
           </div>
@@ -221,7 +221,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               value={typeof conciergerie.tva === 'string' ? conciergerie.tva : (conciergerie.tva ? 'TTC' : 'HT')}
               onChange={(e) => updateField && updateField('tva', e.target.value)}
             >
-              <option value="">Non spÃ©cifiÃ©</option>
+              <option value="">Non spécifié</option>
               <option value="TTC">TTC</option>
               <option value="HT">HT</option>
             </select>
@@ -244,18 +244,18 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               checked={conciergerie.accepteResidencePrincipale || false}
               onChange={(e) => updateField && updateField('accepteResidencePrincipale', e.target.checked)}
             />
-            <label className="text-sm font-medium">Accepte les rÃ©sidences principales</label>
+            <label className="text-sm font-medium">Accepte les résidences principales</label>
           </div>
         </div>
       ) : (
         <div className="space-y-2">
           <p><span className="font-medium">Nom:</span> {conciergerie.nom}</p>
           <p><span className="font-medium">Email de contact:</span> {conciergerie.mail || ''}</p>
-          <p><span className="font-medium">Nom du contact:</span> {conciergerie.nomContact || 'Non spÃ©cifiÃ©'}</p>
-          <p><span className="font-medium">TÃ©lÃ©phone du contact:</span> {conciergerie.telephoneContact || 'Non spÃ©cifiÃ©'}</p>
+          <p><span className="font-medium">Nom du contact:</span> {conciergerie.nomContact || 'Non spécifié'}</p>
+          <p><span className="font-medium">Téléphone du contact:</span> {conciergerie.telephoneContact || 'Non spécifié'}</p>
           <p><span className="font-medium">Score Final:</span> {conciergerie.score}</p>
           {conciergerie.scoreManuel != null && (
-            <p className="text-sm text-gray-600">(Score manuel appliquÃ© : {conciergerie.scoreManuel})</p>
+            <p className="text-sm text-gray-600">(Score manuel appliqué : {conciergerie.scoreManuel})</p>
           )}
           
           {conciergerie.logo ? (
@@ -292,18 +292,18 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
                   })}
                 </div>
               ) : (
-                <span className="text-gray-500 text-sm">Aucune ville spÃ©cifiÃ©e</span>
+                <span className="text-gray-500 text-sm">Aucune ville spécifiée</span>
               )}
             </div>
           </div>
           
-          <p><span className="font-medium">Type de logement acceptÃ©:</span> {getPropertyTypeLabel ? getPropertyTypeLabel(conciergerie.typeLogementAccepte) : conciergerie.typeLogementAccepte}</p>
-          <p><span className="font-medium">Superficie minimum:</span> {conciergerie.superficieMin} mÂ²</p>
+          <p><span className="font-medium">Type de logement accepté:</span> {getPropertyTypeLabel ? getPropertyTypeLabel(conciergerie.typeLogementAccepte) : conciergerie.typeLogementAccepte}</p>
+          <p><span className="font-medium">Superficie minimum:</span> {conciergerie.superficieMin} m²</p>
           <p><span className="font-medium">Nombre de chambres minimum:</span> {conciergerie.nombreChambresMin}</p>
-          <p><span className="font-medium">DÃ©duction des frais:</span> {getDeductionFraisLabel ? getDeductionFraisLabel(conciergerie.deductionFrais || '') : conciergerie.deductionFrais}</p>
+          <p><span className="font-medium">Déduction des frais:</span> {getDeductionFraisLabel ? getDeductionFraisLabel(conciergerie.deductionFrais || '') : conciergerie.deductionFrais}</p>
           <p><span className="font-medium">TVA:</span> {typeof conciergerie.tva === 'string' ? conciergerie.tva : (conciergerie.tva ? 'TTC' : 'HT')}</p>
           <p><span className="font-medium">Accepte la gestion partielle:</span> {conciergerie.accepteGestionPartielle ? 'Oui' : 'Non'}</p>
-          <p><span className="font-medium">Accepte les rÃ©sidences principales:</span> {conciergerie.accepteResidencePrincipale ? 'Oui' : 'Non'}</p>
+          <p><span className="font-medium">Accepte les résidences principales:</span> {conciergerie.accepteResidencePrincipale ? 'Oui' : 'Non'}</p>
         </div>
       )}
     </div>

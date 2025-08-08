@@ -1,4 +1,4 @@
-﻿// Types pour les tests
+// Types pour les tests
 
 export interface TestConfig {
   setupFilesAfterEnv?: string[]

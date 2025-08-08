@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -19,6 +19,7 @@ import ServicesSection from "@/components/ui-kit/comparison-card/services-sectio
 import FavoriteButton from "@/components/ui-kit/favorite-button";
 import DevisModal from "@/components/conciergerie/DevisModal";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui-kit/tooltip";
+import AddAvisModal from "@/components/ui-kit/add-avis-modal";
 
 interface ConciergerieDetailsProps {
   conciergerieSlug: string;
@@ -39,6 +40,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
   const [showDevisModal, setShowDevisModal] = React.useState(false);
   const [selectedFormule, setSelectedFormule] = React.useState<{ formuleId: string; conciergerieId: string; } | null>(null);
   const [subscription, setSubscription] = React.useState<any>(null);
+  const [showAddReviewModal, setShowAddReviewModal] = React.useState(false);
   
   React.useEffect(() => {
     const fetchData = async () => {
@@ -218,6 +220,15 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
     }
   };
 
+  const handleAddAvis = () => {
+    setShowAddReviewModal(true);
+  };
+
+  const handleAvisAdded = () => {
+    // Recharge simple de la page pour refléter le nouvel avis
+    window.location.reload();
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center py-20">
@@ -251,134 +262,152 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               {/* Logo, titre, note et villes */}
-              <div className="flex items-start gap-6 mb-8">
-                {/* Logo circulaire */}
-                <div className="flex-shrink-0">
-                  <ConciergerieLogoDisplay
-                    logoUrl={conciergerie.logo}
-                    altText={conciergerie.nom}
-                    size="lg"
-                  />
-                </div>
-                
-                {/* Informations principales */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-                      {conciergerie.nom}
-                    </h1>
-                    
-                    {/* Pictogrammes tï¿½lï¿½phone et site web */}
-                    <div className="flex items-center gap-1">
-                      {subscription?.website_url && subscription?.website_link && (
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <button
-                                onClick={handleWebsiteClick}
-                                className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
-                                aria-label="Visiter le site web"
-                              >
-                                <ExternalLink size={20} />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Visiter le site web</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      )}
-                      
-                      {subscription?.phone_number_value && subscription?.phone_number && (
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <button
-                                onClick={handlePhoneClick}
-                                className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
-                                aria-label="Appeler"
-                              >
-                                <Phone size={20} />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Appeler</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      )}
-                    </div>
+              <div className="mb-8">
+                {/* Logo et informations principales - Desktop: côte à côte, Mobile: empilés */}
+                <div className="flex flex-col md:flex-row items-start gap-6">
+                  {/* Logo circulaire */}
+                  <div className="flex-shrink-0">
+                    <ConciergerieLogoDisplay
+                      logoUrl={conciergerie.logo}
+                      altText={conciergerie.nom}
+                      size="lg"
+                    />
                   </div>
                   
-                  {/* Note et avis - CLIQUABLES */}
-                  {averageRating && (
-                    <button 
-                      onClick={handleStarClick}
-                      className="flex items-center gap-2 mb-3 hover:opacity-80 transition-opacity cursor-pointer"
-                    >
+                  {/* Informations principales */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+                        {conciergerie.nom}
+                      </h1>
+                      
+                      {/* Pictogrammes tï¿½lï¿½phone et site web */}
                       <div className="flex items-center gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            className={`h-4 w-4 md:h-5 md:w-5 ${i < Math.round(averageRating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                          />
-                        ))}
+                        {subscription?.website_url && subscription?.website_link && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <button
+                                  onClick={handleWebsiteClick}
+                                  className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
+                                  aria-label="Visiter le site web"
+                                >
+                                  <ExternalLink size={20} />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Visiter le site web</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
+                        
+                        {subscription?.phone_number_value && subscription?.phone_number && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <button
+                                  onClick={handlePhoneClick}
+                                  className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
+                                  aria-label="Appeler"
+                                >
+                                  <Phone size={20} />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Appeler</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
                       </div>
-                      <span className="text-sm md:text-base text-gray-600">({reviewCount} avis)</span>
-                    </button>
-                  )}
-                  
-                  {/* Zones d'intervention - CLIQUABLES */}
-                  {conciergerieVilles.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {conciergerieVilles.map((ville) => (
-                        <Link 
-                          key={ville.id} 
-                          href={`/conciergerie/${ville.slug}`}
-                          className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors"
-                        >
-                          {ville.nom}
-                        </Link>
-                      ))}
                     </div>
-                  )}
-                </div>
+                    
+                                         {/* Note et avis - CLIQUABLES */}
+                     {averageRating && (
+                       <button 
+                         onClick={handleStarClick}
+                         className="flex items-center gap-2 mb-3 hover:opacity-80 transition-opacity cursor-pointer"
+                       >
+                         <div className="flex items-center gap-1">
+                           {[...Array(5)].map((_, i) => (
+                             <Star 
+                               key={i} 
+                               className={`h-4 w-4 md:h-5 md:w-5 ${i < Math.round(averageRating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                             />
+                           ))}
+                         </div>
+                         <span className="text-sm md:text-base text-gray-600">({reviewCount} avis)</span>
+                       </button>
+                     )}
+                     
+                     {/* Zones d'intervention - CLIQUABLES - Sous la note pour tous les écrans */}
+                     {conciergerieVilles.length > 0 && (
+                       <div className="flex flex-wrap gap-2 mb-4">
+                         {conciergerieVilles.map((ville) => (
+                           <Link 
+                             key={ville.id} 
+                             href={`/conciergerie/${ville.slug}`}
+                             className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                           >
+                             {ville.nom}
+                           </Link>
+                         ))}
+                       </div>
+                     )}
+                   </div>
+                 </div>
               </div>
 
               {/* Critï¿½res d'acceptation */}
               <h2 className="text-2xl font-bold mb-6">Critï¿½res d'acceptation</h2>
               
-              {/* Critï¿½res en 2 colonnes avec ordre prï¿½cis */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div>
-                    <span className="text-gray-600 text-sm">Zone couverte</span>
-                    <p className="font-medium">{conciergerie.zoneCouverte || 'Non spï¿½cifiï¿½e'}</p>
+              {/* Critères en 2 colonnes, remplissage gauche → droite puis retour à la ligne */}
+              {(() => {
+                const criteria = [
+                  {
+                    label: 'Zone couverte',
+                    value: conciergerie.zoneCouverte,
+                    show: Boolean(conciergerie.zoneCouverte),
+                  },
+                  {
+                    label: "Type de logement accepté",
+                    value: getPropertyTypeLabel(conciergerie.typeLogementAccepte),
+                    show: true,
+                  },
+                  {
+                    label: 'Superficie minimale',
+                    value: `${conciergerie.superficieMin} m²`,
+                    show: conciergerie.superficieMin > 0,
+                  },
+                  {
+                    label: 'Nombre de chambres minimal',
+                    value: conciergerie.nombreChambresMin,
+                    show: conciergerie.nombreChambresMin > 0,
+                  },
+                  {
+                    label: 'Accepte résidence principale',
+                    value: conciergerie.accepteResidencePrincipale ? 'Oui' : 'Non',
+                    show: true,
+                  },
+                  {
+                    label: 'Accepte gestion partielle',
+                    value: conciergerie.accepteGestionPartielle ? 'Oui' : 'Non',
+                    show: true,
+                  },
+                ].filter(item => item.show);
+
+                return (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {criteria.map((item, index) => (
+                      <div key={`${item.label}-${index}`}>
+                        <span className="text-gray-600 text-sm">{item.label}</span>
+                        <p className="font-medium">{item.value}</p>
+                      </div>
+                    ))}
                   </div>
-                  
-                  <div>
-                    <span className="text-gray-600 text-sm">Nombre de chambres minimal</span>
-                    <p className="font-medium">{conciergerie.nombreChambresMin}</p>
-                  </div>
-                  
-                  <div>
-                    <span className="text-gray-600 text-sm">Accepte rï¿½sidence principale</span>
-                    <p className="font-medium">{conciergerie.accepteResidencePrincipale ? 'Oui' : 'Non'}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <div>
-                    <span className="text-gray-600 text-sm">Type de logement acceptï¿½</span>
-                    <p className="font-medium">{getPropertyTypeLabel(conciergerie.typeLogementAccepte)}</p>
-                  </div>
-                  
-                  <div>
-                    <span className="text-gray-600 text-sm">Accepte gestion partielle</span>
-                    <p className="font-medium">{conciergerie.accepteGestionPartielle ? 'Oui' : 'Non'}</p>
-                  </div>
-                </div>
-              </div>
+                );
+              })()}
             </div>
           </div>
 
@@ -449,6 +478,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
         <div id="avis-clients-section" className="mt-8">
           <AvisDisplay
             conciergerieId={conciergerie.id}
+            onAddAvis={handleAddAvis}
           />
         </div>
       </div>
@@ -475,6 +505,14 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           createdAt: formules.find(f => f.id === selectedFormule.formuleId)?.created_at || '',
           conciergerie: conciergerie
         } : null}
+      />
+
+      <AddAvisModal
+        isOpen={showAddReviewModal}
+        onClose={() => setShowAddReviewModal(false)}
+        conciergerieId={conciergerie.id}
+        conciergerieName={conciergerie.nom}
+        onAvisAdded={handleAvisAdded}
       />
     </div>
   );

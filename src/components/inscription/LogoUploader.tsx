@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { FormLabel } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
@@ -20,8 +20,8 @@ const LogoUploader: React.FC<LogoUploaderProps> = ({
 }) => {
   // Generate alt text for preview
   const previewAltText = conciergerieNom 
-    ? `AperÃ§u du logo de ${conciergerieNom}` 
-    : "AperÃ§u du logo";
+    ? `Aperçu du logo de ${conciergerieNom}` 
+    : "Aperçu du logo";
 
   return (
     <div className="space-y-2">
@@ -35,7 +35,7 @@ const LogoUploader: React.FC<LogoUploaderProps> = ({
       {isUploading && (
         <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
           <Loader2 className="h-4 w-4 animate-spin" />
-          TÃ©lÃ©chargement du logo en cours...
+          Téléchargement du logo en cours...
         </div>
       )}
       {logoPreview && (

@@ -1,4 +1,4 @@
-﻿
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/integrations/supabase/client';
@@ -29,7 +29,7 @@ export const useSubscriptionSubmit = ({
   const [loading, setLoading] = useState(false);
 
   const handleSubscription = async (values: SubscriptionFormValues) => {
-    console.log("handleSubscription appelÃ© avec:", values);
+    console.log("handleSubscription appelé avec:", values);
     
     if (!conciergerieId) {
       toast({ title: "Erreur", description: "ID de conciergerie manquant.", variant: "destructive" });
@@ -43,7 +43,7 @@ export const useSubscriptionSubmit = ({
       const amountInCents = totalMonthlyFee * 100;
       
       if (totalMonthlyFee < 0) {
-        toast({ title: "Erreur", description: "Le montant ne peut pas Ãªtre nÃ©gatif.", variant: "destructive" });
+        toast({ title: "Erreur", description: "Le montant ne peut pas être négatif.", variant: "destructive" });
         setLoading(false);
         return;
       }
@@ -88,11 +88,11 @@ export const useSubscriptionSubmit = ({
         phone_number_value: values.phoneNumberValue || null
       };
 
-      // Si c'est une souscription gratuite (pas d'abonnement payant cochÃ©), traiter directement
+      // Si c'est une souscription gratuite (pas d'abonnement payant coché), traiter directement
       if (!values.useCustomAmount || totalMonthlyFee === 0) {
-        console.log("Souscription gratuite dÃ©tectÃ©e, traitement direct sans Stripe");
+        console.log("Souscription gratuite détectée, traitement direct sans Stripe");
         
-        // Si on a une souscription existante qui Ã©tait payante, il faut d'abord annuler l'abonnement Stripe
+        // Si on a une souscription existante qui était payante, il faut d'abord annuler l'abonnement Stripe
         if (existingSubscription && existingSubscription.stripe_subscription_id && existingSubscription.monthly_amount > 0) {
           console.log("Annulation de l'abonnement Stripe existant");
           try {
@@ -111,7 +111,7 @@ export const useSubscriptionSubmit = ({
               return;
             }
             
-            console.log("Abonnement Stripe annulÃ© avec succÃ¨s");
+            console.log("Abonnement Stripe annulé avec succès");
           } catch (cancelError) {
             console.error("Erreur lors de l'annulation de l'abonnement:", cancelError);
             toast({
@@ -125,7 +125,7 @@ export const useSubscriptionSubmit = ({
         }
         
         // Traiter la souscription gratuite directement
-        // VÃ©rifier s'il existe dÃ©jÃ  une souscription pour cette conciergerie
+        // Vérifier s'il existe déjà une souscription pour cette conciergerie
         const { data: existingData } = await supabase
           .from('subscriptions')
           .select('id')
@@ -136,7 +136,7 @@ export const useSubscriptionSubmit = ({
         let isUpdate = false;
 
         if (existingData) {
-          // Mettre Ã  jour la souscription existante
+          // Mettre à jour la souscription existante
           const { error: updateError } = await supabase
             .from('subscriptions')
             .update({
@@ -155,7 +155,7 @@ export const useSubscriptionSubmit = ({
           subscriptionId = existingData.id;
           isUpdate = true;
         } else {
-          // CrÃ©er une nouvelle souscription
+          // Créer une nouvelle souscription
           const { data: insertData, error: insertError } = await supabase
             .from('subscriptions')
             .insert({
@@ -201,7 +201,7 @@ export const useSubscriptionSubmit = ({
           console.error("Error during conciergerie validation for free subscription:", error);
         }
         
-        // DÃ©clencher le webhook
+        // Déclencher le webhook
         try {
           await triggerWebhook({
             type: 'subscription_update',
@@ -213,10 +213,10 @@ export const useSubscriptionSubmit = ({
             is_free: true
           });
         } catch (webhookError) {
-          console.error("Erreur lors du dÃ©clenchement du webhook:", webhookError);
+          console.error("Erreur lors du déclenchement du webhook:", webhookError);
         }
 
-        // Rediriger vers la page de succÃ¨s avec tous les paramÃ¨tres
+        // Rediriger vers la page de succès avec tous les paramètres
         const params = new URLSearchParams({
           subscription_id: subscriptionId,
           points: totalPoints.toString(),
@@ -253,7 +253,7 @@ export const useSubscriptionSubmit = ({
         console.error("Error creating checkout:", error);
         toast({
           title: "Erreur",
-          description: "Impossible de crÃ©er la session de paiement.",
+          description: "Impossible de créer la session de paiement.",
           variant: "destructive"
         });
         setLoading(false);
@@ -263,7 +263,7 @@ export const useSubscriptionSubmit = ({
       console.log("Checkout response:", data);
 
       if (data?.url) {
-        // DÃ©clencher le webhook pour les souscriptions payantes
+        // Déclencher le webhook pour les souscriptions payantes
         try {
           await triggerWebhook({
             type: 'subscription_checkout',
@@ -273,7 +273,7 @@ export const useSubscriptionSubmit = ({
             checkout_url: data.url
           });
         } catch (webhookError) {
-          console.error("Erreur lors du dÃ©clenchement du webhook:", webhookError);
+          console.error("Erreur lors du déclenchement du webhook:", webhookError);
         }
         
         // Redirect to URL

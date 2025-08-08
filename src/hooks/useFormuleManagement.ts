@@ -1,4 +1,4 @@
-﻿
+
 import { useState } from "react";
 import { useToast } from "@/components/ui-kit/use-toast";
 import type { FormuleFormData } from "@/components/FormuleForm";
@@ -20,8 +20,8 @@ export const useFormuleManagement = () => {
     setFormules([...formules, newFormule]);
     
     toast({
-      title: "Formule ajoutÃ©e",
-      description: `La formule "${formule.nom}" a Ã©tÃ© ajoutÃ©e`,
+      title: "Formule ajoutée",
+      description: `La formule "${formule.nom}" a été ajoutée`,
     });
   };
 
@@ -29,8 +29,8 @@ export const useFormuleManagement = () => {
     setFormules(formules.filter(f => f.id !== formuleId));
     
     toast({
-      title: "Formule supprimÃ©e",
-      description: "La formule a Ã©tÃ© supprimÃ©e",
+      title: "Formule supprimée",
+      description: "La formule a été supprimée",
     });
   };
 

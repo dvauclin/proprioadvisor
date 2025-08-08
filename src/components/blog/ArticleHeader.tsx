@@ -1,4 +1,4 @@
-﻿
+
 import React from 'react';
 import { Article } from '@/types';
 
@@ -16,13 +16,13 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
     <>
       <div className="mb-6 text-sm text-gray-500">
         {isModified ? (
-          <>ModifiÃ© le {new Date(article.datePublication || '').toLocaleDateString('fr-FR', { 
+          <>Modifié le {new Date(article.datePublication || '').toLocaleDateString('fr-FR', { 
             year: 'numeric', 
             month: 'long', 
             day: 'numeric' 
           })}</>
         ) : (
-          <>PubliÃ© le {new Date(article.createdAt || '').toLocaleDateString('fr-FR', { 
+          <>Publié le {new Date(article.createdAt || '').toLocaleDateString('fr-FR', { 
             year: 'numeric', 
             month: 'long', 
             day: 'numeric' 

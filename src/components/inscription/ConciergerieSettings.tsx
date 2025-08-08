@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import {
@@ -22,7 +22,7 @@ const ConciergerieSettings = () => {
           name="typeLogementAccepte"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type de logement acceptÃ©</FormLabel>
+              <FormLabel>Type de logement accepté</FormLabel>
               <FormControl>
                 <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-chartreuse focus:border-brand-chartreuse"
@@ -45,14 +45,14 @@ const ConciergerieSettings = () => {
           name="deductionFrais"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>DÃ©duction des frais</FormLabel>
+              <FormLabel>Déduction des frais</FormLabel>
               <FormControl>
                 <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-chartreuse focus:border-brand-chartreuse"
                   {...field}
                 >
-                  <option value="deductTous">DÃ©duction de tous les frais</option>
-                  <option value="deductMenage">DÃ©duction du mÃ©nage seulement</option>
+                  <option value="deductTous">Déduction de tous les frais</option>
+                  <option value="deductMenage">Déduction du ménage seulement</option>
                   <option value="inclus">Frais inclus</option>
                 </select>
               </FormControl>
@@ -68,7 +68,7 @@ const ConciergerieSettings = () => {
           name="superficieMin"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Superficie minimale (mÂ²)</FormLabel>
+              <FormLabel>Superficie minimale (m²)</FormLabel>
               <FormControl>
                 <Input type="number" min="0" {...field} />
               </FormControl>

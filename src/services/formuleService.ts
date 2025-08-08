@@ -1,4 +1,4 @@
-﻿import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { Formule, Conciergerie } from "@/types";
 import { transformConciergerieFromDB, transformFormuleFromDB } from "./conciergerieTransformService";
 

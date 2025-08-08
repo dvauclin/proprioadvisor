@@ -1,6 +1,6 @@
-﻿import { Conciergerie, Formule } from "@/types";
+import { Conciergerie, Formule } from "@/types";
 
-// Service pour transformer les donnÃ©es entre Supabase et l'interface TypeScript
+// Service pour transformer les données entre Supabase et l'interface TypeScript
 export const transformFormuleFromDB = (formule: any): Formule => ({
   id: formule.id,
   nom: formule.nom,
@@ -30,9 +30,9 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
   // Calculate score based on the new logic
   let calculatedScore = 0;
   
-  // ðŸ” DIAGNOSTIC: Log score calculation for Aurora specifically
+  // x DIAGNOSTIC: Log score calculation for Aurora specifically
   if (conciergerie.nom?.toLowerCase().includes('aurora')) {
-    console.log("ðŸŒŸ Aurora Score Calculation in Transform:", {
+    console.log("xRx Aurora Score Calculation in Transform:", {
       nom: conciergerie.nom,
       scoreManuel: conciergerie.score_manuel,
       subscriptions: conciergerie.subscriptions,
@@ -44,7 +44,7 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
     // If manual score is set, use it
     calculatedScore = conciergerie.score_manuel;
     if (conciergerie.nom?.toLowerCase().includes('aurora')) {
-      console.log("ðŸŒŸ Aurora using scoreManuel:", calculatedScore);
+      console.log("xRx Aurora using scoreManuel:", calculatedScore);
     }
   } else if (conciergerie.subscriptions && conciergerie.subscriptions.length > 0) {
     // Get the most recent subscription
@@ -59,7 +59,7 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
       }
       
       if (conciergerie.nom?.toLowerCase().includes('aurora')) {
-        console.log("ðŸŒŸ Aurora subscription score calculation:", {
+        console.log("xRx Aurora subscription score calculation:", {
           latestSubscription,
           paymentStatus: latestSubscription.payment_status,
           totalPoints: latestSubscription.total_points,
@@ -71,7 +71,7 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
   }
   
   if (conciergerie.nom?.toLowerCase().includes('aurora')) {
-    console.log("ðŸŒŸ Aurora final calculated score:", calculatedScore);
+    console.log("xRx Aurora final calculated score:", calculatedScore);
   }
 
   const transformed: Conciergerie = {

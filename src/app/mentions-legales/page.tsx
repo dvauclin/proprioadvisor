@@ -1,13 +1,13 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import MentionsLegales from '@/pages/MentionsLegales'
 
 export const metadata: Metadata = {
-  title: 'Mentions LÃ©gales | Proprioadvisor',
-  description: 'Mentions lÃ©gales de Proprioadvisor',
-  keywords: ['mentions lÃ©gales', 'lÃ©gal', 'conciergerie'],
+  title: 'Mentions Légales | Proprioadvisor',
+  description: 'Mentions légales de Proprioadvisor',
+  keywords: ['mentions légales', 'légal', 'conciergerie'],
   openGraph: {
-    title: 'Mentions LÃ©gales | Proprioadvisor',
-    description: 'Mentions lÃ©gales de Proprioadvisor',
+    title: 'Mentions Légales | Proprioadvisor',
+    description: 'Mentions légales de Proprioadvisor',
     url: 'https://proprioadvisor.com/mentions-legales',
   },
   alternates: {

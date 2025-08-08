@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
@@ -35,7 +35,7 @@ export const LingeOptions: React.FC<LingeOptionsProps> = ({
               }}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="SÃ©lectionnez une option" />
+                <SelectValue placeholder="Sélectionnez une option" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="inclus">Inclus</SelectItem>
@@ -57,7 +57,7 @@ export const LingeOptions: React.FC<LingeOptionsProps> = ({
             
             return (
               <FormItem>
-                <FormLabel>Prix location mensuel du linge (â‚¬)</FormLabel>
+                <FormLabel>Prix location mensuel du linge ()</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 

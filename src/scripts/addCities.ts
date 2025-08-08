@@ -1,6 +1,6 @@
-﻿import { addCities } from "@/services/supabaseService";
+import { addCities } from "@/services/supabaseService";
 
-// Liste des villes Ã  ajouter - dÃ©jÃ  prÃ©sente dans le fichier
+// Liste des villes à ajouter - déjà présente dans le fichier
 const cities = [
   "Aix-en-Provence",
   "Aix-les-Bains",
@@ -53,7 +53,7 @@ export const populateCities = async () => {
   }
 };
 
-// Ajout d'une fonction pour exÃ©cuter le script directement
+// Ajout d'une fonction pour exécuter le script directement
 if (typeof window !== 'undefined') {
   const addCitiesButton = document.getElementById('add-cities-button');
   if (addCitiesButton) {
@@ -61,12 +61,12 @@ if (typeof window !== 'undefined') {
       try {
         const result = await populateCities();
         if (result.success) {
-          alert("Les villes ont Ã©tÃ© ajoutÃ©es avec succÃ¨s !");
+          alert("Les villes ont été ajoutées avec succès !");
         } else {
           alert("Erreur lors de l'ajout des villes : " + result.error);
         }
       } catch (error) {
-        console.error("Erreur lors de l'exÃ©cution du script :", error);
+        console.error("Erreur lors de l'exécution du script :", error);
         alert("Une erreur est survenue lors de l'ajout des villes");
       }
     });

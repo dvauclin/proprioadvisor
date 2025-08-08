@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllConciergeries, getAllVilles } from "@/lib/data";
 import { Conciergerie, Ville, Formule, Filter } from "@/types";
@@ -34,6 +34,8 @@ interface UseConciergerieListingLogicReturn {
   pageDescription: string;
   formules: FormuleWithConciergerie[];
   selectedFormule: Formule | null;
+  conciergerieRatings: Map<string, number>;
+  conciergerieReviewCounts: Map<string, number>;
 }
 
 const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogicReturn => {
@@ -265,6 +267,54 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     });
   }
 
+  // Récupérer les avis pour toutes les conciergeries (comme sur les pages détails)
+  const [conciergerieRatings, setConciergerieRatings] = useState<Map<string, number>>(new Map());
+  const [conciergerieReviewCounts, setConciergerieReviewCounts] = useState<Map<string, number>>(new Map());
+  
+  useEffect(() => {
+    const fetchAvis = async () => {
+      if (!formules || formules.length === 0) return;
+      
+      const conciergerieIds = formules
+        .map(f => f.conciergerie?.id)
+        .filter(Boolean) as string[];
+      
+      if (conciergerieIds.length === 0) return;
+      
+      console.log("📝 Récupération des avis pour les conciergeries:", conciergerieIds);
+      
+      const { data: allAvisData, error: avisError } = await supabase
+        .from('avis')
+        .select('conciergerie_id, note')
+        .in('conciergerie_id', conciergerieIds)
+        .eq('valide', true);
+      
+      if (avisError) {
+        console.error("Erreur lors du chargement des avis:", avisError);
+      } else if (allAvisData) {
+        // Calculer les ratings moyens et le nombre d'avis pour chaque conciergerie
+        const ratingsMap = new Map<string, number>();
+        const countsMap = new Map<string, number>();
+        
+        conciergerieIds.forEach(conciergerieId => {
+          const conciergerieAvis = allAvisData.filter(avis => avis.conciergerie_id === conciergerieId);
+          const count = conciergerieAvis.length;
+          const averageRating = count > 0 
+            ? conciergerieAvis.reduce((sum, avis) => sum + avis.note, 0) / count 
+            : 0;
+          ratingsMap.set(conciergerieId, averageRating);
+          countsMap.set(conciergerieId, count);
+        });
+        
+        setConciergerieRatings(ratingsMap);
+        setConciergerieReviewCounts(countsMap);
+        console.log("✅ Ratings & counts calculés pour", ratingsMap.size, "conciergeries");
+      }
+    };
+    
+    fetchAvis();
+  }, [formules]);
+
   return {
     villeSlug,
     showFilters,
@@ -278,6 +328,8 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     error: villesError?.message || conciergeriesError?.message || null,
     filters,
     subscriptions: subscriptionsMap,
+    conciergerieRatings, // Exposer les ratings
+    conciergerieReviewCounts, // Exposer le nombre d'avis
     handleFilterChange,
     handleServiceToggle,
     resetFilters,

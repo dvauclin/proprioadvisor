@@ -1,4 +1,4 @@
-﻿// Types pour les erreurs
+// Types pour les erreurs
 
 export interface BaseError {
   name: string

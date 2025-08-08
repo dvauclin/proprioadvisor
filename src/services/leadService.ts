@@ -1,18 +1,18 @@
-﻿import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { Lead } from "@/types";
 
 export const getLeads = async (): Promise<Lead[]> => {
   try {
-    console.log('ðŸ” Starting getLeads for current user...');
+    console.log('x Starting getLeads for current user...');
     
     // Get current user
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
-      console.log('âŒ User not authenticated');
+      console.log('R User not authenticated');
       throw new Error('User not authenticated');
     }
 
-    console.log('âœ… User email:', user.email);
+    console.log('S& User email:', user.email);
 
     // Get user's conciergerie
     const { data: conciergerie, error: conciergerieError } = await supabase
@@ -22,11 +22,11 @@ export const getLeads = async (): Promise<Lead[]> => {
       .single();
 
     if (conciergerieError || !conciergerie) {
-      console.log('âŒ No conciergerie found for user:', user.email, conciergerieError);
+      console.log('R No conciergerie found for user:', user.email, conciergerieError);
       return [];
     }
 
-    console.log('âœ… Found conciergerie:', conciergerie.id);
+    console.log('S& Found conciergerie:', conciergerie.id);
 
     // Get formules for this conciergerie
     const { data: formules, error: formulesError } = await supabase
@@ -39,12 +39,12 @@ export const getLeads = async (): Promise<Lead[]> => {
     }
 
     if (!formules || formules.length === 0) {
-      console.log('âŒ No formules found for conciergerie:', conciergerie.id);
+      console.log('R No formules found for conciergerie:', conciergerie.id);
       return [];
     }
 
     const formuleIds = formules.map(f => f.id);
-    console.log('âœ… Formule IDs for leads filtering:', formuleIds);
+    console.log('S& Formule IDs for leads filtering:', formuleIds);
 
     // Get leads for these formules
     const { data, error } = await supabase
@@ -86,7 +86,7 @@ export const getLeads = async (): Promise<Lead[]> => {
       dateVue: lead.date_vue || undefined,
       plusieursLogements: lead.plusieurs_logements || undefined,
       residencePrincipale: lead.residence_principale || undefined,
-      // Ajout des nouvelles propriÃ©tÃ©s
+      // Ajout des nouvelles propriétés
       formuleNom: lead.formules?.nom,
       conciergerieNom: lead.formules?.conciergeries?.nom
     }));
@@ -150,7 +150,7 @@ export const submitLead = async (leadData: Omit<Lead, 'id' | 'date'>): Promise<{
 
 export const getAllLeads = async (): Promise<Lead[]> => {
   try {
-    console.log('ðŸ” Admin getting all leads...');
+    console.log('x Admin getting all leads...');
     
     const { data, error } = await supabase
       .from('leads')
@@ -172,7 +172,7 @@ export const getAllLeads = async (): Promise<Lead[]> => {
       return [];
     }
     
-    console.log('âœ… Found', data.length, 'leads total');
+    console.log('S& Found', data.length, 'leads total');
     
     return data.map(lead => ({
       id: lead.id,

@@ -1,4 +1,4 @@
-﻿// Types pour les API
+// Types pour les API
 
 export interface ApiResponse<T = any> {
   data?: T
@@ -37,7 +37,7 @@ export interface ApiSuccess<T = any> {
   status: number
 }
 
-// Types pour les endpoints spÃ©cifiques
+// Types pour les endpoints spécifiques
 export interface ConciergerieSearchParams extends SearchParams {
   ville?: string
   services?: string[]
@@ -60,7 +60,7 @@ export interface UserSearchParams extends SearchParams {
   date_creation?: string
 }
 
-// Types pour les rÃ©ponses d'API
+// Types pour les réponses d'API
 export interface ConciergerieSearchResponse extends PaginatedResponse<Conciergerie> {
   filters: {
     villes: Ville[]

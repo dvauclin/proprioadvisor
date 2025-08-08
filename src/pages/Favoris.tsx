@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { Heart, Trash2, Send } from "lucide-react";
@@ -26,7 +26,7 @@ const Favoris = () => {
     conciergerieId: string;
   } | null>(null);
 
-  // VÃ©rification de sÃ©curitÃ© pour favorites
+  // Vérification de sécurité pour favorites
   const safeFavorites = Array.isArray(favorites) ? favorites : [];
   const favoritesCount = safeFavorites.length;
 
@@ -42,7 +42,7 @@ const Favoris = () => {
     if (favoritesCount === 0) {
       toast({
         title: "Aucun favori",
-        description: "Vous devez d'abord ajouter des formules Ã  vos favoris",
+        description: "Vous devez d'abord ajouter des formules à vos favoris",
         variant: "destructive"
       });
       return;
@@ -53,8 +53,8 @@ const Favoris = () => {
   const handleClearFavorites = () => {
     clearFavorites();
     toast({
-      title: "Favoris supprimÃ©s",
-      description: "Tous vos favoris ont Ã©tÃ© supprimÃ©s"
+      title: "Favoris supprimés",
+      description: "Tous vos favoris ont été supprimés"
     });
   };
 
@@ -95,7 +95,7 @@ const Favoris = () => {
           <CardContent>
             <div className="space-y-4">
               <Heart className="h-16 w-16 text-gray-300 mx-auto" />
-              <p className="text-gray-500 max-w-md mx-auto">Parcourez nos conciergeries Airbnb et ajoutez vos formules prÃ©fÃ©rÃ©es en cliquant sur l'icÃ´ne cÅ“ur pour pouvoir contacter plusieurs conciergeries en mÃªme temps.</p>
+              <p className="text-gray-500 max-w-md mx-auto">Parcourez nos conciergeries Airbnb et ajoutez vos formules préférées en cliquant sur l'icône cur pour pouvoir contacter plusieurs conciergeries en même temps.</p>
               <Button asChild>
                 <a href="https://proprioadvisor.fr">Rechercher une conciergerie</a>
               </Button>

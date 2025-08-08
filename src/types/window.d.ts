@@ -1,4 +1,4 @@
-﻿
+
 interface Window {
   // Stripe
   Stripe?: any;

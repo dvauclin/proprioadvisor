@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 const FeaturesSection: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const FeaturesSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">Pourquoi utiliser ProprioAdvisor ?</h2>
           <p className="text-gray-600 max-w-xl mx-auto">
-            Notre plateforme vous permet de comparer rapidement et efficacement les services de conciergerie pour votre location courte durÃ©e
+            Notre plateforme vous permet de comparer rapidement et efficacement les services de conciergerie pour votre location courte durée
           </p>
         </div>
         
@@ -20,7 +20,7 @@ const FeaturesSection: React.FC = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">Comparaison objective</h3>
             <p className="text-gray-600">
-              Analysez les offres des diffÃ©rentes conciergeries selon des critÃ¨res clairs pour faire le meilleur choix pour votre bien.
+              Analysez les offres des différentes conciergeries selon des critères clairs pour faire le meilleur choix pour votre bien.
             </p>
           </div>
           
@@ -30,9 +30,9 @@ const FeaturesSection: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Service vÃ©rifiÃ©</h3>
+            <h3 className="text-xl font-semibold mb-2">Service vérifié</h3>
             <p className="text-gray-600">
-              Nous validons chaque conciergerie avant publication pour garantir des informations fiables et Ã  jour.
+              Nous validons chaque conciergerie avant publication pour garantir des informations fiables et à jour.
             </p>
           </div>
           
@@ -44,7 +44,7 @@ const FeaturesSection: React.FC = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">Gain de temps</h3>
             <p className="text-gray-600">
-              Trouvez rapidement le prestataire idÃ©al sans avoir Ã  contacter individuellement chaque conciergerie.
+              Trouvez rapidement le prestataire idéal sans avoir à contacter individuellement chaque conciergerie.
             </p>
           </div>
 
@@ -56,7 +56,7 @@ const FeaturesSection: React.FC = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">Service gratuit</h3>
             <p className="text-gray-600">
-              AccÃ©dez gratuitement Ã  toutes les fonctionnalitÃ©s de comparaison et trouvez la conciergerie idÃ©ale sans frais.
+              Accédez gratuitement à toutes les fonctionnalités de comparaison et trouvez la conciergerie idéale sans frais.
             </p>
           </div>
         </div>

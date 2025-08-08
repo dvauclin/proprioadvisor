@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -45,22 +45,22 @@ export function FormuleForm({
     }
   });
 
-  // Ã‰tats pour les options conditionnelles
+  // 0tats pour les options conditionnelles
   const [showReapproOptions, setShowReapproOptions] = useState(false);
   const [showForfaitReappro, setShowForfaitReappro] = useState(false);
   const [showLingeOptions, setShowLingeOptions] = useState(false);
   const [showPrixLinge, setShowPrixLinge] = useState(false);
   
-  // Ã‰tat pour suivre les services sÃ©lectionnÃ©s
+  // 0tat pour suivre les services sélectionnés
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  // Ã‰tat pour les services personnalisÃ©s
+  // 0tat pour les services personnalisés
   const [customServices, setCustomServices] = useState<string[]>([]);
 
   useEffect(() => {
     if (formuleData) {
-      console.log("FormuleData chargÃ©:", formuleData);
+      console.log("FormuleData chargé:", formuleData);
       
-      // Conversion explicite des valeurs avec vÃ©rification dÃ©taillÃ©e des valeurs numÃ©riques
+      // Conversion explicite des valeurs avec vérification détaillée des valeurs numériques
       const processedData: FormuleFormData = {
         nom: formuleData.nom || "",
         commission: ensureNumeric(formuleData.commission),
@@ -76,9 +76,9 @@ export function FormuleForm({
         prixLocationLinge: ensureNumeric(formuleData.prixLocationLinge || formuleData.prix_location_linge),
       };
       
-      console.log("DonnÃ©es traitÃ©es pour le formulaire:", processedData);
+      console.log("Données traitées pour le formulaire:", processedData);
       
-      // Initialiser les services standard et personnalisÃ©s
+      // Initialiser les services standard et personnalisés
       const standards = processedData.servicesInclus.filter(service => 
         availableServices.some(s => s.id === service)
       );
@@ -89,16 +89,16 @@ export function FormuleForm({
       setSelectedServices(standards);
       setCustomServices(customs);
       
-      // Mettre Ã  jour les options conditionnelles
+      // Mettre à jour les options conditionnelles
       setShowReapproOptions(standards.includes('reapprovisionnement'));
       setShowLingeOptions(standards.includes('fournitureLinge'));
       setShowForfaitReappro(processedData.fraisReapprovisionnement === 'forfait');
       setShowPrixLinge(processedData.locationLinge === 'optionnel' || processedData.locationLinge === 'obligatoire');
       
-      // RÃ©initialiser le formulaire avec les donnÃ©es traitÃ©es
+      // Réinitialiser le formulaire avec les données traitées
       form.reset(processedData);
     } else {
-      // RÃ©initialiser les Ã©tats si pas de formuleData
+      // Réinitialiser les états si pas de formuleData
       setSelectedServices([]);
       setCustomServices([]);
       setShowReapproOptions(false);
@@ -108,7 +108,7 @@ export function FormuleForm({
     }
   }, [formuleData, form]);
 
-  // Fonction utilitaire pour s'assurer qu'une valeur est numÃ©rique
+  // Fonction utilitaire pour s'assurer qu'une valeur est numérique
   const ensureNumeric = (value: any, isInteger = false): number => {
     console.log(`Converting value to ${isInteger ? 'integer' : 'number'}: `, value, typeof value);
     
@@ -139,7 +139,7 @@ export function FormuleForm({
   };
 
   const handleFormSubmit = (values: FormuleFormData) => {
-    // Mise Ã  jour des valeurs en fonction des cases cochÃ©es
+    // Mise à jour des valeurs en fonction des cases cochées
     const formValues = {
       ...values,
       servicesInclus: [...selectedServices, ...customServices]
@@ -162,7 +162,7 @@ export function FormuleForm({
     setSelectedServices(prev => {
       const newServices = prev.includes(serviceId) ? prev.filter(id => id !== serviceId) : [...prev, serviceId];
 
-      // GÃ©rer les options conditionnelles
+      // Gérer les options conditionnelles
       if (serviceId === 'reapprovisionnement') {
         setShowReapproOptions(newServices.includes('reapprovisionnement'));
         if (!newServices.includes('reapprovisionnement')) {
@@ -181,7 +181,7 @@ export function FormuleForm({
     });
   };
 
-  // Gestion des services personnalisÃ©s
+  // Gestion des services personnalisés
   const handleAddCustomService = (service: string) => {
     setCustomServices(prev => [...prev, service]);
   };

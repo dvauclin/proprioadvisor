@@ -1,4 +1,4 @@
-﻿import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { Formule } from "@/types";
 
 // Helper function to properly convert numeric values
@@ -13,7 +13,7 @@ const formatNumericValue = (value: any): number => {
 };
 
 export const fetchFormulesById = async (conciergerieId: string): Promise<Formule[]> => {
-  console.log("RÃ©cupÃ©ration des formules pour la conciergerie ID:", conciergerieId);
+  console.log("Récupération des formules pour la conciergerie ID:", conciergerieId);
   
   try {
     // First get all formules to understand what might be wrong
@@ -23,7 +23,7 @@ export const fetchFormulesById = async (conciergerieId: string): Promise<Formule
       .limit(5);
     
     console.log("Total de 20 formules dans la base");
-    console.log("Ã‰chantillon des formules disponibles:", allFormules?.map(f => ({
+    console.log("0chantillon des formules disponibles:", allFormules?.map(f => ({
       conciergerieId: f.conciergerie_id,
       formuleId: f.id,
       nomFormule: f.nom
@@ -36,11 +36,11 @@ export const fetchFormulesById = async (conciergerieId: string): Promise<Formule
       .eq("conciergerie_id", conciergerieId);
 
     if (error) {
-      console.error("Erreur lors de la rÃ©cupÃ©ration des formules:", error);
+      console.error("Erreur lors de la récupération des formules:", error);
       return [];
     }
 
-    console.log(`âœ… ${formules?.length || 0} formules trouvÃ©es via requÃªte directe pour ID: ${conciergerieId}`);
+    console.log(`S& ${formules?.length || 0} formules trouvées via requête directe pour ID: ${conciergerieId}`);
     
     if (!formules || formules.length === 0) {
       return [];
@@ -85,16 +85,16 @@ export const fetchFormulesById = async (conciergerieId: string): Promise<Formule
         createdAt: formule.created_at || new Date().toISOString()
       };
       
-      console.log(`Formule normalisÃ©e: ${formule.nom}, ID: ${formule.id}, ConciergerieID: ${formule.conciergerie_id}`);
-      console.log(`locationLinge: "${formule.location_linge}" â†’ "${result.locationLinge}"`);
-      console.log(`fraisReapprovisionnement: "${formule.frais_reapprovisionnement}" â†’ "${result.fraisReapprovisionnement}"`);
+      console.log(`Formule normalisée: ${formule.nom}, ID: ${formule.id}, ConciergerieID: ${formule.conciergerie_id}`);
+      console.log(`locationLinge: "${formule.location_linge}"   "${result.locationLinge}"`);
+      console.log(`fraisReapprovisionnement: "${formule.frais_reapprovisionnement}"   "${result.fraisReapprovisionnement}"`);
       
       return result;
     });
     
     return normalizedFormules;
   } catch (error) {
-    console.error("Erreur lors de la rÃ©cupÃ©ration des formules:", error);
+    console.error("Erreur lors de la récupération des formules:", error);
     return [];
   }
 };
@@ -111,16 +111,16 @@ export const getPropertyTypeLabel = (type: string): string => {
 
 export const getDeductionFraisLabel = (type: string): string => {
   switch (type) {
-    case 'deductTous': return 'Les frais sont dÃ©duits de tous les loyers';
-    case 'deductPremier': return 'Les frais sont dÃ©duits du premier loyer';
-    case 'nonDeduct': return 'Les frais ne sont pas dÃ©duits des loyers';
+    case 'deductTous': return 'Les frais sont déduits de tous les loyers';
+    case 'deductPremier': return 'Les frais sont déduits du premier loyer';
+    case 'nonDeduct': return 'Les frais ne sont pas déduits des loyers';
     default: return type;
   }
 };
 
 export const getFraisReapprovisionnementLabel = (type: string): string => {
   switch (type) {
-    case 'reel': return 'CoÃ»t rÃ©el';
+    case 'reel': return 'Coût réel';
     case 'forfait': return 'Forfait mensuel';
     case 'inclus': return 'Inclus';
     default: return type;

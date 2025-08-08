@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
@@ -7,7 +7,7 @@ import { Article } from '@/types';
 interface ArticleContentProps {
   article: Article;
   relatedArticles?: Article[];
-  processedContent?: string; // Contenu traitÃ© avec les IDs
+  processedContent?: string; // Contenu traité avec les IDs
 }
 
 const ArticleContent: React.FC<ArticleContentProps> = ({ 
@@ -33,7 +33,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
   const headings = extractH2Headings(processedContent || article.contenu);
   const extendedArticle = article as any;
 
-  // Fonction pour gÃ©rer le scroll vers les ancres
+  // Fonction pour gérer le scroll vers les ancres
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     
@@ -42,16 +42,16 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
       // Attendre un peu pour s'assurer que le DOM est stable
       setTimeout(() => {
         const header = document.querySelector('header');
-        const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par dÃ©faut plus Ã©levÃ©e
+        const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par défaut plus élevée
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplÃ©mentaire
+        const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplémentaire
         
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
         });
 
-        // Mettre Ã  jour l'URL sans recharger la page
+        // Mettre à jour l'URL sans recharger la page
         const url = new URL(window.location.href);
         url.hash = id;
         window.history.pushState({}, '', url.toString());
@@ -59,25 +59,25 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
     }
   };
 
-  // GÃ©rer le scroll vers l'ancre au chargement de la page
+  // Gérer le scroll vers l'ancre au chargement de la page
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash && processedContent) {
       const hash = window.location.hash.substring(1);
       const element = document.getElementById(hash);
       
       if (element) {
-        // Attendre que le contenu soit chargÃ© et que le DOM soit stable
+        // Attendre que le contenu soit chargé et que le DOM soit stable
         setTimeout(() => {
           const header = document.querySelector('header');
-          const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par dÃ©faut plus Ã©levÃ©e
+          const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par défaut plus élevée
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplÃ©mentaire
+          const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplémentaire
           
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
           });
-        }, 200); // DÃ©lai plus long pour s'assurer que tout est chargÃ©
+        }, 200); // Délai plus long pour s'assurer que tout est chargé
       }
     }
   }, [processedContent]);
@@ -117,7 +117,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
         </div>
       )}
 
-      {/* Contenu principal avec formatage amÃ©liorÃ© */}
+      {/* Contenu principal avec formatage amélioré */}
       <div 
         className="prose prose-lg max-w-none"
         style={{
@@ -142,7 +142,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
       {/* FAQ */}
       {(extendedArticle.question_1 || extendedArticle.question_2 || extendedArticle.question_3 || extendedArticle.question_4 || extendedArticle.question_5) && (
         <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-6">Questions frÃ©quentes</h2>
+          <h2 className="text-2xl font-bold mb-6">Questions fréquentes</h2>
           <div className="space-y-6">
             {extendedArticle.question_1 && extendedArticle.reponse_1 && (
               <div className="bg-white border border-gray-200 rounded-lg p-6">

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -13,19 +13,19 @@ const TestSupabase: React.FC = () => {
   const [transformTest, setTransformTest] = useState<any>(null);
   const [simpleTest, setSimpleTest] = useState<any>(null);
 
-  // Test trÃ¨s simple - juste compter les enregistrements
+  // Test très simple - juste compter les enregistrements
   useEffect(() => {
     const testSimple = async () => {
-      console.log("ðŸ” Test simple - DÃ©but");
+      console.log("x Test simple - Début");
       try {
         const { count, error } = await supabase
           .from('conciergeries')
           .select('*', { count: 'exact', head: true });
         
-        console.log("ðŸ” Test simple - RÃ©sultat:", { count, error });
+        console.log("x Test simple - Résultat:", { count, error });
         setSimpleTest({ count, error });
       } catch (err) {
-        console.error("ðŸ” Test simple - Erreur:", err);
+        console.error("x Test simple - Erreur:", err);
         setSimpleTest({ error: String(err) });
       }
     };
@@ -36,14 +36,14 @@ const TestSupabase: React.FC = () => {
   // Test direct du client Supabase
   useEffect(() => {
     const testDirectSupabase = async () => {
-      console.log("ðŸ” Test direct Supabase - DÃ©but");
+      console.log("x Test direct Supabase - Début");
       try {
         const { data, error } = await supabase
           .from('conciergeries')
           .select('*')
           .limit(5);
         
-        console.log("ðŸ” Test direct Supabase - RÃ©sultat:", { data, error });
+        console.log("x Test direct Supabase - Résultat:", { data, error });
         setDirectTest({ data, error });
         
         if (error) {
@@ -54,15 +54,15 @@ const TestSupabase: React.FC = () => {
         if (data && data.length > 0) {
           try {
             const transformed = transformConciergerieFromDB(data[0]);
-            console.log("ðŸ” Test transformation - RÃ©sultat:", transformed);
+            console.log("x Test transformation - Résultat:", transformed);
             setTransformTest(transformed);
           } catch (transformError) {
-            console.error("ðŸ” Test transformation - Erreur:", transformError);
+            console.error("x Test transformation - Erreur:", transformError);
             setTransformTest({ error: String(transformError) });
           }
         }
       } catch (err) {
-        console.error("ðŸ” Test direct Supabase - Erreur:", err);
+        console.error("x Test direct Supabase - Erreur:", err);
         setDirectTestError(String(err));
       }
     };
@@ -87,7 +87,7 @@ const TestSupabase: React.FC = () => {
       
       {/* Test Simple */}
       <div className="border rounded-lg p-6 mb-8 bg-purple-50">
-        <h2 className="text-xl font-semibold mb-4">ðŸ”¢ Test Simple (Count)</h2>
+        <h2 className="text-xl font-semibold mb-4">x Test Simple (Count)</h2>
         {simpleTest && (
           <div>
             <p className="text-sm mb-2">
@@ -102,12 +102,12 @@ const TestSupabase: React.FC = () => {
 
       {/* Test Direct Supabase */}
       <div className="border rounded-lg p-6 mb-8 bg-blue-50">
-        <h2 className="text-xl font-semibold mb-4">ðŸ” Test Direct Supabase</h2>
+        <h2 className="text-xl font-semibold mb-4">x Test Direct Supabase</h2>
         {directTestError && <p className="text-red-500 mb-2">Erreur: {directTestError}</p>}
         {directTest && (
           <div>
             <p className="text-sm mb-2">
-              <strong>DonnÃ©es brutes:</strong> {directTest.data ? `${directTest.data.length} enregistrements` : 'Aucune donnÃ©e'}
+              <strong>Données brutes:</strong> {directTest.data ? `${directTest.data.length} enregistrements` : 'Aucune donnée'}
             </p>
             <p className="text-sm mb-2">
               <strong>Erreur Supabase:</strong> {directTest.error ? directTest.error.message : 'Aucune erreur'}
@@ -127,13 +127,13 @@ const TestSupabase: React.FC = () => {
       {/* Test Transformation */}
       {transformTest && (
         <div className="border rounded-lg p-6 mb-8 bg-green-50">
-          <h2 className="text-xl font-semibold mb-4">ðŸ”„ Test Transformation</h2>
+          <h2 className="text-xl font-semibold mb-4">x Test Transformation</h2>
           {transformTest.error ? (
             <p className="text-red-500">Erreur de transformation: {transformTest.error}</p>
           ) : (
             <div>
               <p className="text-sm mb-2">
-                <strong>Transformation rÃ©ussie:</strong> âœ…
+                <strong>Transformation réussie:</strong> S&
               </p>
               <p className="text-sm mb-2">
                 <strong>Nom conciergerie:</strong> {transformTest.nom}
@@ -142,7 +142,7 @@ const TestSupabase: React.FC = () => {
                 <strong>Formules:</strong> {transformTest.formules?.length || 0}
               </p>
               <div className="mt-4">
-                <p className="text-sm font-semibold mb-2">DonnÃ©es transformÃ©es:</p>
+                <p className="text-sm font-semibold mb-2">Données transformées:</p>
                 <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto">
                   {JSON.stringify(transformTest, null, 2)}
                 </pre>
@@ -155,12 +155,12 @@ const TestSupabase: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Test Villes */}
         <div className="border rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">ðŸ™ï¸ Villes (via React Query)</h2>
+          <h2 className="text-xl font-semibold mb-4">x"️ Villes (via React Query)</h2>
           {villesLoading && <p>Chargement des villes...</p>}
           {villesError && <p className="text-red-500">Erreur: {villesError.message}</p>}
           {villes && (
             <div>
-              <p className="text-green-600 mb-2">âœ… {villes.length} villes trouvÃ©es</p>
+              <p className="text-green-600 mb-2">S& {villes.length} villes trouvées</p>
               <ul className="space-y-2">
                 {villes.slice(0, 5).map(ville => (
                   <li key={ville.id} className="text-sm">
@@ -175,12 +175,12 @@ const TestSupabase: React.FC = () => {
 
         {/* Test Conciergeries */}
         <div className="border rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">ðŸ¢ Conciergeries (via React Query)</h2>
+          <h2 className="text-xl font-semibold mb-4">x Conciergeries (via React Query)</h2>
           {conciergeriesLoading && <p>Chargement des conciergeries...</p>}
           {conciergeriesError && <p className="text-red-500">Erreur: {conciergeriesError.message}</p>}
           {conciergeries && (
             <div>
-              <p className="text-green-600 mb-2">âœ… {conciergeries.length} conciergeries trouvÃ©es</p>
+              <p className="text-green-600 mb-2">S& {conciergeries.length} conciergeries trouvées</p>
               <ul className="space-y-2">
                 {conciergeries.slice(0, 5).map(conciergerie => (
                   <li key={conciergerie.id} className="text-sm">
@@ -199,7 +199,7 @@ const TestSupabase: React.FC = () => {
 
       {/* Debug Info */}
       <div className="mt-8 border rounded-lg p-6 bg-gray-50">
-        <h3 className="text-lg font-semibold mb-4">ðŸ“Š Informations de dÃ©bogage</h3>
+        <h3 className="text-lg font-semibold mb-4">x` Informations de débogage</h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
           <div>
             <p><strong>Test Simple:</strong></p>
@@ -208,7 +208,7 @@ const TestSupabase: React.FC = () => {
           </div>
           <div>
             <p><strong>Test Direct:</strong></p>
-            <p>DonnÃ©es: {directTest?.data?.length || 0}</p>
+            <p>Données: {directTest?.data?.length || 0}</p>
             <p>Erreur: {directTestError ? 'Oui' : 'Non'}</p>
           </div>
           <div>
@@ -228,12 +228,12 @@ const TestSupabase: React.FC = () => {
 
       {/* Configuration Info */}
       <div className="mt-8 border rounded-lg p-6 bg-yellow-50">
-        <h3 className="text-lg font-semibold mb-4">âš™ï¸ Configuration Supabase</h3>
+        <h3 className="text-lg font-semibold mb-4">a"️ Configuration Supabase</h3>
         <div className="text-sm space-y-2">
           <p><strong>URL:</strong> https://gajceuvnerzlnuqvhnan.supabase.co</p>
-          <p><strong>ClÃ© anon:</strong> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</p>
-          <p><strong>Client utilisÃ©:</strong> {typeof supabase !== 'undefined' ? 'âœ… InitialisÃ©' : 'âŒ Non initialisÃ©'}</p>
-          <p><strong>AnonClient utilisÃ©:</strong> {typeof anonSupabase !== 'undefined' ? 'âœ… InitialisÃ©' : 'âŒ Non initialisÃ©'}</p>
+          <p><strong>Clé anon:</strong> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</p>
+          <p><strong>Client utilisé:</strong> {typeof supabase !== 'undefined' ? 'S& Initialisé' : 'R Non initialisé'}</p>
+          <p><strong>AnonClient utilisé:</strong> {typeof anonSupabase !== 'undefined' ? 'S& Initialisé' : 'R Non initialisé'}</p>
         </div>
       </div>
     </div>

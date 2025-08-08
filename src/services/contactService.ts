@@ -1,13 +1,13 @@
-﻿
+
 import { supabase } from "@/integrations/supabase/client";
 import { ContactMessage } from "@/types";
 import { type ContactFormData } from "@/schemas/contactFormSchema";
 
 export const sendContactMessage = async (formData: ContactFormData) => {
   try {
-    console.log("ðŸš€ Tentative d'envoi de message via Edge Function:", formData);
+    console.log("xa Tentative d'envoi de message via Edge Function:", formData);
 
-    // Validation des donnÃ©es cÃ´tÃ© client
+    // Validation des données côté client
     if (!formData.nom?.trim()) {
       return { success: false, error: "Le nom est requis" };
     }
@@ -21,7 +21,7 @@ export const sendContactMessage = async (formData: ContactFormData) => {
       return { success: false, error: "Le message est requis" };
     }
 
-    // Appeler la fonction Edge au lieu d'insÃ©rer directement
+    // Appeler la fonction Edge au lieu d'insérer directement
     const { data, error } = await supabase.functions.invoke('submit-contact', {
       body: {
         nom: formData.nom.trim(),
@@ -32,21 +32,21 @@ export const sendContactMessage = async (formData: ContactFormData) => {
     });
 
     if (error) {
-      console.error("âŒ Erreur fonction Edge:", error);
-      throw new Error("Erreur lors de l'envoi de votre message. Veuillez rÃ©essayer.");
+      console.error("R Erreur fonction Edge:", error);
+      throw new Error("Erreur lors de l'envoi de votre message. Veuillez réessayer.");
     }
 
     if (!data.success) {
-      console.error("âŒ Ã‰chec fonction Edge:", data.error);
+      console.error("R 0chec fonction Edge:", data.error);
       throw new Error(data.error || "Erreur lors de l'envoi de votre message.");
     }
     
-    console.log("âœ… Message envoyÃ© avec succÃ¨s via Edge Function:", data);
+    console.log("S& Message envoyé avec succès via Edge Function:", data);
     return data.data;
     
   } catch (error) {
-    console.error("ðŸ’¥ Erreur inattendue:", error);
-    throw new Error(error instanceof Error ? error.message : "Une erreur inattendue s'est produite. Veuillez rÃ©essayer.");
+    console.error("x Erreur inattendue:", error);
+    throw new Error(error instanceof Error ? error.message : "Une erreur inattendue s'est produite. Veuillez réessayer.");
   }
 };
 

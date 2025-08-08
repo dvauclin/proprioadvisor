@@ -1,4 +1,4 @@
-﻿// Types pour les composants
+// Types pour les composants
 
 declare module '*.svg' {
   import React from 'react'

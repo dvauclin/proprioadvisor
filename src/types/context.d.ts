@@ -1,4 +1,4 @@
-﻿// Types pour les contextes
+// Types pour les contextes
 
 export interface AuthContextType {
   user: User | null

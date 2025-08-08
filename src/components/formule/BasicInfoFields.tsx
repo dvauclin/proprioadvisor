@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
@@ -46,7 +46,7 @@ export const BasicInfoFields: React.FC<BasicInfoFieldsProps> = ({ form }) => {
           name="dureeGestionMin"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>DurÃ©e de gestion minimale (mois)</FormLabel>
+              <FormLabel>Durée de gestion minimale (mois)</FormLabel>
               <FormControl>
                 <Input type="number" min="0" {...field} />
               </FormControl>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useMemo } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -89,10 +89,10 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
               {loading ? <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> 
                   Traitement en cours...
-                </> : existingSubscription ? "Mettre Ã  jour la souscription" : "Souscrire maintenant"}
+                </> : existingSubscription ? "Mettre à jour la souscription" : "Souscrire maintenant"}
             </Button>
             <p className="text-sm text-gray-500 mt-2">
-              Vous pourrez modifier ou annuler votre souscription Ã  tout moment
+              Vous pourrez modifier ou annuler votre souscription à tout moment
             </p>
           </div>
         </form>

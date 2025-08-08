@@ -1,4 +1,5 @@
-﻿import React from "react";
+import React from "react";
+import { renderServiceWithIcon } from "@/utils/serviceMapping";
 
 interface ServicesSectionProps {
   services: string[] | undefined;
@@ -7,21 +8,23 @@ interface ServicesSectionProps {
 const ServicesSection: React.FC<ServicesSectionProps> = ({ services }) => {
   if (!services || services.length === 0) {
     return (
-      <div className="border rounded-md p-3">
+      <div className="border rounded-md p-2">
         <div className="text-sm text-gray-600">Services inclus</div>
-        <div className="text-sm">Aucun service renseignÃ©</div>
+        <div className="text-xs">Aucun service renseigné</div>
       </div>
     );
   }
 
   return (
-    <div className="border rounded-md p-3">
-      <div className="text-sm text-gray-600 mb-2">Services inclus</div>
-      <ul className="list-disc pl-5 text-sm">
-        {services.map((s, i) => (
-          <li key={i}>{s}</li>
+    <div className="border rounded-md p-2">
+      <div className="text-sm text-gray-600 mb-1">Services inclus</div>
+      <div className="flex flex-wrap gap-1">
+        {services.map((serviceId, i) => (
+          <span key={i} className="inline-flex items-center px-1.5 py-0.5 rounded-md border text-xs">
+            {renderServiceWithIcon(serviceId)}
+          </span>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

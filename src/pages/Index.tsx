@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
@@ -36,19 +36,19 @@ const Index: React.FC = () => {
 
   const breadcrumbStructuredData = createBreadcrumbStructuredData(breadcrumbItems);
 
-  // Structure de donnÃ©es pour l'organisation ProprioAdvisor
+  // Structure de données pour l'organisation ProprioAdvisor
   const organizationStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "ProprioAdvisor",
     "url": "https://proprioadvisor.fr",
     "logo": "https://proprioadvisor.fr/favicon.svg",
-    "description": "Premier comparateur de conciergeries Airbnb en France. Trouvez la meilleure conciergerie pour votre bien en location courte durÃ©e.",
+    "description": "Premier comparateur de conciergeries Airbnb en France. Trouvez la meilleure conciergerie pour votre bien en location courte durée.",
     "foundingDate": "2024",
     "founder": {
       "@type": "Person",
       "name": "David Vauclin",
-      "jobTitle": "Expert en location courte durÃ©e"
+      "jobTitle": "Expert en location courte durée"
     },
     "areaServed": {
       "@type": "Country",
@@ -84,7 +84,7 @@ const Index: React.FC = () => {
     }
   };
 
-  // Structure de donnÃ©es pour le site web
+  // Structure de données pour le site web
   const websiteStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -111,7 +111,7 @@ const Index: React.FC = () => {
     <>
       <Head>
         <title>ProprioAdvisor | Comparateur de conciergeries Airbnb le + complet</title>
-        <meta name="description" content="ProprioAdvisor vous aide Ã  trouver la meilleure conciergerie pour votre bien en location courte durÃ©e. On compare localisation, services, tarifs en profondeur pour vous aider Ã  choisir." />
+        <meta name="description" content="ProprioAdvisor vous aide à trouver la meilleure conciergerie pour votre bien en location courte durée. On compare localisation, services, tarifs en profondeur pour vous aider à choisir." />
         <link rel="canonical" href="https://proprioadvisor.fr/" />
       </Head>
       
@@ -123,13 +123,13 @@ const Index: React.FC = () => {
         <section aria-label="Section principale d'accueil">
           <HeroSection selectedVille={selectedVille} allVilles={allVilles} />
         </section>
-        <section aria-label="FonctionnalitÃ©s de ProprioAdvisor">
+        <section aria-label="Fonctionnalités de ProprioAdvisor">
           <FeaturesSection />
         </section>
-        <section aria-label="Articles rÃ©cents du blog">
+        <section aria-label="Articles récents du blog">
           <RecentArticlesSection articles={articles} loading={loading} />
         </section>
-        <section aria-label="Appel Ã  l'action">
+        <section aria-label="Appel à l'action">
           <CTASection />
         </section>
         <section aria-label="Toutes les villes disponibles">

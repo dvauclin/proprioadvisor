@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 interface StickyRecapProps {
   totalPoints: number;
   totalMonthlyFee: number;

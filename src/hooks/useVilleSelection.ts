@@ -1,4 +1,4 @@
-﻿
+
 import { useState, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 
@@ -15,7 +15,7 @@ export const useVilleSelection = <T extends { villesIds: string[] }>(form: UseFo
     });
   };
 
-  // Mise Ã  jour des villesIds dans le formulaire Ã  chaque changement de sÃ©lection
+  // Mise à jour des villesIds dans le formulaire à chaque changement de sélection
   useEffect(() => {
     (form as any).setValue("villesIds", selectedVillesIds);
   }, [selectedVillesIds, form]);

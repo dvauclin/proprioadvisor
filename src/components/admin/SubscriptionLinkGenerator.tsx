@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -29,8 +29,8 @@ const SubscriptionLinkGenerator: React.FC<SubscriptionLinkGeneratorProps> = ({
       await navigator.clipboard.writeText(subscriptionLink);
       setCopied(true);
       toast({
-        title: "Lien copiÃ©",
-        description: "Le lien de souscription a Ã©tÃ© copiÃ© dans le presse-papiers",
+        title: "Lien copié",
+        description: "Le lien de souscription a été copié dans le presse-papiers",
       });
       
       // Reset copied state after 2 seconds
@@ -59,7 +59,7 @@ const SubscriptionLinkGenerator: React.FC<SubscriptionLinkGeneratorProps> = ({
           {copied ? (
             <>
               <Check className="h-4 w-4 text-green-500" />
-              <span>CopiÃ©</span>
+              <span>Copié</span>
             </>
           ) : (
             <>
@@ -87,7 +87,7 @@ const SubscriptionLinkGenerator: React.FC<SubscriptionLinkGeneratorProps> = ({
           Lien de souscription
         </CardTitle>
         <CardDescription>
-          GÃ©nÃ©rez et partagez le lien de souscription pour {conciergerieName}
+          Générez et partagez le lien de souscription pour {conciergerieName}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -107,7 +107,7 @@ const SubscriptionLinkGenerator: React.FC<SubscriptionLinkGeneratorProps> = ({
               {copied ? (
                 <>
                   <Check className="h-4 w-4 text-green-500" />
-                  <span>CopiÃ©</span>
+                  <span>Copié</span>
                 </>
               ) : (
                 <>
@@ -126,8 +126,8 @@ const SubscriptionLinkGenerator: React.FC<SubscriptionLinkGeneratorProps> = ({
         </div>
         
         <div className="text-sm text-gray-600">
-          <p>Ce lien permet aux utilisateurs de s'abonner directement Ã  {conciergerieName}.</p>
-          <p className="mt-1">Vous pouvez le partager via email, SMS ou l'intÃ©grer sur votre site web.</p>
+          <p>Ce lien permet aux utilisateurs de s'abonner directement à {conciergerieName}.</p>
+          <p className="mt-1">Vous pouvez le partager via email, SMS ou l'intégrer sur votre site web.</p>
         </div>
       </CardContent>
     </Card>

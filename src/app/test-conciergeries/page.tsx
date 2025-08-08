@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -14,18 +14,18 @@ const TestConciergeries: React.FC = () => {
     <div className="container mx-auto p-8">
       <h1 className="text-3xl font-bold mb-8">Test Conciergeries - Diagnostic</h1>
       
-      {/* Ã‰tat de chargement */}
+      {/* 0tat de chargement */}
       {isLoading && (
         <div className="border rounded-lg p-6 mb-8 bg-orange-50">
-          <h2 className="text-xl font-semibold mb-4">â³ Chargement en cours...</h2>
-          <p>RÃ©cupÃ©ration des conciergeries depuis Supabase...</p>
+          <h2 className="text-xl font-semibold mb-4">⏳ Chargement en cours...</h2>
+          <p>Récupération des conciergeries depuis Supabase...</p>
         </div>
       )}
 
       {/* Erreurs */}
       {error && (
         <div className="border rounded-lg p-6 mb-8 bg-red-50">
-          <h2 className="text-xl font-semibold mb-4">âŒ Erreur</h2>
+          <h2 className="text-xl font-semibold mb-4">R Erreur</h2>
           <p className="text-red-600">{error.message}</p>
         </div>
       )}
@@ -33,7 +33,7 @@ const TestConciergeries: React.FC = () => {
       {/* Liste des conciergeries */}
       {conciergeries && (
         <div className="border rounded-lg p-6 mb-8 bg-green-50">
-          <h2 className="text-xl font-semibold mb-4">ðŸ¢ Conciergeries trouvÃ©es ({conciergeries.length})</h2>
+          <h2 className="text-xl font-semibold mb-4">x Conciergeries trouvées ({conciergeries.length})</h2>
           <div className="space-y-4">
             {conciergeries.slice(0, 5).map((conciergerie) => (
               <div key={conciergerie.id} className="border rounded p-4 bg-white">
@@ -44,7 +44,7 @@ const TestConciergeries: React.FC = () => {
                   <p><strong>Villes IDs:</strong> {conciergerie.villesIds?.join(', ') || 'Aucune'}</p>
                   <p><strong>Villes (relation):</strong> {(conciergerie as any).villes?.map((v: any) => v.nom).join(', ') || 'Aucune'}</p>
                   <p><strong>Formules:</strong> {conciergerie.formules?.length || 0}</p>
-                  <p><strong>ValidÃ©e:</strong> {conciergerie.validated ? 'Oui' : 'Non'}</p>
+                  <p><strong>Validée:</strong> {conciergerie.validated ? 'Oui' : 'Non'}</p>
                 </div>
               </div>
             ))}
@@ -58,7 +58,7 @@ const TestConciergeries: React.FC = () => {
       {/* Recherche de conciergeries pour Paris */}
       {conciergeries && (
         <div className="border rounded-lg p-6 mb-8 bg-blue-50">
-          <h2 className="text-xl font-semibold mb-4">ðŸ” Conciergeries pour Paris</h2>
+          <h2 className="text-xl font-semibold mb-4">x Conciergeries pour Paris</h2>
           <div className="space-y-2">
             <p><strong>Recherche par villeId:</strong></p>
             <p>Conciergeries avec villeId "paris": {conciergeries.filter(c => c.villeId === "paris").length}</p>
@@ -75,10 +75,10 @@ const TestConciergeries: React.FC = () => {
         </div>
       )}
 
-      {/* DÃ©tails des premiÃ¨res conciergeries */}
+      {/* Détails des premières conciergeries */}
       {conciergeries && (
         <div className="border rounded-lg p-6 mb-8 bg-yellow-50">
-          <h2 className="text-xl font-semibold mb-4">ðŸ“‹ DÃ©tails des premiÃ¨res conciergeries</h2>
+          <h2 className="text-xl font-semibold mb-4">x9 Détails des premières conciergeries</h2>
           <div className="space-y-4">
             {conciergeries.slice(0, 3).map((conciergerie) => (
               <div key={conciergerie.id} className="border rounded p-4 bg-white">
@@ -103,7 +103,7 @@ const TestConciergeries: React.FC = () => {
 
       {/* Debug complet */}
       <div className="border rounded-lg p-6 bg-gray-50">
-        <h2 className="text-xl font-semibold mb-4">ðŸ› Debug complet</h2>
+        <h2 className="text-xl font-semibold mb-4">x: Debug complet</h2>
         <div className="text-xs">
           <pre className="bg-gray-100 p-4 rounded overflow-auto">
             {JSON.stringify({

@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster as Sonner } from "@/components/ui-kit/sonner"
@@ -18,17 +18,17 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://proprioadvisor.fr'),
   title: 'Proprioadvisor | SEUL comparateur de conciergeries Airbnb',
-  description: 'Proprioadvisor vous aide Ã  trouver la meilleure conciergerie pour votre bien en location courte durÃ©e. Comparez les services, tarifs et avis des conciergeries Airbnb.',
+  description: 'Proprioadvisor vous aide à trouver la meilleure conciergerie pour votre bien en location courte durée. Comparez les services, tarifs et avis des conciergeries Airbnb.',
   keywords: [
     'conciergerie',
     'airbnb',
-    'location courte durÃ©e',
+    'location courte durée',
     'comparateur',
-    'propriÃ©taire',
+    'propriétaire',
     'gestion locative',
     'conciergerie airbnb',
     'service conciergerie',
-    'location saisonniÃ¨re',
+    'location saisonnière',
     'gestionnaire airbnb'
   ],
   authors: [{ name: 'Proprioadvisor', url: 'https://proprioadvisor.fr' }],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     url: 'https://proprioadvisor.fr',
     siteName: 'Proprioadvisor',
     title: 'ProprioAdvisor | Comparateur de conciergeries Airbnb le + complet',
-    description: 'ProprioAdvisor vous aide Ã  trouver la meilleure conciergerie pour votre bien en location courte durÃ©e. Comparez les services, tarifs et avis.',
+    description: 'ProprioAdvisor vous aide à trouver la meilleure conciergerie pour votre bien en location courte durée. Comparez les services, tarifs et avis.',
     images: [
       {
         url: '/og-image.jpg',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     site: '@proprioadvisor',
     creator: '@proprioadvisor',
     title: 'ProprioAdvisor | Comparateur de conciergeries Airbnb',
-    description: 'ProprioAdvisor vous aide Ã  trouver la meilleure conciergerie pour votre bien en location courte durÃ©e',
+    description: 'ProprioAdvisor vous aide à trouver la meilleure conciergerie pour votre bien en location courte durée',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -100,6 +100,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
+        <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

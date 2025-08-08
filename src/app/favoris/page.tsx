@@ -1,10 +1,10 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Favoris from '@/pages/Favoris'
 
 export const metadata: Metadata = {
   title: 'Mes Favoris | Proprioadvisor',
   description: 'Consultez vos conciergeries favorites',
-  keywords: ['favoris', 'conciergerie', 'airbnb', 'sauvegardÃ©'],
+  keywords: ['favoris', 'conciergerie', 'airbnb', 'sauvegardé'],
   openGraph: {
     title: 'Mes Favoris | Proprioadvisor',
     description: 'Consultez vos conciergeries favorites',

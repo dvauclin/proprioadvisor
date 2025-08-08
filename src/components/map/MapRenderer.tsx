@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useRef, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
@@ -74,7 +74,7 @@ const MapRenderer: React.FC<MapRendererProps> = ({
                 class="mt-2 px-4 py-1 bg-brand-chartreuse text-white rounded-md hover:bg-brand-chartreuse/90 w-full text-center"
                 onclick="window.location.href='/conciergerie/${ville.slug}'"
               >
-                Voir les dÃ©tails
+                Voir les détails
               </button>
             </div>
           `);

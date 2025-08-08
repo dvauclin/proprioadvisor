@@ -1,4 +1,4 @@
-﻿
+
 import React from 'react';
 import { 
   Select, 
@@ -11,10 +11,10 @@ import {
 
 // Define regions in France
 const regions = [
-  { id: 'all', name: 'Toutes les rÃ©gions' },
-  { id: 'ile-de-france', name: 'ÃŽle-de-France' },
-  { id: 'auvergne-rhone-alpes', name: 'Auvergne-RhÃ´ne-Alpes' },
-  { id: 'provence-alpes-cote-azur', name: 'Provence-Alpes-CÃ´te d\'Azur' },
+  { id: 'all', name: 'Toutes les régions' },
+  { id: 'ile-de-france', name: '}le-de-France' },
+  { id: 'auvergne-rhone-alpes', name: 'Auvergne-Rhône-Alpes' },
+  { id: 'provence-alpes-cote-azur', name: 'Provence-Alpes-Côte d\'Azur' },
   { id: 'occitanie', name: 'Occitanie' },
   { id: 'nouvelle-aquitaine', name: 'Nouvelle-Aquitaine' },
   { id: 'hauts-de-france', name: 'Hauts-de-France' },
@@ -23,7 +23,7 @@ const regions = [
   { id: 'bretagne', name: 'Bretagne' },
   { id: 'pays-de-la-loire', name: 'Pays de la Loire' },
   { id: 'centre-val-de-loire', name: 'Centre-Val de Loire' },
-  { id: 'bourgogne-franche-comte', name: 'Bourgogne-Franche-ComtÃ©' },
+  { id: 'bourgogne-franche-comte', name: 'Bourgogne-Franche-Comté' },
 ];
 
 // Define population size ranges
@@ -52,7 +52,7 @@ const MapFilters: React.FC<MapFiltersProps> = ({
       <div className="w-full sm:w-1/2">
         <Select value={selectedRegion} onValueChange={onRegionChange}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Filtrer par rÃ©gion" />
+            <SelectValue placeholder="Filtrer par région" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

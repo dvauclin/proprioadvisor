@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { Filter } from "@/types";
 import { Button } from "@/components/ui-kit/button";
@@ -47,7 +47,7 @@ const ConciergerieFilters: React.FC<ConciergerieFiltersProps> = ({
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <Checkbox id="residence-principale" checked={filters.accepteResidencePrincipale === true} onCheckedChange={checked => onFilterChange('accepteResidencePrincipale', checked === true ? true : undefined)} />
-                <Label htmlFor="residence-principale">Accepte les rÃ©sidences principales</Label>
+                <Label htmlFor="residence-principale">Accepte les résidences principales</Label>
               </div>
               
               <div className="flex items-center space-x-2">
@@ -71,8 +71,8 @@ const ConciergerieFilters: React.FC<ConciergerieFiltersProps> = ({
             </div>
 
             <div>
-              <Label htmlFor="dureeGestionMin" className="mb-1 block">DurÃ©e de mise Ã  disposition envisagÃ©e (mois)</Label>
-              <Input id="dureeGestionMin" type="number" value={filters.dureeGestionMin || ''} onChange={e => onFilterChange('dureeGestionMin', parseInt(e.target.value) || 0)} placeholder="DurÃ©e (mois)" className="w-full" min="0" />
+              <Label htmlFor="dureeGestionMin" className="mb-1 block">Durée de mise à disposition envisagée (mois)</Label>
+              <Input id="dureeGestionMin" type="number" value={filters.dureeGestionMin || ''} onChange={e => onFilterChange('dureeGestionMin', parseInt(e.target.value) || 0)} placeholder="Durée (mois)" className="w-full" min="0" />
             </div>
 
             <div>
@@ -96,9 +96,9 @@ const ConciergerieFilters: React.FC<ConciergerieFiltersProps> = ({
         </div>
 
         <div>
-          <h3 className="font-medium mb-2">Services inclus</h3>
-          <ScrollArea className="h-80">
-            <div className="space-y-2 pr-4">
+          <h3 className="font-medium mb-1 text-sm">Services inclus</h3>
+          <ScrollArea className="h-64">
+            <div className="space-y-1 pr-4">
               {availableServices.map(service => (
                 <div key={service.id} className="flex items-center">
                   <Checkbox 
@@ -107,7 +107,7 @@ const ConciergerieFilters: React.FC<ConciergerieFiltersProps> = ({
                     onCheckedChange={() => onServiceToggle(service.id)} 
                     className="mr-2" 
                   />
-                  <Label htmlFor={`service-${service.id}`}>{service.label}</Label>
+                  <Label htmlFor={`service-${service.id}`} className="text-sm">{service.label}</Label>
                 </div>
               ))}
             </div>
@@ -117,7 +117,7 @@ const ConciergerieFilters: React.FC<ConciergerieFiltersProps> = ({
 
       <div className="mt-6 flex justify-end">
         <Button variant="outline" onClick={onResetFilters} className="mr-2">
-          RÃ©initialiser
+          Réinitialiser
         </Button>
         <Button onClick={onHideFilters}>Appliquer</Button>
       </div>

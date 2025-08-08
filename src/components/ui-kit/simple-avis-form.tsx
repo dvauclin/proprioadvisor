@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -47,8 +47,8 @@ export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({
       });
 
       if (result.success) {
-        toast.success("Avis envoyÃ© !", {
-          description: "Votre avis a Ã©tÃ© envoyÃ© et sera publiÃ© aprÃ¨s modÃ©ration."
+        toast.success("Avis envoyé !", {
+          description: "Votre avis a été envoyé et sera publié après modération."
         });
         
         // Reset form
@@ -66,7 +66,7 @@ export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({
       }
     } catch (error) {
       toast.error("Erreur d'envoi", {
-        description: "Une erreur inattendue s'est produite. Veuillez rÃ©essayer."
+        description: "Une erreur inattendue s'est produite. Veuillez réessayer."
       });
     } finally {
       setIsSubmitting(false);
@@ -109,7 +109,7 @@ export const SimpleAvisForm: React.FC<SimpleAvisFormProps> = ({
           id="commentaire"
           value={commentaire}
           onChange={(e) => setCommentaire(e.target.value)}
-          placeholder="Partagez votre expÃ©rience..."
+          placeholder="Partagez votre expérience..."
           rows={4}
         />
       </div>

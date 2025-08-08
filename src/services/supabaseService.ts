@@ -1,4 +1,4 @@
-﻿import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { Ville } from "@/types";
 
 // Re-export services from other files
@@ -14,12 +14,12 @@ export * from './subscriptionService';
 
 // Keep only core utility functions here
 export const servicesOptions = [
-  { id: 'mÃ©nage', label: 'MÃ©nage' },
+  { id: 'ménage', label: 'Ménage' },
   { id: 'blanchisserie', label: 'Blanchisserie' },
   { id: 'checkin', label: 'Check-in/Check-out' },
   { id: 'gestion-annonce', label: 'Gestion annonce' },
   { id: 'conciergerie-24-7', label: 'Conciergerie 24/7' },
-  { id: 'chef-privÃ©', label: 'Chef privÃ©' }
+  { id: 'chef-privé', label: 'Chef privé' }
 ];
 
 export const propertyTypeOptions = [
@@ -33,8 +33,8 @@ export const addCities = async (cityNames: string[]): Promise<{ success: boolean
     const citiesToAdd = cityNames.map(cityName => ({
       nom: cityName,
       slug: cityName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-"),
-      description: `DÃ©couvrez les meilleures conciergeries Airbnb Ã  ${cityName}.`,
-      titleSeo: `Meilleures conciergeries Airbnb Ã  ${cityName} | ProprioAdvisor`,
+      description: `Découvrez les meilleures conciergeries Airbnb à ${cityName}.`,
+      titleSeo: `Meilleures conciergeries Airbnb à ${cityName} | ProprioAdvisor`,
     }));
 
     const { data, error } = await supabase

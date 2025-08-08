@@ -1,4 +1,4 @@
-﻿
+
 import { supabase } from "@/integrations/supabase/client";
 import { Subscription } from "@/types";
 

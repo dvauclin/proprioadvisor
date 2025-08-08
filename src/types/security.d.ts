@@ -1,4 +1,4 @@
-﻿// Types pour la sÃ©curitÃ©
+// Types pour la sécurité
 
 export interface SecurityConfig {
   cors: CorsConfig

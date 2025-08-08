@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from 'react';
 import { Article } from '@/types';
@@ -15,7 +15,7 @@ const ClientArticleWrapper: React.FC<ClientArticleWrapperProps> = ({
 }) => {
   const [processedContent, setProcessedContent] = useState<string>('');
 
-  // Fonction pour crÃ©er un ID Ã  partir du texte
+  // Fonction pour créer un ID à partir du texte
   const slugify = (text: string): string => {
     return text.toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
   };
@@ -37,25 +37,25 @@ const ClientArticleWrapper: React.FC<ClientArticleWrapperProps> = ({
     }
   }, [article.contenu]);
 
-  // GÃ©rer le scroll vers l'ancre au chargement de la page
+  // Gérer le scroll vers l'ancre au chargement de la page
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash && processedContent) {
       const hash = window.location.hash.substring(1);
       const element = document.getElementById(hash);
       
       if (element) {
-        // Attendre que le contenu soit chargÃ© et que le DOM soit stable
+        // Attendre que le contenu soit chargé et que le DOM soit stable
         setTimeout(() => {
           const header = document.querySelector('header');
-          const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par dÃ©faut plus Ã©levÃ©e
+          const headerHeight = header ? header.getBoundingClientRect().height : 80; // Valeur par défaut plus élevée
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplÃ©mentaire
+          const offsetPosition = elementPosition - headerHeight - 20; // 20px de marge supplémentaire
           
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
           });
-        }, 200); // DÃ©lai plus long pour s'assurer que tout est chargÃ©
+        }, 200); // Délai plus long pour s'assurer que tout est chargé
       }
     }
   }, [processedContent]);

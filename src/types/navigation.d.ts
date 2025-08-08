@@ -1,4 +1,4 @@
-﻿// Types pour la navigation
+// Types pour la navigation
 
 export interface NavigationItem {
   name: string

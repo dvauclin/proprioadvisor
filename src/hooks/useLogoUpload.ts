@@ -1,4 +1,4 @@
-﻿
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui-kit/use-toast";
 import { uploadImage } from "@/services/storageService";
@@ -51,8 +51,8 @@ export const useLogoUpload = () => {
         setUploadError(null);
         
         toast({
-          title: "Logo tÃ©lÃ©chargÃ©",
-          description: "Le logo a Ã©tÃ© tÃ©lÃ©chargÃ© avec succÃ¨s."
+          title: "Logo téléchargé",
+          description: "Le logo a été téléchargé avec succès."
         });
       } else {
         const errorMsg = result.error || "Erreur inconnue lors de l'upload";
@@ -62,8 +62,8 @@ export const useLogoUpload = () => {
         setLogoUrl(null);
         
         toast({
-          title: "Erreur de tÃ©lÃ©chargement",
-          description: `Impossible de tÃ©lÃ©charger le logo: ${errorMsg}`,
+          title: "Erreur de téléchargement",
+          description: `Impossible de télécharger le logo: ${errorMsg}`,
           variant: "destructive"
         });
       }
@@ -75,7 +75,7 @@ export const useLogoUpload = () => {
       
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue pendant le tÃ©lÃ©chargement du logo.",
+        description: "Une erreur est survenue pendant le téléchargement du logo.",
         variant: "destructive"
       });
     } finally {

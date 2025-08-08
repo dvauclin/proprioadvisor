@@ -1,8 +1,8 @@
-﻿
+
 import React from "react";
 import { Formule, Conciergerie } from "@/types";
 
-// Type Ã©tendu pour les formules avec conciergerie
+// Type étendu pour les formules avec conciergerie
 type FormuleWithConciergerie = Formule & { conciergerie?: Conciergerie };
 
 import ComparisonCard from "@/components/ui-kit/comparison-card";
@@ -14,6 +14,8 @@ interface ConciergerieListProps {
   onDevisRequest: (formuleId: string, conciergerieId: string) => void;
   onResetFilters: () => void;
   subscriptions: Map<string, any>;
+  conciergerieRatings?: Map<string, number>;
+  conciergerieReviewCounts?: Map<string, number>;
 }
 
 const ConciergerieList: React.FC<ConciergerieListProps> = ({
@@ -21,7 +23,9 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
   allFormulesCount,
   onDevisRequest,
   onResetFilters,
-  subscriptions
+  subscriptions,
+  conciergerieRatings,
+  conciergerieReviewCounts
 }) => {
 
   if (formules.length === 0) {
@@ -29,12 +33,12 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
       <div className="text-center py-10">
         <p className="text-gray-600">
           {allFormulesCount === 0 
-            ? "Aucune conciergerie n'est encore enregistrÃ©e pour cette ville." 
-            : "Aucune conciergerie ne correspond Ã  vos critÃ¨res de recherche."}
+            ? "Aucune conciergerie n'est encore enregistrée pour cette ville." 
+            : "Aucune conciergerie ne correspond à vos critères de recherche."}
         </p>
         {allFormulesCount > 0 && (
           <Button variant="outline" onClick={onResetFilters} className="mt-4">
-            RÃ©initialiser les filtres
+            Réinitialiser les filtres
           </Button>
         )}
       </div>
@@ -54,7 +58,7 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
     const effectiveScoreB = b.conciergerie?.scoreManuel ?? (subscriptionB?.total_points || 0);
     
 
-    
+
     // First: Compare effective scores (highest first)
     if (effectiveScoreA !== effectiveScoreB) {
       return effectiveScoreB - effectiveScoreA; // Sort by effective score descending
@@ -67,12 +71,15 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
   });
 
 
+
   
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {sortedFormules.map(formule => {
           const subscription = formule.conciergerie?.id ? subscriptions.get(formule.conciergerie.id) : null;
+          const preloadedRating = formule.conciergerie?.id && conciergerieRatings ? conciergerieRatings.get(formule.conciergerie.id) : undefined;
+          const preloadedReviewsCount = formule.conciergerie?.id && conciergerieReviewCounts ? conciergerieReviewCounts.get(formule.conciergerie.id) : undefined;
           
           return formule.conciergerie ? (
             <ComparisonCard 
@@ -81,6 +88,8 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
               conciergerie={formule.conciergerie} 
               subscription={subscription}
               onDevisClick={() => onDevisRequest(formule.id, formule.conciergerie!.id)} 
+              preloadedRating={preloadedRating}
+              preloadedReviewsCount={preloadedReviewsCount}
             />
           ) : null;
         })}

@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
@@ -25,7 +25,7 @@ const CommissionCalculationSection: React.FC<CommissionCalculationSectionProps> 
           <FormItem>
             <div className="flex items-center">
               <Percent className="mr-2 h-4 w-4 text-gray-600" />
-              <FormLabel>MÃ©thode calcul de la commission</FormLabel>
+              <FormLabel>Méthode calcul de la commission</FormLabel>
             </div>
             <FormControl>
               <Select
@@ -33,11 +33,11 @@ const CommissionCalculationSection: React.FC<CommissionCalculationSectionProps> 
                 onValueChange={field.onChange}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="SÃ©lectionnez une mÃ©thode" />
+                  <SelectValue placeholder="Sélectionnez une méthode" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="deductTous">DÃ©duction de tous les frais</SelectItem>
-                  <SelectItem value="deductMenage">DÃ©duction du mÃ©nage seulement</SelectItem>
+                  <SelectItem value="deductTous">Déduction de tous les frais</SelectItem>
+                  <SelectItem value="deductMenage">Déduction du ménage seulement</SelectItem>
                   <SelectItem value="inclus">Frais inclus</SelectItem>
                 </SelectContent>
               </Select>
@@ -62,7 +62,7 @@ const CommissionCalculationSection: React.FC<CommissionCalculationSectionProps> 
                 onValueChange={field.onChange}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="SÃ©lectionnez un type" />
+                  <SelectValue placeholder="Sélectionnez un type" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="TTC">TTC</SelectItem>

@@ -1,4 +1,4 @@
-﻿// Types pour les hooks
+// Types pour les hooks
 
 export interface UseLocalStorageOptions<T> {
   defaultValue?: T

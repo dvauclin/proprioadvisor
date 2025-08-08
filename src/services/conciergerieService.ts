@@ -1,4 +1,4 @@
-﻿import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { Conciergerie, Formule } from "@/types";
 import { transformConciergerieFromDB, transformConciergerieForDB, transformFormuleForDB } from "./conciergerieTransformService";
 import { triggerWebhook } from "@/utils/webhookService";

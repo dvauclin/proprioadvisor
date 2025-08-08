@@ -1,4 +1,4 @@
-﻿
+
 import React from 'react';
 import { Button } from '@/components/ui-kit/button';
 
@@ -14,7 +14,7 @@ const MapError: React.FC<MapErrorProps> = ({ errorMessage }) => {
         variant="outline" 
         onClick={() => window.location.reload()}
       >
-        RÃ©essayer
+        Réessayer
       </Button>
     </div>
   );

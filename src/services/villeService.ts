@@ -1,4 +1,4 @@
-﻿
+
 import { supabase } from "@/integrations/supabase/client";
 import { Ville } from "@/types";
 

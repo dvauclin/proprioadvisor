@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import React, { Suspense } from 'react'
 import SubscriptionSuccess from '@/pages/SubscriptionSuccess'
 

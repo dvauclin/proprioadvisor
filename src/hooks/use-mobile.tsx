@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react"
 
@@ -19,7 +19,7 @@ export function useIsMobile() {
     return () => mql.removeEventListener("change", onChange)
   }, [])
 
-  // Retourner false par dÃ©faut pendant l'hydratation pour Ã©viter les erreurs
+  // Retourner false par défaut pendant l'hydratation pour éviter les erreurs
   if (!hasMounted) {
     return false
   }

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,7 @@ export const adminConciergerieSchema = inscriptionSchema.extend({
   score: z.preprocess(
     (val) => (val === "" ? undefined : val), // Treat empty string as undefined to avoid coercion to 0
     z.coerce
-      .number({ invalid_type_error: "Le score doit Ãªtre un nombre." })
+      .number({ invalid_type_error: "Le score doit être un nombre." })
       .optional()
       .nullable()
   ),
@@ -129,7 +129,7 @@ export const useEditConciergerieForm = ({
     }
   }, [conciergerie, setSelectedVillesIds]);
 
-  // RÃ©cupÃ©ration des villes depuis Supabase
+  // Récupération des villes depuis Supabase
   const [villes, setVilles] = useState<Ville[]>([]);
   const [villesLoading, setVillesLoading] = useState(true);
 
@@ -203,7 +203,7 @@ export const useEditConciergerieForm = ({
     if (!conciergerie?.id) {
       toast({
         title: "Erreur",
-        description: "Impossible d'ajouter la formule : conciergerie non trouvÃ©e",
+        description: "Impossible d'ajouter la formule : conciergerie non trouvée",
         variant: "destructive"
       });
       return;
@@ -258,8 +258,8 @@ export const useEditConciergerieForm = ({
       setFormules([...formules, newFormule]);
       
       toast({
-        title: "Formule ajoutÃ©e",
-        description: `La formule "${formuleData.nom}" a Ã©tÃ© ajoutÃ©e et sauvegardÃ©e`,
+        title: "Formule ajoutée",
+        description: `La formule "${formuleData.nom}" a été ajoutée et sauvegardée`,
       });
     } catch (error: any) {
       console.error("Error adding formule:", error);
@@ -277,7 +277,7 @@ export const useEditConciergerieForm = ({
     if (!formuleToEdit?.id) {
       toast({
         title: "Erreur",
-        description: "Impossible de modifier la formule : ID non trouvÃ©",
+        description: "Impossible de modifier la formule : ID non trouvé",
         variant: "destructive"
       });
       return;
@@ -335,8 +335,8 @@ export const useEditConciergerieForm = ({
       setFormules(updatedFormules);
       
       toast({
-        title: "Formule modifiÃ©e",
-        description: `La formule "${formuleData.nom}" a Ã©tÃ© modifiÃ©e et sauvegardÃ©e`,
+        title: "Formule modifiée",
+        description: `La formule "${formuleData.nom}" a été modifiée et sauvegardée`,
       });
     } catch (error: any) {
       console.error("Error updating formule:", error);
@@ -354,7 +354,7 @@ export const useEditConciergerieForm = ({
     if (!formuleToDelete?.id) {
       toast({
         title: "Erreur",
-        description: "Impossible de supprimer la formule : ID non trouvÃ©",
+        description: "Impossible de supprimer la formule : ID non trouvé",
         variant: "destructive"
       });
       return;
@@ -375,8 +375,8 @@ export const useEditConciergerieForm = ({
       setFormules(formules.filter((_, i) => i !== index));
       
       toast({
-        title: "Formule supprimÃ©e",
-        description: "La formule a Ã©tÃ© supprimÃ©e avec succÃ¨s",
+        title: "Formule supprimée",
+        description: "La formule a été supprimée avec succès",
       });
     } catch (error: any) {
       console.error("Error deleting formule:", error);
@@ -445,8 +445,8 @@ export const useEditConciergerieForm = ({
       }
       
       toast({
-        title: "Modifications enregistrÃ©es",
-        description: "Les modifications de la conciergerie ont Ã©tÃ© enregistrÃ©es"
+        title: "Modifications enregistrées",
+        description: "Les modifications de la conciergerie ont été enregistrées"
       });
       
       // Reset form state

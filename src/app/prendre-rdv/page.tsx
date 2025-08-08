@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import PrendreRdv from '@/pages/PrendreRdv'
 
 export const dynamic = 'force-dynamic'

@@ -1,4 +1,4 @@
-﻿// Types pour les formulaires
+// Types pour les formulaires
 
 export interface LoginFormData {
   email: string

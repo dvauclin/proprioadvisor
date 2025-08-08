@@ -1,11 +1,11 @@
-﻿
+
 import React from "react";
 import { AspectRatio } from "./aspect-ratio";
 
 interface ConciergerieLogoDisplayProps {
   logoUrl: string | null;
   altText: string;
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "sm" | "md" | "lg" | "xl" | "stretch";
 }
 
 const ConciergerieLogoDisplay: React.FC<ConciergerieLogoDisplayProps> = ({
@@ -22,8 +22,9 @@ const ConciergerieLogoDisplay: React.FC<ConciergerieLogoDisplayProps> = ({
     sm: "w-12 h-12",
     md: "w-24 h-24",
     lg: "w-28 h-28",  // Reduced from w-32 h-32 to w-28 h-28 
-    xl: "w-48 h-48"
-  };
+    xl: "w-48 h-48",
+    stretch: "h-full aspect-square w-auto"
+  } as const;
   
   // Return null if no logo URL is provided
   if (!logoUrl || logoUrl.trim() === '') {
@@ -43,6 +44,22 @@ const ConciergerieLogoDisplay: React.FC<ConciergerieLogoDisplayProps> = ({
     console.log("ConciergerieLogoDisplay - Image loaded successfully:", logoUrl);
   };
   
+  // Stretch mode renders without AspectRatio to occupy full header height while staying square
+  if (size === "stretch") {
+    return (
+      <div className={`${sizeClasses[size]} overflow-hidden border border-gray-200 rounded-full bg-white self-stretch flex items-center justify-center`}>
+        <img
+          src={logoUrl}
+          alt={logoAltText}
+          className="w-full h-full object-contain p-1"
+          style={{ imageRendering: "-webkit-optimize-contrast" }}
+          onError={handleImageError}
+          onLoad={handleImageLoad}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={`${sizeClasses[size]} overflow-hidden border border-gray-200 rounded-full`}>
       <AspectRatio ratio={1/1} className="bg-white">

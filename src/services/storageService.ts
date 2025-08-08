@@ -1,4 +1,4 @@
-﻿
+
 import { supabase } from "@/integrations/supabase/client";
 import { ImageFile } from "@/types";
 
@@ -74,7 +74,7 @@ export const uploadImage = async (file: File, bucket: string = 'images'): Promis
     if (uploadError) {
       console.error("uploadImage - Upload error:", uploadError);
       
-      // Analyser le type d'erreur pour donner un message plus prÃ©cis
+      // Analyser le type d'erreur pour donner un message plus précis
       if (uploadError.message.includes('Bucket not found')) {
         return { success: false, error: `Le bucket 'images' n'existe pas` };
       } else if (uploadError.message.includes('not allowed')) {

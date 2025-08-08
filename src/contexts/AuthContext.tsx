@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
@@ -73,7 +73,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     let mounted = true;
     setLoading(true);
 
-    // Timeout pour Ã©viter un chargement infini
+    // Timeout pour éviter un chargement infini
     const loadingTimeout = setTimeout(() => {
       if (mounted && loading) {
         console.log('Auth loading timeout - forcing loading to false');
@@ -112,7 +112,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     );
 
-    // Initial check - optimisÃ© pour rÃ©duire le temps de chargement
+    // Initial check - optimisé pour réduire le temps de chargement
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!mounted) return;
       
@@ -120,11 +120,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setLoading(false);
         setInitialized(true);
       } else {
-        // Si il y a une session, on la traite immÃ©diatement
+        // Si il y a une session, on la traite immédiatement
         setSession(session);
         setUser(session.user);
         
-        // On rÃ©cupÃ¨re le profil en arriÃ¨re-plan
+        // On récupère le profil en arrière-plan
         fetchProfile(session.user.id).then((profileData) => {
           if (mounted) {
             setProfile(profileData);

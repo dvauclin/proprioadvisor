@@ -1,4 +1,4 @@
-﻿// Types pour les utilitaires
+// Types pour les utilitaires
 
 export interface DebounceOptions {
   leading?: boolean

@@ -1,4 +1,4 @@
-﻿// Types pour les donnÃ©es
+// Types pour les données
 
 export interface Ville {
   id: string

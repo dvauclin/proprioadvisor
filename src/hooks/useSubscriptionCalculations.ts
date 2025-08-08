@@ -1,4 +1,4 @@
-﻿
+
 import { useEffect, useRef } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { SubscriptionFormValues } from '@/types/subscription';

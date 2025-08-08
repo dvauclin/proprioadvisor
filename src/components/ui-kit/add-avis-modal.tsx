@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui-kit/dialog';
@@ -34,29 +34,29 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validation cÃ´tÃ© client
+    // Validation côté client
     if (!conciergerieId || conciergerieId.trim() === '') {
-      toast.error('âŒ Erreur: Identifiant de conciergerie manquant');
-      console.error('ðŸš¨ conciergerieId is missing or empty:', conciergerieId);
+      toast.error('R Erreur: Identifiant de conciergerie manquant');
+      console.error('xa conciergerieId is missing or empty:', conciergerieId);
       return;
     }
 
     if (!emetteur.trim()) {
-      toast.error('âš ï¸ Veuillez saisir votre nom');
+      toast.error('a️ Veuillez saisir votre nom');
       return;
     }
 
     if (note === 0) {
-      toast.error('âš ï¸ Veuillez donner une note');
+      toast.error('a️ Veuillez donner une note');
       return;
     }
 
     if (note < 1 || note > 5) {
-      toast.error('âš ï¸ La note doit Ãªtre comprise entre 1 et 5');
+      toast.error('a️ La note doit être comprise entre 1 et 5');
       return;
     }
 
-    console.log('ðŸ“‹ DonnÃ©es du formulaire avant soumission:', {
+    console.log('x9 Données du formulaire avant soumission:', {
       conciergerieId,
       emetteur: emetteur.trim(),
       note,
@@ -74,19 +74,19 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
       });
 
       if (result.success) {
-        toast.success('ðŸŽ‰ Votre avis a Ã©tÃ© soumis et sera examinÃ© avant publication');
+        toast.success('x}0 Votre avis a été soumis et sera examiné avant publication');
         setEmetteur('');
         setNote(0);
         setCommentaire('');
         onClose();
         onAvisAdded();
       } else {
-        console.error('âŒ Ã‰chec de l\'ajout d\'avis:', result.error);
-        toast.error(`âŒ ${result.error || 'Erreur lors de l\'envoi de votre avis'}`);
+        console.error('R 0chec de l\'ajout d\'avis:', result.error);
+        toast.error(`R ${result.error || 'Erreur lors de l\'envoi de votre avis'}`);
       }
     } catch (error) {
-      console.error('ðŸ’¥ Erreur lors de la soumission de l\'avis:', error);
-      toast.error('ðŸ’¥ Erreur inattendue lors de l\'envoi de votre avis. Veuillez rÃ©essayer.');
+      console.error('x Erreur lors de la soumission de l\'avis:', error);
+      toast.error('x Erreur inattendue lors de l\'envoi de votre avis. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);
     }
@@ -100,7 +100,7 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
     onClose();
   };
 
-  // VÃ©rification de sÃ©curitÃ© : si conciergerieId est manquant, afficher une erreur
+  // Vérification de sécurité : si conciergerieId est manquant, afficher une erreur
   if (!conciergerieId) {
     return (
       <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -125,7 +125,7 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
         <DialogHeader>
           <DialogTitle>Ajouter un avis pour {conciergerieName}</DialogTitle>
           <DialogDescription>
-            Partagez votre expÃ©rience avec cette conciergerie. Votre avis sera examinÃ© avant publication.
+            Partagez votre expérience avec cette conciergerie. Votre avis sera examiné avant publication.
           </DialogDescription>
         </DialogHeader>
         
@@ -166,7 +166,7 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
               id="commentaire"
               value={commentaire}
               onChange={(e) => setCommentaire(e.target.value)}
-              placeholder="Partagez votre expÃ©rience..."
+              placeholder="Partagez votre expérience..."
               rows={4}
             />
           </div>
@@ -180,7 +180,7 @@ const AddAvisModal: React.FC<AddAvisModalProps> = ({
               disabled={isSubmitting || !emetteur.trim() || note === 0}
               className=""
             >
-              {isSubmitting ? 'ðŸ“¤ Envoi...' : 'ðŸ“ Publier l\'avis'}
+              {isSubmitting ? 'x Envoi...' : 'x Publier l\'avis'}
             </Button>
           </div>
         </form>

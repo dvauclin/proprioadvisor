@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
@@ -24,19 +24,19 @@ const ConciergerieListingMeta: React.FC<ConciergerieListingMetaProps> = ({
 }) => {
   const [structuredDataListing, setStructuredDataListing] = useState<any>(null);
   
-  // Titre personnalisÃ© par ville depuis Supabase
+  // Titre personnalisé par ville depuis Supabase
   const pageTitle = ville?.titleSeo 
     ? ville.titleSeo
     : ville?.nom 
-    ? `Conciergeries Airbnb Ã  ${ville.nom} - Comparateur gratuit | Proprioadvisor`
+    ? `Conciergeries Airbnb à ${ville.nom} - Comparateur gratuit | Proprioadvisor`
     : emergencyMetaData?.title || 'Comparateur conciergeries Airbnb';
     
-  // Description personnalisÃ©e par ville depuis Supabase
+  // Description personnalisée par ville depuis Supabase
   const pageDescription = ville?.description 
     ? ville.description
     : ville?.nom
-    ? `DÃ©couvrez les meilleures conciergeries Airbnb Ã  ${ville.nom}. Comparez gratuitement les services, tarifs et avis pour choisir la conciergerie idÃ©ale pour votre location courte durÃ©e.`
-    : emergencyMetaData?.description || 'DÃ©couvrez les meilleures conciergeries Airbnb pour votre bien.';
+    ? `Découvrez les meilleures conciergeries Airbnb à ${ville.nom}. Comparez gratuitement les services, tarifs et avis pour choisir la conciergerie idéale pour votre location courte durée.`
+    : emergencyMetaData?.description || 'Découvrez les meilleures conciergeries Airbnb pour votre bien.';
   
   const canonicalUrl = `https://proprioadvisor.fr/conciergerie/${villeSlug}`;
 
@@ -47,7 +47,7 @@ const ConciergerieListingMeta: React.FC<ConciergerieListingMetaProps> = ({
     return lastUpdate.toISOString();
   };
 
-  // GÃ©nÃ©rer les donnÃ©es structurÃ©es avec les vrais avis de faÃ§on asynchrone
+  // Générer les données structurées avec les vrais avis de façon asynchrone
   useEffect(() => {
     const generateStructuredData = async () => {
       if (ville && filteredFormules.length > 0) {
@@ -56,7 +56,7 @@ const ConciergerieListingMeta: React.FC<ConciergerieListingMetaProps> = ({
           setStructuredDataListing(data);
         } catch (error) {
           console.error('Error generating structured data:', error);
-          // Fallback vers null pour Ã©viter les erreurs
+          // Fallback vers null pour éviter les erreurs
           setStructuredDataListing(null);
         }
       }
@@ -83,9 +83,9 @@ const ConciergerieListingMeta: React.FC<ConciergerieListingMetaProps> = ({
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
         
-        {/* Keywords basÃ©s sur la ville */}
+        {/* Keywords basés sur la ville */}
         {ville?.nom && (
-          <meta name="keywords" content={`conciergerie airbnb, ${ville.nom}, location courte durÃ©e, gestion locative, airbnb management`} />
+          <meta name="keywords" content={`conciergerie airbnb, ${ville.nom}, location courte durée, gestion locative, airbnb management`} />
         )}
       </Head>
       

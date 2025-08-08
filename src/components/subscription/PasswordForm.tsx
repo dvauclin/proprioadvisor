@@ -1,4 +1,4 @@
-﻿
+
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { FormField, FormItem, FormLabel, FormControl } from '@/components/ui-kit/form';
@@ -22,9 +22,9 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
 
   return (
     <div className="border border-gray-200 rounded-lg p-4 bg-white">
-      <h3 className="font-semibold text-lg mb-3">CrÃ©er votre compte</h3>
+      <h3 className="font-semibold text-lg mb-3">Créer votre compte</h3>
       <p className="text-sm text-gray-600 mb-4">
-        Un compte sera crÃ©Ã© avec l'email de votre conciergerie : <strong>{conciergerieEmail}</strong>
+        Un compte sera créé avec l'email de votre conciergerie : <strong>{conciergerieEmail}</strong>
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -37,7 +37,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
               <FormControl>
                 <Input 
                   type="password" 
-                  placeholder="Minimum 6 caractÃ¨res"
+                  placeholder="Minimum 6 caractères"
                   {...field}
                 />
               </FormControl>

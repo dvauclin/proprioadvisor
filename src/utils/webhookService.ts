@@ -1,4 +1,4 @@
-﻿
+
 export const triggerWebhook = async (data: any) => {
   console.log("ðŸŽ¯ WEBHOOK TRIGGERED - Function called!");
   console.log("ðŸ“ Input data:", data);

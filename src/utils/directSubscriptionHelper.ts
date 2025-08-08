@@ -1,4 +1,4 @@
-﻿import { SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { SubscriptionFormValues } from '@/types/subscription';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 

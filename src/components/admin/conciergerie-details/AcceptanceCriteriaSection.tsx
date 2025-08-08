@@ -1,4 +1,4 @@
-﻿
+
 import React from "react";
 import { Conciergerie } from "@/types";
 
@@ -34,14 +34,14 @@ const AcceptanceCriteriaSection: React.FC<AcceptanceCriteriaSectionProps> = ({
         )}
         
         <div>
-          <h3 className="text-sm text-gray-500">Type de logement acceptÃ©</h3>
+          <h3 className="text-sm text-gray-500">Type de logement accepté</h3>
           <p>{getPropertyTypeLabel(conciergerie.typeLogementAccepte)}</p>
         </div>
         
         {conciergerie.superficieMin > 0 && (
           <div>
             <h3 className="text-sm text-gray-500">Superficie minimale</h3>
-            <p>{conciergerie.superficieMin} mÂ²</p>
+            <p>{conciergerie.superficieMin} m²</p>
           </div>
         )}
         
@@ -58,7 +58,7 @@ const AcceptanceCriteriaSection: React.FC<AcceptanceCriteriaSectionProps> = ({
         </div>
         
         <div>
-          <h3 className="text-sm text-gray-500">Accepte rÃ©sidence principale</h3>
+          <h3 className="text-sm text-gray-500">Accepte résidence principale</h3>
           <p>{conciergerie.accepteResidencePrincipale ? "Oui" : "Non"}</p>
         </div>
       </div>

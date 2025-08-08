@@ -1,4 +1,4 @@
-﻿import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next'
 import { supabase } from '@/integrations/supabase/client'
 
 const BASE_URL = process.env.NODE_ENV === 'development' 

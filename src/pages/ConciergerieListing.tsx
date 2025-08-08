@@ -1,4 +1,4 @@
-﻿
+
 "use client";
 
 import React from "react";
@@ -40,7 +40,9 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
     breadcrumbItems,
     getLastUpdateDate,
     pageDescription,
-    formules
+    formules,
+    conciergerieRatings,
+    conciergerieReviewCounts
   } = useConciergerieListingLogic(ville);
   
   // Show loading for ville data
@@ -58,10 +60,10 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
       <div className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center py-10">
-            <h1 className="text-3xl font-bold mb-4">Destination non trouvÃ©e</h1>
-            <p className="text-gray-600 mb-6">Nous n'avons pas trouvÃ© la destination que vous recherchez.</p>
+            <h1 className="text-3xl font-bold mb-4">Destination non trouvée</h1>
+            <p className="text-gray-600 mb-6">Nous n'avons pas trouvé la destination que vous recherchez.</p>
             <div className="flex gap-4">
-              <Button>Retour Ã  l'accueil</Button>
+              <Button>Retour à l'accueil</Button>
             </div>
           </div>
         </div>
@@ -99,6 +101,8 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
         }}
         resetFilters={resetFilters}
         subscriptions={subscriptions}
+        conciergerieRatings={conciergerieRatings}
+        conciergerieReviewCounts={conciergerieReviewCounts}
       />
 
       <LinkedCitiesSection linkedCities={linkedCities} currentCity={villeData?.nom || ville} />

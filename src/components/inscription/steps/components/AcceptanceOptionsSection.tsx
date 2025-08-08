@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl } from "@/components/ui-kit/form";
 import { Checkbox } from "@/components/ui-kit/checkbox";
@@ -36,7 +36,7 @@ const AcceptanceOptionsSection: React.FC<AcceptanceOptionsSectionProps> = ({
               <div className="flex items-center">
                 
                 <FormLabel>
-                  Accepte les rÃ©sidences principales
+                  Accepte les résidences principales
                 </FormLabel>
               </div>
             </div>

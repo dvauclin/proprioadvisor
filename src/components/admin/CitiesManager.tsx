@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui-kit/button";
@@ -46,7 +46,7 @@ const CitiesManager: React.FC<CitiesManagerProps> = ({ villes, onDelete }) => {
             <TableRow>
               <TableHead>Nom</TableHead>
               <TableHead>Slug</TableHead>
-              <TableHead>CoordonnÃ©es</TableHead>
+              <TableHead>Coordonnées</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -62,7 +62,7 @@ const CitiesManager: React.FC<CitiesManagerProps> = ({ villes, onDelete }) => {
                       {ville.latitude.toFixed(4)}, {ville.longitude.toFixed(4)}
                     </div>
                   ) : (
-                    <span className="text-xs text-gray-400">Non dÃ©finies</span>
+                    <span className="text-xs text-gray-400">Non définies</span>
                   )}
                 </TableCell>
                 <TableCell className="text-right">
