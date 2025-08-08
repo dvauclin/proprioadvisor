@@ -1,14 +1,14 @@
-ï»¿"use client";
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui-kit/card';
+import { Button } from '@/components/ui-kit/button';
+import { Input } from '@/components/ui-kit/input';
+import { Label } from '@/components/ui-kit/label';
+import { Alert, AlertDescription } from '@/components/ui-kit/alert';
 import { Loader2, ArrowLeft } from 'lucide-react';
 
 const Connexion = () => {
@@ -70,13 +70,13 @@ const Connexion = () => {
       const { error } = await resetPassword(email);
       
       if (error) {
-        setError('Erreur lors de l\'envoi de l\'email de rÃ©initialisation');
+        setError('Erreur lors de l\'envoi de l\'email de réinitialisation');
       } else {
-        setSuccess('Un email de rÃ©initialisation a Ã©tÃ© envoyÃ© Ã  votre adresse email');
+        setSuccess('Un email de réinitialisation a été envoyé à votre adresse email');
         setShowResetForm(false);
       }
     } catch (error: any) {
-      setError('Une erreur est survenue lors de la rÃ©initialisation');
+      setError('Une erreur est survenue lors de la réinitialisation');
     } finally {
       setIsLoading(false);
     }
@@ -99,12 +99,12 @@ const Connexion = () => {
             <span className="text-lg font-semibold">PROPRIOADVISOR</span>
           </Link>
           <h2 className="text-3xl font-bold text-gray-900">
-            {showResetForm ? 'RÃ©initialiser le mot de passe' : 'Connexion'}
+            {showResetForm ? 'Réinitialiser le mot de passe' : 'Connexion'}
           </h2>
           <p className="mt-2 text-gray-600">
             {showResetForm 
-              ? 'Saisissez votre email pour recevoir un lien de rÃ©initialisation'
-              : 'Connectez-vous Ã  votre compte pour gÃ©rer votre conciergerie'
+              ? 'Saisissez votre email pour recevoir un lien de réinitialisation'
+              : 'Connectez-vous à votre compte pour gérer votre conciergerie'
             }
           </p>
         </div>
@@ -122,7 +122,7 @@ const Connexion = () => {
                   >
                     <ArrowLeft className="h-4 w-4" />
                   </Button>
-                  Mot de passe oubliÃ©
+                  Mot de passe oublié
                 </div>
               ) : (
                 'Se connecter'
@@ -130,8 +130,8 @@ const Connexion = () => {
             </CardTitle>
             <CardDescription>
               {showResetForm 
-                ? 'Nous vous enverrons un email pour rÃ©initialiser votre mot de passe'
-                : 'Entrez vos identifiants pour accÃ©der Ã  votre espace'
+                ? 'Nous vous enverrons un email pour réinitialiser votre mot de passe'
+                : 'Entrez vos identifiants pour accéder à votre espace'
               }
             </CardDescription>
           </CardHeader>
@@ -156,7 +156,7 @@ const Connexion = () => {
                       Envoi en cours...
                     </>
                   ) : (
-                    'Envoyer le lien de rÃ©initialisation'
+                    'Envoyer le lien de réinitialisation'
                   )}
                 </Button>
               </form>
@@ -181,7 +181,7 @@ const Connexion = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+                    placeholder="••••••••"
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
@@ -201,7 +201,7 @@ const Connexion = () => {
                     onClick={() => setShowResetForm(true)}
                     className="text-sm text-primary hover:underline"
                   >
-                    Mot de passe oubliÃ© ?
+                    Mot de passe oublié ?
                   </button>
                 </div>
               </form>
@@ -224,7 +224,7 @@ const Connexion = () => {
                 <p className="text-sm text-gray-600">
                   Pas encore de compte ?{' '}
                   <Link href="/inscription" className="text-primary hover:underline">
-                    CrÃ©er une conciergerie
+                    Créer une conciergerie
                   </Link>
                 </p>
               </div>

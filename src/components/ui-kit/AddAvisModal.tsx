@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui-kit/dialog';
+import { Button } from '@/components/ui-kit/button';
+import { Input } from '@/components/ui-kit/input';
+import { Textarea } from '@/components/ui-kit/textarea';
+import { Label } from '@/components/ui-kit/label';
 import { Star } from 'lucide-react';
 import { addAvis } from '@/services/avisService';
 import { toast } from 'sonner';

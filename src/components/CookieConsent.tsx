@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui-kit/button';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui-kit/dialog';
 
 const CookieConsent: React.FC = () => {
   const { cookieConsent, hasResponded, updateCookieConsent } = useCookieConsent();

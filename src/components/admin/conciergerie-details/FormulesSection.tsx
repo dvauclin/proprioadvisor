@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { Formule } from "@/types";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui-kit/separator";
 import FormuleCard from "./FormuleCard";
 import { Loader2, Info, Database, Bug } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { useToast } from "@/components/ui/use-toast";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui-kit/accordion";
+import { useToast } from "@/components/ui-kit/use-toast";
 
 interface FormulesSectionProps {
   formules: Formule[];

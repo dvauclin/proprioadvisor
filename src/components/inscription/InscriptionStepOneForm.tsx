@@ -1,7 +1,7 @@
 
 import React from "react";
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui-kit/form";
+import { Button } from "@/components/ui-kit/button";
 import { UseFormReturn } from "react-hook-form";
 import StepOne from "@/components/inscription/steps/StepOne";
 import { Ville } from "@/types";

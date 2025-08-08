@@ -1,9 +1,9 @@
 
 import React from "react";
-import { FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { FormLabel } from "@/components/ui-kit/form";
+import { Input } from "@/components/ui-kit/input";
 import { Loader2 } from "lucide-react";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui-kit/aspect-ratio";
 
 interface LogoUploaderProps {
   logoPreview: string;

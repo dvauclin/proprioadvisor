@@ -1,4 +1,4 @@
-ï»¿import { SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { SubscriptionFormValues } from '@/types/subscription';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
@@ -76,11 +76,11 @@ export const processDirectSubscription = async ({
     throw error; // Re-throw to be caught by the main handler
   }
 
-  // Ne pas mettre Ã  jour score_manuel - ce champ doit rester modifiable manuellement uniquement
+  // Ne pas mettre à jour score_manuel - ce champ doit rester modifiable manuellement uniquement
   
   toast({
-    title: existingSubscription ? "Souscription mise Ã  jour" : "Souscription rÃ©ussie",
-    description: "Votre souscription a Ã©tÃ© traitÃ©e avec succÃ¨s.",
+    title: existingSubscription ? "Souscription mise à jour" : "Souscription réussie",
+    description: "Votre souscription a été traitée avec succès.",
   });
 
   const updateParam = existingSubscription ? "&update=true" : "";

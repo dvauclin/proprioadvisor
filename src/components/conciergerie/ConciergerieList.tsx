@@ -5,8 +5,8 @@ import { Formule, Conciergerie } from "@/types";
 // Type étendu pour les formules avec conciergerie
 type FormuleWithConciergerie = Formule & { conciergerie?: Conciergerie };
 
-import ComparisonCard from "@/components/ui/ComparisonCard";
-import { Button } from "@/components/ui/button";
+import ComparisonCard from "@/components/ui-kit/ComparisonCard";
+import { Button } from "@/components/ui-kit/button";
 
 interface ConciergerieListProps {
   formules: FormuleWithConciergerie[];

@@ -1,7 +1,7 @@
 
 import React from "react";
 import { List } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui-kit/badge";
 import { getServiceLabel } from "@/utils/serviceMapping.tsx";
 
 interface ServicesSectionProps {

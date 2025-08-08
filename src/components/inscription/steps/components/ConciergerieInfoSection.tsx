@@ -1,7 +1,7 @@
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
+import { Input } from "@/components/ui-kit/input";
 import { User, Mail, Image, Phone, UserCircle } from "lucide-react";
 import LogoUploader from "@/components/inscription/LogoUploader";
 

@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useToast } from "@/components/ui/use-toast";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/components/ui-kit/use-toast";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui-kit/tabs";
+import { ScrollArea, ScrollBar } from "@/components/ui-kit/scroll-area";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui-kit/card";
+import { Button } from "@/components/ui-kit/button";
+import { Badge } from "@/components/ui-kit/badge";
 import { Eye, Edit, Trash2, Plus, CheckCircle, XCircle } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { getConciergeriesToValidate, getValidatedConciergeries, getAllVilles, getAllArticles, validateConciergerie, rejectConciergerie, addArticle, updateArticle, deleteArticle, addVille, updateVille, deleteVille, uploadImage, getAllImages, deleteImage, saveConciergerie, deleteConciergerie, getContactMessages, updateContactMessageStatus, deleteContactMessage, getAllSubscriptions } from "@/services/supabaseService";
 import { getAllLeads } from "@/services/leadService";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,8 +21,8 @@ import VillesManager from "@/components/admin/VillesManager";
 import CityPopulator from "@/components/admin/CityPopulator";
 import SubscriptionLinkGenerator from "@/components/admin/SubscriptionLinkGenerator";
 import LeadDetailsDialog from "@/components/admin/LeadDetailsDialog";
-import StarRating from "@/components/ui/StarRating";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import StarRating from "@/components/ui-kit/StarRating";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui-kit/table";
 const Admin = () => {
   const {
     toast

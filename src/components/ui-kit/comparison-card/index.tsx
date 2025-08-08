@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui-kit/card';
+import { Button } from '@/components/ui-kit/button';
 import { Conciergerie, Formule } from '@/types';
 import CardHeader from './CardHeader';
 import CommissionSection from './CommissionSection';
@@ -9,7 +9,7 @@ import DurationSection from './DurationSection';
 import FeesSection from './FeesSection';
 import ServicesSection from './ServicesSection';
 import PropertiesSection from './PropertiesSection';
-import FavoriteButton from '@/components/ui/FavoriteButton';
+import FavoriteButton from '@/components/ui-kit/FavoriteButton';
 
 interface ComparisonCardProps {
   conciergerie: Conciergerie;

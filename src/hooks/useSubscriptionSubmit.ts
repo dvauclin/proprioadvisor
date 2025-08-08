@@ -1,8 +1,8 @@
-Ôªø
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui-kit/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { SubscriptionFormValues } from '@/types/subscription';
 import { handleUserAuthentication } from '@/utils/subscriptionAuthHelper';
@@ -29,7 +29,7 @@ export const useSubscriptionSubmit = ({
   const [loading, setLoading] = useState(false);
 
   const handleSubscription = async (values: SubscriptionFormValues) => {
-    console.log("handleSubscription appel√© avec:", values);
+    console.log("handleSubscription appelÈ avec:", values);
     
     if (!conciergerieId) {
       toast({ title: "Erreur", description: "ID de conciergerie manquant.", variant: "destructive" });
@@ -43,7 +43,7 @@ export const useSubscriptionSubmit = ({
       const amountInCents = totalMonthlyFee * 100;
       
       if (totalMonthlyFee < 0) {
-        toast({ title: "Erreur", description: "Le montant ne peut pas √™tre n√©gatif.", variant: "destructive" });
+        toast({ title: "Erreur", description: "Le montant ne peut pas Ítre nÈgatif.", variant: "destructive" });
         setLoading(false);
         return;
       }
@@ -88,11 +88,11 @@ export const useSubscriptionSubmit = ({
         phone_number_value: values.phoneNumberValue || null
       };
 
-      // Si c'est une souscription gratuite (pas d'abonnement payant coch√©), traiter directement
+      // Si c'est une souscription gratuite (pas d'abonnement payant cochÈ), traiter directement
       if (!values.useCustomAmount || totalMonthlyFee === 0) {
-        console.log("Souscription gratuite d√©tect√©e, traitement direct sans Stripe");
+        console.log("Souscription gratuite dÈtectÈe, traitement direct sans Stripe");
         
-        // Si on a une souscription existante qui √©tait payante, il faut d'abord annuler l'abonnement Stripe
+        // Si on a une souscription existante qui Ètait payante, il faut d'abord annuler l'abonnement Stripe
         if (existingSubscription && existingSubscription.stripe_subscription_id && existingSubscription.monthly_amount > 0) {
           console.log("Annulation de l'abonnement Stripe existant");
           try {
@@ -111,7 +111,7 @@ export const useSubscriptionSubmit = ({
               return;
             }
             
-            console.log("Abonnement Stripe annul√© avec succ√®s");
+            console.log("Abonnement Stripe annulÈ avec succËs");
           } catch (cancelError) {
             console.error("Erreur lors de l'annulation de l'abonnement:", cancelError);
             toast({
@@ -125,7 +125,7 @@ export const useSubscriptionSubmit = ({
         }
         
         // Traiter la souscription gratuite directement
-        // V√©rifier s'il existe d√©j√† une souscription pour cette conciergerie
+        // VÈrifier s'il existe dÈj‡ une souscription pour cette conciergerie
         const { data: existingData } = await supabase
           .from('subscriptions')
           .select('id')
@@ -136,7 +136,7 @@ export const useSubscriptionSubmit = ({
         let isUpdate = false;
 
         if (existingData) {
-          // Mettre √† jour la souscription existante
+          // Mettre ‡ jour la souscription existante
           const { error: updateError } = await supabase
             .from('subscriptions')
             .update({
@@ -155,7 +155,7 @@ export const useSubscriptionSubmit = ({
           subscriptionId = existingData.id;
           isUpdate = true;
         } else {
-          // Cr√©er une nouvelle souscription
+          // CrÈer une nouvelle souscription
           const { data: insertData, error: insertError } = await supabase
             .from('subscriptions')
             .insert({
@@ -201,9 +201,9 @@ export const useSubscriptionSubmit = ({
           console.error("Error during conciergerie validation for free subscription:", error);
         }
         
-        // Ne pas mettre √† jour le score_manuel - ce champ doit rester modifiable manuellement uniquement
+        // Ne pas mettre ‡ jour le score_manuel - ce champ doit rester modifiable manuellement uniquement
         
-        // D√©clencher le webhook
+        // DÈclencher le webhook
         try {
           await triggerWebhook({
             type: 'subscription_update',
@@ -215,10 +215,10 @@ export const useSubscriptionSubmit = ({
             is_free: true
           });
         } catch (webhookError) {
-          console.error("Erreur lors du d√©clenchement du webhook:", webhookError);
+          console.error("Erreur lors du dÈclenchement du webhook:", webhookError);
         }
 
-        // Rediriger vers la page de succ√®s avec tous les param√®tres
+        // Rediriger vers la page de succËs avec tous les paramËtres
         const params = new URLSearchParams({
           subscription_id: subscriptionId,
           points: totalPoints.toString(),
@@ -255,7 +255,7 @@ export const useSubscriptionSubmit = ({
         console.error("Error creating checkout:", error);
         toast({
           title: "Erreur",
-          description: "Impossible de cr√©er la session de paiement.",
+          description: "Impossible de crÈer la session de paiement.",
           variant: "destructive"
         });
         setLoading(false);
@@ -265,7 +265,7 @@ export const useSubscriptionSubmit = ({
       console.log("Checkout response:", data);
 
       if (data?.url) {
-        // D√©clencher le webhook pour les souscriptions payantes
+        // DÈclencher le webhook pour les souscriptions payantes
         try {
           await triggerWebhook({
             type: 'subscription_checkout',
@@ -275,7 +275,7 @@ export const useSubscriptionSubmit = ({
             checkout_url: data.url
           });
         } catch (webhookError) {
-          console.error("Erreur lors du d√©clenchement du webhook:", webhookError);
+          console.error("Erreur lors du dÈclenchement du webhook:", webhookError);
         }
         
         // If it's a redirect to success page (free subscription), navigate directly

@@ -1,8 +1,8 @@
 
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui-kit/button";
 import { Filter as FilterIcon } from "lucide-react";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Breadcrumbs from "@/components/ui-kit/Breadcrumbs";
 import ConciergerieFilters from "@/components/conciergerie/ConciergerieFilters";
 import { Filter, Ville } from "@/types";
 

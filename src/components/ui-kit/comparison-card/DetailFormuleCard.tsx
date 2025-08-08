@@ -1,13 +1,13 @@
 
 import React from "react";
 import { Formule, Conciergerie } from "@/types";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui-kit/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui-kit/card";
 import CommissionSection from "./CommissionSection";
 import DurationSection from "./DurationSection";
 import FeesSection from "./FeesSection";
 import ServicesSection from "./ServicesSection";
-import FavoriteButton from "@/components/ui/FavoriteButton";
+import FavoriteButton from "@/components/ui-kit/FavoriteButton";
 
 interface DetailFormuleCardProps {
   formule: Formule;

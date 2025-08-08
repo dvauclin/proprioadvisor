@@ -3,12 +3,12 @@
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui-kit/button";
+import { Badge } from "@/components/ui-kit/badge";
 import { toast } from "sonner";
 import { Loader2, Check, X, Eye } from "lucide-react";
-import ConciergerieLogoDisplay from "@/components/ui/ConciergerieLogoDisplay";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import ConciergerieLogoDisplay from "@/components/ui-kit/ConciergerieLogoDisplay";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui-kit/dialog";
 import EditConciergerieForm from "./EditConciergerieForm";
 import { validateConciergerie } from "@/services/conciergerieService";
 import { Conciergerie } from "@/types";

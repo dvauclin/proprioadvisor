@@ -1,8 +1,8 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
+import { Input } from "@/components/ui-kit/input";
 import { Home } from "lucide-react";
 import { propertyTypeOptions } from "@/services/supabaseService";
 import { 
@@ -11,7 +11,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui-kit/select";
 
 interface PropertyConfigSectionProps {
   form: UseFormReturn<any>;

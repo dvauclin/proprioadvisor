@@ -1,10 +1,10 @@
-ï»¿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-// Import des icÃ´nes utilisÃ©es
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui-kit/card";
+import { Button } from "@/components/ui-kit/button";
+// Import des icônes utilisées
 import { CheckCircle, Mail, Calendar, CreditCard, Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -48,12 +48,12 @@ const SubscriptionSuccess = () => {
 
 
         if (!subscriptionId) {
-          setError("Aucun identifiant de souscription trouvÃ©");
+          setError("Aucun identifiant de souscription trouvé");
           setLoading(false);
           return;
         }
 
-        // RÃ©cupÃ©rer les dÃ©tails de la souscription
+        // Récupérer les détails de la souscription
         const { data: subscriptionData, error: subscriptionError } = await supabase
           .from('subscriptions')
           .select('*')
@@ -62,14 +62,14 @@ const SubscriptionSuccess = () => {
 
         if (subscriptionError) {
           console.error('Error fetching subscription:', subscriptionError);
-          setError("Impossible de rÃ©cupÃ©rer les dÃ©tails de la souscription");
+          setError("Impossible de récupérer les détails de la souscription");
           setLoading(false);
           return;
         }
 
         setSubscription(subscriptionData);
 
-        // RÃ©cupÃ©rer les dÃ©tails de la conciergerie
+        // Récupérer les détails de la conciergerie
         if (subscriptionData.conciergerie_id) {
           const { data: conciergerieData, error: conciergerieError } = await supabase
             .from('conciergeries')
@@ -84,7 +84,7 @@ const SubscriptionSuccess = () => {
 
       } catch (error) {
         console.error('Error fetching data:', error);
-        setError("Une erreur est survenue lors du chargement des donnÃ©es");
+        setError("Une erreur est survenue lors du chargement des données");
       } finally {
         setLoading(false);
       }
@@ -94,8 +94,8 @@ const SubscriptionSuccess = () => {
   }, [searchParams, supabase]);
 
   const formatCurrency = (amount: number) => {
-    // Le montant est dÃ©jÃ  stockÃ© en euros entiers dans Supabase
-    return `${amount}â‚¬`;
+    // Le montant est déjà stocké en euros entiers dans Supabase
+    return `${amount}€`;
   };
 
   const getPlanName = (points: number, monthlyAmount: number) => {
@@ -141,7 +141,7 @@ const SubscriptionSuccess = () => {
           </CardHeader>
           <CardContent>
             <Button className="w-full" asChild>
-              <a href="/subscription">Retour Ã  la souscription</a>
+              <a href="/subscription">Retour à la souscription</a>
             </Button>
           </CardContent>
         </Card>
@@ -158,10 +158,10 @@ const SubscriptionSuccess = () => {
               <CheckCircle className="h-10 w-10 text-green-600" />
             </div>
             <CardTitle className="text-3xl font-bold text-gray-900 mb-2">
-              {isUpdate ? "Souscription mise Ã  jour !" : "Souscription rÃ©ussie !"}
+              {isUpdate ? "Souscription mise à jour !" : "Souscription réussie !"}
             </CardTitle>
             <CardDescription className="text-lg">
-              {isUpdate ? "Votre abonnement a Ã©tÃ© modifiÃ© avec succÃ¨s" : "Votre abonnement a Ã©tÃ© activÃ© avec succÃ¨s"}
+              {isUpdate ? "Votre abonnement a été modifié avec succès" : "Votre abonnement a été activé avec succès"}
             </CardDescription>
           </CardHeader>
           
@@ -178,12 +178,12 @@ const SubscriptionSuccess = () => {
                   {conciergerie.mail}
                 </p>
                 {conciergerie.validated && (
-                  <p className="text-green-600 text-sm mt-1">âœ“ Conciergerie validÃ©e</p>
+                  <p className="text-green-600 text-sm mt-1">? Conciergerie validée</p>
                 )}
               </div>
             )}
 
-            {/* DÃ©tails de la souscription */}
+            {/* Détails de la souscription */}
             {subscription && (
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { FormuleFormData } from "@/components/formule/FormuleFormSchema";
 import FormuleForm from "@/components/formule/FormuleForm";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui-kit/button";
 import { ListPlus, ArrowLeft, Trash2, Edit } from "lucide-react";
 
 interface StepTwoProps {

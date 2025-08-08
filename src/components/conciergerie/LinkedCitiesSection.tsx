@@ -1,4 +1,4 @@
-ï»¿"use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -24,7 +24,7 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
       className="mt-12" 
       aria-labelledby="nearby-cities-heading"
       role="region"
-      aria-label="Villes Ã  proximitÃ©"
+      aria-label="Villes à proximité"
     >
       <div className="container mx-auto px-4">
         <div className="bg-gray-50 rounded-lg p-6">
@@ -32,12 +32,12 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
             id="nearby-cities-heading" 
             className="text-xl font-semibold mb-4 text-center text-gray-800"
           >
-            Voir aussi les conciergeries dans les villes Ã  proximitÃ©
+            Voir aussi les conciergeries dans les villes à proximité
           </h2>
           <div 
             className="flex flex-wrap justify-center gap-3"
             role="list"
-            aria-label="Liste des villes Ã  proximitÃ©"
+            aria-label="Liste des villes à proximité"
           >
             {linkedCities.map(linkedCity => (
               <Link 
@@ -45,8 +45,8 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
                 href={`/conciergerie/${linkedCity.slug}`} 
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:border-gray-400 px-4 py-2"
                 role="listitem"
-                aria-label={`Voir les conciergeries Airbnb Ã  ${linkedCity.nom}`}
-                title={`Comparer les conciergeries Airbnb Ã  ${linkedCity.nom}`}
+                aria-label={`Voir les conciergeries Airbnb à ${linkedCity.nom}`}
+                title={`Comparer les conciergeries Airbnb à ${linkedCity.nom}`}
                 data-city-id={linkedCity.id}
                 data-city-slug={linkedCity.slug}
                 data-city-name={linkedCity.nom}
@@ -58,9 +58,9 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
                 <span itemProp="name" className="sr-only">{linkedCity.nom}</span>
                 <span itemProp="url" className="sr-only">{`/conciergerie/${linkedCity.slug}`}</span>
                 <h3 itemProp="name">
-                  Conciergerie Airbnb Ã  {linkedCity.nom}
+                  Conciergerie Airbnb à {linkedCity.nom}
                 </h3>
-                {/* DonnÃ©es structurÃ©es pour les bots */}
+                {/* Données structurées pour les bots */}
                 <script
                   type="application/ld+json"
                   dangerouslySetInnerHTML={{
@@ -87,7 +87,7 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
                           "value": currentCity || "unknown"
                         }
                       ],
-                      "description": `Conciergeries Airbnb disponibles Ã  ${linkedCity.nom}`,
+                      "description": `Conciergeries Airbnb disponibles à ${linkedCity.nom}`,
                       "serviceType": "Conciergerie Airbnb",
                       "areaServed": {
                         "@type": "City",
@@ -99,15 +99,15 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
               </Link>
             ))}
           </div>
-          {/* DonnÃ©es structurÃ©es pour la section entiÃ¨re */}
+          {/* Données structurées pour la section entière */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "ItemList",
-                "name": "Villes Ã  proximitÃ© avec conciergeries Airbnb",
-                "description": `Liste des villes Ã  proximitÃ© de ${currentCity || 'cette ville'} proposant des services de conciergerie Airbnb`,
+                "name": "Villes à proximité avec conciergeries Airbnb",
+                "description": `Liste des villes à proximité de ${currentCity || 'cette ville'} proposant des services de conciergerie Airbnb`,
                 "numberOfItems": linkedCities.length,
                 "mainEntity": {
                   "@type": "City",
@@ -134,10 +134,10 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
                       {
                         "@type": "PropertyValue",
                         "name": "distance-from-current",
-                        "value": "proximitÃ©"
+                        "value": "proximité"
                       }
                     ],
-                    "description": `Conciergeries Airbnb disponibles Ã  ${city.nom}`,
+                    "description": `Conciergeries Airbnb disponibles à ${city.nom}`,
                     "serviceType": "Conciergerie Airbnb"
                   }
                 })),

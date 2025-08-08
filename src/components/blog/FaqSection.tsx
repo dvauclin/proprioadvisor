@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Article } from '@/types';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui-kit/accordion";
 
 interface FaqSectionProps {
   article: Article;

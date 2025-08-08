@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui-kit/use-toast";
 import type { FormuleFormData } from "@/components/FormuleForm";
 
 export interface Formule extends FormuleFormData {

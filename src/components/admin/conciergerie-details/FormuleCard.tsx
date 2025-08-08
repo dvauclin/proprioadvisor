@@ -5,8 +5,8 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui-kit/card";
+import { Badge } from "@/components/ui-kit/badge";
 import {
   Table,
   TableBody,
@@ -14,7 +14,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui-kit/table";
 import { renderServiceWithIcon } from "@/utils/serviceMapping.tsx";
 
 interface FormuleCardProps {

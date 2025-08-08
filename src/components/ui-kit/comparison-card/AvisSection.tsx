@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui-kit/dialog';
 import { Avis } from '@/types';
 import { getAvisByConciergerie } from '@/services/supabaseService';
-import StarRating from '@/components/ui/StarRating';
-import SimpleAvisForm from '@/components/ui/SimpleAvisForm';
-import AvisModal from '@/components/ui/AvisModal';
+import StarRating from '@/components/ui-kit/StarRating';
+import SimpleAvisForm from '@/components/ui-kit/SimpleAvisForm';
+import AvisModal from '@/components/ui-kit/AvisModal';
 
 interface AvisSectionProps {
   conciergerieId: string;

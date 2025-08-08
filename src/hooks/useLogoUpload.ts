@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui-kit/use-toast";
 import { uploadImage } from "@/services/storageService";
 
 export const useLogoUpload = () => {

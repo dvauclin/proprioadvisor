@@ -1,4 +1,4 @@
-ï»¿
+
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -7,18 +7,18 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+} from '@/components/ui-kit/dropdown-menu';
+import { Button } from '@/components/ui-kit/button';
+import { Avatar, AvatarFallback } from '@/components/ui-kit/avatar';
 import { User, LogOut, Shield, PlusCircle, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import ConciergerieUserMenu from './ConciergerieUserMenu';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@/components/ui-kit/skeleton';
 
 const UserMenu = () => {
   const { user, profile, signOut, isAdmin, loading } = useAuth();
 
-  // Skeleton loader pour un chargement plus Ã©lÃ©gant
+  // Skeleton loader pour un chargement plus élégant
   if (loading) {
     return (
       <div className="flex items-center space-x-2">
@@ -89,7 +89,7 @@ const UserMenu = () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={signOut} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />
-            <span>Se dÃ©connecter</span>
+            <span>Se déconnecter</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

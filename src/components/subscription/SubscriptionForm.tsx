@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
+import { Button } from "@/components/ui-kit/button";
+import { Form } from "@/components/ui-kit/form";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

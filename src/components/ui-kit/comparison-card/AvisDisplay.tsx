@@ -7,8 +7,8 @@ import { SimpleAvisForm } from '../SimpleAvisForm';
 import { getAvisByConciergerie } from '@/services/avisService';
 import { format } from 'date-fns/format';
 import { fr } from 'date-fns/locale/fr';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui-kit/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui-kit/dialog';
 
 interface AvisDisplayProps {
   conciergerieId: string;

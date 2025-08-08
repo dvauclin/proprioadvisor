@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui-kit/dialog";
+import { Button } from "@/components/ui-kit/button";
 import { Info } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { createConciergerieSlug } from "@/utils/conciergerieUtils";

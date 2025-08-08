@@ -1,6 +1,6 @@
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui-kit/input';
 import { SubscriptionFormValues } from '@/types/subscription';
 import { PricingExplanation } from './PricingExplanation';
 import { RenewalDayDisplay } from './RenewalDayDisplay';

@@ -1,6 +1,6 @@
 import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
+import { Badge } from "@/components/ui-kit/badge";
 import { Lead } from "@/types";
 interface LeadDetailsDialogProps {
   lead: Lead | null;

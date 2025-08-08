@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui-kit/button";
 import { getAllVilles, addVille } from "@/services/villeService";
 import { Ville } from "@/types";
 

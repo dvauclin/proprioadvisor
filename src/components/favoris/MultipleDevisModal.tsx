@@ -9,19 +9,19 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Separator } from "@/components/ui/separator";
-import { useToast } from "@/components/ui/use-toast";
+} from "@/components/ui-kit/dialog";
+import { Button } from "@/components/ui-kit/button";
+import { Input } from "@/components/ui-kit/input";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui-kit/form";
+import { Checkbox } from "@/components/ui-kit/checkbox";
+import { Separator } from "@/components/ui-kit/separator";
+import { useToast } from "@/components/ui-kit/use-toast";
 import { submitLead } from "@/services/leadService";
 import { supabase } from "@/integrations/supabase/client";
 import { triggerWebhook } from "@/utils/webhookService";
 import { Formule, Conciergerie } from "@/types";
 import { Loader2, LayoutDashboard, Clock, Home, Square, Bed, MapPin, Building, Phone, Mail, User, Send, ClipboardList } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui-kit/select";
 
 interface FavoriteFormule extends Formule {
   conciergerie?: Conciergerie;

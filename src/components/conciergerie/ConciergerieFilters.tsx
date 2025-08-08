@@ -1,15 +1,15 @@
 
 import React from "react";
 import { Filter } from "@/types";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui-kit/button";
+import { Checkbox } from "@/components/ui-kit/checkbox";
+import { Label } from "@/components/ui-kit/label";
+import { Input } from "@/components/ui-kit/input";
 
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/components/ui-kit/slider";
 import { propertyTypeOptions } from "@/services/supabaseService";
 import { availableServices } from "@/utils/serviceMapping";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui-kit/scroll-area";
 
 interface ConciergerieFiltersProps {
   filters: Filter;

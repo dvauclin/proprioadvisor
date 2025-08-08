@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui-kit/button";
+import { Input } from "@/components/ui-kit/input";
+import { Label } from "@/components/ui-kit/label";
 import { Copy, Check, ExternalLink } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/components/ui-kit/use-toast";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui-kit/card";
 
 interface SubscriptionLinkGeneratorProps {
   conciergerieId: string;

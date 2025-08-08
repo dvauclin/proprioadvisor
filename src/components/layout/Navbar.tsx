@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui-kit/button";
 import { Menu, X } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui-kit/badge";
 import UserMenu from "@/components/auth/UserMenu";
 import { useFavorites } from "@/contexts/FavoritesContext";
 

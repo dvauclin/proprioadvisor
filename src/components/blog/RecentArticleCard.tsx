@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import React from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui-kit/card';
+import { Badge } from '@/components/ui-kit/badge';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import { Article } from '@/types';
 

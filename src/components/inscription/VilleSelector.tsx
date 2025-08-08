@@ -8,8 +8,8 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui-kit/form";
+import { Input } from "@/components/ui-kit/input";
 import { Search } from "lucide-react";
 
 // Type optimisé pour les villes dans le sélecteur

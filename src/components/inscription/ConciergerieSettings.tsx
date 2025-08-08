@@ -7,8 +7,8 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui-kit/form";
+import { Input } from "@/components/ui-kit/input";
 import { propertyTypeOptions } from "@/services/supabaseService";
 
 const ConciergerieSettings = () => {

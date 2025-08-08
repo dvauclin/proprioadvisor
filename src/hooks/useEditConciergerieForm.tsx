@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui-kit/use-toast";
 import { Conciergerie, Ville, Formule } from "@/types";
 
 // Import refactored hooks

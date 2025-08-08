@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui-kit/dialog';
+import { Button } from '@/components/ui-kit/button';
 import { Avis } from '@/types';
 import StarRating from './StarRating';
 import { format } from 'date-fns/format';

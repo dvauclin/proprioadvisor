@@ -2,7 +2,7 @@
 
 import Head from "next/head";
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui-kit/button";
 import { SubscriptionHeader } from "@/components/subscription/SubscriptionHeader";
 import { IntroductionSection } from "@/components/subscription/IntroductionSection";
 import { SubscriptionForm } from "@/components/subscription/SubscriptionForm";
@@ -11,7 +11,7 @@ import { useCalcomScript } from "@/hooks/useCalcomScript";
 import { useSubscriptionData } from "@/hooks/useSubscriptionData";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2, AlertCircle } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui-kit/card";
 import Link from "next/link";
 
 const Subscription = () => {

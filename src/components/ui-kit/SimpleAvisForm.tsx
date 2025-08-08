@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import StarRating from "@/components/ui/StarRating";
+import { Button } from "@/components/ui-kit/button";
+import { Input } from "@/components/ui-kit/input";
+import { Textarea } from "@/components/ui-kit/textarea";
+import StarRating from "@/components/ui-kit/StarRating";
 import { addAvis } from "@/services/avisService";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";

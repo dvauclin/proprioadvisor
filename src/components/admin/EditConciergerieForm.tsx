@@ -1,12 +1,12 @@
 import React from "react";
 import { useEditConciergerieForm } from "@/hooks/useEditConciergerieForm";
 import { Conciergerie, Formule } from "@/types";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/components/ui-kit/form";
 import StepOne from "@/components/inscription/steps/StepOne";
 import StepTwo from "@/components/inscription/steps/StepTwo";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui-kit/button";
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface EditConciergerieFormProps {

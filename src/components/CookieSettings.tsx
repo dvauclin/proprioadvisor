@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui-kit/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui-kit/dialog';
+import { Checkbox } from '@/components/ui-kit/checkbox';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
 
 export const CookieSettings: React.FC = () => {

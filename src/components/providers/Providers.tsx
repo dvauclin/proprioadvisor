@@ -6,7 +6,7 @@ import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui-kit/tooltip";
 
 interface ProvidersProps {
   children: React.ReactNode;

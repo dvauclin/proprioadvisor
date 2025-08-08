@@ -1,13 +1,13 @@
-ï»¿"use client";
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui-kit/card';
+import { Button } from '@/components/ui-kit/button';
+import { Input } from '@/components/ui-kit/input';
+import { Label } from '@/components/ui-kit/label';
+import { Alert, AlertDescription } from '@/components/ui-kit/alert';
 import { Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -46,7 +46,7 @@ const ResetPassword = () => {
     }
 
     if (password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractÃ¨res');
+      setError('Le mot de passe doit contenir au moins 6 caractères');
       setIsLoading(false);
       return;
     }
@@ -57,11 +57,11 @@ const ResetPassword = () => {
       if (error) {
         setError(error.message);
       } else {
-        // Rediriger vers la page d'accueil aprÃ¨s succÃ¨s
+        // Rediriger vers la page d'accueil après succès
         router.push('/');
       }
     } catch (error: any) {
-      setError('Une erreur est survenue lors de la mise Ã  jour du mot de passe');
+      setError('Une erreur est survenue lors de la mise à jour du mot de passe');
     } finally {
       setIsLoading(false);
     }
@@ -80,7 +80,7 @@ const ResetPassword = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">
-            RÃ©initialiser le mot de passe
+            Réinitialiser le mot de passe
           </h2>
           <p className="mt-2 text-gray-600">
             Entrez votre nouveau mot de passe
@@ -91,7 +91,7 @@ const ResetPassword = () => {
           <CardHeader>
             <CardTitle>Nouveau mot de passe</CardTitle>
             <CardDescription>
-              Choisissez un mot de passe sÃ©curisÃ© pour votre compte
+              Choisissez un mot de passe sécurisé pour votre compte
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -104,7 +104,7 @@ const ResetPassword = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+                  placeholder="••••••••"
                   minLength={6}
                 />
               </div>
@@ -116,7 +116,7 @@ const ResetPassword = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+                  placeholder="••••••••"
                   minLength={6}
                 />
               </div>
@@ -124,10 +124,10 @@ const ResetPassword = () => {
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Mise Ã  jour...
+                    Mise à jour...
                   </>
                 ) : (
-                  'Mettre Ã  jour le mot de passe'
+                  'Mettre à jour le mot de passe'
                 )}
               </Button>
             </form>

@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { Heart, Trash2, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui-kit/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui-kit/card";
 import Head from "next/head";
 import { useFavorites } from "@/contexts/FavoritesContext";
-import ComparisonCard from "@/components/ui/ComparisonCard";
+import ComparisonCard from "@/components/ui-kit/ComparisonCard";
 import DevisModal from "@/components/conciergerie/DevisModal";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui-kit/use-toast";
 import MultipleDevisModal from "@/components/favoris/MultipleDevisModal";
 
 const Favoris = () => {

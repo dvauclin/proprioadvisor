@@ -1,8 +1,8 @@
 
 import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { DevisForm } from "@/components/DevisForm";
-import ConciergerieLogoDisplay from "@/components/ui/ConciergerieLogoDisplay";
+import ConciergerieLogoDisplay from "@/components/ui-kit/ConciergerieLogoDisplay";
 import { Formule, Conciergerie } from "@/types";
 
 interface DevisModalProps {

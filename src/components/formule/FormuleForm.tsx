@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Form } from "@/components/ui-kit/form";
+import { Button } from "@/components/ui-kit/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { formuleSchema, FormuleFormData } from "./FormuleFormSchema";
 import ServicesSection from "./ServicesSection";
 import BasicInfoFields from "./BasicInfoFields";

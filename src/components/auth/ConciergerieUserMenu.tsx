@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,9 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+} from '@/components/ui-kit/dropdown-menu';
+import { Button } from '@/components/ui-kit/button';
+import { Avatar, AvatarFallback } from '@/components/ui-kit/avatar';
 import { User, LogOut, Settings, Building } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -78,7 +78,7 @@ const ConciergerieUserMenu = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Se déconnecter</span>
+          <span>Se d�connecter</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

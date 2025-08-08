@@ -1,13 +1,13 @@
-ï»¿"use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
 import { Phone, ExternalLink } from "lucide-react";
 import { Conciergerie, Formule } from "@/types";
-import ConciergerieLogoDisplay from "@/components/ui/ConciergerieLogoDisplay";
+import ConciergerieLogoDisplay from "@/components/ui-kit/ConciergerieLogoDisplay";
 import AvisSection from "./AvisSection";
 import { createConciergerieSlug } from "@/utils/conciergerieUtils";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui-kit/tooltip";
 
 interface CardHeaderProps {
   conciergerie: Conciergerie;
@@ -77,7 +77,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
               </Link>
             )}
             
-            {/* Pictogrammes tÃ©lÃ©phone et site web - Exactement comme dans ConciergerieDetails */}
+            {/* Pictogrammes téléphone et site web - Exactement comme dans ConciergerieDetails */}
             {subscription && (subscription.website_url && subscription.website_link || subscription.phone_number_value && subscription.phone_number) && (
               <div className="flex items-center gap-1">
                                 {subscription.website_url && subscription.website_link && (

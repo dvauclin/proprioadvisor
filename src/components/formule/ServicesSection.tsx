@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui-kit/checkbox";
+import { Input } from "@/components/ui-kit/input";
+import { Button } from "@/components/ui-kit/button";
 import { availableServices } from "@/utils/serviceMapping";
-import { FormLabel } from "@/components/ui/form";
+import { FormLabel } from "@/components/ui-kit/form";
 import { Plus } from "lucide-react";
 
 interface ServicesSectionProps {

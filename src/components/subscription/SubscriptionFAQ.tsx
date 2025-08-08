@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui-kit/card";
 import { Euro, TrendingUp, CheckCircle, Zap, Users } from "lucide-react";
 
 const SubscriptionFAQ: React.FC = () => {

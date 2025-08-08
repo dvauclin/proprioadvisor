@@ -1,7 +1,7 @@
 
 import React from "react";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
+import { Input } from "@/components/ui-kit/input";
 import { UseFormReturn } from "react-hook-form";
 import { FormuleFormData } from "./FormuleFormSchema";
 

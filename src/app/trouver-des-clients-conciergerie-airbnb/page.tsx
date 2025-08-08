@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getAllArticles, getArticleBySlug } from '@/services/supabaseService'
 import ArticleHeader from '@/components/blog/ArticleHeader'
 import ClientArticleWrapper from '@/components/blog/ClientArticleWrapper'
-import Breadcrumbs from '@/components/ui/Breadcrumbs'
+import Breadcrumbs from '@/components/ui-kit/Breadcrumbs'
 
 export async function generateMetadata(): Promise<Metadata> {
   const article = await getArticleBySlug('trouver-des-clients-conciergerie-airbnb');

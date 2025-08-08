@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { FormField, FormItem, FormLabel, FormControl } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { FormField, FormItem, FormLabel, FormControl } from '@/components/ui-kit/form';
+import { Input } from '@/components/ui-kit/input';
 import { SubscriptionFormValues } from '@/types/subscription';
 
 interface PasswordFormProps {

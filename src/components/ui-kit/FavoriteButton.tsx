@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui-kit/button';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { Formule, Conciergerie } from '@/types';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui-kit/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FavoriteButtonProps {

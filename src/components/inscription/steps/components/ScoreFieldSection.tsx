@@ -1,8 +1,8 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
+import { Input } from "@/components/ui-kit/input";
 import { Star } from "lucide-react";
 
 interface ScoreFieldSectionProps {
