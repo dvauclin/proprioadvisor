@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllArticles, getArticleBySlug } from '@/services/supabaseService'
 import ArticleHeader from '@/components/blog/ArticleHeader'
+import ArticleContentFrame from '@/components/blog/ArticleContentFrame'
 import ClientArticleWrapper from '@/components/blog/ClientArticleWrapper'
 import Breadcrumbs from '@/components/ui-kit/breadcrumbs'
 
@@ -72,9 +73,6 @@ export default async function TrouverClientsPage() {
           {/* Article Header */}
           <header className="mb-8">
             <ArticleHeader article={article} />
-            {article.excerpt && (
-              <p className="text-xl text-gray-600 mb-6">{article.excerpt}</p>
-            )}
           </header>
 
           {/* Article Image */}
@@ -90,7 +88,9 @@ export default async function TrouverClientsPage() {
 
           {/* Article Content */}
           <article className="mb-12">
-            <ClientArticleWrapper article={article} relatedArticles={relatedArticles} />
+            <ArticleContentFrame>
+              <ClientArticleWrapper article={article} relatedArticles={relatedArticles} />
+            </ArticleContentFrame>
           </article>
         </div>
       </div>

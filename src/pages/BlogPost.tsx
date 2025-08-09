@@ -13,6 +13,7 @@ import RecentArticlesSection from "@/components/blog/RecentArticlesSection";
 import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 import TableOfContents, { Heading } from "@/components/blog/TableOfContents";
 import FaqSection from "@/components/blog/FaqSection";
+import ArticleContentFrame from "@/components/blog/ArticleContentFrame";
 
 interface BlogPostProps {
   slug: string;
@@ -152,10 +153,16 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-8">
           <div className="lg:col-span-3">
-            <ArticleHeader article={article} />
-            <ArticleContent article={article} relatedArticles={recentArticles} processedContent={processedContent} />
-            <ShareSection />
-            <FaqSection article={extendedArticle} />
+            <ArticleContentFrame>
+              <ArticleHeader article={article} />
+              <ArticleContent article={article} relatedArticles={recentArticles} processedContent={processedContent} />
+            </ArticleContentFrame>
+            <div className="mt-8">
+              <ShareSection />
+            </div>
+            <div className="mt-8">
+              <FaqSection article={extendedArticle} />
+            </div>
           </div>
           
           <div className="lg:col-span-1">
