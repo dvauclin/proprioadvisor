@@ -11,7 +11,7 @@ import CTASection from "@/components/home/CTASection";
 import AllCitiesSection from "@/components/home/AllCitiesSection";
 import { useVillesData } from "@/hooks/useVillesData";
 import StructuredData from "@/components/seo/StructuredData";
-import { createBreadcrumbStructuredData } from "@/utils/structuredDataHelpers";
+import { breadcrumbsJsonLd } from "@/lib/structured-data-models";
 
 const Index: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -33,79 +33,7 @@ const Index: React.FC = () => {
   const breadcrumbItems = [
     { name: "Accueil", url: "/" }
   ];
-
-  const breadcrumbStructuredData = createBreadcrumbStructuredData(breadcrumbItems);
-
-  // Structure de données pour l'organisation ProprioAdvisor
-  const organizationStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "ProprioAdvisor",
-    "url": "https://proprioadvisor.fr",
-    "logo": "https://proprioadvisor.fr/favicon.svg",
-    "description": "Premier comparateur de conciergeries Airbnb en France. Trouvez la meilleure conciergerie pour votre bien en location courte durée.",
-    "foundingDate": "2024",
-    "founder": {
-      "@type": "Person",
-      "name": "David Vauclin",
-      "jobTitle": "Expert en location courte durée"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "France"
-    },
-    "serviceType": "Comparateur de conciergeries Airbnb",
-    "sameAs": [
-      "https://www.linkedin.com/company/proprioadvisor",
-      "https://twitter.com/proprioadvisor",
-      "https://www.facebook.com/proprioadvisor"
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Services ProprioAdvisor",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Comparateur de conciergeries",
-            "description": "Comparaison gratuite des meilleures conciergeries Airbnb"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Simulateur de revenus Airbnb",
-            "description": "Estimation gratuite de vos revenus potentiels"
-          }
-        }
-      ]
-    }
-  };
-
-  // Structure de données pour le site web
-  const websiteStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "ProprioAdvisor",
-    "url": "https://proprioadvisor.fr",
-    "description": "Comparateur de conciergeries Airbnb en France le + complet. Trouvez la meilleure conciergerie pour maximiser vos revenus locatifs.",
-    "inLanguage": "fr-FR",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://proprioadvisor.fr/conciergerie/{search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "ProprioAdvisor",
-      "logo": "https://proprioadvisor.fr/favicon.svg"
-    }
-  };
+  const breadcrumbStructuredData = breadcrumbsJsonLd(breadcrumbItems);
 
   return (
     <>
@@ -115,8 +43,6 @@ const Index: React.FC = () => {
         <link rel="canonical" href="https://proprioadvisor.fr/" />
       </Head>
       
-      <StructuredData data={organizationStructuredData} />
-      <StructuredData data={websiteStructuredData} />
       <StructuredData data={breadcrumbStructuredData} />
       
       <div className="flex flex-col">

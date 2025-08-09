@@ -8,8 +8,8 @@ import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import CookieConsent from "@/components/CookieConsent"
 import MobileStickyButton from "@/components/MobileStickyButton"
-import OrganizationStructuredData from "@/components/seo/OrganizationStructuredData"
-import WebsiteStructuredData from "@/components/seo/WebsiteStructuredData"
+import StructuredData from "@/components/seo/StructuredData"
+import { orgJsonLd, websiteJsonLd } from "@/lib/structured-data-models"
 import Providers from "@/components/providers/Providers"
 import PageWrapper from "@/components/PageWrapper"
 
@@ -101,10 +101,14 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
         <meta name="theme-color" content="#7FFF00" />
-        <OrganizationStructuredData />
-        <WebsiteStructuredData />
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
+        <StructuredData scriptId="ld-global" data={[orgJsonLd(), websiteJsonLd()]} />
       </head>
       <body className={inter.className}>
         <Providers>

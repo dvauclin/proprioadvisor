@@ -7,7 +7,7 @@ import { getAllArticles } from "@/services/supabaseService";
 import { Article } from "@/types";
 import { Loader2 } from "lucide-react";
 import StructuredData from "@/components/seo/StructuredData";
-import { createBreadcrumbStructuredData } from "@/utils/structuredDataHelpers";
+import { breadcrumbsJsonLd } from "@/lib/structured-data-models";
 import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 
 const Blog: React.FC = () => {
@@ -43,7 +43,7 @@ const Blog: React.FC = () => {
     label: "Blog",
     href: "/blog"
   }];
-  const breadcrumbStructuredData = createBreadcrumbStructuredData(
+  const breadcrumbStructuredData = breadcrumbsJsonLd(
     breadcrumbItems.map(item => ({ name: item.label, url: item.href }))
   );
 

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import StructuredData from "@/components/seo/StructuredData";
-import { createListingStructuredData, createBreadcrumbStructuredData } from "@/utils/structuredDataHelpers";
+import { breadcrumbsJsonLd, listingItemListJsonLd } from "@/lib/structured-data-models";
 
 import { Ville, Formule, Conciergerie } from "@/types";
 
@@ -52,7 +52,30 @@ const ConciergerieListingMeta: React.FC<ConciergerieListingMetaProps> = ({
     const generateStructuredData = async () => {
       if (ville && filteredFormules.length > 0) {
         try {
-          const data = await createListingStructuredData(ville, filteredFormules, getLastUpdateDateISO());
+          // Build GroupedConciergerieEntry[] shape from filteredFormules
+          const groupedMap = new Map<string, { conciergerie: any; formules: any[] }>();
+          filteredFormules.forEach(f => {
+            if (!f.conciergerie) return;
+            const id = f.conciergerie.id;
+            if (!groupedMap.has(id)) groupedMap.set(id, { conciergerie: f.conciergerie, formules: [] });
+            groupedMap.get(id)!.formules.push({ nom: f.nom, commission: f.commission, createdAt: (f as any).createdAt });
+          });
+          const grouped = Array.from(groupedMap.values()).map(entry => {
+            const best = entry.formules
+              .filter(x => typeof x.commission === 'number')
+              .sort((a, b) => (a.commission! - b.commission!))[0];
+            return {
+              conciergerie: entry.conciergerie,
+              formules: entry.formules,
+              bestFormule: best || null,
+            };
+          });
+
+          const data = listingItemListJsonLd(
+            { nom: ville.nom, slug: ville.slug!, description: ville.description },
+            grouped,
+            { dateModified: getLastUpdateDateISO() }
+          );
           setStructuredDataListing(data);
         } catch (error) {
           console.error('Error generating structured data:', error);
@@ -92,7 +115,7 @@ const ConciergerieListingMeta: React.FC<ConciergerieListingMetaProps> = ({
       {ville && (
         <>
           {structuredDataListing && <StructuredData data={structuredDataListing} />}
-          <StructuredData data={createBreadcrumbStructuredData(
+          <StructuredData data={breadcrumbsJsonLd(
             breadcrumbItems.map(item => ({ name: item.label, url: item.href }))
           )} />
         </>

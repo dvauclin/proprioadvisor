@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui-kit/tabs";
 
 import StructuredData from "@/components/seo/StructuredData";
-import { createSimulatorStructuredData } from "@/utils/structuredDataHelpers";
+import { webAppJsonLd } from "@/lib/structured-data-models";
 
 // Define calculation model types
 type PropertyType = "standard" | "standardPlus" | "hautDeGamme" | "luxe";
@@ -242,7 +242,7 @@ const Simulator = () => {
         <meta name="description" content="Estimez gratuitement et immédiatement vos revenus potentiels sur Airbnb avec notre simulateur." />
       </Head>
       
-      <StructuredData data={createSimulatorStructuredData()} />
+      <StructuredData data={webAppJsonLd()} />
       
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">

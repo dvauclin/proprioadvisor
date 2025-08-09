@@ -60,95 +60,11 @@ const LinkedCitiesSection: React.FC<LinkedCitiesSectionProps> = ({ linkedCities,
                 <h3 itemProp="name">
                   Conciergerie Airbnb à {linkedCity.nom}
                 </h3>
-                {/* Données structurées pour les bots */}
-                <script
-                  type="application/ld+json"
-                  dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                      "@context": "https://schema.org",
-                      "@type": "City",
-                      "name": linkedCity.nom,
-                      "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/conciergerie/${linkedCity.slug}`,
-                      "sameAs": `https://fr.wikipedia.org/wiki/${encodeURIComponent(linkedCity.nom)}`,
-                      "additionalProperty": [
-                        {
-                          "@type": "PropertyValue",
-                          "name": "conciergerie-airbnb",
-                          "value": "true"
-                        },
-                        {
-                          "@type": "PropertyValue", 
-                          "name": "relation-type",
-                          "value": "nearby-city"
-                        },
-                        {
-                          "@type": "PropertyValue",
-                          "name": "current-city",
-                          "value": currentCity || "unknown"
-                        }
-                      ],
-                      "description": `Conciergeries Airbnb disponibles à ${linkedCity.nom}`,
-                      "serviceType": "Conciergerie Airbnb",
-                      "areaServed": {
-                        "@type": "City",
-                        "name": linkedCity.nom
-                      }
-                    })
-                  }}
-                />
+                {/* Données structurées supprimées pour éviter les schémas City non pertinents */}
               </Link>
             ))}
           </div>
-          {/* Données structurées pour la section entière */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "ItemList",
-                "name": "Villes à proximité avec conciergeries Airbnb",
-                "description": `Liste des villes à proximité de ${currentCity || 'cette ville'} proposant des services de conciergerie Airbnb`,
-                "numberOfItems": linkedCities.length,
-                "mainEntity": {
-                  "@type": "City",
-                  "name": currentCity || "Ville actuelle"
-                },
-                "itemListElement": linkedCities.map((city, index) => ({
-                  "@type": "ListItem",
-                  "position": index + 1,
-                  "item": {
-                    "@type": "City",
-                    "name": city.nom,
-                    "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/conciergerie/${city.slug}`,
-                    "additionalProperty": [
-                      {
-                        "@type": "PropertyValue",
-                        "name": "conciergerie-airbnb",
-                        "value": "true"
-                      },
-                      {
-                        "@type": "PropertyValue",
-                        "name": "relation-type", 
-                        "value": "nearby-city"
-                      },
-                      {
-                        "@type": "PropertyValue",
-                        "name": "distance-from-current",
-                        "value": "proximité"
-                      }
-                    ],
-                    "description": `Conciergeries Airbnb disponibles à ${city.nom}`,
-                    "serviceType": "Conciergerie Airbnb"
-                  }
-                })),
-                "additionalProperty": {
-                  "@type": "PropertyValue",
-                  "name": "section-type",
-                  "value": "nearby-cities-links"
-                }
-              })
-            }}
-          />
+          {/* Données structurées supprimées (ItemList de cities) pour suivre les bonnes pratiques */}
         </div>
       </div>
     </section>

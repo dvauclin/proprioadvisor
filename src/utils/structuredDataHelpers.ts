@@ -1,4 +1,5 @@
-// Helpers pour générer les données structurées JSON-LD
+// DEPRECATED: legacy helpers replaced by canonical builders in src/lib/structured-data-models.ts
+// Kept for backward compatibility where still imported; avoid using in new code.
 import { Conciergerie, Formule, Ville } from '@/types';
 import { getAvisByConciergerie } from '@/services/avisService';
 

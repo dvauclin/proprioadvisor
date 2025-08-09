@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import StructuredData from "@/components/seo/StructuredData";
-import { createArticleStructuredData, createBreadcrumbStructuredData } from "@/utils/structuredDataHelpers";
+import { articleJsonLd, breadcrumbsJsonLd } from "@/lib/structured-data-models";
 import { useBlogPostData } from "@/hooks/useBlogPostData";
 import { getValidImageUrl } from "@/utils/articleUtils";
 import ArticleHeader from "@/components/blog/ArticleHeader";
@@ -99,7 +99,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
   }, {
     label: article.titre
   }];
-  const breadcrumbStructuredData = createBreadcrumbStructuredData(
+  const breadcrumbStructuredData = breadcrumbsJsonLd(
     breadcrumbItems.map(item => ({ name: item.label, url: item.href }))
   );
 
@@ -141,7 +141,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
   };
 
   const faqStructuredData = createFaqStructuredData();
-  const articleStructuredData = createArticleStructuredData(article, articleImage);
+  const articleStructuredData = articleJsonLd(article, { imageUrl: articleImage });
 
   return (
     <div className="min-h-screen bg-background">
