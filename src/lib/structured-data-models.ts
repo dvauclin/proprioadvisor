@@ -144,8 +144,11 @@ export function articleJsonLd(article: any, opts?: { imageUrl?: string }) {
     inLanguage: LANG,
     author: { "@type": "Person", name: "David Vauclin" },
     publisher: { "@id": `${BASE_URL}/#organization` },
-    datePublished: iso(article?.date_creation),
-    dateModified: iso(article?.date_modification) || iso(article?.date_creation),
+    // Robustly infer dates from multiple possible fields
+    datePublished: iso(article?.date_creation || article?.createdAt || article?.datePublication),
+    dateModified:
+      iso(article?.date_modification || article?.updatedAt || article?.datePublication) ||
+      iso(article?.date_creation || article?.createdAt),
     mainEntityOfPage: { "@type": "WebPage", "@id": webPageId },
   };
   if (article?.keywords) data.keywords = article.keywords;

@@ -11,6 +11,7 @@ import ConciergerieListingContent from "@/components/conciergerie/ConciergerieLi
 import LinkedCitiesSection from "@/components/conciergerie/LinkedCitiesSection";
 import LongDescriptionSection from "@/components/conciergerie/LongDescriptionSection";
 import { useConciergerieListingLogic } from "@/components/conciergerie/ConciergerieListingLogic";
+import ConciergerieListingMeta from "@/components/conciergerie/ConciergerieListingMeta";
 
 interface ConciergerieListingProps {
   ville: string;
@@ -73,6 +74,13 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
 
   return (
     <div className="relative overflow-hidden">
+      <ConciergerieListingMeta
+        ville={villeData}
+        villeSlug={villeSlug}
+        filteredFormules={filteredFormules}
+        breadcrumbItems={breadcrumbItems}
+        emergencyMetaData={emergencyMetaData}
+      />
       <ConciergerieListingHeader
         ville={villeData}
         villeSlug={villeSlug}

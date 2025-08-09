@@ -6,6 +6,7 @@ interface PropertiesSectionProps {
   accepteGestionPartielle?: boolean;
   superficieMin?: number;
   nombreChambresMin?: number;
+  variant?: "default" | "details";
 }
 
 const PropertiesSection: React.FC<PropertiesSectionProps> = ({
@@ -13,7 +14,8 @@ const PropertiesSection: React.FC<PropertiesSectionProps> = ({
   accepteResidencePrincipale,
   accepteGestionPartielle,
   superficieMin,
-  nombreChambresMin
+  nombreChambresMin,
+  variant = "default"
 }) => {
   // Fonction pour obtenir le label du type de logement
   const getTypeLogementLabel = (type: string) => {
@@ -36,8 +38,10 @@ const PropertiesSection: React.FC<PropertiesSectionProps> = ({
     return !isNaN(numValue) && numValue > minValue;
   };
 
+  const paddingClass = variant === "details" ? "p-5" : "p-4";
+
   return (
-    <div className="border rounded-md p-3">
+    <div className={`border rounded-md ${paddingClass}`}>
       <div className="text-sm text-gray-600 mb-2">Logements acceptés</div>
       <div className="space-y-1 text-sm">
         {/* Toujours affiché */}

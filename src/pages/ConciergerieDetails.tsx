@@ -11,7 +11,7 @@ import { getAllConciergeries, getAllVilles } from "@/lib/data";
 import { findConciergerieBySlug } from "@/utils/conciergerieUtils";
 import { supabase } from "@/integrations/supabase/client";
 import StructuredData from "@/components/seo/StructuredData";
-import { conciergerieLocalBusinessJsonLd } from "@/lib/structured-data-models";
+import { conciergerieLocalBusinessJsonLd, breadcrumbsJsonLd } from "@/lib/structured-data-models";
 import CommissionSection from "@/components/ui-kit/comparison-card/commission-section";
 import DurationSection from "@/components/ui-kit/comparison-card/duration-section";
 import FeesSection from "@/components/ui-kit/comparison-card/fees-section";
@@ -257,6 +257,15 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
   return (
     <div className="min-h-screen bg-background">
       {structuredDataDetails && <StructuredData data={structuredDataDetails} />}
+      {conciergerie && (
+        <StructuredData
+          data={breadcrumbsJsonLd([
+            { name: "Accueil", url: "/" },
+            { name: "Annuaire", url: "/annuaire" },
+            { name: conciergerie.nom },
+          ])}
+        />
+      )}
       
       <div className="container mx-auto px-4 py-8">
         {/* Contenu principal - Layout avec effet sticky */}
@@ -363,7 +372,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
               </div>
 
               {/* Critères d'acceptation */}
-                              <h2 className="text-2xl font-bold mb-6">Critères d'acceptation</h2>
+              <h2 className="text-2xl font-bold mb-6">Critères d'acceptation</h2>
               
               {/* Critères en 2 colonnes, remplissage gauche → droite puis retour à la ligne */}
               {(() => {
@@ -403,9 +412,11 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                 return (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {criteria.map((item, index) => (
-                      <div key={`${item.label}-${index}`}>
-                        <span className="text-gray-600 text-sm">{item.label}</span>
-                        <p className="font-medium">{item.value}</p>
+                      <div key={`${item.label}-${index}`} className="border rounded-md p-5">
+                        <div className="text-sm text-gray-600 mb-2">{item.label}</div>
+                        <div className="text-sm">
+                          <span className="font-medium">{item.value}</span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -427,14 +438,15 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                     <h3 className="font-semibold text-lg mb-4">{formule.nom}</h3>
                     
                     <div className="space-y-4">
-                      {/* Commission - Identique aux listings */}
-                      <CommissionSection 
-                        commission={formule.commission} 
-                        tva={conciergerie.tva} 
-                      />
-                      
-                      {/* Durée d'engagement - Identique aux listings */}
-                      <DurationSection dureeGestionMin={formule.dureeGestionMin} />
+                      {/* Commission et Durée d'engagement côte à côte */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <CommissionSection 
+                          commission={formule.commission} 
+                          tva={conciergerie.tva}
+                          variant="details"
+                        />
+                        <DurationSection dureeGestionMin={formule.dureeGestionMin} variant="details" />
+                      </div>
                       
                       {/* Autres frais - Identique aux listings */}
                       <FeesSection 
@@ -446,10 +458,11 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                         locationLinge={formule.locationLinge}
                         prixLocationLinge={formule.prixLocationLinge}
                         fraisSupplementaireLocation={formule.fraisSupplementaireLocation}
+                        variant="details"
                       />
                       
                       {/* Services inclus - Identique aux listings */}
-                      <ServicesSection services={formule.servicesInclus} />
+                      <ServicesSection services={formule.servicesInclus} variant="details" />
                     </div>
                     
                     {/* Boutons d'action avec FavoriteButton identique aux listings */}

@@ -9,6 +9,7 @@ interface FeesSectionProps {
   locationLinge?: string;
   prixLocationLinge?: number;
   fraisSupplementaireLocation?: number;
+  variant?: "default" | "details";
 }
 
 const FeesSection: React.FC<FeesSectionProps> = ({
@@ -19,7 +20,8 @@ const FeesSection: React.FC<FeesSectionProps> = ({
   forfaitReapprovisionnement,
   locationLinge,
   prixLocationLinge,
-  fraisSupplementaireLocation
+  fraisSupplementaireLocation,
+  variant = "default"
 }) => {
   // Debug: Log all props to identify the source of "00"
   console.log("FeesSection props:", {
@@ -94,8 +96,10 @@ const FeesSection: React.FC<FeesSectionProps> = ({
     return !isNaN(numValue) && numValue > minValue;
   };
 
+  const paddingClass = variant === "details" ? "p-5" : "p-4";
+
   return (
-    <div className="border rounded-md p-3">
+    <div className={`border rounded-md ${paddingClass}`}>
       <div className="text-sm text-gray-600 mb-2">Autres frais</div>
       <div className="space-y-1 text-sm">
         {/* Toujours affiché - Ménage */}
