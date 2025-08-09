@@ -37,7 +37,7 @@ const MobileStickyButton = () => {
   }
 
   // Don't show on certain pages
-  if (pathname === '/connexion' || pathname === '/inscription' || pathname === '/admin' || pathname === '/subscription') {
+  if (pathname === '/inscription' || pathname === '/subscription' || pathname === '/success') {
     return null;
   }
 
@@ -50,22 +50,19 @@ const MobileStickyButton = () => {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       {favoritesCount === 0 && !user ? (
-        // Bouton "Ajouter conciergerie" seulement si pas de favoris ET pas connecté
         <Button
           asChild
           className="rounded-full shadow-lg bg-brand-chartreuse hover:bg-brand-chartreuse/90 text-black"
         >
           <a href="/inscription">
             <Plus className="mr-2 h-5 w-5" />
-            Ajouter conciergerie
+            Ajouter une conciergerie
           </a>
         </Button>
       ) : favoritesCount > 0 ? (
-        // Bouton favoris quand il y a des favoris
         <Button
           className="rounded-full shadow-lg bg-brand-chartreuse hover:bg-brand-chartreuse/90 text-black"
           onClick={() => {
-            // Naviguer vers la page favoris
             window.location.href = '/favoris';
           }}
         >

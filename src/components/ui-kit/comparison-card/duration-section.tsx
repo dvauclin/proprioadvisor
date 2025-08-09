@@ -8,7 +8,7 @@ const DurationSection: React.FC<DurationSectionProps> = ({ dureeGestionMin }) =>
   return (
     <div className="border rounded-md p-3">
       <div className="text-sm text-gray-600">Durée d'engagement</div>
-      <div className="font-semibold">{dureeGestionMin === 0 ? "Aucun engagement" : `${dureeGestionMin} mois`}</div>
+      <div>{dureeGestionMin === 0 ? "Aucun engagement" : `${dureeGestionMin} mois`}</div>
     </div>
   );
 };

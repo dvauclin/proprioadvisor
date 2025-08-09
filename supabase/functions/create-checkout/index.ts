@@ -369,29 +369,8 @@ serve(async (req) => {
         subscriptionId = insertData.id;
         logStep("Created free subscription", { subscriptionId });
         
-        // Auto-validate conciergerie for free subscription
-        try {
-          const { data: conciergerie } = await supabaseAdmin
-            .from('conciergeries')
-            .select('validated')
-            .eq('id', conciergerieId)
-            .single();
-          
-          if (!conciergerie?.validated) {
-            const { error: updateError } = await supabaseAdmin
-              .from('conciergeries')
-              .update({ validated: true })
-              .eq('id', conciergerieId);
-            
-            if (updateError) {
-              logStep("Error auto-validating conciergerie for free subscription", { error: updateError });
-            } else {
-              logStep("Auto-validated conciergerie for free subscription", { conciergerieId });
-            }
-          }
-        } catch (error) {
-          logStep("Error during conciergerie validation for free subscription", { error: error.message });
-        }
+        // Do NOT auto-validate on free subscription (business rule)
+        logStep("Skipping auto-validation for free subscription", { conciergerieId });
         
         // Ne pas mettre à jour score_manuel - ce champ doit rester modifiable manuellement uniquement
 

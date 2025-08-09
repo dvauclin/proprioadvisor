@@ -31,7 +31,7 @@ const Blog: React.FC = () => {
     fetchArticles();
   }, []);
 
-  // Vï¿½rification de sï¿½curitï¿½ pour articles et filteredArticles
+      // Vérification de sécurité pour articles et filteredArticles
   const safeArticles = Array.isArray(articles) ? articles : [];
   const filteredArticles = safeArticles.filter(article => 
     article.titre.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -125,9 +125,9 @@ const Blog: React.FC = () => {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 13.5V15m-6 4h12a2 2 0 002-2v-12a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <h3 className="text-xl font-medium mb-2">Aucun rï¿½sultat trouvï¿½</h3>
+                              <h3 className="text-xl font-medium mb-2">Aucun résultat trouvé</h3>
               <p className="text-gray-600">
-                Aucun article ne correspond ï¿½ votre recherche. Essayez avec d'autres termes.
+                                  Aucun article ne correspond à votre recherche. Essayez avec d'autres termes.
               </p>
             </section>}
         </div>

@@ -65,7 +65,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
         // Check if conciergerie exists
         if (!foundConciergerie) {
           console.log("=== CONCIERGERIE NOT FOUND ===");
-          setError("Conciergerie non trouvï¿½e");
+          setError("Conciergerie non trouvée");
         } else {
           console.log("Conciergerie found:", foundConciergerie.nom);
           console.log("Conciergerie ID:", foundConciergerie.id);
@@ -170,7 +170,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
         }
       } catch (err) {
         console.error("Error fetching conciergerie details:", err);
-        setError("Erreur lors du chargement des dï¿½tails");
+                    setError("Erreur lors du chargement des détails");
       } finally {
         setLoading(false);
       }
@@ -241,10 +241,10 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Conciergerie non trouvï¿½e</h1>
+          <h1 className="text-3xl font-bold mb-4">Conciergerie non trouvée</h1>
           <p className="text-gray-600 mb-6">{error || "Cette conciergerie n'existe pas."}</p>
           <Button onClick={() => router.push('/')}>
-            Retour ï¿½ l'accueil
+            Retour à l'accueil
           </Button>
         </div>
       </div>
@@ -258,7 +258,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
       <div className="container mx-auto px-4 py-8">
         {/* Contenu principal - Layout avec effet sticky */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Colonne gauche - Logo, titre, note, villes + Critï¿½res d'acceptation (STICKY) */}
+          {/* Colonne gauche - Logo, titre, note, villes + Critères d'acceptation (STICKY) */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               {/* Logo, titre, note et villes */}
@@ -281,7 +281,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                         {conciergerie.nom}
                       </h1>
                       
-                      {/* Pictogrammes tï¿½lï¿½phone et site web */}
+                      {/* Pictogrammes téléphone et site web */}
                       <div className="flex items-center gap-1">
                         {subscription?.website_url && subscription?.website_link && (
                           <TooltipProvider>
@@ -359,8 +359,8 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                  </div>
               </div>
 
-              {/* Critï¿½res d'acceptation */}
-              <h2 className="text-2xl font-bold mb-6">Critï¿½res d'acceptation</h2>
+              {/* Critères d'acceptation */}
+                              <h2 className="text-2xl font-bold mb-6">Critères d'acceptation</h2>
               
               {/* Critères en 2 colonnes, remplissage gauche → droite puis retour à la ligne */}
               {(() => {
@@ -430,7 +430,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                         tva={conciergerie.tva} 
                       />
                       
-                      {/* Durï¿½e d'engagement - Identique aux listings */}
+                      {/* Durée d'engagement - Identique aux listings */}
                       <DurationSection dureeGestionMin={formule.dureeGestionMin} />
                       
                       {/* Autres frais - Identique aux listings */}
@@ -474,7 +474,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           </div>
         </div>
 
-        {/* Section Avis - Section fille uniquement (sans section mï¿½re) */}
+                            {/* Section Avis - Section fille uniquement (sans section mère) */}
         <div id="avis-clients-section" className="mt-8">
           <AvisDisplay
             conciergerieId={conciergerie.id}

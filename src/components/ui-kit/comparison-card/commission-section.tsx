@@ -11,17 +11,17 @@ const CommissionSection: React.FC<CommissionSectionProps> = ({ commission, tva }
     if (!tva) return "";
     
     if (tva === "TTC/HT") {
-      return " (TTC/HT)";
+      return " TTC/HT";
     }
     
     // Si c'est un pourcentage
     if (tva.includes("%")) {
-      return ` (${tva})`;
+      return ` ${tva}`;
     }
     
     // Si c'est TTC ou HT
     if (tva === "TTC" || tva === "HT") {
-      return ` (${tva})`;
+      return ` ${tva}`;
     }
     
     return "";
@@ -30,7 +30,10 @@ const CommissionSection: React.FC<CommissionSectionProps> = ({ commission, tva }
   return (
     <div className="border rounded-md p-3">
       <div className="text-sm text-gray-600">Commission</div>
-      <div className="font-semibold">{commission}%{formatTva(tva)}</div>
+      <div>
+        <span className="font-bold">{commission}%</span>
+        {formatTva(tva)}
+      </div>
     </div>
   );
 };

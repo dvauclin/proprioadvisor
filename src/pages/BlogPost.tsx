@@ -54,14 +54,14 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
     }
   }, [article?.contenu]);
 
-  // Gï¿½rer le scroll vers l'ancre au chargement de la page
+      // Gérer le scroll vers l'ancre au chargement de la page
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash.substring(1);
       const element = document.getElementById(hash);
       
       if (element) {
-        // Attendre que le contenu soit chargï¿½
+        // Attendre que le contenu soit chargé
         setTimeout(() => {
           const header = document.querySelector('header');
           const headerHeight = header ? header.getBoundingClientRect().height : 64;

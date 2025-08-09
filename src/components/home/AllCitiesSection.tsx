@@ -10,7 +10,7 @@ interface AllCitiesSectionProps {
 
 const AllCitiesSection: React.FC<AllCitiesSectionProps> = ({ allVilles }) => {
   const formatVilleName = (ville: Ville) => {
-    return ville.departementNumero ? `${ville.nom} (${ville.departementNumero})` : ville.nom;
+    return ville.nom;
   };
 
   return (

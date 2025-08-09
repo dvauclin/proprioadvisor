@@ -14,10 +14,10 @@ const InscriptionHeader: React.FC<InscriptionHeaderProps> = () => {
         </h1>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
           <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">
-            S Inscription gratuite en 3 min
+            Inscription gratuite en 3 min
           </div>
           <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">
-            S Options payantes facultatives
+            Options payantes facultatives
           </div>
         </div>
         <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed mb-8">
