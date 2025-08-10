@@ -48,6 +48,19 @@
     @apply bg-background text-foreground;
   }
   
+  /* Ensure gradients work properly on mobile devices */
+  .bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  }
+  
+  /* Force hardware acceleration for gradients on mobile */
+  .bg-gradient-to-r {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
   /* Ensure viewport height accounts for mobile navigation */
   html {
     height: 100%;
@@ -99,6 +112,65 @@
     
     .max-sm\:top-safe-area-top {
       top: max(1rem, var(--safe-area-inset-top));
+    }
+  }
+  
+  /* Amélioration de la compatibilité des gradients pour mobile */
+  @supports (background: linear-gradient(to right, #7FFF00, #86EFAC, #6EE7B7)) {
+    .bg-gradient-to-r {
+      background: linear-gradient(to right, #7FFF00, #86EFAC, #6EE7B7) !important;
+    }
+    
+    .hover\:from-brand-chartreuse\/95:hover {
+      background: linear-gradient(to right, rgba(127, 255, 0, 0.95), rgba(134, 239, 172, 0.95), rgba(110, 231, 183, 0.95)) !important;
+    }
+  }
+  
+  /* Fallback pour les navigateurs qui ne supportent pas les gradients */
+  @supports not (background: linear-gradient(to right, #7FFF00, #86EFAC, #6EE7B7)) {
+    .bg-gradient-to-r {
+      background-color: #7FFF00 !important;
+    }
+    
+    .hover\:from-brand-chartreuse\/95:hover {
+      background-color: rgba(127, 255, 0, 0.95) !important;
+    }
+  }
+  
+  /* Styles spécifiques pour mobile pour améliorer l'apparence des boutons */
+  @media (max-width: 768px) {
+    /* Force le gradient sur mobile */
+    .bg-gradient-to-r {
+      background: linear-gradient(to right, #7FFF00, #86EFAC, #6EE7B7) !important;
+    }
+    
+    /* Amélioration des transitions sur mobile */
+    .transition-all {
+      transition: all 0.2s ease-in-out !important;
+    }
+    
+    /* Amélioration des ombres sur mobile */
+    .shadow-md {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+    
+    .hover\:shadow-lg:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    }
+    
+    /* Styles spécifiques pour les boutons avec gradient */
+    button.bg-gradient-to-r,
+    .bg-gradient-to-r button,
+    .bg-gradient-to-r[role="button"] {
+      background: linear-gradient(to right, #7FFF00, #86EFAC, #6EE7B7) !important;
+      color: black !important;
+    }
+    
+    /* Hover states pour les boutons avec gradient sur mobile */
+    button.bg-gradient-to-r:hover,
+    .bg-gradient-to-r button:hover,
+    .bg-gradient-to-r[role="button"]:hover {
+      background: linear-gradient(to right, rgba(127, 255, 0, 0.95), rgba(134, 239, 172, 0.95), rgba(110, 231, 183, 0.95)) !important;
     }
   }
 } 

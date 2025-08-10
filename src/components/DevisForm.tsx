@@ -390,7 +390,7 @@ export const DevisForm: React.FC<DevisFormProps> = ({
           </div>
 
           <div className="flex justify-end">
-            <Button type="submit" disabled={isSubmitting} className="bg-brand-chartreuse text-black hover:bg-brand-chartreuse/90">
+            <Button type="submit" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               <Send className="h-4 w-4 mr-2" />
               Envoyer la demande

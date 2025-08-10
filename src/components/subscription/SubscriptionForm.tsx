@@ -85,7 +85,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
           <PasswordForm form={form} existingSubscription={existingSubscription} conciergerieEmail={conciergerieEmail} />
 
           <div className="text-center pt-6 md:pt-6 pt-3">
-            <Button type="submit" size="lg" className="bg-brand-chartreuse hover:bg-brand-chartreuse/90 text-black" disabled={loading}>
+            <Button type="submit" size="lg" disabled={loading}>
               {loading ? <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> 
                   Traitement en cours...
