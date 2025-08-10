@@ -16,6 +16,7 @@ interface ConciergerieListProps {
   subscriptions: Map<string, any>;
   conciergerieRatings?: Map<string, number>;
   conciergerieReviewCounts?: Map<string, number>;
+  cardsContainerRef?: React.Ref<HTMLDivElement>;
 }
 
 const ConciergerieList: React.FC<ConciergerieListProps> = ({
@@ -25,7 +26,8 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
   onResetFilters,
   subscriptions,
   conciergerieRatings,
-  conciergerieReviewCounts
+  conciergerieReviewCounts,
+  cardsContainerRef
 }) => {
 
   if (formules.length === 0) {
@@ -75,7 +77,7 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
   
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div ref={cardsContainerRef} className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {sortedFormules.map(formule => {
           const subscription = formule.conciergerie?.id ? subscriptions.get(formule.conciergerie.id) : null;
           const preloadedRating = formule.conciergerie?.id && conciergerieRatings ? conciergerieRatings.get(formule.conciergerie.id) : undefined;

@@ -163,7 +163,7 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
                       <TooltipTrigger asChild>
                         <button
                           onClick={handleWebsiteClick}
-                          className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
+                          className="p-1 text-gray-500 hover:text-primary transition-colors"
                           aria-label="Visiter le site web"
                         >
                           <ExternalLink size={20} />
@@ -181,7 +181,7 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
                       <TooltipTrigger asChild>
                         <button
                           onClick={handlePhoneClick}
-                          className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
+                          className="p-1 text-gray-500 hover:text-primary transition-colors"
                           aria-label="Appeler"
                         >
                           <Phone size={20} />
@@ -234,7 +234,7 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
 
         {/* Sections de comparaison */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <CommissionSection commission={formule?.commission || 0} tva={conciergerie?.tva || null} />
+          <CommissionSection commission={formule?.commission || 0} tva={(formule as any)?.tva || conciergerie?.tva || null} />
           <DurationSection dureeGestionMin={formule?.dureeGestionMin || 0} />
         </div>
 
@@ -265,7 +265,7 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
             <FavoriteButton formule={formule} conciergerie={conciergerie} className="flex-shrink-0" />
           )}
           {isNonRecommande ? (
-            <Button disabled className="flex-1 bg-gray-100 text-gray-600 cursor-not-allowed border border-gray-300">
+            <Button disabled className="flex-1" variant="secondary">
               Non recommandé
             </Button>
           ) : (

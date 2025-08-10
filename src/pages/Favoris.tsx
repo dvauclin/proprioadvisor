@@ -159,7 +159,7 @@ const Favoris = () => {
           <CardContent>
             <div className="space-y-4">
               <Heart className="h-16 w-16 text-gray-300 mx-auto" />
-              <p className="text-gray-500 max-w-md mx-auto">Parcourez nos conciergeries Airbnb et ajoutez vos formules préférées en cliquant sur l'icône cur pour pouvoir contacter plusieurs conciergeries en même temps.</p>
+              <p className="text-gray-500 max-w-md mx-auto">Parcourez nos conciergeries Airbnb et ajoutez vos formules préférées en cliquant sur l'icône coeur pour pouvoir contacter plusieurs conciergeries en même temps.</p>
               <Button asChild>
                 <a href="https://proprioadvisor.fr">Rechercher une conciergerie</a>
               </Button>

@@ -57,7 +57,7 @@ export const LingeOptions: React.FC<LingeOptionsProps> = ({
             
             return (
               <FormItem>
-                <FormLabel>Prix location mensuel du linge ()</FormLabel>
+                <FormLabel>Prix location mensuel du linge (€)</FormLabel>
                 <FormControl>
                   <Input 
                     type="number" 

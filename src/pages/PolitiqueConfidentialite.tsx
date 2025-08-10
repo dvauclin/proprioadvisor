@@ -94,7 +94,7 @@ const PolitiqueConfidentialite: React.FC = () => {
                 <li>Droit d'opposition au traitement</li>
                 <li>Droit de retirer votre consentement à tout moment</li>
               </ul>
-              <p className="mt-4">Pour exercer ces droits, vous pouvez nous contacter à l'adresse suivante : <a href="mailto:contact@proprioadvisor.fr" className="text-brand-chartreuse hover:underline">contact@proprioadvisor.fr</a></p>
+              <p className="mt-4">Pour exercer ces droits, vous pouvez nous contacter à l'adresse suivante : <a href="mailto:contact@proprioadvisor.fr" className="text-primary hover:underline">contact@proprioadvisor.fr</a></p>
             </section>
 
             <section>

@@ -9,7 +9,7 @@ export const inscriptionSchema = z.object({
   telephoneContact: z.string().min(10, "Le numéro de téléphone doit contenir au moins 10 caractères"),
   typeLogementAccepte: z.enum(["standard", "luxe", "tous"]),
   deductionFrais: z.enum(["deductTous", "deductMenage", "inclus"]),
-  tva: z.enum(["TTC", "HT"]),
+  // tva removed from step 1 schema; handled per formule on step 2
   accepteGestionPartielle: z.boolean(),
   accepteResidencePrincipale: z.boolean(),
   superficieMin: z.coerce.number().min(0, "La superficie minimale doit être positive"),

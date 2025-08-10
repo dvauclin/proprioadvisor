@@ -49,6 +49,7 @@ const MyConciergerie = () => {
       await saveConciergerie(data);
       toast.success('Modifications enregistrées avec succès !');
       await queryClient.invalidateQueries({ queryKey: ['my-conciergerie', user?.email] });
+      await queryClient.invalidateQueries({ queryKey: ['conciergeries'] });
       navigate.push('/subscription');
     } catch (error: any) {
       toast.error("Erreur lors de l'enregistrement", { description: error.message });

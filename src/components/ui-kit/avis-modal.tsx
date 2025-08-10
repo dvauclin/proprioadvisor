@@ -53,7 +53,7 @@ const AvisModal: React.FC<AvisModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col bg-white z-50">
+      <DialogContent className="max-w-2xl max-h-[80vh] sm:max-h-[80vh] max-sm:max-h-[calc(100vh-1rem)] overflow-hidden flex flex-col bg-white z-50">
         <DialogHeader>
           <DialogTitle>Avis pour {conciergerieName}</DialogTitle>
         </DialogHeader>

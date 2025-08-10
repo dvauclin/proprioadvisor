@@ -144,7 +144,7 @@ const VilleForm: React.FC<VilleFormProps> = ({ ville, allVilles, onSave, onCance
 
   return (
     <Dialog open={open} onOpenChange={onCancel}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             {ville ? "Modifier la ville" : "Ajouter une ville"}

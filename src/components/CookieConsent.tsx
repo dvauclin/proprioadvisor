@@ -62,7 +62,7 @@ const CookieConsent: React.FC = () => {
 
   return (
     <Dialog open={!hasResponded} onOpenChange={(open) => !open && handleDialogClose()}>
-      <DialogContent className="max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl w-full max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         {!showDetails ? (
           <div>
             <DialogHeader className="mb-6">
@@ -117,7 +117,7 @@ const CookieConsent: React.FC = () => {
                     type="checkbox"
                     checked={true}
                     disabled
-                    className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                    className="h-4 w-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
                   />
                 </div>
               </div>
@@ -132,7 +132,7 @@ const CookieConsent: React.FC = () => {
                     type="checkbox"
                     checked={preferences.analytics}
                     onChange={() => handlePreferenceChange('analytics')}
-                    className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                    className="h-4 w-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
                   />
                 </div>
               </div>
@@ -147,7 +147,7 @@ const CookieConsent: React.FC = () => {
                     type="checkbox"
                     checked={preferences.marketing}
                     onChange={() => handlePreferenceChange('marketing')}
-                    className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                    className="h-4 w-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
                   />
                 </div>
               </div>

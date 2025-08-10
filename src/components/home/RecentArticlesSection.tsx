@@ -55,7 +55,7 @@ const RecentArticlesSection: React.FC<RecentArticlesSectionProps> = ({ articles,
                       <div className="overlay-gradient"></div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-brand-chartreuse-dark transition-colors duration-200">
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-200">
                         {article.titre}
                       </h3>
                       <p className="text-gray-600 mb-4">

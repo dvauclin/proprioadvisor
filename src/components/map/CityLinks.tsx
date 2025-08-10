@@ -24,8 +24,8 @@ const CityLinks: React.FC<CityLinksProps> = ({ villes, onVilleSelect }) => {
             className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200 hover:border-brand-chartreuse hover:shadow-md transition-all group"
           >
             <div className="flex items-center space-x-2">
-              <MapPin className="h-4 w-4 text-gray-400 group-hover:text-brand-chartreuse" />
-              <span className="font-medium text-gray-900 group-hover:text-brand-chartreuse">
+                              <MapPin className="h-4 w-4 text-gray-400 group-hover:text-primary" />
+                <span className="font-medium text-gray-900 group-hover:text-primary">
                 {ville.nom}
               </span>
             </div>

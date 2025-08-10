@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useMemo } from "react";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
 import { UseFormReturn } from "react-hook-form";
@@ -10,12 +10,13 @@ interface FeesFieldsProps {
 }
 
 export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
-  console.log("FeesFields rendering with values:", {
+  // Utiliser useMemo pour éviter les re-rendus inutiles
+  const formValues = useMemo(() => ({
     fraisMenageHeure: form.getValues("fraisMenageHeure"),
     fraisDemarrage: form.getValues("fraisDemarrage"),
     abonnementMensuel: form.getValues("abonnementMensuel"),
     fraisSupplementaireLocation: form.getValues("fraisSupplementaireLocation")
-  });
+  }), [form]);
 
   return (
     <>
@@ -106,7 +107,6 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
           name="fraisSupplementaireLocation"
           render={({ field }) => {
             const numericValue = typeof field.value === 'number' ? field.value : 0;
-            console.log("Rendering fraisSupplementaireLocation with value:", field.value, "numeric value:", numericValue);
             
             return (
               <FormItem>
@@ -118,7 +118,6 @@ export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
                     value={numericValue}
                     onChange={(e) => {
                       const value = e.target.value === '' ? 0 : parseFloat(e.target.value);
-                      console.log("Changing fraisSupplementaireLocation to:", value);
                       field.onChange(value);
                     }}
                   />

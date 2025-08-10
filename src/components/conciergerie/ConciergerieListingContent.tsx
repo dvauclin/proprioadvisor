@@ -18,6 +18,7 @@ interface ConciergerieListingContentProps {
   ville: any;
   conciergerieRatings?: Map<string, number>;
   conciergerieReviewCounts?: Map<string, number>;
+  cardsContainerRef?: React.Ref<HTMLDivElement>;
 }
 
 const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
@@ -29,7 +30,8 @@ const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
   subscriptions,
   ville,
   conciergerieRatings,
-  conciergerieReviewCounts
+  conciergerieReviewCounts,
+  cardsContainerRef
 }) => {
   return (
     <div className="container mx-auto px-4">
@@ -52,6 +54,7 @@ const ConciergerieListingContent: React.FC<ConciergerieListingContentProps> = ({
             subscriptions={subscriptions}
             conciergerieRatings={conciergerieRatings}
             conciergerieReviewCounts={conciergerieReviewCounts}
+            cardsContainerRef={cardsContainerRef}
           />
         )}
       </section>

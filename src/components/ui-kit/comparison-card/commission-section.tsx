@@ -7,24 +7,11 @@ interface CommissionSectionProps {
 }
 
 const CommissionSection: React.FC<CommissionSectionProps> = ({ commission, tva, variant = "default" }) => {
-  // Fonction pour formater la TVA
+  // Fonction pour formater l'affichage du type (HT/TTC)
   const formatTva = (tva: string | null | undefined) => {
     if (!tva) return "";
     
-    if (tva === "TTC/HT") {
-      return " TTC/HT";
-    }
-    
-    // Si c'est un pourcentage
-    if (tva.includes("%")) {
-      return ` ${tva}`;
-    }
-    
-    // Si c'est TTC ou HT
-    if (tva === "TTC" || tva === "HT") {
-      return ` ${tva}`;
-    }
-    
+    if (tva === "TTC" || tva === "HT") return ` ${tva}`;
     return "";
   };
 

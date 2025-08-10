@@ -62,7 +62,7 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
   }, [villes, searchTerm]);
 
   const formatVilleName = (ville: VilleSelectorItem) => {
-    return ville.departementNumero ? `${ville.nom} (${ville.departementNumero})` : ville.nom;
+    return ville.departementNumero ? `${ville.departementNumero} - ${ville.nom}` : ville.nom;
   };
 
   return (
@@ -105,7 +105,7 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
                           id={`ville-${ville.id}`}
                           checked={selectedVillesIds.includes(ville.id)}
                           onChange={() => handleVilleSelection(ville.id)}
-                          className="rounded border-gray-300 text-brand-chartreuse focus:ring-brand-chartreuse"
+                          className="rounded border-gray-300 text-primary focus:ring-primary"
                         />
                         <label htmlFor={`ville-${ville.id}`} className="text-sm">
                           {formatVilleName(ville)}

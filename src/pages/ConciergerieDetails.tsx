@@ -130,6 +130,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
               nom: formule.nom,
               conciergerieId: formule.conciergerie_id,
               commission: formule.commission || 0,
+              tva: (formule.tva || formule.type_commission || null) as any,
               dureeGestionMin: formule.duree_gestion_min || 0,
               servicesInclus: formule.services_inclus || [],
               fraisMenageHeure: formule.frais_menage_heure || 0,
@@ -301,7 +302,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                               <TooltipTrigger asChild>
                                 <button
                                   onClick={handleWebsiteClick}
-                                  className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
+                                  className="p-1 text-gray-500 hover:text-primary transition-colors"
                                   aria-label="Visiter le site web"
                                 >
                                   <ExternalLink size={20} />
@@ -320,7 +321,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                               <TooltipTrigger asChild>
                                 <button
                                   onClick={handlePhoneClick}
-                                  className="p-1 text-gray-500 hover:text-brand-chartreuse transition-colors"
+                                  className="p-1 text-gray-500 hover:text-primary transition-colors"
                                   aria-label="Appeler"
                                 >
                                   <Phone size={20} />
@@ -442,7 +443,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <CommissionSection 
                           commission={formule.commission} 
-                          tva={conciergerie.tva}
+                          tva={(formule as any).tva || conciergerie.tva}
                           variant="details"
                         />
                         <DurationSection dureeGestionMin={formule.dureeGestionMin} variant="details" />

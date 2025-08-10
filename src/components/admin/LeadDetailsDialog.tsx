@@ -14,7 +14,7 @@ const LeadDetailsDialog: React.FC<LeadDetailsDialogProps> = ({
 }) => {
   if (!lead) return null;
   return <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Détails du lead</DialogTitle>
         </DialogHeader>

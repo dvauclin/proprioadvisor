@@ -95,6 +95,10 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
   console.log("?? Formules found:", formules);
   console.log("?? Formules count:", formules.length);
 
+  // Récupérer les avis pour toutes les conciergeries (comme sur les pages détails)
+  const [conciergerieRatings, setConciergerieRatings] = useState<Map<string, number>>(new Map());
+  const [conciergerieReviewCounts, setConciergerieReviewCounts] = useState<Map<string, number>>(new Map());
+
   // Apply filters to formules
   console.log("?? Filtres actuels:", filters);
   console.log("?? Formules avant filtrage:", formules.length);
@@ -151,12 +155,17 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
       }
     }
     
-    // Filter by note minimum (if conciergerie has score)
+    // Filter by note minimum (basé sur la moyenne des avis reçus)
     if (filters.noteMin && filters.noteMin > 0) {
-      const conciergerieScore = formule.conciergerie?.score || 0;
-      if (conciergerieScore < filters.noteMin) {
-        console.log("? Formule filtrée par note:", formule.nom, "score:", conciergerieScore, "min:", filters.noteMin);
-        return false;
+      const conciergerieId = formule.conciergerie?.id;
+      if (conciergerieId) {
+        const averageRating = conciergerieRatings.get(conciergerieId) || 0;
+        const isRecommended = (formule.conciergerie?.score ?? 0) > 0;
+        const effectiveRating = isRecommended ? averageRating : 0; // Non recommandée => note 0
+        if (effectiveRating < filters.noteMin) {
+          console.log("? Formule filtrée par note:", formule.nom, "effective:", effectiveRating, "(avg:", averageRating, "rec:", isRecommended, ") min:", filters.noteMin);
+          return false;
+        }
       }
     }
     
@@ -267,10 +276,6 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
     });
   }
 
-  // Récupérer les avis pour toutes les conciergeries (comme sur les pages détails)
-  const [conciergerieRatings, setConciergerieRatings] = useState<Map<string, number>>(new Map());
-  const [conciergerieReviewCounts, setConciergerieReviewCounts] = useState<Map<string, number>>(new Map());
-  
   useEffect(() => {
     const fetchAvis = async () => {
       if (!formules || formules.length === 0) return;

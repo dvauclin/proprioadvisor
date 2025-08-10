@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { FormuleFormData } from "@/components/formule/FormuleFormSchema";
 import { getAllVilles } from "@/services/villeService";
 import { Ville } from "@/types";
+import { transformFormuleForDB } from "@/services/conciergerieTransformService";
 
 interface InscriptionFormData {
   nom: string;
@@ -18,7 +19,7 @@ interface InscriptionFormData {
   telephoneContact: string;
   typeLogementAccepte: "standard" | "luxe" | "tous";
   deductionFrais: "deductTous" | "deductMenage" | "inclus";
-  tva: "TTC" | "HT";
+  // tva removed from step 1; now managed per formule at step 2
   accepteGestionPartielle: boolean;
   accepteResidencePrincipale: boolean;
   superficieMin: number;
@@ -31,12 +32,18 @@ interface InscriptionFormData {
 // Type étendu pour inclure l'id
 interface FormuleWithId extends FormuleFormData {
   id: string;
+  tva?: "TTC" | "HT";
 }
 
 export const useInscriptionForm = () => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [formules, setFormules] = useState<FormuleWithId[]>([]);
+  
+  // Log pour tracer les changements d'état des formules
+  useEffect(() => {
+    console.log("useInscriptionForm: État des formules mis à jour:", formules);
+  }, [formules]);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [selectedVillesIds, setSelectedVillesIds] = useState<string[]>([]);
   const [villes, setVilles] = useState<Ville[]>([]);
@@ -72,7 +79,7 @@ export const useInscriptionForm = () => {
       telephoneContact: "",
       typeLogementAccepte: "tous",
       deductionFrais: "deductTous",
-      tva: "TTC",
+      // tva removed from defaults; managed per formule
       accepteGestionPartielle: false,
       accepteResidencePrincipale: false,
       superficieMin: 0,
@@ -98,7 +105,18 @@ export const useInscriptionForm = () => {
   }, []);
 
   const handleAddFormule = useCallback((formule: FormuleFormData) => {
-    setFormules(prev => [...prev, { ...formule, id: `formule_${Date.now()}` }]);
+    console.log("handleAddFormule: Ajout d'une formule:", formule);
+    const newFormule: FormuleWithId = { 
+      ...formule, 
+      id: `formule_${Date.now()}`,
+      tva: formule.tva || "TTC"
+    };
+    console.log("handleAddFormule: Nouvelle formule avec ID:", newFormule);
+    setFormules(prev => {
+      const updatedFormules = [...prev, newFormule];
+      console.log("handleAddFormule: Formules mises à jour:", updatedFormules);
+      return updatedFormules;
+    });
   }, []);
 
   const handleDeleteFormule = useCallback((formuleId: string) => {
@@ -140,6 +158,8 @@ export const useInscriptionForm = () => {
       
       console.log("handleSubmit: Form data:", formData);
       console.log("handleSubmit: Selected villes IDs:", selectedVillesIds);
+      console.log("handleSubmit: Formules à sauvegarder:", formules);
+      console.log("handleSubmit: Nombre de formules:", formules.length);
       
       const insertData = {
         nom: formData.nom,
@@ -148,12 +168,12 @@ export const useInscriptionForm = () => {
         nom_contact: formData.nomContact,
         type_logement_accepte: formData.typeLogementAccepte,
         deduction_frais: formData.deductionFrais,
-        tva: formData.tva,
+         // tva removed from conciergeries insert; handled per formule
         accepte_gestion_partielle: formData.accepteGestionPartielle,
         accepte_residence_principale: formData.accepteResidencePrincipale,
         superficie_min: formData.superficieMin,
         nombre_chambres_min: formData.nombreChambresMin,
-        zone_couverte: formData.zoneCouverte || 'locale',
+        zone_couverte: formData.zoneCouverte || '',
         url_avis: formData.urlAvis,
         validated: false,
         villes_ids: selectedVillesIds
@@ -181,6 +201,57 @@ export const useInscriptionForm = () => {
       }
 
       console.log("handleSubmit: Conciergerie créée avec succès:", conciergerie);
+      
+      // Sauvegarder les formules si elles existent
+      console.log("handleSubmit: Vérification des formules à sauvegarder, count:", formules.length);
+      if (formules.length > 0) {
+        console.log("handleSubmit: Sauvegarde des formules:", formules);
+        
+        try {
+          console.log("handleSubmit: Formules avant transformation:", JSON.stringify(formules, null, 2));
+          
+          // Transformer les formules pour la base de données en utilisant le service de transformation
+          const formulesForDB = formules.map(formule => {
+            console.log("handleSubmit: Transformation de la formule:", formule);
+            const transformedFormule = transformFormuleForDB({
+              ...formule,
+              conciergerieId: conciergerie.id
+            });
+            console.log("handleSubmit: Formule transformée:", transformedFormule);
+            
+            return {
+              id: crypto.randomUUID(),
+              ...transformedFormule,
+              created_at: new Date().toISOString()
+            };
+          });
+          
+          console.log("handleSubmit: Formules transformées pour DB:", formulesForDB);
+          
+          console.log("handleSubmit: Tentative d'insertion des formules avec client anonyme");
+          const { data: formulesData, error: formulesError } = await supabase
+            .from('formules')
+            .insert(formulesForDB)
+            .select();
+            
+          if (formulesError) {
+            console.error("handleSubmit: Erreur lors de la sauvegarde des formules:", formulesError);
+            console.error("handleSubmit: Détails de l'erreur:", {
+              message: formulesError.message,
+              details: formulesError.details,
+              hint: formulesError.hint,
+              code: formulesError.code
+            });
+            toast.error("Conciergerie créée mais erreur lors de la sauvegarde des formules");
+          } else {
+            console.log("handleSubmit: Formules sauvegardées avec succès:", formulesData);
+          }
+        } catch (error) {
+          console.error("handleSubmit: Erreur lors de la sauvegarde des formules:", error);
+          toast.error("Conciergerie créée mais erreur lors de la sauvegarde des formules");
+        }
+      }
+      
       toast.success("Inscription réussie ! Vous allez être redirigé vers la page de souscription.");
       
       // Redirection vers la page de souscription avec l'ID de la conciergerie
@@ -193,7 +264,7 @@ export const useInscriptionForm = () => {
     } finally {
       setLoading(false);
     }
-  }, [form, signUp, router, selectedVillesIds]);
+  }, [form, signUp, router, selectedVillesIds, formules]);
 
   // Validation de l'étape 1
   const isStepOneValid = form.watch("nom") && 

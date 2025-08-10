@@ -6,6 +6,7 @@ export const transformFormuleFromDB = (formule: any): Formule => ({
   nom: formule.nom,
   conciergerieId: formule.conciergerie_id,
   commission: formule.commission || 0,
+  tva: (formule.tva || formule.type_commission || null) as any,
   dureeGestionMin: formule.duree_gestion_min || 0,
   servicesInclus: formule.services_inclus || [],
   fraisMenageHeure: formule.frais_menage_heure || 0,
@@ -142,6 +143,7 @@ export const transformFormuleForDB = (formule: Formule | any) => {
     nom: formule.nom,
     conciergerie_id: formule.conciergerieId || formule.conciergerie_id,
     commission: formule.commission || 0,
+    tva: formule.tva || formule.type_commission || 'TTC',
     duree_gestion_min: formule.dureeGestionMin || formule.duree_gestion_min || 0,
     services_inclus: formule.servicesInclus || formule.services_inclus || [],
     frais_menage_heure: formule.fraisMenageHeure || formule.frais_menage_heure || 0,
@@ -155,6 +157,7 @@ export const transformFormuleForDB = (formule: Formule | any) => {
   };
 
   console.log("Transforming formule for DB:", result);
+  console.log("Valeur tva dans transformFormuleForDB:", result.tva);
   return result;
 };
 

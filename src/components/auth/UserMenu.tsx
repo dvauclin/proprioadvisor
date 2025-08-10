@@ -80,12 +80,6 @@ const UserMenu = () => {
               <span>Administration</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/connexion" className="cursor-pointer">
-              <User className="mr-2 h-4 w-4" />
-              <span>Connexion admin</span>
-            </Link>
-          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={signOut} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />

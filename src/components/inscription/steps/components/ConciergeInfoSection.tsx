@@ -30,7 +30,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center">
-                <User className="mr-2 h-4 w-4 text-gray-600" />
+                <User className="mr-2 h-4 w-4 text-brand-chartreuse" />
                 <FormLabel>Nom de la conciergerie</FormLabel>
               </div>
               <FormControl>
@@ -51,7 +51,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center">
-                <Mail className="mr-2 h-4 w-4 text-gray-600" />
+                <Mail className="mr-2 h-4 w-4 text-brand-chartreuse" />
                 <FormLabel>Email de contact</FormLabel>
               </div>
               <FormControl>
@@ -75,7 +75,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center">
-                <UserCircle className="mr-2 h-4 w-4 text-gray-600" />
+                <UserCircle className="mr-2 h-4 w-4 text-brand-chartreuse" />
                 <FormLabel>Nom du contact</FormLabel>
               </div>
               <FormControl>
@@ -97,7 +97,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center">
-                <Phone className="mr-2 h-4 w-4 text-gray-600" />
+                <Phone className="mr-2 h-4 w-4 text-brand-chartreuse" />
                 <FormLabel>Téléphone de contact</FormLabel>
               </div>
               <FormControl>
@@ -117,7 +117,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
 
       <div>
         <div className="flex items-center mb-2">
-          <Image className="mr-2 h-4 w-4 text-gray-600" />
+                      <Image className="mr-2 h-4 w-4 text-brand-chartreuse" />
           <h3 className="text-base font-medium">Logo de votre conciergerie</h3>
         </div>
         <LogoUploader 
@@ -130,7 +130,7 @@ const ConciergeInfoSection: React.FC<ConciergeInfoSectionProps> = ({
 
       <div>
         <div className="flex items-center mb-2">
-          <Star className="mr-2 h-4 w-4 text-gray-600" />
+                      <Star className="mr-2 h-4 w-4 text-brand-chartreuse" />
           <h3 className="text-base font-medium">Avis sur la conciergerie</h3>
         </div>
         <FormField

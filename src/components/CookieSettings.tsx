@@ -33,7 +33,7 @@ export const CookieSettings: React.FC = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="link" className="text-sm text-gray-500 hover:text-gray-700">
+        <Button variant="link" className="text-sm text-gray-500 hover:text-primary transition-colors">
           Gérer les cookies
         </Button>
       </DialogTrigger>

@@ -32,6 +32,7 @@ export function FormuleForm({
     defaultValues: {
       nom: "",
       commission: 0,
+      tva: "TTC",
       dureeGestionMin: 0,
       servicesInclus: [],
       fraisMenageHeure: 0,
@@ -64,6 +65,7 @@ export function FormuleForm({
       const processedData: FormuleFormData = {
         nom: formuleData.nom || "",
         commission: ensureNumeric(formuleData.commission),
+        tva: (formuleData as any).tva || (formuleData as any).type_commission || "TTC",
         dureeGestionMin: ensureNumeric(formuleData.dureeGestionMin || formuleData.duree_gestion_min),
         servicesInclus: formuleData.servicesInclus || formuleData.services_inclus || [],
         fraisMenageHeure: ensureNumeric(formuleData.fraisMenageHeure || formuleData.frais_menage_heure),
@@ -146,6 +148,7 @@ export function FormuleForm({
     };
     
     console.log("Envoi du formulaire avec valeurs:", formValues);
+    console.log("Valeur tva spécifiquement:", formValues.tva);
     
     onSubmit(formValues);
     onOpenChange(false);
@@ -214,7 +217,7 @@ export function FormuleForm({
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[600px] max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             {formuleData ? "Modifier une formule" : "Ajouter une formule"}

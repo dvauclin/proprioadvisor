@@ -144,12 +144,14 @@ export const useConciergerieData = (villeSlug: string | undefined) => {
       results = results.filter(formule => formule.dureeGestionMin <= filters.dureeGestionMin!);
     }
 
-    // Filtre par note minimale
+    // Filtre par note minimale (conciergeries non recommandées => note 0)
     if (filters.noteMin && filters.noteMin > 0) {
       results = results.filter(formule => {
         if (!formule.conciergerie?.id) return false;
-        const rating = conciergerieRatings.get(formule.conciergerie.id) || 0;
-        return rating >= filters.noteMin!;
+        const averageRating = conciergerieRatings.get(formule.conciergerie.id) || 0;
+        const isRecommended = (formule.conciergerie?.score ?? 0) > 0;
+        const effectiveRating = isRecommended ? averageRating : 0;
+        return effectiveRating >= filters.noteMin!;
       });
     }
 

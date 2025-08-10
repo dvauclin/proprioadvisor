@@ -164,7 +164,7 @@ export const DevisForm: React.FC<DevisFormProps> = ({
   };
 
   return (
-    <div className="max-h-[70vh] overflow-y-auto px-2 py-0">
+    <div className="max-h-[70vh] sm:max-h-[70vh] max-sm:max-h-[calc(100vh-8rem)] overflow-y-auto px-2 py-0">
       <p className="mb-4">
         Demande de devis pour la formule <strong>{formuleName}</strong> de <strong>{conciergerieName}</strong>
       </p>

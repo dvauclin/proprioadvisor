@@ -58,7 +58,7 @@ export const ReapproOptions: React.FC<ReapproOptionsProps> = ({
             
             return (
               <FormItem>
-                <FormLabel>Forfait mensuel réappro. ()</FormLabel>
+                <FormLabel>Forfait mensuel réappro. (€)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"

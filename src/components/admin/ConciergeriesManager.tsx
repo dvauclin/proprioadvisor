@@ -69,6 +69,7 @@ const ConciergeriesManager: React.FC<ConciergeriesManagerProps> = ({ validated }
       );
       
       queryClient.invalidateQueries({ queryKey: ['admin-conciergeries'] });
+      queryClient.invalidateQueries({ queryKey: ['conciergeries'] });
     } catch (error: any) {
       console.error("Erreur lors de la validation:", error);
       toast.error("Erreur lors de la validation");
@@ -139,7 +140,7 @@ const ConciergeriesManager: React.FC<ConciergeriesManagerProps> = ({ validated }
                         Voir
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
                       <DialogHeader>
                         <DialogTitle>Détails de la conciergerie</DialogTitle>
                       </DialogHeader>

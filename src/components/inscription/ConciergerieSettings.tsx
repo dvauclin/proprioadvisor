@@ -25,7 +25,7 @@ const ConciergerieSettings = () => {
               <FormLabel>Type de logement accepté</FormLabel>
               <FormControl>
                 <select
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-chartreuse focus:border-brand-chartreuse"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
                   {...field}
                 >
                   {propertyTypeOptions.map(option => (
@@ -48,7 +48,7 @@ const ConciergerieSettings = () => {
               <FormLabel>Déduction des frais</FormLabel>
               <FormControl>
                 <select
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-chartreuse focus:border-brand-chartreuse"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
                   {...field}
                 >
                   <option value="deductTous">Déduction de tous les frais</option>
@@ -92,25 +92,7 @@ const ConciergerieSettings = () => {
         />
       </div>
 
-      <FormField
-        control={form.control}
-        name="tva"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>TVA</FormLabel>
-            <FormControl>
-              <select
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-chartreuse focus:border-brand-chartreuse"
-                {...field}
-              >
-                <option value="TTC">TTC</option>
-                <option value="HT">HT</option>
-              </select>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      {/* Le choix TTC/HT est désormais géré par formule à l'étape 2 */}
     </>
   );
 };

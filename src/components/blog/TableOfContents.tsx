@@ -95,8 +95,8 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
                 onClick={(e) => handleAnchorClick(e, heading.id)}
                 className={`block text-sm transition-colors duration-200 ${
                   activeHeading === heading.id
-                    ? 'text-brand-chartreuse font-medium'
-                    : 'text-gray-700 hover:text-brand-chartreuse hover:font-medium'
+                                    ? 'text-primary font-medium'
+                : 'text-gray-700 hover:text-primary hover:font-medium'
                 }`}
                 aria-current={activeHeading === heading.id ? 'location' : undefined}
               >

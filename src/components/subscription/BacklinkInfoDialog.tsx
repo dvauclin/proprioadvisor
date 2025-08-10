@@ -73,7 +73,7 @@ export const BacklinkInfoDialog: React.FC<BacklinkInfoDialogProps> = ({
           <Info className="h-4 w-4 text-blue-500" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Conditions pour le lien partenaire</DialogTitle>
         </DialogHeader>

@@ -278,6 +278,9 @@ const Admin = () => {
       queryClient.invalidateQueries({
         queryKey: ["validated-conciergeries"]
       });
+      queryClient.invalidateQueries({
+        queryKey: ["conciergeries"]
+      });
       toast({
         title: "Conciergerie validée",
         description: "La conciergerie a été validée avec succès"
@@ -319,6 +322,9 @@ const Admin = () => {
       queryClient.invalidateQueries({
         queryKey: ["validated-conciergeries"]
       });
+      queryClient.invalidateQueries({
+        queryKey: ["conciergeries"]
+      });
       setShowEditForm(false);
       setEditingConciergerie(undefined);
       setEditingFormules([]);
@@ -340,6 +346,9 @@ const Admin = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["validated-conciergeries"]
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["conciergeries"]
       });
       toast({
         title: "Conciergerie supprimée",
@@ -1103,7 +1112,7 @@ const Admin = () => {
       <EditConciergerieForm conciergerie={editingConciergerie} formules={editingFormules} onSave={handleSaveConciergerie} onCancel={handleCancelEdit} open={showEditForm} />
 
       <Dialog open={showArticleForm} onOpenChange={setShowArticleForm}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
               {editingArticle ? "Modifier l'article" : "Ajouter un article"}

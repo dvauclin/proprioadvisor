@@ -200,12 +200,12 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Contacter plusieurs conciergeries</DialogTitle>
         </DialogHeader>
 
-        <div className="max-h-[70vh] overflow-y-auto px-2 py-0">
+        <div className="max-h-[70vh] sm:max-h-[70vh] max-sm:max-h-[calc(100vh-8rem)] overflow-y-auto px-2 py-0">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               {/* Selected formulas section */}

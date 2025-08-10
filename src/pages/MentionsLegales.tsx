@@ -34,7 +34,7 @@ const MentionsLegales: React.FC = () => {
               </address>
               
               <p>Directeur de la publication : David Vauclin</p>
-              <p>Contact : <a href="mailto:contact@proprioadvisor.fr" className="text-brand-chartreuse hover:underline">contact@proprioadvisor.fr</a></p>
+              <p>Contact : <a href="mailto:contact@proprioadvisor.fr" className="text-primary hover:underline">contact@proprioadvisor.fr</a></p>
             </section>
 
             <section className="mb-8">

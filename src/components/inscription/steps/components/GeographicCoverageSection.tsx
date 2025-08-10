@@ -56,13 +56,13 @@ const GeographicCoverageSection: React.FC<GeographicCoverageSectionProps> = ({
   }, [villes, searchTerm]);
 
   const formatVilleName = (ville: VilleSelectorItem) => {
-    return ville.departementNumero ? `${ville.nom} (${ville.departementNumero})` : ville.nom;
+    return ville.departementNumero ? `${ville.departementNumero} - ${ville.nom}` : ville.nom;
   };
 
   return (
     <div className="space-y-4">
       <div className="flex items-center mb-2">
-        <Building2 className="mr-2 h-5 w-5 text-gray-600" />
+                    <Building2 className="mr-2 h-5 w-5 text-brand-chartreuse" />
         <h3 className="text-lg font-medium">Couverture géographique</h3>
       </div>
 
@@ -107,7 +107,7 @@ const GeographicCoverageSection: React.FC<GeographicCoverageSectionProps> = ({
                           id={`ville-${ville.id}`} 
                           checked={selectedVillesIds.includes(ville.id)} 
                           onChange={() => handleVilleSelection(ville.id)} 
-                          className="rounded border-gray-300 text-brand-chartreuse focus:ring-brand-chartreuse" 
+                          className="rounded border-gray-300 text-primary focus:ring-primary" 
                         />
                         <label htmlFor={`ville-${ville.id}`} className="text-sm">
                           {formatVilleName(ville)}
@@ -136,7 +136,7 @@ const GeographicCoverageSection: React.FC<GeographicCoverageSectionProps> = ({
         render={({ field }) => (
           <FormItem>
             <div className="flex items-center">
-              <MapPin className="mr-2 h-4 w-4 text-gray-600" />
+              <MapPin className="mr-2 h-4 w-4 text-brand-chartreuse" />
               <FormLabel>Zone de déplacement (optionnelle) </FormLabel>
             </div>
             <FormControl>

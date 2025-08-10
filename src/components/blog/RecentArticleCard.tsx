@@ -32,7 +32,7 @@ const RecentArticleCard: React.FC<RecentArticleCardProps> = ({ article }) => {
               {formatDate(article.createdAt || '')}
             </span>
           </div>
-          <CardTitle className="text-lg line-clamp-2 group-hover:text-brand-chartreuse transition-colors">
+          <CardTitle className="text-lg line-clamp-2 group-hover:text-primary transition-colors">
             {article.titre}
           </CardTitle>
         </CardHeader>

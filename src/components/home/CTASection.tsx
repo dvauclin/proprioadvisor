@@ -10,7 +10,7 @@ const CTASection: React.FC = () => {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Vous gérez une conciergerie Airbnb ?</h2>
           <p className="text-xl text-gray-600 mb-6">
-            Inscrivez votre entreprise gratuitement sur ProprioAdvisor pour augmenter votre visibilité et <a href="https://proprioadvisor.fr/trouver-des-clients-conciergerie-airbnb" className="text-brand-chartreuse hover:underline">trouver de nouveaux clients</a>.
+            Inscrivez votre entreprise gratuitement sur ProprioAdvisor pour augmenter votre visibilité et <a href="https://proprioadvisor.fr/trouver-des-clients-conciergerie-airbnb" className="underline">trouver de nouveaux clients</a>.
           </p>
           <Button className="text-lg px-6 py-3" asChild>
             <Link href="/inscription">

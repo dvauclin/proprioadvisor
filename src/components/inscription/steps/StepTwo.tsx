@@ -27,6 +27,9 @@ const StepTwo: React.FC<StepTwoProps> = ({
   onEditFormule,
   submitText = "Finaliser l'inscription"
 }) => {
+  // Log pour tracer les formules reçues
+  console.log("StepTwo: Formules reçues:", formules);
+  console.log("StepTwo: Nombre de formules:", formules.length);
   const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [editingFormule, setEditingFormule] = useState<{
     index: number;
@@ -70,7 +73,7 @@ const StepTwo: React.FC<StepTwoProps> = ({
     <div>
       <div className="mb-6">
         <div className="flex items-center mb-2">
-          <ListPlus className="mr-2 h-5 w-5 text-gray-600" />
+                      <ListPlus className="mr-2 h-5 w-5 text-brand-chartreuse" />
           <h2 className="text-xl font-semibold">
             Gérer les formules
           </h2>

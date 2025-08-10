@@ -70,7 +70,7 @@ const Blog: React.FC = () => {
           <section className="mb-8" aria-labelledby="search-heading">
             <h2 id="search-heading" className="sr-only">Rechercher des articles</h2>
             <div className="relative">
-              <input type="text" placeholder="Rechercher un article..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} aria-label="Rechercher un article dans le blog" className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-md focus:ring-brand-chartreuse focus:border-brand-chartreuse focus:outline-none" />
+              <input type="text" placeholder="Rechercher un article..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} aria-label="Rechercher un article dans le blog" className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary focus:outline-none" />
               <div className="absolute left-3 top-1/2 transform -translate-y-1/2" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8" />
@@ -85,7 +85,7 @@ const Blog: React.FC = () => {
             </div> : filteredArticlesCount > 0 ? <section className="space-y-8" aria-labelledby="articles-list-heading">
               <h2 id="articles-list-heading" className="sr-only">Liste des articles</h2>
               {filteredArticles.map(article => <article key={article.id}>
-                  <Link href={`/${article.slug}`} className="block bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-shadow group focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2" aria-label={`Lire l'article : ${article.titre}`}>
+                  <Link href={`/${article.slug}`} className="block bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-shadow group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" aria-label={`Lire l'article : ${article.titre}`}>
                     <div className="md:flex">
                       <div className="md:w-1/3 relative">
                         {article.image ? <img src={article.image} alt={`Image d'illustration pour l'article : ${article.titre}`} className="w-full h-48 md:h-full object-cover" onError={e => {
@@ -99,7 +99,7 @@ const Blog: React.FC = () => {
                         <div className="overlay-gradient" aria-hidden="true"></div>
                       </div>
                       <div className="p-6 md:w-2/3">
-                        <h2 className="text-2xl font-semibold mb-3 group-hover:text-brand-chartreuse-dark transition-colors">
+                        <h2 className="text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
                           {article.titre}
                         </h2>
                         <p className="text-gray-600 mb-4">

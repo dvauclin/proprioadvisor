@@ -4,7 +4,8 @@ import * as z from "zod";
 // Schema definition for the formule form
 export const formuleSchema = z.object({
   nom: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
-  commission: z.coerce.number().min(5, "Veuillez entrer un pourcentage de commission valide").max(40, "Veuillez entrer un pourcentage de commission valide"),
+  commission: z.coerce.number().int().min(5, "Veuillez entrer un pourcentage de commission valide").max(40, "Veuillez entrer un pourcentage de commission valide"),
+  tva: z.enum(["TTC", "HT"]).default("TTC").optional(),
   dureeGestionMin: z.coerce.number().min(0, "La durée minimum doit être d'au moins 0 mois"),
   servicesInclus: z.array(z.string()),
   fraisMenageHeure: z.coerce.number().min(0, "Les frais doivent être positifs"),

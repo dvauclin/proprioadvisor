@@ -73,7 +73,18 @@ const ConciergerieListing: React.FC<ConciergerieListingProps> = ({ ville }) => {
   }
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">
+      {/* Top-only gradient overlay focused on header + first cards */}
+      <div className="absolute inset-x-0 top-0 h-[640px] -z-10 bg-gradient-to-b from-brand-emerald-50 via-white to-white overflow-hidden">
+        <div
+          className="absolute -top-12 -right-12 h-40 w-40 rounded-full blur-2xl opacity-40"
+          style={{ background: "radial-gradient(circle at center, rgba(127,255,0,0.35), transparent 60%)" }}
+        />
+        <div
+          className="absolute -bottom-16 -left-10 h-48 w-48 rounded-full blur-2xl opacity-30"
+          style={{ background: "radial-gradient(circle at center, rgba(0,191,255,0.25), transparent 60%)" }}
+        />
+      </div>
       <ConciergerieListingMeta
         ville={villeData}
         villeSlug={villeSlug}

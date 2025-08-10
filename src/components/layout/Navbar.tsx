@@ -28,7 +28,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 rounded-md">
+            <Link href="/" className="flex items-center focus:outline-none rounded-md">
               <div className="w-8 h-8 bg-brand-chartreuse rounded-full mr-2" aria-hidden="true"></div>
               <span className="text-lg font-semibold">PROPRIOADVISOR</span>
             </Link>
@@ -37,11 +37,11 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <nav className="ml-10 flex items-baseline space-x-4" role="menubar">
-              <Link
-                href="/gestion-airbnb"
-                role="menuitem"
-                aria-current={isActive("/gestion-airbnb") ? "page" : undefined}
-                className={`px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 ${
+                                <Link
+                    href="/gestion-airbnb"
+                    role="menuitem"
+                    aria-current={isActive("/gestion-airbnb") ? "page" : undefined}
+                    className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isActive("/gestion-airbnb")
                     ? "text-primary bg-primary/10"
                     : "text-gray-600 hover:text-primary hover:bg-primary/5"
@@ -49,11 +49,11 @@ const Navbar = () => {
               >
                 Guide Airbnb
               </Link>
-              <Link
-                href="/simulateur-airbnb"
-                role="menuitem"
-                aria-current={isActive("/simulateur-airbnb") ? "page" : undefined}
-                className={`px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 ${
+                                <Link
+                    href="/simulateur-airbnb"
+                    role="menuitem"
+                    aria-current={isActive("/simulateur-airbnb") ? "page" : undefined}
+                    className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isActive("/simulateur-airbnb")
                     ? "text-primary bg-primary/10"
                     : "text-gray-600 hover:text-primary hover:bg-primary/5"
@@ -61,11 +61,11 @@ const Navbar = () => {
               >
                 Simulateur Airbnb
               </Link>
-              <Link
-                href="/favoris"
-                role="menuitem"
-                aria-current={isActive("/favoris") ? "page" : undefined}
-                className={`px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2 ${
+                                <Link
+                    href="/favoris"
+                    role="menuitem"
+                    aria-current={isActive("/favoris") ? "page" : undefined}
+                    className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isActive("/favoris")
                     ? "text-primary bg-primary/10"
                     : "text-gray-600 hover:text-primary hover:bg-primary/5"
@@ -95,7 +95,7 @@ const Navbar = () => {
               aria-label={isMenuOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
-              className="focus:outline-none focus:ring-2 focus:ring-brand-chartreuse focus:ring-offset-2"
+                              className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" aria-hidden="true" />
@@ -117,7 +117,7 @@ const Navbar = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link
                 href="/gestion-airbnb"
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                className={`block px-3 py-2 rounded-full text-base font-medium ${
                   isActive("/gestion-airbnb")
                     ? "text-primary bg-primary/10"
                     : "text-gray-600 hover:text-primary hover:bg-primary/5"
@@ -128,7 +128,7 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/simulateur-airbnb"
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                className={`block px-3 py-2 rounded-full text-base font-medium ${
                   isActive("/simulateur-airbnb")
                     ? "text-primary bg-primary/10"
                     : "text-gray-600 hover:text-primary hover:bg-primary/5"
@@ -139,7 +139,7 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/favoris"
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                className={`block px-3 py-2 rounded-full text-base font-medium ${
                   isActive("/favoris")
                     ? "text-primary bg-primary/10"
                     : "text-gray-600 hover:text-primary hover:bg-primary/5"

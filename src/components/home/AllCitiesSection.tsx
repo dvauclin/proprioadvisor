@@ -22,7 +22,7 @@ const AllCitiesSection: React.FC<AllCitiesSectionProps> = ({ allVilles }) => {
             <Link 
               key={ville.id} 
               href={`/conciergerie/${ville.slug}`}
-              className="text-gray-600 hover:text-brand-chartreuse transition-colors"
+              className="text-gray-600 hover:text-primary transition-colors"
             >
               Conciergerie {formatVilleName(ville)}
             </Link>

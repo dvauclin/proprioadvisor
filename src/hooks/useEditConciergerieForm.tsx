@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/components/ui-kit/use-toast";
 import { Conciergerie, Ville, Formule } from "@/types";
+import { useQueryClient } from "@tanstack/react-query";
 
 // Import refactored hooks
 import { useLogoUpload } from "@/hooks/useLogoUpload";
@@ -31,20 +32,14 @@ export const adminConciergerieSchema = inscriptionSchema.extend({
 
 export type AdminConciergerieFormValues = z.infer<typeof adminConciergerieSchema>;
 
-interface UseEditConciergerieFormProps {
-  conciergerie?: Conciergerie;
-  formules?: Formule[];
-  onSave?: (conciergerie: Conciergerie & { formules: Formule[] }) => void;
-  onCancel?: () => void;
-}
-
-export const useEditConciergerieForm = ({
-  conciergerie,
-  formules: initialFormules = [],
-  onSave,
-  onCancel
-}: UseEditConciergerieFormProps) => {
+export const useEditConciergerieForm = (
+  conciergerie: Conciergerie | null,
+  initialFormules: Formule[] = [],
+  onSave?: (data: Conciergerie & { formules: Formule[] }) => void,
+  onCancel?: () => void
+) => {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [formules, setFormules] = useState<Formule[]>(initialFormules);
@@ -62,7 +57,7 @@ export const useEditConciergerieForm = ({
       logo: "",
       typeLogementAccepte: "standard",
       deductionFrais: "deductTous",
-      tva: "TTC",
+
       accepteGestionPartielle: false,
       accepteResidencePrincipale: false,
       superficieMin: 0,
@@ -88,7 +83,7 @@ export const useEditConciergerieForm = ({
         logo: conciergerie.logo || "",
         typeLogementAccepte: (conciergerie.typeLogementAccepte as "standard" | "luxe" | "tous") || "standard",
         deductionFrais: (conciergerie.deductionFrais as "inclus" | "deductTous" | "deductMenage") || "deductTous",
-        tva: (typeof conciergerie.tva === 'string' ? conciergerie.tva as "TTC" | "HT" : (conciergerie.tva ? "TTC" : "HT")) || "TTC",
+
         accepteGestionPartielle: conciergerie.accepteGestionPartielle || false,
         accepteResidencePrincipale: conciergerie.accepteResidencePrincipale || false,
         superficieMin: conciergerie.superficieMin || 0,
@@ -236,26 +231,30 @@ export const useEditConciergerieForm = ({
 
       console.log("Successfully inserted formule:", data);
 
-      // Create the new formule object with proper typing and value transformation
-      const newFormule: Formule = {
-        id: data.id,
-        nom: data.nom,
-        conciergerieId: data.conciergerie_id,
-        commission: data.commission || 0,
-        dureeGestionMin: data.duree_gestion_min || 0,
-        servicesInclus: data.services_inclus || [],
-        fraisMenageHeure: data.frais_menage_heure || 0,
-        fraisDemarrage: data.frais_demarrage || 0,
-        abonnementMensuel: data.abonnement_mensuel || 0,
-        fraisReapprovisionnement: data.frais_reapprovisionnement as 'reel' | 'forfait' | 'inclus' || 'inclus',
-        forfaitReapprovisionnement: data.forfait_reapprovisionnement || 0,
-        locationLinge: data.location_linge as 'inclus' | 'optionnel' | 'obligatoire' || 'inclus',
-        prixLocationLinge: data.prix_location_linge || 0,
-        fraisSupplementaireLocation: data.frais_supplementaire_location || 0,
-        createdAt: data.created_at || undefined
-      };
+             // Create the new formule object with proper typing and value transformation
+       const newFormule: Formule = {
+         id: data.id,
+         nom: data.nom,
+         conciergerieId: data.conciergerie_id,
+         commission: data.commission || 0,
+         tva: ((data as any).tva || (data as any).type_commission || null) as any,
+         dureeGestionMin: data.duree_gestion_min || 0,
+         servicesInclus: data.services_inclus || [],
+         fraisMenageHeure: data.frais_menage_heure || 0,
+         fraisDemarrage: data.frais_demarrage || 0,
+         abonnementMensuel: data.abonnement_mensuel || 0,
+         fraisReapprovisionnement: data.frais_reapprovisionnement as 'reel' | 'forfait' | 'inclus' || 'inclus',
+         forfaitReapprovisionnement: data.forfait_reapprovisionnement || 0,
+         locationLinge: data.location_linge as 'inclus' | 'optionnel' | 'obligatoire' || 'inclus',
+         prixLocationLinge: data.prix_location_linge || 0,
+         fraisSupplementaireLocation: data.frais_supplementaire_location || 0,
+         createdAt: data.created_at || undefined
+       };
 
       setFormules([...formules, newFormule]);
+      
+      // Invalidate cache to refresh listing pages
+      queryClient.invalidateQueries({ queryKey: ['conciergeries'] });
       
       toast({
         title: "Formule ajoutée",
@@ -312,27 +311,31 @@ export const useEditConciergerieForm = ({
 
       console.log("Successfully updated formule:", data);
 
-      // Update the formule in state with proper typing and value transformation
-      const updatedFormules = [...formules];
-      updatedFormules[index] = {
-        id: data.id,
-        nom: data.nom,
-        conciergerieId: data.conciergerie_id,
-        commission: data.commission || 0,
-        dureeGestionMin: data.duree_gestion_min || 0,
-        servicesInclus: data.services_inclus || [],
-        fraisMenageHeure: data.frais_menage_heure || 0,
-        fraisDemarrage: data.frais_demarrage || 0,
-        abonnementMensuel: data.abonnement_mensuel || 0,
-        fraisReapprovisionnement: data.frais_reapprovisionnement as 'reel' | 'forfait' | 'inclus' || 'inclus',
-        forfaitReapprovisionnement: data.forfait_reapprovisionnement || 0,
-        locationLinge: data.location_linge as 'inclus' | 'optionnel' | 'obligatoire' || 'inclus',
-        prixLocationLinge: data.prix_location_linge || 0,
-        fraisSupplementaireLocation: data.frais_supplementaire_location || 0,
-        createdAt: data.created_at || undefined
-      };
+             // Update the formule in state with proper typing and value transformation
+       const updatedFormules = [...formules];
+       updatedFormules[index] = {
+         id: data.id,
+         nom: data.nom,
+         conciergerieId: data.conciergerie_id,
+         commission: data.commission || 0,
+         tva: (data as any).tva || (data as any).type_commission || null,
+         dureeGestionMin: data.duree_gestion_min || 0,
+         servicesInclus: data.services_inclus || [],
+         fraisMenageHeure: data.frais_menage_heure || 0,
+         fraisDemarrage: data.frais_demarrage || 0,
+         abonnementMensuel: data.abonnement_mensuel || 0,
+         fraisReapprovisionnement: data.frais_reapprovisionnement as 'reel' | 'forfait' | 'inclus' || 'inclus',
+         forfaitReapprovisionnement: data.forfait_reapprovisionnement || 0,
+         locationLinge: data.location_linge as 'inclus' | 'optionnel' | 'obligatoire' || 'inclus',
+         prixLocationLinge: data.prix_location_linge || 0,
+         fraisSupplementaireLocation: data.frais_supplementaire_location || 0,
+         createdAt: data.created_at || undefined
+       };
       
       setFormules(updatedFormules);
+      
+      // Invalidate cache to refresh listing pages
+      queryClient.invalidateQueries({ queryKey: ['conciergeries'] });
       
       toast({
         title: "Formule modifiée",
@@ -373,6 +376,9 @@ export const useEditConciergerieForm = ({
 
       // Remove from state
       setFormules(formules.filter((_, i) => i !== index));
+      
+      // Invalidate cache to refresh listing pages
+      queryClient.invalidateQueries({ queryKey: ['conciergeries'] });
       
       toast({
         title: "Formule supprimée",
@@ -420,7 +426,6 @@ export const useEditConciergerieForm = ({
         logo: finalLogoUrl,
         typeLogementAccepte: values.typeLogementAccepte,
         deductionFrais: values.deductionFrais,
-        tva: values.tva,
         accepteGestionPartielle: values.accepteGestionPartielle,
         accepteResidencePrincipale: values.accepteResidencePrincipale,
         superficieMin: values.superficieMin,

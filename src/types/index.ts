@@ -43,6 +43,7 @@ export interface Conciergerie {
   accepteGestionPartielle: boolean;
   score: number;
   scoreManuel?: number | null;
+  // tva is now per-formule; keep for backward display compatibility if needed
   tva: "TTC" | "HT" | null;
   zoneCouverte?: string;
   deductionFrais?: string;
@@ -60,6 +61,8 @@ export interface Formule {
   description?: string;
   conciergerieId: string;
   commission: number;
+  // New: commission type per formule
+  tva?: "TTC" | "HT" | null;
   dureeGestionMin: number;
   servicesInclus: string[];
   fraisReapprovisionnement: 'reel' | 'forfait' | 'inclus';

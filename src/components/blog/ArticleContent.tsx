@@ -101,7 +101,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
                   <a 
                     href={`#${heading.id}`}
                     onClick={(e) => handleAnchorClick(e, heading.id)}
-                    className="flex items-center gap-3 text-gray-700 hover:text-brand-chartreuse transition-colors group"
+                    className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors group"
                   >
                     <span className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm font-medium group-hover:bg-brand-chartreuse group-hover:text-white transition-colors">
                       {index + 1}
@@ -221,7 +221,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
                   </div>
                 )}
                 <div className="p-6">
-                  <h3 className="font-semibold mb-2 group-hover:text-brand-chartreuse transition-colors line-clamp-2">
+                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
                     {relatedArticle.titre}
                   </h3>
                   {relatedArticle.excerpt && (
@@ -237,7 +237,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
                         day: 'numeric'
                       })}
                     </span>
-                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-brand-chartreuse group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                   </div>
                 </div>
               </Link>

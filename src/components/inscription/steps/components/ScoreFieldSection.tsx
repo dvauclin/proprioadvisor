@@ -13,7 +13,7 @@ const ScoreFieldSection: React.FC<ScoreFieldSectionProps> = ({ form }) => {
   return (
     <div className="space-y-4">
       <div className="flex items-center mb-2">
-        <Star className="mr-2 h-5 w-5 text-gray-600" />
+                    <Star className="mr-2 h-5 w-5 text-brand-chartreuse" />
         <h3 className="text-lg font-medium">Score (Admin uniquement)</h3>
       </div>
       

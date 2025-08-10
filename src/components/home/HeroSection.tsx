@@ -42,19 +42,27 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
   };
 
   return (
-    <section className="pt-16 pb-20 bg-gradient-subtle relative overflow-hidden">
+    <section className="relative overflow-hidden pt-20 pb-24">
+      {/* Top-only gradient overlay for consistent height */}
+      <div className="absolute inset-x-0 top-0 h-[640px] -z-10 bg-gradient-to-b from-brand-emerald-50 via-white to-white pointer-events-none overflow-hidden">
+        <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-50"
+             style={{ background: "radial-gradient(circle at center, rgba(127,255,0,0.35), transparent 60%)" }} />
+        <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full blur-3xl opacity-40"
+             style={{ background: "radial-gradient(circle at center, rgba(0,191,255,0.25), transparent 60%)" }} />
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-6">
             Trouvez la <span className="text-brand-chartreuse">conciergerie Airbnb</span> idéale pour votre bien
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-lg mx-auto">
+          <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
             Comparez gratuitement les offres des conciergeries Airbnb en France et optimisez la gestion de votre location courte durée
           </p>
-          
-          <div className="max-w-md mx-auto mb-8">
+
+          <div className="flex justify-center mb-8">
             <Select value={selectedVilleSlug || ""} onValueChange={handleVilleChange}>
-              <SelectTrigger className="w-full h-12 text-lg">
+              <SelectTrigger className="w-fit min-w-[200px] h-12 text-lg px-6 gap-2">
                 <SelectValue placeholder="Choisissez une ville" />
               </SelectTrigger>
               <SelectContent>
@@ -66,19 +74,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
               </SelectContent>
             </Select>
           </div>
-          
+
+          {/* Boutons comme avant: sous le sélecteur, côte à côte sur desktop */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <Button
               onClick={handleSubmit}
               disabled={!selectedVilleSlug}
-              className="h-12 text-lg px-8"
+              className="h-12 text-base sm:text-lg px-6 sm:px-8 rounded-full shadow-md"
             >
               {selectedVilleSlug ? "Voir le comparatif" : "Choisissez une ville"}
             </Button>
-            <Button variant="outline" className="h-12" asChild>
-              <Link href="/inscription">
-                Ajouter votre conciergerie
-              </Link>
+            <Button variant="outline" className="h-12 px-6 rounded-full shadow-sm" asChild>
+              <Link href="/inscription">Ajouter votre conciergerie</Link>
             </Button>
           </div>
         </div>

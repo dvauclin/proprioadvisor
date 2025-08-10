@@ -46,22 +46,22 @@ const EditConciergerieForm: React.FC<EditConciergerieFormProps> = ({
     villes,
     villesLoading,
     isUploadingLogo
-  } = useEditConciergerieForm({
-    conciergerie,
+  } = useEditConciergerieForm(
+    conciergerie || null,
     formules,
-    onSave: (data) => {
+    (data) => {
       if (onSave) onSave(data);
       if (onSuccess) onSuccess();
     },
-    onCancel: () => {
+    () => {
       if (onCancel) onCancel();
       if (onSuccess) onSuccess();
     }
-  });
+  );
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && handleCancel()}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{conciergerie ? "Modifier une conciergerie" : "Ajouter une conciergerie"}</DialogTitle>
         </DialogHeader>
@@ -94,7 +94,21 @@ const EditConciergerieForm: React.FC<EditConciergerieFormProps> = ({
                 </div>
               ) : (
                 <StepTwo
-                  formules={managedFormules}
+                  formules={managedFormules.map(f => ({
+                    nom: f.nom,
+                    commission: f.commission,
+                    dureeGestionMin: f.dureeGestionMin,
+                    servicesInclus: f.servicesInclus,
+                    fraisMenageHeure: f.fraisMenageHeure,
+                    fraisDemarrage: f.fraisDemarrage,
+                    abonnementMensuel: f.abonnementMensuel,
+                    fraisSupplementaireLocation: f.fraisSupplementaireLocation,
+                    fraisReapprovisionnement: f.fraisReapprovisionnement,
+                    forfaitReapprovisionnement: f.forfaitReapprovisionnement,
+                    locationLinge: f.locationLinge,
+                    prixLocationLinge: f.prixLocationLinge,
+                    tva: f.tva || undefined
+                  }))}
                   onAddFormule={handleAddFormule}
                   onEditFormule={handleEditFormule}
                   onDeleteFormule={handleDeleteFormule}
