@@ -10,7 +10,7 @@ import { useToast } from "@/components/ui-kit/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Wifi, WifiOff } from "lucide-react";
+import { Loader2, Wifi } from "lucide-react";
 import { uploadImage } from "@/services/supabaseService";
 import { Article } from "@/types";
 import { Separator } from "@/components/ui-kit/separator";
