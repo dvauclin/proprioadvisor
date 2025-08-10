@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllArticles, getArticleBySlug } from '@/services/supabaseService'
-import ArticleHeader from '@/components/blog/ArticleHeader'
-import ArticleContentFrame from '@/components/blog/ArticleContentFrame'
-import ClientArticleWrapper from '@/components/blog/ClientArticleWrapper'
-import Breadcrumbs from '@/components/ui-kit/breadcrumbs'
+import ArticlePageLayout from '@/components/blog/ArticlePageLayout'
 
 export async function generateMetadata(): Promise<Metadata> {
   const article = await getArticleBySlug('trouver-des-clients-conciergerie-airbnb');
@@ -64,37 +61,12 @@ export default async function TrouverClientsPage() {
   ];
 
   return (
-    <div className="py-12">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Breadcrumb */}
-          <Breadcrumbs items={breadcrumbItems} className="mb-6" />
-
-          {/* Article Header */}
-          <header className="mb-8">
-            <ArticleHeader article={article} />
-          </header>
-
-          {/* Article Image */}
-          {article.image && (
-            <div className="mb-8">
-              <img 
-                src={article.image} 
-                alt={`Image d'illustration pour l'article : ${article.titre}`}
-                className="w-full h-64 md:h-96 object-cover rounded-lg"
-              />
-            </div>
-          )}
-
-          {/* Article Content */}
-          <article className="mb-12">
-            <ArticleContentFrame>
-              <ClientArticleWrapper article={article} relatedArticles={relatedArticles} />
-            </ArticleContentFrame>
-          </article>
-        </div>
-      </div>
-    </div>
+    <ArticlePageLayout
+      article={article}
+      relatedArticles={relatedArticles}
+      slug="trouver-des-clients-conciergerie-airbnb"
+      breadcrumbItems={breadcrumbItems}
+    />
   );
 } 
 

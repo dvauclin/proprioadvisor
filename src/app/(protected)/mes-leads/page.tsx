@@ -15,9 +15,8 @@ export default function MesLeadsPage() {
     );
   }
 
-  // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
+  // Si l'utilisateur n'est pas connecté, le ProtectedRoute s'occupe de la redirection
   if (!user) {
-    window.location.href = '/connexion';
     return null;
   }
 
