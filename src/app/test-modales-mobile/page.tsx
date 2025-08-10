@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui-kit/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui-kit/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui-kit/dialog';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui-kit/card';
 
 export default function TestModalesMobile() {
