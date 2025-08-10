@@ -12,7 +12,7 @@ const RealtimeStatusIndicator: React.FC = () => {
     // Vérifier la connexion initiale
     const checkConnection = async () => {
       try {
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from('articles')
           .select('id')
           .limit(1);
