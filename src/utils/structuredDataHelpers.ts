@@ -48,8 +48,8 @@ export const createArticleStructuredData = (article: any, imageUrl?: string) => 
   description: article.description,
   image: imageUrl || 'https://proprioadvisor.fr/default-article-image.jpg',
   author: {
-    '@type': 'Organization',
-    name: 'ProprioAdvisor'
+    '@type': 'Person',
+    name: 'David Vauclin'
   },
   publisher: {
     '@type': 'Organization',
@@ -63,7 +63,7 @@ export const createArticleStructuredData = (article: any, imageUrl?: string) => 
   dateModified: article.date_modification || article.date_creation,
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `https://proprioadvisor.fr/blog/${article.slug}`
+    '@id': `https://proprioadvisor.fr/${article.slug}`
   }
 });
 

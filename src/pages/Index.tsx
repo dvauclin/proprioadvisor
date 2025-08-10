@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { getRecentArticles } from "@/lib/data";
+import { getRecentArticles } from "@/services/supabaseService";
 import { Article } from "@/types";
 import HeroSection from "@/components/home/HeroSection";
 import FeaturesSection from "@/components/home/FeaturesSection";

@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   },
 }
 
+// Revalidation toutes les 60 secondes pour le blog
+export const revalidate = 60;
+
 export default function BlogPage() {
   return <Blog />
 } 

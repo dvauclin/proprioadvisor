@@ -54,6 +54,9 @@ export async function generateStaticParams() {
   }));
 }
 
+// Revalidation toutes les 60 secondes pour les articles
+export const revalidate = 60;
+
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getArticleBySlug(params.slug);
   

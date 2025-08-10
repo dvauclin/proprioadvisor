@@ -31,8 +31,8 @@ export const defaultMetadata: Metadata = {
     'conciergerie lyon',
     'conciergerie marseille'
   ],
-  authors: [{ name: 'ProprioAdvisor' }],
-  creator: 'ProprioAdvisor',
+  authors: [{ name: 'David Vauclin' }],
+  creator: 'David Vauclin',
   publisher: 'ProprioAdvisor',
   formatDetection: {
     email: false,

@@ -134,7 +134,7 @@ export function breadcrumbsJsonLd(items: Array<{ name: string; url?: string }>) 
 
 export function articleJsonLd(article: any, opts?: { imageUrl?: string }) {
   const image = imageOrPlaceholder(opts?.imageUrl || article?.image);
-  const webPageId = `${BASE_URL}/blog/${article?.slug}`;
+  const webPageId = `${BASE_URL}/${article?.slug}`;
   const data: any = {
     "@context": "https://schema.org",
     "@type": "Article",

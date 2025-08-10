@@ -97,6 +97,12 @@ const nextConfig = {
         destination: '/mentions-legales',
         permanent: true,
       },
+      // Redirections pour éviter les URLs avec slashes finaux
+      {
+        source: '/:path*/',
+        destination: '/:path*',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

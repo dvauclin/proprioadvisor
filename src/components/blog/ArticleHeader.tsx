@@ -53,7 +53,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
         
         <div className="flex items-center gap-2">
           <User className="h-4 w-4" />
-          <span>ProprioAdvisor</span>
+          <span>David Vauclin</span>
         </div>
       </div>
 
@@ -65,12 +65,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
       {/* Résumé / TL;DR sous le titre */}
       {extendedArticle?.resume ? (
         <div className="bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl p-6 mb-8 shadow-sm">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-6 h-6 bg-brand-chartreuse rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold">R</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900">Résumé de l'article</h3>
-          </div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">Résumé de l'article</h2>
           <div
             className="prose prose-gray max-w-none text-gray-800"
             dangerouslySetInnerHTML={{ __html: extendedArticle.resume }}
@@ -79,12 +74,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
       ) : (
         article.excerpt && (
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl p-6 mb-8 shadow-sm">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-6 h-6 bg-brand-chartreuse rounded-full flex items-center justify-center">
-                <span className="text-white text-xs font-bold">R</span>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Résumé de l'article</h3>
-            </div>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">Résumé de l'article</h2>
             <p className="text-lg text-gray-700 leading-relaxed font-medium">
               {article.excerpt}
             </p>

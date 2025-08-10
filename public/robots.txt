@@ -7,4 +7,7 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /private/
 
+# Empêcher le crawl des URLs avec slashes finaux
+Disallow: /*/
+
 Sitemap: https://proprioadvisor.fr/sitemap.xml

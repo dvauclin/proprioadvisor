@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   },
 }
 
+// Revalidation toutes les 60 secondes pour la page d'accueil
+export const revalidate = 60;
+
 export default function HomePage() {
   return <Index />
 } 

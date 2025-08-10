@@ -44,7 +44,7 @@ const RecentArticleCard: React.FC<RecentArticleCardProps> = ({ article }) => {
             <div className="flex items-center space-x-4">
               <span className="flex items-center">
                 <User className="h-3 w-3 mr-1" />
-                Proprioadvisor
+                David Vauclin
               </span>
               <span className="flex items-center">
                 <Calendar className="h-3 w-3 mr-1" />

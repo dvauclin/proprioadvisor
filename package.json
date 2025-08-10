@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test-sitemaps": "node scripts/test-sitemaps.js",
-    "test-sitemaps-vercel": "node scripts/test-sitemaps-vercel.js"
+    "test-sitemaps-vercel": "node scripts/test-sitemaps-vercel.js",
+    "clean-sitemap": "node scripts/clean-sitemap-urls.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
