@@ -22,11 +22,7 @@ const Connexion = () => {
   const { signIn, resetPassword, user, loading } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (user && !loading) {
-      router.push('/');
-    }
-  }, [user, loading, router]);
+  // Suppression du useEffect qui redirige automatiquement pour éviter les boucles
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -57,8 +57,8 @@ const ResetPassword = () => {
       if (error) {
         setError(error.message);
       } else {
-        // Rediriger vers la page d'accueil après succès
-        router.push('/');
+        // Rediriger vers la page de connexion après succès au lieu de la page d'accueil
+        router.push('/connexion');
       }
     } catch (error: any) {
       setError('Une erreur est survenue lors de la mise à jour du mot de passe');

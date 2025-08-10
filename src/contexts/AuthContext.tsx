@@ -73,14 +73,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     let mounted = true;
     setLoading(true);
 
-    // Timeout pour éviter un chargement infini
+    // Timeout réduit pour éviter les problèmes de redirection
     const loadingTimeout = setTimeout(() => {
       if (mounted && loading) {
         console.log('Auth loading timeout - forcing loading to false');
         setLoading(false);
         setInitialized(true);
       }
-    }, 3000); // 3 secondes maximum
+    }, 1000); // Réduit à 1 seconde
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
@@ -97,13 +97,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             if (mounted) {
               setProfile(profileData);
               setLoading(false);
+              setInitialized(true);
             }
           } else {
             setProfile(null);
             setLoading(false);
-          }
-          
-          if (mounted && !initialized) {
             setInitialized(true);
           }
         };
@@ -140,7 +138,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       clearTimeout(loadingTimeout);
       subscription.unsubscribe();
     };
-  }, [initialized]);
+  }, []); // Suppression de la dépendance [initialized] pour éviter les re-renders
 
   const signIn = async (email: string, password: string) => {
     setLoading(true);
@@ -196,7 +194,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.log('Attempting sign out.');
       await supabase.auth.signOut();
       // State will be cleared by onAuthStateChange
-      window.location.href = '/';
+      // Suppression de window.location.href pour éviter les redirections forcées
     } catch (error) {
       console.error('Error signing out:', error);
     }

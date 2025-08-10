@@ -97,7 +97,7 @@ const nextConfig = {
         destination: '/mentions-legales',
         permanent: true,
       },
-      // Redirections pour éviter les URLs avec slashes finaux
+      // Redirection pour éviter les slashes finaux et briser la boucle
       {
         source: '/:path*/',
         destination: '/:path*',

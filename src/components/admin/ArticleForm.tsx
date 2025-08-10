@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
 import { Textarea } from "@/components/ui-kit/textarea";
@@ -10,11 +10,10 @@ import { useToast } from "@/components/ui-kit/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Wifi } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { uploadImage } from "@/services/supabaseService";
 import { Article } from "@/types";
 import { Separator } from "@/components/ui-kit/separator";
-import { supabase } from "@/integrations/supabase/client";
 
 interface ArticleFormProps {
   article: Article | null;
@@ -45,7 +44,6 @@ const articleSchema = z.object({
 const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) => {
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
-  const [isRealtimeActive, setIsRealtimeActive] = useState(false);
   const extendedArticle = article as any;
   const [imagePreview, setImagePreview] = useState<string | null>(extendedArticle?.image || null);
   

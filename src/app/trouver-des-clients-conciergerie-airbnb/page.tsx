@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllArticles, getArticleBySlug } from '@/services/supabaseService'
-import ArticlePageLayout from '@/components/blog/ArticlePageLayout'
+import ArticleHeader from '@/components/blog/ArticleHeader'
+import ArticleContentFrame from '@/components/blog/ArticleContentFrame'
+import Breadcrumbs from '@/components/ui-kit/breadcrumbs'
+import ClientArticleWrapper from '@/components/blog/ClientArticleWrapper'
 
 export async function generateMetadata(): Promise<Metadata> {
   const article = await getArticleBySlug('trouver-des-clients-conciergerie-airbnb');
@@ -61,12 +64,40 @@ export default async function TrouverClientsPage() {
   ];
 
   return (
-    <ArticlePageLayout
-      article={article}
-      relatedArticles={relatedArticles}
-      slug="trouver-des-clients-conciergerie-airbnb"
-      breadcrumbItems={breadcrumbItems}
-    />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Breadcrumb */}
+          <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+
+          {/* Article Header */}
+          <header className="mb-12">
+            <ArticleHeader article={article} />
+          </header>
+
+          {/* Article Image */}
+          {article.image && (
+            <div className="mb-12">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg">
+                <img 
+                  src={article.image} 
+                  alt={`Image d'illustration pour l'article : ${article.titre}`}
+                  className="w-full h-64 md:h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+            </div>
+          )}
+
+          {/* Article Content */}
+          <article className="mb-16">
+            <ArticleContentFrame>
+              <ClientArticleWrapper article={article} relatedArticles={relatedArticles} />
+            </ArticleContentFrame>
+          </article>
+        </div>
+      </div>
+    </div>
   );
 } 
 
