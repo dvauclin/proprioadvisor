@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heart, Trash2, Send } from "lucide-react";
 import { Button } from "@/components/ui-kit/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui-kit/card";
@@ -10,6 +10,7 @@ import ComparisonCard from "@/components/ui-kit/comparison-card";
 import DevisModal from "@/components/conciergerie/DevisModal";
 import { useToast } from "@/components/ui-kit/use-toast";
 import MultipleDevisModal from "@/components/favoris/MultipleDevisModal";
+import { supabase } from "@/integrations/supabase/client";
 
 const Favoris = () => {
   const {
@@ -25,10 +26,73 @@ const Favoris = () => {
     formuleId: string;
     conciergerieId: string;
   } | null>(null);
+  const [subscriptions, setSubscriptions] = useState<Map<string, any>>(new Map());
+  const [conciergerieRatings, setConciergerieRatings] = useState<Map<string, number>>(new Map());
+  const [conciergerieReviewCounts, setConciergerieReviewCounts] = useState<Map<string, number>>(new Map());
 
   // Vérification de sécurité pour favorites
   const safeFavorites = Array.isArray(favorites) ? favorites : [];
   const favoritesCount = safeFavorites.length;
+
+  // Charger les données des subscriptions et avis pour les favoris
+  useEffect(() => {
+    const loadSubscriptionData = async () => {
+      if (safeFavorites.length === 0) return;
+
+      const conciergerieIds = safeFavorites
+        .map(f => f.conciergerie?.id)
+        .filter(Boolean) as string[];
+
+      if (conciergerieIds.length === 0) return;
+
+      try {
+        // Charger les subscriptions
+        const { data: subscriptionData } = await supabase
+          .from('subscriptions')
+          .select('*')
+          .in('conciergerie_id', conciergerieIds);
+
+        const subscriptionMap = new Map();
+        subscriptionData?.forEach(sub => {
+          subscriptionMap.set(sub.conciergerie_id, sub);
+        });
+        setSubscriptions(subscriptionMap);
+
+        // Charger les avis
+        const { data: avisData } = await supabase
+          .from('avis')
+          .select('conciergerie_id, note')
+          .in('conciergerie_id', conciergerieIds)
+          .eq('valide', true);
+
+        const ratingMap = new Map();
+        const reviewCountMap = new Map();
+        
+        // Grouper par conciergerie
+        const avisByConciergerie = avisData?.reduce((acc, avis) => {
+          if (!acc[avis.conciergerie_id]) {
+            acc[avis.conciergerie_id] = [];
+          }
+          acc[avis.conciergerie_id].push(avis.note);
+          return acc;
+        }, {} as Record<string, number[]>) || {};
+
+        // Calculer les moyennes et counts
+        Object.entries(avisByConciergerie).forEach(([conciergerieId, notes]) => {
+          const average = notes.reduce((sum, note) => sum + note, 0) / notes.length;
+          ratingMap.set(conciergerieId, average);
+          reviewCountMap.set(conciergerieId, notes.length);
+        });
+
+        setConciergerieRatings(ratingMap);
+        setConciergerieReviewCounts(reviewCountMap);
+      } catch (error) {
+        console.error('Erreur lors du chargement des données:', error);
+      }
+    };
+
+    loadSubscriptionData();
+  }, [safeFavorites]);
 
   const handleSingleDevisRequest = (formuleId: string, conciergerieId: string) => {
     setSelectedFormule({
@@ -102,7 +166,25 @@ const Favoris = () => {
             </div>
           </CardContent>
         </Card> : <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          {safeFavorites.map(favorite => favorite.conciergerie ? <ComparisonCard key={favorite.id} formule={favorite} conciergerie={favorite.conciergerie} onDevisClick={() => handleSingleDevisRequest(favorite.id, favorite.conciergerie!.id)} /> : null)}
+          {safeFavorites.map(favorite => {
+            if (!favorite.conciergerie) return null;
+            
+            const subscription = subscriptions.get(favorite.conciergerie.id);
+            const preloadedRating = conciergerieRatings.get(favorite.conciergerie.id);
+            const preloadedReviewsCount = conciergerieReviewCounts.get(favorite.conciergerie.id);
+            
+            return (
+              <ComparisonCard 
+                key={favorite.id} 
+                formule={favorite} 
+                conciergerie={favorite.conciergerie} 
+                subscription={subscription}
+                onDevisClick={() => handleSingleDevisRequest(favorite.id, favorite.conciergerie!.id)}
+                preloadedRating={preloadedRating}
+                preloadedReviewsCount={preloadedReviewsCount}
+              />
+            );
+          })}
         </div>}
 
       <DevisModal open={showSingleDevisModal} onOpenChange={setShowSingleDevisModal} selectedFormule={selectedFormule} formuleData={selectedFormuleData || null} />
