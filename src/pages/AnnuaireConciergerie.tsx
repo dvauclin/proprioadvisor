@@ -59,11 +59,11 @@ const AnnuaireConciergerie = () => {
                      Filtres de recherche disponibles
                    </h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>⬢ Recherche par ville et région</li>
-                    <li>⬢ Type de bien (appartement, maison, etc.)</li>
-                    <li>⬢ Niveau de service souhaité</li>
-                    <li>⬢ Commission et tarification</li>
-                    <li>⬢ Services spécialisés</li>
+                    <li className="break-words">⬢ Recherche par ville et région</li>
+                    <li className="break-words">⬢ Type de bien (appartement, maison, etc.)</li>
+                    <li className="break-words">⬢ Niveau de service souhaité</li>
+                    <li className="break-words">⬢ Commission et tarification</li>
+                    <li className="break-words">⬢ Services spécialisés</li>
                   </ul>
                 </div>
               </div>
@@ -75,11 +75,11 @@ const AnnuaireConciergerie = () => {
                      Avantages ProprioAdvisor
                    </h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>⬢ Gain de temps considérable</li>
-                    <li>⬢ Prestataires qualifiés et référencés</li>
-                    <li>⬢ Comparaison facile et rapide</li>
-                    <li>⬢ Service 100% gratuit</li>
-                    <li>⬢ Mise en relation directe</li>
+                    <li className="break-words">⬢ Gain de temps considérable</li>
+                    <li className="break-words">⬢ Prestataires qualifiés et référencés</li>
+                    <li className="break-words">⬢ Comparaison facile et rapide</li>
+                    <li className="break-words">⬢ Service 100% gratuit</li>
+                    <li className="break-words">⬢ Mise en relation directe</li>
                   </ul>
                 </div>
               </div>
@@ -109,13 +109,13 @@ const AnnuaireConciergerie = () => {
                    <Users className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
                    Avantages pour les conciergeries
                  </h3>
-                <ul className="space-y-2 text-muted-foreground mb-6">
-                  <li>⬢ Visibilité accrue auprès des propriétaires</li>
-                  <li>⬢ Leads qualifiés et ciblés</li>
-                  <li>⬢ Filtres personnalisés selon vos critères</li>
-                  <li>⬢ Zone géographique définie par vous</li>
-                  <li>⬢ Types de biens de votre choix</li>
-                </ul>
+                                 <ul className="space-y-2 text-muted-foreground mb-6">
+                   <li className="break-words">⬢ Visibilité accrue auprès des propriétaires</li>
+                   <li className="break-words">⬢ Leads qualifiés et ciblés</li>
+                   <li className="break-words">⬢ Filtres personnalisés selon vos critères</li>
+                   <li className="break-words">⬢ Zone géographique définie par vous</li>
+                   <li className="break-words">⬢ Types de biens de votre choix</li>
+                 </ul>
               </div>
               
                              <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
@@ -189,7 +189,7 @@ const AnnuaireConciergerie = () => {
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">0cosystème technique solide</h3>
+                                         <h3 className="font-semibold mb-2">Écosystème technique solide</h3>
                     <p className="text-muted-foreground">
                       SPA moderne, filtres intelligents, intégration Stripe et infrastructure robuste
                     </p>
