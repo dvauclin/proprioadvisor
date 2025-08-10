@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ConciergeriePageProps): Promi
       const dateString = `${monthName} ${year}`;
       
       // Titre sur mesure avec ville et date
-      const pageTitle = `Comparatif Conciergeries Airbnb ${villeData.nom} ${dateString} | ProprioAdvisor`;
+      const pageTitle = `Comparatif Conciergeries Airbnb ${villeData.nom} | ${dateString} | ProprioAdvisor`;
         
       // Description personnalisée par ville depuis Supabase
       const pageDescription = villeData.description 
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: ConciergeriePageProps): Promi
   const year = currentDate.getFullYear();
   const dateString = `${monthName} ${year}`;
   
-  const fallbackTitle = `Comparatif Conciergeries Airbnb ${villeSlug} ${dateString} | ProprioAdvisor`;
+  const fallbackTitle = `Comparatif Conciergeries Airbnb ${villeSlug} | ${dateString} | ProprioAdvisor`;
   
   return {
     title: fallbackTitle,
