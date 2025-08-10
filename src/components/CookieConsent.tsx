@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui-kit/button';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui-kit/dialog';
+import { Dialog, ResponsiveDialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui-kit/dialog';
 import { isBot } from '@/utils/botDetection';
 
 const CookieConsent: React.FC = () => {
@@ -62,7 +62,7 @@ const CookieConsent: React.FC = () => {
 
   return (
     <Dialog open={!hasResponded} onOpenChange={(open) => !open && handleDialogClose()}>
-      <DialogContent className="max-w-2xl w-full max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
+      <ResponsiveDialogContent className="max-w-2xl w-full max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         {!showDetails ? (
           <div>
             <DialogHeader className="mb-6">
@@ -169,7 +169,7 @@ const CookieConsent: React.FC = () => {
             </DialogFooter>
           </div>
         )}
-      </DialogContent>
+      </ResponsiveDialogContent>
     </Dialog>
   );
 };

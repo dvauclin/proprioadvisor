@@ -41,18 +41,16 @@ const MobileStickyButton = () => {
     return null;
   }
 
-
-
   if (!isVisible) {
     return null;
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-4 right-4 z-50 safe-area-bottom safe-area-right">
       {favoritesCount === 0 && !user ? (
         <Button
           asChild
-          className="rounded-full shadow-lg bg-brand-chartreuse hover:bg-brand-chartreuse/90 text-black"
+          className="rounded-full shadow-lg"
         >
           <a href="/inscription">
             <Plus className="mr-2 h-5 w-5" />
@@ -61,7 +59,7 @@ const MobileStickyButton = () => {
         </Button>
       ) : favoritesCount > 0 ? (
         <Button
-          className="rounded-full shadow-lg bg-brand-chartreuse hover:bg-brand-chartreuse/90 text-black"
+          className="rounded-full shadow-lg"
           onClick={() => {
             window.location.href = '/favoris';
           }}

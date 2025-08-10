@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Dialog,
-  DialogContent,
+  ResponsiveDialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui-kit/dialog";
@@ -200,7 +200,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
+      <ResponsiveDialogContent className="max-w-4xl max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Contacter plusieurs conciergeries</DialogTitle>
         </DialogHeader>
@@ -532,7 +532,7 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
             </form>
           </Form>
         </div>
-      </DialogContent>
+      </ResponsiveDialogContent>
     </Dialog>
   );
 };

@@ -15,24 +15,19 @@ import { User, LogOut, Settings, Building } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+interface ConciergerieUserMenuProps {
+  onMobileMenuClose?: () => void;
+}
 
-const ConciergerieUserMenu = () => {
+const ConciergerieUserMenu: React.FC<ConciergerieUserMenuProps> = ({ onMobileMenuClose }) => {
   const { profile, signOut } = useAuth();
   const router = useRouter();
-
-
-
 
   const handleSignOut = async () => {
     await signOut();
     router.push('/');
+    onMobileMenuClose?.();
   };
-
-
-
-
-
-
 
   const userInitials = profile?.email
     ? profile.email.split('@')[0].substring(0, 2).toUpperCase()
@@ -58,19 +53,19 @@ const ConciergerieUserMenu = () => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/ma-conciergerie" className="cursor-pointer">
+          <Link href="/ma-conciergerie" className="cursor-pointer" onClick={onMobileMenuClose}>
             <Building className="mr-2 h-4 w-4" />
             <span>Ma conciergerie</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/subscription" className="cursor-pointer">
+          <Link href="/subscription" className="cursor-pointer" onClick={onMobileMenuClose}>
             <Settings className="mr-2 h-4 w-4" />
             <span>Modifier ma souscription</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/mes-leads" className="cursor-pointer">
+          <Link href="/mes-leads" className="cursor-pointer" onClick={onMobileMenuClose}>
             <User className="mr-2 h-4 w-4" />
             <span>Mes leads</span>
           </Link>

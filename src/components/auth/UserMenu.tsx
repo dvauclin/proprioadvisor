@@ -15,7 +15,11 @@ import Link from 'next/link';
 import ConciergerieUserMenu from './ConciergerieUserMenu';
 import { Skeleton } from '@/components/ui-kit/skeleton';
 
-const UserMenu = () => {
+interface UserMenuProps {
+  onMobileMenuClose?: () => void;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ onMobileMenuClose }) => {
   const { user, profile, signOut, isAdmin, loading } = useAuth();
 
   // Skeleton loader pour un chargement plus élégant
@@ -31,13 +35,13 @@ const UserMenu = () => {
   if (!user || !profile) {
     return (
       <div className="flex items-center space-x-2">
-        <Link href="/connexion">
+        <Link href="/connexion" onClick={onMobileMenuClose}>
           <Button variant="ghost" size="sm">
             <LogIn className="h-4 w-4 mr-2" />
             <span className="hidden sm:inline">Connexion</span>
           </Button>
         </Link>
-        <Link href="/inscription">
+        <Link href="/inscription" onClick={onMobileMenuClose}>
           <Button variant="outline">
             <PlusCircle className="h-4 w-4 mr-2" />
             <span className="hidden sm:inline">Ajouter une conciergerie</span>
@@ -91,7 +95,7 @@ const UserMenu = () => {
   }
 
   // Sinon, utiliser le menu pour les gestionnaires de conciergerie
-  return <ConciergerieUserMenu />;
+  return <ConciergerieUserMenu onMobileMenuClose={onMobileMenuClose} />;
 };
 
 export default UserMenu;

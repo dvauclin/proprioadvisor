@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui-kit/form";
 import { Button } from "@/components/ui-kit/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
+import { Dialog, ResponsiveDialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { formuleSchema, FormuleFormData } from "./FormuleFormSchema";
 import ServicesSection from "./ServicesSection";
 import BasicInfoFields from "./BasicInfoFields";
@@ -217,7 +217,7 @@ export function FormuleForm({
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
+      <ResponsiveDialogContent className="sm:max-w-[600px] max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             {formuleData ? "Modifier une formule" : "Ajouter une formule"}
@@ -263,7 +263,7 @@ export function FormuleForm({
             </Button>
           </form>
         </Form>
-      </DialogContent>
+      </ResponsiveDialogContent>
     </Dialog>
   );
 }

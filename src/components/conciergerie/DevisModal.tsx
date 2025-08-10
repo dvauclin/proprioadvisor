@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
+import { Dialog, ResponsiveDialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { DevisForm } from "@/components/DevisForm";
 import ConciergerieLogoDisplay from "@/components/ui-kit/conciergerie-logo-display";
 import { Formule, Conciergerie } from "@/types";
@@ -20,7 +20,7 @@ const DevisModal: React.FC<DevisModalProps> = ({
 }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[700px] max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-hidden flex flex-col">
+      <ResponsiveDialogContent className="sm:max-w-[700px] max-h-[90vh] sm:max-h-[90vh] max-sm:max-h-[calc(100vh-1rem)] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
             {formuleData?.conciergerie?.logo && (
@@ -44,7 +44,7 @@ const DevisModal: React.FC<DevisModalProps> = ({
             conciergerieEmail={formuleData.conciergerie.mail || ''}
           />
         )}
-      </DialogContent>
+      </ResponsiveDialogContent>
     </Dialog>
   );
 };
