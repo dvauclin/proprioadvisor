@@ -2,7 +2,6 @@
 
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
@@ -24,22 +23,15 @@ const queryClient = new QueryClient({
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <CookieConsentProvider>
-          <AuthProvider>
-            <FavoritesProvider>
-              <TooltipProvider>
-                {children}
-              </TooltipProvider>
-            </FavoritesProvider>
-          </AuthProvider>
-        </CookieConsentProvider>
-      </ThemeProvider>
+      <CookieConsentProvider>
+        <AuthProvider>
+          <FavoritesProvider>
+            <TooltipProvider>
+              {children}
+            </TooltipProvider>
+          </FavoritesProvider>
+        </AuthProvider>
+      </CookieConsentProvider>
     </QueryClientProvider>
   );
 };

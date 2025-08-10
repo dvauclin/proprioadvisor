@@ -88,9 +88,7 @@ export const useInscriptionForm = () => {
     try {
       // Validation et traitement de l'étape 1
       console.log("Step 1 data:", data);
-      setStep(2);
-      
-      // Scroll désactivé pour éviter les sauts intempestifs lors de l'inscription
+      setStepWithScroll(2);
     } catch (error) {
       console.error("Error in step 1:", error);
       toast.error("Erreur lors de la validation de l'étape 1");
@@ -206,7 +204,9 @@ export const useInscriptionForm = () => {
   // Wrapper pour setStep qui inclut le scroll vers le haut
   const setStepWithScroll = useCallback((newStep: number) => {
     setStep(newStep);
-    // Scroll désactivé
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, []);
 
   return {

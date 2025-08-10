@@ -107,13 +107,16 @@ serve(async (req) => {
 
       console.log('🔗 Déclenchement du webhook:', webhookData);
 
-      await fetch('https://n8n.davidvauclin.fr/webhook/235febdf-0463-42fd-adb2-dbb6e1c2302d', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(webhookData),
-      });
+      const webhookUrl = Deno.env.get('N8N_WEBHOOK_URL');
+      if (webhookUrl) {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(webhookData),
+        });
+      }
 
       console.log('✅ Webhook déclenché avec succès');
     } catch (webhookError) {

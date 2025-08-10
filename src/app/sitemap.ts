@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
 import { supabase } from '@/integrations/supabase/client'
 
-const BASE_URL = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:3000' 
-  : 'https://proprioadvisor.fr'
+const BASE_URL = (
+  (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '') ||
+  (process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://proprioadvisor.fr')
+)
 
 const formatW3CDate = (date: Date | string | undefined): string => {
   if (!date) return new Date().toISOString().split('T')[0]

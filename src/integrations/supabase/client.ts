@@ -3,16 +3,23 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = "https://gajceuvnerzlnuqvhnan.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdhamNldXZuZXJ6bG51cXZobmFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5MzM1MzgsImV4cCI6MjA2MTUwOTUzOH0.7gsaxDRXCGBALLfbAawQoFZEPxATam_0oWdgig5oDIs";
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
-
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
+export const supabase = (() => {
+  if (!url || !anon) {
+    // Export a safe stub that throws only when used
+    return new Proxy({}, {
+      get() {
+        throw new Error('Supabase not configured: set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY');
+      },
+    }) as unknown as ReturnType<typeof createClient<Database>>;
   }
-});
+  return createClient<Database>(url, anon, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+    },
+  });
+})();
 

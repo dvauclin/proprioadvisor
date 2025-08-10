@@ -6,8 +6,9 @@ import Stripe from 'https://esm.sh/stripe@14.15.0';
 // Webhook service
 const triggerWebhook = async (data: any) => {
   try {
-    const webhookUrl = "https://n8n.davidvauclin.fr/webhook/235febdf-0463-42fd-adb2-dbb6e1c2302d";
-    
+    const webhookUrl = Deno.env.get("N8N_WEBHOOK_URL");
+    if (!webhookUrl) return;
+
     await fetch(webhookUrl, {
       method: "POST",
       headers: {

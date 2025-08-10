@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Inscription from '@/pages/Inscription'
+import dynamic from 'next/dynamic'
 
 export const metadata: Metadata = {
   title: 'Inscription | Proprioadvisor',
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 }
 
 export default function InscriptionPage() {
+  const Inscription = dynamic(() => import('@/pages/Inscription'), { ssr: false })
   return <Inscription />
 } 
 
