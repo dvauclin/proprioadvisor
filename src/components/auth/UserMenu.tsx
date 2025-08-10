@@ -10,7 +10,7 @@ import {
 } from '@/components/ui-kit/dropdown-menu';
 import { Button } from '@/components/ui-kit/button';
 import { Avatar, AvatarFallback } from '@/components/ui-kit/avatar';
-import { User, LogOut, Shield, PlusCircle, LogIn } from 'lucide-react';
+import { LogOut, Shield, PlusCircle, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import ConciergerieUserMenu from './ConciergerieUserMenu';
 import { Skeleton } from '@/components/ui-kit/skeleton';

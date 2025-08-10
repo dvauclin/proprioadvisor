@@ -1,5 +1,5 @@
 
-import React, { useMemo } from "react";
+import React from "react";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
 import { UseFormReturn } from "react-hook-form";
@@ -10,13 +10,6 @@ interface FeesFieldsProps {
 }
 
 export const FeesFields: React.FC<FeesFieldsProps> = ({ form }) => {
-  // Utiliser useMemo pour éviter les re-rendus inutiles
-  const formValues = useMemo(() => ({
-    fraisMenageHeure: form.getValues("fraisMenageHeure"),
-    fraisDemarrage: form.getValues("fraisDemarrage"),
-    abonnementMensuel: form.getValues("abonnementMensuel"),
-    fraisSupplementaireLocation: form.getValues("fraisSupplementaireLocation")
-  }), [form]);
 
   return (
     <>
