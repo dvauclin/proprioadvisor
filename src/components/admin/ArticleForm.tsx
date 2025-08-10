@@ -72,48 +72,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
     }
   });
 
-  // Fonction pour mettre à jour l'article en temps réel
-  const updateArticleRealtime = async (field: string, value: string) => {
-    if (!extendedArticle?.id) return;
-    
-    try {
-      setIsRealtimeActive(true);
-      
-      const { error } = await supabase
-        .from('articles')
-        .update({ [field]: value })
-        .eq('id', extendedArticle.id);
-      
-      if (error) {
-        console.error('Erreur mise à jour temps réel:', error);
-      }
-    } catch (error) {
-      console.error('Erreur mise à jour temps réel:', error);
-    } finally {
-      // Désactiver l'indicateur après un délai
-      setTimeout(() => setIsRealtimeActive(false), 1000);
-    }
-  };
 
-  // Écouter les changements de formulaire pour les mises à jour en temps réel
-  useEffect(() => {
-    const subscription = form.watch((value, { name }) => {
-      if (name && extendedArticle?.id) {
-        // Mettre à jour en temps réel pour les champs principaux et FAQ
-        const realtimeFields = [
-          'titre', 'contenu', 'excerpt', 'resume',
-          'question_1', 'reponse_1', 'question_2', 'reponse_2',
-          'question_3', 'reponse_3', 'question_4', 'reponse_4',
-          'question_5', 'reponse_5'
-        ];
-        if (realtimeFields.includes(name)) {
-          updateArticleRealtime(name, value[name] || '');
-        }
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [form, extendedArticle?.id]);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -154,10 +113,6 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
       
       if (result.success && result.url) {
         form.setValue("image", result.url);
-        // Mettre à jour l'image en temps réel
-        if (extendedArticle?.id) {
-          updateArticleRealtime('image', result.url);
-        }
         toast({
           title: "Image téléchargée",
           description: "L'image a été téléchargée avec succès",
@@ -202,16 +157,6 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCancel }) 
 
   return (
     <div className="space-y-6">
-      {/* Indicateur de mise à jour en temps réel */}
-      {isRealtimeActive && (
-        <div className="flex items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-          <Wifi className="h-4 w-4 text-blue-600 animate-pulse" />
-          <span className="text-sm text-blue-700 font-medium">
-            ✓ Mise à jour en temps réel active - Les changements sont appliqués instantanément
-          </span>
-        </div>
-      )}
-      
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

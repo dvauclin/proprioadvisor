@@ -23,7 +23,6 @@ import SubscriptionLinkGenerator from "@/components/admin/SubscriptionLinkGenera
 import LeadDetailsDialog from "@/components/admin/LeadDetailsDialog";
 import StarRating from "@/components/ui-kit/star-rating";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui-kit/table";
-import RealtimeStatusIndicator from "@/components/admin/RealtimeStatusIndicator";
 const Admin = () => {
   const {
     toast
@@ -647,10 +646,7 @@ const Admin = () => {
     }
   };
   return <div className="container mx-auto py-8">
-      <div className="flex justify-between items-start mb-8">
-        <h1 className="text-3xl font-bold">Panneau d'administration</h1>
-        <RealtimeStatusIndicator />
-      </div>
+      <h1 className="text-3xl font-bold mb-8">Panneau d'administration</h1>
       
       <Tabs defaultValue="validation" className="space-y-6">
         <ScrollArea className="w-full whitespace-nowrap">
