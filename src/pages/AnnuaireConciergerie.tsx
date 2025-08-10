@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui-kit/button";
 import { Search, Users, CheckCircle, ArrowRight } from "lucide-react";
-import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 
 const AnnuaireConciergerie = () => {
   return (
