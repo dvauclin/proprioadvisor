@@ -6,12 +6,19 @@ import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 
 const AnnuaireConciergerie = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden">
+        {/* Gradient overlay like home page */}
+        <div className="absolute inset-x-0 top-0 h-[640px] -z-10 bg-gradient-to-b from-brand-emerald-50 via-white to-white pointer-events-none overflow-hidden">
+          <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-50"
+               style={{ background: "radial-gradient(circle at center, rgba(127,255,0,0.35), transparent 60%)" }} />
+          <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full blur-3xl opacity-40"
+               style={{ background: "radial-gradient(circle at center, rgba(0,191,255,0.25), transparent 60%)" }} />
+        </div>
+
         {/* Breadcrumb */}
-        <div className="container mx-auto px-4 pt-8">
+        <div className="container mx-auto px-4 pt-8 relative z-10">
           <Breadcrumbs 
             items={[
-              { label: "Accueil", href: "/" },
               { label: "Annuaire" }
             ]} 
             className="mb-6" 
@@ -19,7 +26,7 @@ const AnnuaireConciergerie = () => {
         </div>
         
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-8 sm:py-16">
+        <section className="container mx-auto px-4 py-8 sm:py-16 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center leading-tight">
               Annuaire des conciergeries Airbnb
@@ -47,17 +54,17 @@ const AnnuaireConciergerie = () => {
         </section>
 
         {/* Recherche Section */}
-        <section className="container mx-auto px-4 py-8 sm:py-16">
+        <section className="container mx-auto px-4 py-8 sm:py-16 relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
               Recherchez une conciergerie selon votre ville et vos besoins
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mb-12">
               <div className="space-y-6">
-                <div className="bg-card p-6 rounded-lg border">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center">
-                    <Search className="mr-2 h-5 w-5 text-primary" />
+                <div className="bg-card p-4 sm:p-6 rounded-lg border">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                    <Search className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
                     Filtres de recherche disponibles
                   </h3>
                   <ul className="space-y-2 text-muted-foreground">
@@ -71,9 +78,9 @@ const AnnuaireConciergerie = () => {
               </div>
               
               <div className="space-y-6">
-                <div className="bg-card p-6 rounded-lg border">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center">
-                    <CheckCircle className="mr-2 h-5 w-5 text-primary" />
+                <div className="bg-card p-4 sm:p-6 rounded-lg border">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                    <CheckCircle className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
                     Avantages ProprioAdvisor
                   </h3>
                   <ul className="space-y-2 text-muted-foreground">
@@ -99,16 +106,16 @@ const AnnuaireConciergerie = () => {
         </section>
 
         {/* Conciergeries Section */}
-        <section className="container mx-auto px-4 py-8 sm:py-16 bg-muted/30">
+        <section className="container mx-auto px-4 py-8 sm:py-16 bg-muted/30 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-center">
               Vous êtes une conciergerie ? Rejoignez notre annuaire spécialisé
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-card p-6 rounded-lg border">
-                <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <Users className="mr-2 h-5 w-5 text-primary" />
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mb-12">
+              <div className="bg-card p-4 sm:p-6 rounded-lg border">
+                <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                  <Users className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
                   Avantages pour les conciergeries
                 </h3>
                 <ul className="space-y-2 text-muted-foreground mb-6">
@@ -120,8 +127,8 @@ const AnnuaireConciergerie = () => {
                 </ul>
               </div>
               
-              <div className="bg-card p-6 rounded-lg border">
-                <h3 className="text-xl font-semibold mb-4">
+              <div className="bg-card p-4 sm:p-6 rounded-lg border">
+                <h3 className="text-lg sm:text-xl font-semibold mb-4">
                   Rejoignez-nous dès maintenant
                 </h3>
                 <p className="text-muted-foreground mb-6">
@@ -130,13 +137,13 @@ const AnnuaireConciergerie = () => {
                 </p>
                 <div className="space-y-3">
                   <Link href="/inscription" className="block">
-                    <Button className="w-full">
+                    <Button className="w-full text-sm sm:text-base">
                       Inscrivez votre conciergerie
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
                   <Link href="/trouver-des-clients-conciergerie-airbnb" className="block">
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full text-sm sm:text-base">
                       Découvrir comment trouver des clients
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -148,18 +155,18 @@ const AnnuaireConciergerie = () => {
         </section>
 
         {/* Pourquoi choisir Section */}
-        <section className="container mx-auto px-4 py-8 sm:py-16">
+        <section className="container mx-auto px-4 py-8 sm:py-16 relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
               Pourquoi choisir ProprioAdvisor comme annuaire de conciergeries ?
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">Plateforme spécialisée</h3>
+                    <h3 className="font-semibold mb-2 text-sm sm:text-base">Plateforme spécialisée</h3>
                     <p className="text-muted-foreground">
                       Exclusivement dédiée aux locations courte durée et conciergeries Airbnb
                     </p>

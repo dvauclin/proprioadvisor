@@ -3,7 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui-kit/ca
 
 const APropos: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen overflow-x-hidden">
+        {/* Gradient overlay like home page */}
+        <div className="absolute inset-x-0 top-0 h-[640px] -z-10 bg-gradient-to-b from-brand-emerald-50 via-white to-white pointer-events-none overflow-hidden">
+          <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-50"
+               style={{ background: "radial-gradient(circle at center, rgba(127,255,0,0.35), transparent 60%)" }} />
+          <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full blur-3xl opacity-40"
+               style={{ background: "radial-gradient(circle at center, rgba(0,191,255,0.25), transparent 60%)" }} />
+        </div>
+
+        <div className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-8">À propos de ProprioAdvisor</h1>
           
@@ -82,7 +91,8 @@ const APropos: React.FC = () => {
             </Card>
           </div>
         </div>
-      </div>
+        </div>
+    </div>
   );
 };
 
