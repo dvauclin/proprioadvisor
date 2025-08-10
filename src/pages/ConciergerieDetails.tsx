@@ -20,6 +20,7 @@ import FavoriteButton from "@/components/ui-kit/favorite-button";
 import DevisModal from "@/components/conciergerie/DevisModal";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui-kit/tooltip";
 import AddAvisModal from "@/components/ui-kit/add-avis-modal";
+import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 
 interface ConciergerieDetailsProps {
   conciergerieSlug: string;
@@ -269,6 +270,19 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
       )}
       
       <div className="container mx-auto px-4 py-8">
+        {/* Breadcrumb */}
+        {conciergerie && (
+          <div className="mb-6">
+            <Breadcrumbs 
+              items={[
+                { label: "Accueil", href: "/" },
+                { label: "Annuaire", href: "/annuaire" },
+                { label: conciergerie.nom }
+              ]} 
+              className="mb-6" 
+            />
+          </div>
+        )}
         {/* Contenu principal - Layout avec effet sticky */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Colonne gauche - Logo, titre, note, villes + Critères d'acceptation (STICKY) */}

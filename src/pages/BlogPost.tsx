@@ -149,7 +149,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
       <StructuredData data={[breadcrumbStructuredData, articleStructuredData, faqStructuredData].filter(Boolean)} />
       
       <div className="container mx-auto px-4 py-8">
-        <Breadcrumbs items={breadcrumbItems} />
+        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-8">
           <div className="lg:col-span-3">

@@ -37,7 +37,7 @@ const ConciergerieListingHeader: React.FC<ConciergerieListingHeaderProps> = ({
     <header className="py-8 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="mb-6">
-          <Breadcrumbs items={breadcrumbItems} className="mb-4" />
+          <Breadcrumbs items={breadcrumbItems} className="mb-6" />
           
           <div className="text-center">
             <h1 className="text-3xl font-bold mb-4">

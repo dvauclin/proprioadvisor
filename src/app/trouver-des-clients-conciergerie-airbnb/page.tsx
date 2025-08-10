@@ -68,7 +68,7 @@ export default async function TrouverClientsPage() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
-          <Breadcrumbs items={breadcrumbItems} className="mb-8" />
+          <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 
           {/* Article Header */}
           <header className="mb-8">

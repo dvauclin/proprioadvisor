@@ -2,16 +2,31 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui-kit/button";
 import { Search, Users, CheckCircle, ArrowRight } from "lucide-react";
+import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 
 const AnnuaireConciergerie = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 overflow-x-hidden">
+        {/* Breadcrumb */}
+        <div className="container mx-auto px-4 pt-8">
+          <Breadcrumbs 
+            items={[
+              { label: "Accueil", href: "/" },
+              { label: "Annuaire" }
+            ]} 
+            className="mb-6" 
+          />
+        </div>
+        
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-16">
+        <section className="container mx-auto px-4 py-8 sm:py-16">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">
-              Annuaire des conciergeries Airbnb  Trouvez la meilleure conciergerie près de chez vous
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center leading-tight">
+              Annuaire des conciergeries Airbnb
             </h1>
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-8">
+              Trouver la meilleure conciergerie près de chez vous
+            </p>
             
             <div className="prose prose-lg max-w-none text-muted-foreground mb-8">
               <p>
@@ -32,9 +47,9 @@ const AnnuaireConciergerie = () => {
         </section>
 
         {/* Recherche Section */}
-        <section className="container mx-auto px-4 py-16">
+        <section className="container mx-auto px-4 py-8 sm:py-16">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
               Recherchez une conciergerie selon votre ville et vos besoins
             </h2>
             
@@ -84,9 +99,9 @@ const AnnuaireConciergerie = () => {
         </section>
 
         {/* Conciergeries Section */}
-        <section className="container mx-auto px-4 py-16 bg-muted/30">
+        <section className="container mx-auto px-4 py-8 sm:py-16 bg-muted/30">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
               Vous êtes une conciergerie ? Rejoignez notre annuaire spécialisé
             </h2>
             
@@ -133,9 +148,9 @@ const AnnuaireConciergerie = () => {
         </section>
 
         {/* Pourquoi choisir Section */}
-        <section className="container mx-auto px-4 py-16">
+        <section className="container mx-auto px-4 py-8 sm:py-16">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
               Pourquoi choisir ProprioAdvisor comme annuaire de conciergeries ?
             </h2>
             
@@ -188,9 +203,9 @@ const AnnuaireConciergerie = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="container mx-auto px-4 py-16 bg-muted/30">
+        <section className="container mx-auto px-4 py-8 sm:py-16 bg-muted/30">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
               Questions fréquentes sur notre annuaire conciergerie
             </h2>
             

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui-kit/button";
@@ -13,6 +13,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const { favoritesCount } = useFavorites();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const isActive = (path: string) => {
     return pathname === path;
@@ -21,6 +23,31 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Fermer le menu mobile quand on clique quelque part sur la page
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMenuOpen) {
+        const target = event.target as Node;
+        
+        // Ne pas fermer si on clique sur le menu lui-même ou le bouton de menu
+        if (
+          menuRef.current?.contains(target) ||
+          buttonRef.current?.contains(target)
+        ) {
+          return;
+        }
+        
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   return (
     <header role="banner" className="bg-white shadow-sm border-b sticky top-0 z-50">
@@ -89,6 +116,7 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <Button
+              ref={buttonRef}
               variant="ghost"
               size="sm"
               onClick={toggleMenu}
@@ -113,6 +141,7 @@ const Navbar = () => {
             className="md:hidden"
             role="navigation"
             aria-label="Menu de navigation mobile"
+            ref={menuRef}
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link
