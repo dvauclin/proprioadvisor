@@ -199,34 +199,36 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
             {/* Formule */}
             <div className="text-sm text-gray-700 mt-1">{formule?.nom || "Formule"}</div>
 
-            {/* Note et nombre d'avis */}
-            <div className="flex items-center gap-2 mt-1">
-              {/* Étoiles - seulement si il y a des avis, et cliquables */}
-              {hasReviews && (
-                <button 
-                  onClick={handleShowReviews}
-                  className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer"
-                  title="Voir les avis reçus"
-                >
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className={`h-4 w-4 ${i < Math.round(preloadedRating ?? conciergerie.score) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                    />
-                  ))}
-                </button>
-              )}
-              
-              {/* Texte d'avis - géré par AvisCount, cliquable pour ouvrir la modale */}
-              {conciergerie?.id && (
-                <AvisCount 
-                  conciergerieId={conciergerie.id} 
-                  onShowReviews={handleShowReviews}
-                  onLeaveReview={handleLeaveReview}
-                  preloadedCount={preloadedReviewsCount}
-                />
-              )}
-            </div>
+            {/* Note et nombre d'avis - seulement si la conciergerie est recommandée */}
+            {!isNonRecommande && (
+              <div className="flex items-center gap-2 mt-1">
+                {/* Étoiles - seulement si il y a des avis, et cliquables */}
+                {hasReviews && (
+                  <button 
+                    onClick={handleShowReviews}
+                    className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer"
+                    title="Voir les avis reçus"
+                  >
+                    {[...Array(5)].map((_, i) => (
+                      <Star 
+                        key={i} 
+                        className={`h-4 w-4 ${i < Math.round(preloadedRating ?? conciergerie.score) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                      />
+                    ))}
+                  </button>
+                )}
+                
+                {/* Texte d'avis - géré par AvisCount, cliquable pour ouvrir la modale */}
+                {conciergerie?.id && (
+                  <AvisCount 
+                    conciergerieId={conciergerie.id} 
+                    onShowReviews={handleShowReviews}
+                    onLeaveReview={handleLeaveReview}
+                    preloadedCount={preloadedReviewsCount}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </div>
 

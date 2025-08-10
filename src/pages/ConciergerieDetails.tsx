@@ -335,23 +335,23 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                       </div>
                     </div>
                     
-                                         {/* Note et avis - CLIQUABLES */}
-                     {averageRating && (
-                       <button 
-                         onClick={handleStarClick}
-                         className="flex items-center gap-2 mb-3 hover:opacity-80 transition-opacity cursor-pointer"
-                       >
-                         <div className="flex items-center gap-1">
-                           {[...Array(5)].map((_, i) => (
-                             <Star 
-                               key={i} 
-                               className={`h-4 w-4 md:h-5 md:w-5 ${i < Math.round(averageRating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                             />
-                           ))}
-                         </div>
-                         <span className="text-sm md:text-base text-gray-600">({reviewCount} avis)</span>
-                       </button>
-                     )}
+                    {/* Note et avis - CLIQUABLES - seulement si la conciergerie est recommandée */}
+                    {conciergerie && (conciergerie.score || 0) > 0 && averageRating && (
+                      <button 
+                        onClick={handleStarClick}
+                        className="flex items-center gap-2 mb-3 hover:opacity-80 transition-opacity cursor-pointer"
+                      >
+                        <div className="flex items-center gap-1">
+                          {[...Array(5)].map((_, i) => (
+                            <Star 
+                              key={i} 
+                              className={`h-4 w-4 md:h-5 md:w-5 ${i < Math.round(averageRating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm md:text-base text-gray-600">({reviewCount} avis)</span>
+                      </button>
+                    )}
                      
                      {/* Zones d'intervention - CLIQUABLES - Sous la note pour tous les écrans */}
                      {conciergerieVilles.length > 0 && (
@@ -490,13 +490,15 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           </div>
         </div>
 
-                            {/* Section Avis - Section fille uniquement (sans section mère) */}
-        <div id="avis-clients-section" className="mt-8">
-          <AvisDisplay
-            conciergerieId={conciergerie.id}
-            onAddAvis={handleAddAvis}
-          />
-        </div>
+                            {/* Section Avis - Section fille uniquement (sans section mère) - seulement si la conciergerie est recommandée */}
+        {conciergerie && (conciergerie.score || 0) > 0 && (
+          <div id="avis-clients-section" className="mt-8">
+            <AvisDisplay
+              conciergerieId={conciergerie.id}
+              onAddAvis={handleAddAvis}
+            />
+          </div>
+        )}
       </div>
 
       <DevisModal
