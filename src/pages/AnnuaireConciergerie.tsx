@@ -15,15 +15,7 @@ const AnnuaireConciergerie = () => {
                style={{ background: "radial-gradient(circle at center, rgba(0,191,255,0.25), transparent 60%)" }} />
         </div>
 
-        {/* Breadcrumb */}
-        <div className="container mx-auto px-4 pt-8 relative z-10">
-          <Breadcrumbs 
-            items={[
-              { label: "Annuaire" }
-            ]} 
-            className="mb-6" 
-          />
-        </div>
+
         
         {/* Hero Section */}
         <section className="container mx-auto px-4 py-8 sm:py-16 relative z-10">
@@ -61,12 +53,12 @@ const AnnuaireConciergerie = () => {
             </h2>
             
             <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mb-12">
-              <div className="space-y-6">
-                <div className="bg-card p-4 sm:p-6 rounded-lg border">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
-                    <Search className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
-                    Filtres de recherche disponibles
-                  </h3>
+                             <div className="space-y-6">
+                 <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
+                   <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                     <Search className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
+                     Filtres de recherche disponibles
+                   </h3>
                   <ul className="space-y-2 text-muted-foreground">
                     <li>⬢ Recherche par ville et région</li>
                     <li>⬢ Type de bien (appartement, maison, etc.)</li>
@@ -77,12 +69,12 @@ const AnnuaireConciergerie = () => {
                 </div>
               </div>
               
-              <div className="space-y-6">
-                <div className="bg-card p-4 sm:p-6 rounded-lg border">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
-                    <CheckCircle className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
-                    Avantages ProprioAdvisor
-                  </h3>
+                             <div className="space-y-6">
+                 <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
+                   <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                     <CheckCircle className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
+                     Avantages ProprioAdvisor
+                   </h3>
                   <ul className="space-y-2 text-muted-foreground">
                     <li>⬢ Gain de temps considérable</li>
                     <li>⬢ Prestataires qualifiés et référencés</li>
@@ -113,11 +105,11 @@ const AnnuaireConciergerie = () => {
             </h2>
             
             <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mb-12">
-              <div className="bg-card p-4 sm:p-6 rounded-lg border">
-                <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
-                  <Users className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
-                  Avantages pour les conciergeries
-                </h3>
+                             <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
+                 <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
+                   <Users className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
+                   Avantages pour les conciergeries
+                 </h3>
                 <ul className="space-y-2 text-muted-foreground mb-6">
                   <li>⬢ Visibilité accrue auprès des propriétaires</li>
                   <li>⬢ Leads qualifiés et ciblés</li>
@@ -127,10 +119,10 @@ const AnnuaireConciergerie = () => {
                 </ul>
               </div>
               
-              <div className="bg-card p-4 sm:p-6 rounded-lg border">
-                <h3 className="text-lg sm:text-xl font-semibold mb-4">
-                  Rejoignez-nous dès maintenant
-                </h3>
+                             <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
+                 <h3 className="text-lg sm:text-xl font-semibold mb-4">
+                   Rejoignez-nous dès maintenant
+                 </h3>
                 <p className="text-muted-foreground mb-6">
                   Chaque conciergerie peut définir ses critères de zone géographique, 
                   types de biens acceptés et niveau de service proposé.
@@ -166,7 +158,7 @@ const AnnuaireConciergerie = () => {
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2 text-sm sm:text-base">Plateforme spécialisée</h3>
+                    <h3 className="font-semibold mb-2">Plateforme spécialisée</h3>
                     <p className="text-muted-foreground">
                       Exclusivement dédiée aux locations courte durée et conciergeries Airbnb
                     </p>
@@ -216,18 +208,18 @@ const AnnuaireConciergerie = () => {
               Questions fréquentes sur notre annuaire conciergerie
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8">
+                         <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
               <div className="space-y-6">
-                <div className="bg-card p-6 rounded-lg border">
-                  <h3 className="font-semibold mb-3">Comment fonctionne la mise en relation ?</h3>
+                                 <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
+                   <h3 className="font-semibold mb-3">Comment fonctionne la mise en relation ?</h3>
                   <p className="text-muted-foreground">
                     Vous recherchez selon vos critères, comparez les offres et contactez 
                     directement les conciergeries qui vous intéressent via notre plateforme.
                   </p>
                 </div>
                 
-                <div className="bg-card p-6 rounded-lg border">
-                  <h3 className="font-semibold mb-3">Est-ce gratuit pour les propriétaires ?</h3>
+                                 <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
+                   <h3 className="font-semibold mb-3">Est-ce gratuit pour les propriétaires ?</h3>
                   <p className="text-muted-foreground">
                     Oui, notre service est entièrement gratuit pour les propriétaires. 
                     Vous ne payez que la conciergerie que vous choisissez.
@@ -236,8 +228,8 @@ const AnnuaireConciergerie = () => {
               </div>
               
               <div className="space-y-6">
-                <div className="bg-card p-6 rounded-lg border">
-                  <h3 className="font-semibold mb-3">Quels types de logements sont concernés ?</h3>
+                                 <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
+                   <h3 className="font-semibold mb-3">Quels types de logements sont concernés ?</h3>
                   <p className="text-muted-foreground">
                     Tous types de biens en location courte durée : appartements, maisons, 
                     studios, villas, etc.

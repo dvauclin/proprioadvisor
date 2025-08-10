@@ -4,11 +4,11 @@ import StructuredData from '@/components/seo/StructuredData'
 import { breadcrumbsJsonLd, BASE_URL, LANG } from '@/lib/structured-data-models'
 
 export const metadata: Metadata = {
-  title: 'Annuaire des conciergeries Airbnb | Proprioadvisor',
+  title: 'Annuaire des conciergeries Airbnb | ProprioAdvisor',
   description: 'Annuaire spécialisé des conciergeries Airbnb. Comparez gratuitement les offres et trouvez la meilleure conciergerie pour votre location courte durée.',
   keywords: ['annuaire conciergerie', 'conciergerie airbnb', 'gestion location courte durée', 'proprioadvisor'],
   openGraph: {
-    title: 'Annuaire des conciergeries Airbnb | Proprioadvisor',
+    title: 'Annuaire des conciergeries Airbnb | ProprioAdvisor',
     description: 'Annuaire spécialisé des conciergeries Airbnb. Comparez gratuitement les offres et trouvez la meilleure conciergerie pour votre location courte durée.',
     url: 'https://proprioadvisor.com/annuaire',
   },
