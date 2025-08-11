@@ -97,12 +97,7 @@ const nextConfig = {
         destination: '/mentions-legales',
         permanent: true,
       },
-      // Redirection pour éviter les slashes finaux et briser la boucle
-      {
-        source: '/:path*/',
-        destination: '/:path*',
-        permanent: true,
-      },
+      // Aucune redirection de slashes - laisser Vercel gérer
     ];
   },
   webpack: (config) => {

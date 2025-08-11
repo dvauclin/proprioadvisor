@@ -41,7 +41,8 @@ const Connexion = () => {
           setError(error.message);
         }
       } else {
-        router.push('/');
+        // Connexion réussie - pas de redirection automatique pour éviter les boucles
+        setSuccess('Connexion réussie !');
       }
     } catch (error: any) {
       setError('Une erreur est survenue lors de la connexion');

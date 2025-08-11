@@ -48,6 +48,7 @@ export const getAllArticles = async (): Promise<Article[]> => {
 
 export const getArticleBySlug = async (slug: string): Promise<Article | null> => {
   try {
+    console.log(`[DEBUG] Fetching article with slug: ${slug}`);
     const { data, error } = await supabase
       .from('articles')
       .select('*, resume, question_1, reponse_1, question_2, reponse_2, question_3, reponse_3, question_4, reponse_4, question_5, reponse_5')
@@ -58,6 +59,13 @@ export const getArticleBySlug = async (slug: string): Promise<Article | null> =>
       console.error("Error fetching article by slug:", error);
       return null;
     }
+
+    console.log(`[DEBUG] Article data received:`, {
+      id: data.id,
+      titre: data.titre,
+      slug: data.slug,
+      date_modification: data.date_modification
+    });
 
     return {
       id: data.id,
@@ -249,6 +257,18 @@ export const updateArticle = async (article: Article): Promise<{ success: boolea
       question_5: data.question_5,
       reponse_5: data.reponse_5
     } as any;
+    
+    // Forcer la revalidation des pages après mise à jour
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/revalidate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: data.slug })
+      });
+      console.log(`[CACHE] Revalidation triggered for article: ${data.slug}`);
+    } catch (revalidateError) {
+      console.warn('[CACHE] Failed to trigger revalidation:', revalidateError);
+    }
     
     return { success: true, article: updatedArticle };
   } catch (error) {

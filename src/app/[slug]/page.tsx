@@ -45,16 +45,17 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   };
 }
 
-export async function generateStaticParams() {
-  const articles = await getAllArticles();
-  
-  return articles.map((article) => ({
-    slug: article.slug,
-  }));
-}
+// Commenté temporairement pour éviter la génération statique
+// export async function generateStaticParams() {
+//   const articles = await getAllArticles();
+//   
+//   return articles.map((article) => ({
+//     slug: article.slug,
+//   }));
+// }
 
-// Revalidation toutes les 60 secondes pour les articles
-export const revalidate = 60;
+// Revalidation forcée pour les articles (temporaire pour debug)
+export const revalidate = 0;
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getArticleBySlug(params.slug);
