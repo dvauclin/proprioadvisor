@@ -54,8 +54,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 //   }));
 // }
 
-// Revalidation forcée pour les articles (temporaire pour debug)
-export const revalidate = 0;
+// Revalidation toutes les 60 secondes pour les articles
+export const revalidate = 60;
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getArticleBySlug(params.slug);

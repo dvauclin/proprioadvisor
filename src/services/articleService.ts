@@ -48,7 +48,6 @@ export const getAllArticles = async (): Promise<Article[]> => {
 
 export const getArticleBySlug = async (slug: string): Promise<Article | null> => {
   try {
-    console.log(`[DEBUG] Fetching article with slug: ${slug}`);
     const { data, error } = await supabase
       .from('articles')
       .select('*, resume, question_1, reponse_1, question_2, reponse_2, question_3, reponse_3, question_4, reponse_4, question_5, reponse_5')
@@ -59,13 +58,6 @@ export const getArticleBySlug = async (slug: string): Promise<Article | null> =>
       console.error("Error fetching article by slug:", error);
       return null;
     }
-
-    console.log(`[DEBUG] Article data received:`, {
-      id: data.id,
-      titre: data.titre,
-      slug: data.slug,
-      date_modification: data.date_modification
-    });
 
     return {
       id: data.id,

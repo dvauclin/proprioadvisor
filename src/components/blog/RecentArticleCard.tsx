@@ -29,7 +29,7 @@ const RecentArticleCard: React.FC<RecentArticleCardProps> = ({ article }) => {
               Article
             </Badge>
             <span className="text-xs text-gray-500">
-              {formatDate(article.createdAt || '')}
+              {formatDate(article.datePublication || article.date_modification || article.createdAt || '')}
             </span>
           </div>
           <CardTitle className="text-lg line-clamp-2 group-hover:text-primary transition-colors">
@@ -48,7 +48,7 @@ const RecentArticleCard: React.FC<RecentArticleCardProps> = ({ article }) => {
               </span>
               <span className="flex items-center">
                 <Calendar className="h-3 w-3 mr-1" />
-                {formatDate(article.createdAt || '')}
+                {formatDate(article.datePublication || article.date_modification || article.createdAt || '')}
               </span>
             </div>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

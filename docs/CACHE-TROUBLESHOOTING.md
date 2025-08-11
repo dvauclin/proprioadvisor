@@ -1,7 +1,7 @@
 # Résolution des problèmes de cache des articles
 
 ## Problème
-Après avoir mis à jour un article via le panneau d'admin, les modifications sont visibles sur la page `/blog` mais pas sur la page de l'article individuelle.
+Après avoir mis à jour un article via le panneau d'admin, les modifications sont visibles sur la page `/blog` mais pas sur la page de l'article individuelle ou dans les articles similaires.
 
 ## Causes possibles
 
@@ -41,19 +41,19 @@ Après avoir mis à jour un article via le panneau d'admin, les modifications so
 
 1. **Désactiver la génération statique** (déjà fait) :
    - Commenté `generateStaticParams` dans `src/app/[slug]/page.tsx`
-   - Mis `revalidate = 0` pour forcer la revalidation
+   - Mis `revalidate = 60` pour la revalidation
 
 2. **Ajouter la revalidation automatique** (déjà fait) :
    - Route API `/api/revalidate` créée
    - Appel automatique après mise à jour d'article
 
-3. **Vérifier les logs** :
-   - Les logs de debug sont ajoutés dans `articleService.ts`
-   - Vérifier la console pour voir les données récupérées
+3. **Corriger l'affichage des dates** (déjà fait) :
+   - Modifié `ArticleContent.tsx` pour utiliser `datePublication` au lieu de `createdAt`
+   - Modifié `RecentArticleCard.tsx` pour utiliser `datePublication` au lieu de `createdAt`
+   - Les articles similaires affichent maintenant les bonnes dates
 
 ## Pages de test
 
-- `/test-article-cache` : Affiche les données brutes des articles
 - `/api/revalidate` : Force la revalidation des pages
 
 ## Debug
@@ -74,9 +74,9 @@ Après avoir mis à jour un article via le panneau d'admin, les modifications so
 
 ## Configuration actuelle
 
-- `revalidate = 0` sur les pages d'articles
+- `revalidate = 60` sur les pages d'articles
 - Revalidation automatique après mise à jour
-- Logs de debug activés
+- Affichage correct des dates dans les articles similaires
 - Génération statique désactivée
 
 ## Si le problème persiste

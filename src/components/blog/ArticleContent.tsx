@@ -231,7 +231,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
                   )}
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-500">
-                      {new Date(relatedArticle.createdAt || '').toLocaleDateString('fr-FR', {
+                      {new Date(relatedArticle.datePublication || relatedArticle.date_modification || relatedArticle.createdAt || '').toLocaleDateString('fr-FR', {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric'
