@@ -40,7 +40,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
-  const [initialized, setInitialized] = useState(false);
 
   const fetchProfile = async (userId: string) => {
     try {
@@ -78,7 +77,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (mounted && loading) {
         console.log('Auth loading timeout - forcing loading to false');
         setLoading(false);
-        setInitialized(true);
       }
     }, 1000); // Réduit à 1 seconde
 
@@ -97,12 +95,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             if (mounted) {
               setProfile(profileData);
               setLoading(false);
-              setInitialized(true);
             }
           } else {
             setProfile(null);
             setLoading(false);
-            setInitialized(true);
           }
         };
 
@@ -116,7 +112,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (!session) {
         setLoading(false);
-        setInitialized(true);
       } else {
         // Si il y a une session, on la traite immédiatement
         setSession(session);
@@ -127,7 +122,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (mounted) {
             setProfile(profileData);
             setLoading(false);
-            setInitialized(true);
           }
         });
       }
