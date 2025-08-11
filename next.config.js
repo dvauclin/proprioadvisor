@@ -97,7 +97,7 @@ const nextConfig = {
         destination: '/mentions-legales',
         permanent: true,
       },
-      // Aucune redirection de slashes - laisser Vercel gérer
+      // Aucune redirection de slashes - problème à résoudre côté Vercel
     ];
   },
   webpack: (config) => {
