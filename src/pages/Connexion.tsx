@@ -19,7 +19,7 @@ const Connexion = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showResetForm, setShowResetForm] = useState(false);
   
-  const { signIn, resetPassword, user, loading } = useAuth();
+  const { signIn, resetPassword, loading } = useAuth();
   const router = useRouter();
 
   // Suppression du useEffect qui redirige automatiquement pour éviter les boucles
