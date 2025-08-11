@@ -124,6 +124,19 @@ export interface Article {
   image?: string;
   createdAt?: string;
   updatedAt?: string;
+  date_modification?: string;
+  date_creation?: string;
+  resume?: string;
+  question_1?: string;
+  reponse_1?: string;
+  question_2?: string;
+  reponse_2?: string;
+  question_3?: string;
+  reponse_3?: string;
+  question_4?: string;
+  reponse_4?: string;
+  question_5?: string;
+  reponse_5?: string;
 }
 
 export interface PropertyTypeOption {

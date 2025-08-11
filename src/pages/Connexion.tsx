@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui-kit/card';
 import { Button } from '@/components/ui-kit/button';
@@ -20,7 +19,6 @@ const Connexion = () => {
   const [showResetForm, setShowResetForm] = useState(false);
   
   const { signIn, resetPassword, loading } = useAuth();
-  const router = useRouter();
 
   // Suppression du useEffect qui redirige automatiquement pour éviter les boucles
 

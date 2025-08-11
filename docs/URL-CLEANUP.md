@@ -27,27 +27,13 @@ Google Search Console crawlait des URLs avec des slashes finaux qui n'existent p
 
 **Fichier modifié :** `next.config.js`
 
-Ajout d'une redirection générique pour éviter les URLs avec slashes finaux :
-
-```javascript
-// Redirections pour éviter les URLs avec slashes finaux
-{
-  source: '/:path*/',
-  destination: '/:path*',
-  permanent: true,
-},
-```
+⚠️ **Note :** Les redirections automatiques ont été supprimées car elles causaient des redirections infinies sur la page d'accueil. Le problème des URLs avec slashes finaux sera résolu via la configuration Vercel et le robots.txt.
 
 ### 3. Robots.txt mis à jour
 
 **Fichier modifié :** `public/robots.txt`
 
-Ajout d'une règle pour empêcher le crawl des URLs avec slashes finaux :
-
-```
-# Empêcher le crawl des URLs avec slashes finaux
-Disallow: /*/
-```
+⚠️ **Note :** La règle `Disallow: /*/` a été supprimée car elle pouvait causer des problèmes de crawl. Le robots.txt reste dans sa configuration de base.
 
 ### 4. Script de nettoyage créé
 
@@ -74,7 +60,11 @@ npm run build
 3. Demander la suppression des URLs problématiques détectées dans votre rapport de crawl
 4. Surveiller les nouvelles URLs avec slashes finaux qui pourraient apparaître
 
-### 3. Surveillance
+### 3. Configuration Vercel
+- Maintenir la configuration sans `cleanUrls` pour éviter les redirections automatiques
+- Surveiller les redirections dans les logs Vercel
+
+### 4. Surveillance
 - Surveiller Google Search Console pour vérifier que ces URLs ne sont plus crawlées
 - Vérifier que les redirections fonctionnent correctement
 - S'assurer que le sitemap ne contient plus d'URLs avec slashes finaux
@@ -88,6 +78,7 @@ npm run build
 
 ## Notes importantes
 
-- Les redirections sont permanentes (301) pour informer Google du changement définitif
-- Le robots.txt empêche le crawl des URLs avec slashes finaux
+- ⚠️ Les redirections automatiques ont été supprimées pour éviter les redirections infinies
+- La configuration Vercel sans `cleanUrls` reste la solution principale
 - Le script de nettoyage peut être exécuté régulièrement pour maintenir la propreté du sitemap
+- Surveiller les logs Vercel pour détecter d'éventuelles redirections problématiques
