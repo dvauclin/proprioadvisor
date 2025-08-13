@@ -23,6 +23,7 @@ export interface AuthContextType {
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: any }>;
   updatePassword: (newPassword: string) => Promise<{ error: any }>;
+  isUserConciergerie: (email: string) => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -234,6 +235,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const isUserConciergerie = async (userEmail: string): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase
+        .from('conciergeries')
+        .select('id')
+        .eq('mail', userEmail)
+        .single();
+      
+      if (error) {
+        if (error.code === 'PGRST116') { // No rows found
+          return false;
+        }
+        console.error('Error checking if user is conciergerie:', error);
+        return false;
+      }
+      
+      return !!data;
+    } catch (error) {
+      console.error('Exception checking if user is conciergerie:', error);
+      return false;
+    }
+  };
+
   const isAdmin = profile?.role === 'admin';
 
   const value = {
@@ -247,6 +271,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signOut,
     resetPassword,
     updatePassword,
+    isUserConciergerie,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui-kit/card';
 import { Button } from '@/components/ui-kit/button';
@@ -9,6 +10,7 @@ import { Input } from '@/components/ui-kit/input';
 import { Label } from '@/components/ui-kit/label';
 import { Alert, AlertDescription } from '@/components/ui-kit/alert';
 import { Loader2, ArrowLeft } from 'lucide-react';
+
 
 const Connexion = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +20,8 @@ const Connexion = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showResetForm, setShowResetForm] = useState(false);
   
-  const { signIn, resetPassword, loading } = useAuth();
+  const { signIn, resetPassword, loading, isUserConciergerie } = useAuth();
+  const router = useRouter();
 
   // Suppression du useEffect qui redirige automatiquement pour éviter les boucles
 
@@ -39,8 +42,18 @@ const Connexion = () => {
           setError(error.message);
         }
       } else {
-        // Connexion réussie - pas de redirection automatique pour éviter les boucles
-        setSuccess('Connexion réussie !');
+        // Connexion réussie - vérifier si c'est une conciergerie et rediriger
+        const isConciergerie = await isUserConciergerie(email);
+        
+        if (isConciergerie) {
+          setSuccess('Connexion réussie ! Redirection vers votre espace de souscription...');
+          // Rediriger vers la page de souscription après un court délai
+          setTimeout(() => {
+            router.push('/subscription');
+          }, 1500);
+        } else {
+          setSuccess('Connexion réussie !');
+        }
       }
     } catch (error: any) {
       setError('Une erreur est survenue lors de la connexion');

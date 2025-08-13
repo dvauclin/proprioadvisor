@@ -1,4 +1,6 @@
 
+import { supabase } from '@/integrations/supabase/client';
+
 /**
  * Convertit un nom de conciergerie en slug URL-friendly
  */
@@ -72,5 +74,31 @@ export const findConciergerieBySlug = (conciergeries: any[], slug: string) => {
   }
   
   return found;
+};
+
+/**
+ * Vérifie si un utilisateur est une conciergerie en cherchant son email dans la table conciergeries
+ */
+export const isUserConciergerie = async (userEmail: string): Promise<boolean> => {
+  try {
+    const { data, error } = await supabase
+      .from('conciergeries')
+      .select('id')
+      .eq('mail', userEmail)
+      .single();
+    
+    if (error) {
+      if (error.code === 'PGRST116') { // No rows found
+        return false;
+      }
+      console.error('Error checking if user is conciergerie:', error);
+      return false;
+    }
+    
+    return !!data;
+  } catch (error) {
+    console.error('Exception checking if user is conciergerie:', error);
+    return false;
+  }
 };
 
