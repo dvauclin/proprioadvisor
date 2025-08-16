@@ -96,7 +96,10 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               onChange={(e) => updateField && updateField('scoreManuel', e.target.value === '' ? null : parseInt(e.target.value, 10))}
               placeholder="Utilise le score auto"
             />
-            <p className="text-xs text-gray-500 mt-1">Laissez vide pour utiliser le score automatique. Un score négatif est possible.</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Score manuel uniquement pour les entreprises sans souscription. 
+              Si l'entreprise a une souscription, le score automatique sera utilisé.
+            </p>
           </div>
           
           {/* Show villes covered with possibility to modify */}
@@ -255,7 +258,10 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           <p><span className="font-medium">Téléphone du contact:</span> {conciergerie.telephoneContact || 'Non spécifié'}</p>
           <p><span className="font-medium">Score Final:</span> {conciergerie.score}</p>
           {conciergerie.scoreManuel != null && (
-            <p className="text-sm text-gray-600">(Score manuel appliqué : {conciergerie.scoreManuel})</p>
+            <p className="text-sm text-gray-600">(Score manuel défini : {conciergerie.scoreManuel})</p>
+          )}
+          {conciergerie.scoreManuel == null && (
+            <p className="text-sm text-gray-600">(Score automatique basé sur les souscriptions)</p>
           )}
           
           {conciergerie.logo ? (

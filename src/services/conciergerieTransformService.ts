@@ -41,14 +41,9 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
     });
   }
   
-  if (conciergerie.score_manuel !== null && conciergerie.score_manuel !== undefined) {
-    // If manual score is set, use it
-    calculatedScore = conciergerie.score_manuel;
-    if (conciergerie.nom?.toLowerCase().includes('aurora')) {
-      console.log("xRx Aurora using scoreManuel:", calculatedScore);
-    }
-  } else if (conciergerie.subscriptions && conciergerie.subscriptions.length > 0) {
-    // Get the most recent subscription
+  // NOUVELLE LOGIQUE: Score manuel uniquement si pas de souscription
+  if (conciergerie.subscriptions && conciergerie.subscriptions.length > 0) {
+    // Si l'entreprise a une souscription, utiliser uniquement le score automatique
     const latestSubscription = conciergerie.subscriptions
       .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
@@ -68,6 +63,12 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
           calculatedScore
         });
       }
+    }
+  } else if (conciergerie.score_manuel !== null && conciergerie.score_manuel !== undefined) {
+    // Score manuel uniquement si pas de souscription
+    calculatedScore = conciergerie.score_manuel;
+    if (conciergerie.nom?.toLowerCase().includes('aurora')) {
+      console.log("xRx Aurora using scoreManuel (no subscription):", calculatedScore);
     }
   }
   

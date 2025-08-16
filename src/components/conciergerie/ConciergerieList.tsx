@@ -49,17 +49,14 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
 
 
 
-  // NEW LOGIC: Sort by scoreManuel OR total_points, then by conciergerie creation date (oldest first)
-  // Priority: scoreManuel > total_points > conciergerie creation date (oldest first)
+  // NOUVELLE LOGIQUE: Score manuel uniquement si pas de souscription
   const sortedFormules = [...formules].sort((a, b) => {
     const subscriptionA = a.conciergerie?.id ? subscriptions.get(a.conciergerie.id) : null;
     const subscriptionB = b.conciergerie?.id ? subscriptions.get(b.conciergerie.id) : null;
     
-    // Determine effective score: scoreManuel takes priority over total_points
-    const effectiveScoreA = a.conciergerie?.scoreManuel ?? (subscriptionA?.total_points || 0);
-    const effectiveScoreB = b.conciergerie?.scoreManuel ?? (subscriptionB?.total_points || 0);
-    
-
+    // Determine effective score: score manuel uniquement si pas de souscription
+    const effectiveScoreA = subscriptionA ? (subscriptionA.total_points || 0) : (a.conciergerie?.scoreManuel ?? 0);
+    const effectiveScoreB = subscriptionB ? (subscriptionB.total_points || 0) : (b.conciergerie?.scoreManuel ?? 0);
 
     // First: Compare effective scores (highest first)
     if (effectiveScoreA !== effectiveScoreB) {

@@ -687,7 +687,10 @@ const Admin = () => {
                             Score: {conciergerie.score || 0}
                           </Badge>
                           {conciergerie.scoreManuel !== null && <Badge variant="secondary">
-                              Score manuel: {conciergerie.scoreManuel}
+                              Score manuel défini: {conciergerie.scoreManuel}
+                            </Badge>}
+                          {conciergerie.scoreManuel === null && <Badge variant="outline">
+                              Score automatique
                             </Badge>}
                         </div>
                       </div>
@@ -738,7 +741,10 @@ const Admin = () => {
                         <div className="flex gap-2 mt-2">
                           <Badge variant="outline">Score: {conciergerie.score}</Badge>
                           {conciergerie.scoreManuel !== null && <Badge variant="secondary">
-                              Score manuel: {conciergerie.scoreManuel}
+                              Score manuel défini: {conciergerie.scoreManuel}
+                            </Badge>}
+                          {conciergerie.scoreManuel === null && <Badge variant="outline">
+                              Score automatique
                             </Badge>}
                           <Badge variant={conciergerie.validated ? "default" : "secondary"}>
                             {conciergerie.validated ? "Validée" : "En attente"}
