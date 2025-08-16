@@ -177,29 +177,8 @@ export const useSubscriptionSubmit = ({
           isUpdate = false;
         }
 
-        // Auto-validation conciergerie pour la souscription gratuite
-        try {
-          const { data: conciergerie } = await supabase
-            .from('conciergeries')
-            .select('validated')
-            .eq('id', conciergerieId)
-            .single();
-          
-          if (!conciergerie?.validated) {
-            const { error: updateError } = await supabase
-              .from('conciergeries')
-              .update({ validated: true })
-              .eq('id', conciergerieId);
-            
-            if (updateError) {
-              console.error("Error auto-validating conciergerie for free subscription:", updateError);
-            } else {
-              console.log("Auto-validated conciergerie for free subscription:", conciergerieId);
-            }
-          }
-        } catch (error) {
-          console.error("Error during conciergerie validation for free subscription:", error);
-        }
+        // ❌ NE PAS VALIDER AUTOMATIQUEMENT - Les abonnements gratuites ne valident pas automatiquement
+        console.log("Free subscription created - no automatic validation", { conciergerieId });
         
         // Déclencher le webhook
         try {

@@ -142,21 +142,12 @@ serve(async (req) => {
           .single();
         conciergerieEmail = conciergerie?.mail;
 
-        // Auto-validate conciergerie when subscription is updated and payment is confirmed
-        // Only validate if the subscription is paid (amount > 0) and conciergerie is not already validated
-        if ((amount / 100) > 0 && !conciergerie?.validated) {
-          const { error: updateError } = await supabaseAdmin
-            .from('conciergeries')
-            .update({ validated: true })
-            .eq('id', conciergerieId);
-          
-          if (updateError) {
-            logStep("Error auto-validating conciergerie", { error: updateError });
-          } else {
-            logStep("Auto-validated conciergerie due to confirmed paid subscription update", { 
-              conciergerieId 
-            });
-          }
+        // ❌ NE PAS VALIDER ICI - La validation se fera uniquement après confirmation du paiement
+        // Log pour indiquer que la validation attendra la confirmation du paiement
+        if ((amount / 100) > 0) {
+          logStep("Subscription updated - validation will occur after payment confirmation", { 
+            conciergerieId 
+          });
         }
       }
 

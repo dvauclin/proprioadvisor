@@ -40,21 +40,12 @@ export async function handleSubscriptionUpdated(subscription: Stripe.Subscriptio
     
     conciergerieEmail = conciergerie?.mail;
 
-    // Auto-validate conciergerie when subscription is updated and payment is confirmed
-    // Only validate if the subscription is paid (monthly_amount > 0) and conciergerie is not already validated
-    if (dbSubscription.monthly_amount > 0 && !conciergerie?.validated) {
-      const { error: updateError } = await supabase
-        .from('conciergeries')
-        .update({ validated: true })
-        .eq('id', dbSubscription.conciergerie_id);
-      
-      if (updateError) {
-        logStep("Error auto-validating conciergerie", { error: updateError });
-      } else {
-        logStep("Auto-validated conciergerie due to confirmed paid subscription update", { 
-          conciergerieId: dbSubscription.conciergerie_id 
-        });
-      }
+    // ❌ NE PAS VALIDER ICI - La validation se fera uniquement après confirmation du paiement
+    // Log pour indiquer que la validation attendra la confirmation du paiement
+    if (dbSubscription.monthly_amount > 0) {
+      logStep("Subscription updated - validation will occur after payment confirmation", { 
+        conciergerieId: dbSubscription.conciergerie_id 
+      });
     }
   } catch (error) {
     logStep("Error fetching conciergerie data", { error: error.message });
