@@ -77,6 +77,21 @@ export const findConciergerieBySlug = (conciergeries: any[], slug: string) => {
 };
 
 /**
+ * Normalise une chaîne de caractères pour la recherche (supprime accents et tirets)
+ */
+export const normalizeForSearch = (str: string): string => {
+  if (!str) return '';
+  
+  return str
+    .toLowerCase()
+    .normalize('NFD') // Décompose les caractères accentués
+    .replace(/[\u0300-\u036f]/g, '') // Supprime les accents
+    .replace(/[-]/g, '') // Supprime les tirets
+    .replace(/\s+/g, '') // Supprime tous les espaces
+    .trim();
+};
+
+/**
  * Vérifie si un utilisateur est une conciergerie en cherchant son email dans la table conciergeries
  */
 export const isUserConciergerie = async (userEmail: string): Promise<boolean> => {

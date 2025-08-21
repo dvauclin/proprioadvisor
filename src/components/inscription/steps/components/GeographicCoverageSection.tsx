@@ -5,6 +5,7 @@ import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
 import { MapPin, Building2, Search } from "lucide-react";
+import { normalizeForSearch } from "@/utils/conciergerieUtils";
 
 // Type optimisé pour les villes
 interface VilleSelectorItem {
@@ -35,12 +36,15 @@ const GeographicCoverageSection: React.FC<GeographicCoverageSectionProps> = ({
   const filteredAndSortedVilles = useMemo(() => {
     let filtered = villes;
     if (searchTerm.trim()) {
-      const searchLower = searchTerm.toLowerCase();
-      filtered = villes.filter(ville => 
-        ville.nom.toLowerCase().includes(searchLower) ||
-        (ville.departementNumero && ville.departementNumero.includes(searchTerm)) ||
-        (ville.departementNom && ville.departementNom.toLowerCase().includes(searchLower))
-      );
+      const normalizedSearch = normalizeForSearch(searchTerm);
+      filtered = villes.filter(ville => {
+        const normalizedVilleName = normalizeForSearch(ville.nom);
+        const normalizedDepartementNom = ville.departementNom ? normalizeForSearch(ville.departementNom) : '';
+        
+        return normalizedVilleName.includes(normalizedSearch) ||
+               (ville.departementNumero && ville.departementNumero.includes(searchTerm)) ||
+               normalizedDepartementNom.includes(normalizedSearch);
+      });
     }
     
     // Tri optimisé par département puis par nom
