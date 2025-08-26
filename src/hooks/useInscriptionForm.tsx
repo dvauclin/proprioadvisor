@@ -10,6 +10,7 @@ import { FormuleFormData } from "@/components/formule/FormuleFormSchema";
 import { getAllVilles } from "@/services/villeService";
 import { Ville } from "@/types";
 import { transformFormuleForDB } from "@/services/conciergerieTransformService";
+import { triggerWebhook } from "@/utils/webhookService";
 
 interface InscriptionFormData {
   nom: string;
@@ -250,6 +251,36 @@ export const useInscriptionForm = () => {
           console.error("handleSubmit: Erreur lors de la sauvegarde des formules:", error);
           toast.error("Conciergerie créée mais erreur lors de la sauvegarde des formules");
         }
+      }
+      
+      // Déclencher le webhook pour l'inscription
+      try {
+        console.log("🔗 Déclenchement du webhook d'inscription pour:", conciergerie.nom);
+        
+        await triggerWebhook({
+          type: 'inscription_conciergerie',
+          conciergerie_id: conciergerie.id,
+          nom: conciergerie.nom,
+          email: conciergerie.mail,
+          telephone_contact: conciergerie.telephone_contact,
+          nom_contact: conciergerie.nom_contact,
+          type_logement_accepte: conciergerie.type_logement_accepte,
+          deduction_frais: conciergerie.deduction_frais,
+          accepte_gestion_partielle: conciergerie.accepte_gestion_partielle,
+          accepte_residence_principale: conciergerie.accepte_residence_principale,
+          superficie_min: conciergerie.superficie_min,
+          nombre_chambres_min: conciergerie.nombre_chambres_min,
+          zone_couverte: conciergerie.zone_couverte,
+          url_avis: conciergerie.url_avis,
+          villes_ids: selectedVillesIds,
+          nombre_formules: formules.length,
+          timestamp: new Date().toISOString()
+        });
+        
+        console.log("✅ Webhook d'inscription envoyé avec succès");
+      } catch (webhookError) {
+        console.error("❌ Erreur lors du déclenchement du webhook d'inscription:", webhookError);
+        // Ne pas faire échouer l'inscription si le webhook échoue
       }
       
       toast.success("Inscription réussie ! Vous allez être redirigé vers la page de souscription.");

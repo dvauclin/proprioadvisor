@@ -8,7 +8,8 @@ import { ScrollArea, ScrollBar } from "@/components/ui-kit/scroll-area";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui-kit/card";
 import { Button } from "@/components/ui-kit/button";
 import { Badge } from "@/components/ui-kit/badge";
-import { Eye, Edit, Trash2, Plus, CheckCircle, XCircle } from "lucide-react";
+import { Eye, Edit, Trash2, Plus, CheckCircle, XCircle, ExternalLink } from "lucide-react";
+import { createConciergerieSlug } from "@/utils/conciergerieUtils";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { getConciergeriesToValidate, getValidatedConciergeries, getAllVilles, getAllArticles, validateConciergerie, rejectConciergerie, addArticle, updateArticle, deleteArticle, addVille, updateVille, deleteVille, uploadImage, getAllImages, deleteImage, saveConciergerie, deleteConciergerie, getContactMessages, updateContactMessageStatus, deleteContactMessage, getAllSubscriptions } from "@/services/supabaseService";
 import { getAllLeads } from "@/services/leadService";
@@ -699,6 +700,14 @@ const Admin = () => {
                           <Eye className="h-4 w-4 mr-1" />
                           Voir
                         </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => window.open(`/conciergerie-details/${createConciergerieSlug(conciergerie.nom)}`, '_blank')}
+                        >
+                          <ExternalLink className="h-4 w-4 mr-1" />
+                          Détails
+                        </Button>
                         <Button size="sm" onClick={() => validateMutation.mutate(conciergerie.id)} disabled={validateMutation.isPending}>
                           <CheckCircle className="h-4 w-4 mr-1" />
                           Valider
@@ -755,6 +764,14 @@ const Admin = () => {
                         <Button size="sm" variant="outline" onClick={() => handleEditConciergerie(conciergerie)}>
                           <Edit className="h-4 w-4 mr-1" />
                           Modifier
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => window.open(`/conciergerie-details/${createConciergerieSlug(conciergerie.nom)}`, '_blank')}
+                        >
+                          <ExternalLink className="h-4 w-4 mr-1" />
+                          Détails
                         </Button>
                         <Button size="sm" variant="destructive" onClick={() => handleDeleteConciergerie(conciergerie.id, conciergerie.nom)} disabled={deleteConciergerieM.isPending}>
                           <Trash2 className="h-4 w-4 mr-1" />
