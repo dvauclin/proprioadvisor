@@ -336,8 +336,8 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                       </div>
                     </div>
                     
-                    {/* Note et avis - CLIQUABLES - seulement si la conciergerie est recommandée */}
-                    {conciergerie && (conciergerie.score || 0) > 0 && averageRating && (
+                    {/* Note et avis - CLIQUABLES - toujours visible */}
+                    {conciergerie && averageRating && (
                       <button 
                         onClick={handleStarClick}
                         className="flex items-center gap-2 mb-3 hover:opacity-80 transition-opacity cursor-pointer"
@@ -491,8 +491,8 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           </div>
         </div>
 
-                            {/* Section Avis - Section fille uniquement (sans section mère) - seulement si la conciergerie est recommandée */}
-        {conciergerie && (conciergerie.score || 0) > 0 && (
+                            {/* Section Avis - Section fille uniquement (sans section mère) - toujours visible */}
+        {conciergerie && (
           <div id="avis-clients-section" className="mt-8">
             <AvisDisplay
               conciergerieId={conciergerie.id}
