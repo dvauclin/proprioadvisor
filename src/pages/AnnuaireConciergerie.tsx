@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui-kit/button";
 import { Search, Users, CheckCircle, ArrowRight } from "lucide-react";
+import AnimatedCounter from "@/components/ui-kit/AnimatedCounter";
 
 const AnnuaireConciergerie = () => {
   return (
@@ -55,7 +56,7 @@ const AnnuaireConciergerie = () => {
                              <div className="space-y-6">
                  <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
                    <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
-                     <Search className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
+                     <Search className="mr-2 h-5 w-5 text-brand-chartreuse flex-shrink-0" />
                      Filtres de recherche disponibles
                    </h3>
                   <ul className="space-y-2 text-muted-foreground">
@@ -71,7 +72,7 @@ const AnnuaireConciergerie = () => {
                              <div className="space-y-6">
                  <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
                    <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
-                     <CheckCircle className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
+                     <CheckCircle className="mr-2 h-5 w-5 text-brand-chartreuse flex-shrink-0" />
                      Avantages ProprioAdvisor
                    </h3>
                   <ul className="space-y-2 text-muted-foreground">
@@ -106,7 +107,7 @@ const AnnuaireConciergerie = () => {
             <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mb-12">
                              <div className="bg-card p-3 sm:p-4 md:p-6 rounded-lg border">
                  <h3 className="text-lg sm:text-xl font-semibold mb-4 flex items-center">
-                   <Users className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
+                   <Users className="mr-2 h-5 w-5 text-brand-chartreuse flex-shrink-0" />
                    Avantages pour les conciergeries
                  </h3>
                                  <ul className="space-y-2 text-muted-foreground mb-6">
@@ -133,6 +134,18 @@ const AnnuaireConciergerie = () => {
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
+                  
+                  {/* Compteur animé sous le bouton */}
+                  <div className="text-center pt-2">
+                    <AnimatedCounter 
+                      className="inline-block"
+                      textClassName="text-sm text-gray-600"
+                      numberClassName="font-semibold text-brand-chartreuse"
+                      suffix=" déjà présentes"
+                      prefix=""
+                    />
+                  </div>
+                  
                   <Link href="/trouver-des-clients-conciergerie-airbnb" className="block">
                     <Button variant="outline" className="w-full text-sm sm:text-base">
                       Découvrir comment trouver des clients
@@ -155,7 +168,7 @@ const AnnuaireConciergerie = () => {
             <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="h-6 w-6 text-brand-chartreuse mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold mb-2">Plateforme spécialisée</h3>
                     <p className="text-muted-foreground">
@@ -165,7 +178,7 @@ const AnnuaireConciergerie = () => {
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="h-6 w-6 text-brand-chartreuse mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold mb-2">Fonctionnement 100% en ligne</h3>
                     <p className="text-muted-foreground">
@@ -177,7 +190,7 @@ const AnnuaireConciergerie = () => {
               
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="h-6 w-6 text-brand-chartreuse mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold mb-2">Comparaison rapide et intuitive</h3>
                     <p className="text-muted-foreground">
@@ -186,10 +199,10 @@ const AnnuaireConciergerie = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-6 w-6 text-brand-chartreuse mt-1 flex-shrink-0" />
                   <div>
-                                         <h3 className="font-semibold mb-2">Écosystème technique solide</h3>
+                    <h3 className="font-semibold mb-2">Écosystème technique solide</h3>
                     <p className="text-muted-foreground">
                       SPA moderne, filtres intelligents, intégration Stripe et infrastructure robuste
                     </p>

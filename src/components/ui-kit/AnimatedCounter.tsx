@@ -1,15 +1,29 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui-kit/button";
 import { getValidatedConciergeriesCount } from "@/services/conciergerieService";
 
-const CTASection: React.FC = () => {
+interface AnimatedCounterProps {
+  className?: string;
+  textClassName?: string;
+  numberClassName?: string;
+  showPlural?: boolean;
+  suffix?: string;
+  prefix?: string;
+}
+
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+  className = "",
+  textClassName = "text-sm text-gray-600",
+  numberClassName = "font-semibold text-brand-chartreuse",
+  showPlural = true,
+  suffix = "",
+  prefix = "Déjà"
+}) => {
   const [conciergeriesCount, setConciergeriesCount] = useState<number>(0);
   const [displayedCount, setDisplayedCount] = useState<number>(0);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const sectionRef = useRef<HTMLElement>(null);
+  const counterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchConciergeriesCount = async () => {
@@ -25,7 +39,7 @@ const CTASection: React.FC = () => {
     fetchConciergeriesCount();
   }, []);
 
-  // Intersection Observer pour détecter quand la section est visible
+  // Intersection Observer pour détecter quand le compteur est visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -39,13 +53,13 @@ const CTASection: React.FC = () => {
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (counterRef.current) {
+        observer.unobserve(counterRef.current);
       }
     };
   }, []);
@@ -75,33 +89,13 @@ const CTASection: React.FC = () => {
   }, [isVisible, conciergeriesCount]);
 
   return (
-    <section ref={sectionRef} className="py-12 bg-brand-chartreuse/10 relative overflow-hidden my-0">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Vous gérez une conciergerie Airbnb ?</h2>
-          <p className="text-xl text-gray-600 mb-6">
-            Inscrivez votre entreprise gratuitement sur ProprioAdvisor pour augmenter votre visibilité et <a href="https://proprioadvisor.fr/trouver-des-clients-conciergerie-airbnb" className="underline">trouver de nouveaux clients</a>.
-          </p>
-          <div className="flex flex-col items-center">
-            <Button className="text-lg px-6 py-3" asChild>
-              <Link href="/inscription">
-                Ajouter ma conciergerie
-              </Link>
-            </Button>
-            {/* Texte avec le nombre de conciergeries sous le bouton */}
-            <div className="mt-3 text-center">
-              <p className="text-sm text-gray-600">
-                Déjà <span className="font-semibold text-brand-chartreuse">{displayedCount}</span> conciergerie{displayedCount > 1 ? 's' : ''} référencée{displayedCount > 1 ? 's' : ''} sur la plateforme
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div ref={counterRef} className={className}>
+      <p className={textClassName}>
+        {prefix} <span className={numberClassName}>{displayedCount}</span> conciergerie{showPlural && displayedCount > 1 ? 's' : ''} référencée{showPlural && displayedCount > 1 ? 's' : ''}{suffix}
+      </p>
+    </div>
   );
 };
 
-export default CTASection;
-
-
+export default AnimatedCounter;
 

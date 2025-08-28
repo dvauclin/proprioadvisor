@@ -51,6 +51,30 @@ export const getValidatedConciergeries = async (): Promise<Conciergerie[]> => {
   return transformedConciergeries;
 };
 
+export const getValidatedConciergeriesCount = async (): Promise<number> => {
+  console.log("Fetching validated conciergeries count...");
+  
+  try {
+    // Approche simple: récupérer toutes les conciergeries validées et compter
+    const { data: conciergeries, error } = await supabase
+      .from('conciergeries')
+      .select('id')
+      .eq('validated', true);
+
+    if (error) {
+      console.error("Error fetching validated conciergeries:", error);
+      throw error;
+    }
+
+    const count = conciergeries ? conciergeries.length : 0;
+    console.log("Validated conciergeries count:", count);
+    return count;
+  } catch (error) {
+    console.error("Unexpected error in getValidatedConciergeriesCount:", error);
+    return 0;
+  }
+};
+
 export const getConciergerieById = async (id: string): Promise<Conciergerie | null> => {
   try {
     const { data, error } = await supabase

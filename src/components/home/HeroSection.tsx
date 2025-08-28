@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui-kit/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui-kit/select";
 import { Ville } from "@/types";
+import { getValidatedConciergeriesCount } from "@/services/conciergerieService";
 
 interface HeroSectionProps {
   selectedVille: string | null;
@@ -15,6 +16,51 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) => {
   const router = useRouter();
   const [selectedVilleSlug, setSelectedVilleSlug] = useState<string | null>(selectedVille);
+  const [conciergeriesCount, setConciergeriesCount] = useState<number>(0);
+  const [displayedCount, setDisplayedCount] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const fetchConciergeriesCount = async () => {
+      try {
+        console.log("HeroSection: Starting to fetch conciergeries count...");
+        const count = await getValidatedConciergeriesCount();
+        console.log("HeroSection: Received count:", count);
+        setConciergeriesCount(count);
+      } catch (error) {
+        console.error("Erreur lors du chargement du nombre de conciergeries:", error);
+        setConciergeriesCount(0);
+      }
+    };
+
+    fetchConciergeriesCount();
+  }, []);
+
+  // Intersection Observer pour détecter quand la section est visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const handleVilleChange = (value: string) => {
     setSelectedVilleSlug(value);
@@ -41,8 +87,32 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
     return ville.departementNumero ? `${ville.departementNumero} - ${ville.nom}` : ville.nom;
   };
 
+  // Animation d'incrémentation - se déclenche seulement quand visible
+  useEffect(() => {
+    if (isVisible && conciergeriesCount > 0) {
+      const duration = 2000; // 2 secondes
+      const steps = 60; // 60 étapes
+      const increment = conciergeriesCount / steps;
+      const stepDuration = duration / steps;
+      
+      let currentStep = 0;
+      const timer = setInterval(() => {
+        currentStep++;
+        const newValue = Math.min(Math.floor(increment * currentStep), conciergeriesCount);
+        setDisplayedCount(newValue);
+        
+        if (currentStep >= steps || newValue >= conciergeriesCount) {
+          setDisplayedCount(conciergeriesCount);
+          clearInterval(timer);
+        }
+      }, stepDuration);
+      
+      return () => clearInterval(timer);
+    }
+  }, [isVisible, conciergeriesCount]);
+
   return (
-    <section className="relative overflow-hidden pt-20 pb-24">
+    <section ref={sectionRef} className="relative overflow-hidden pt-20 pb-24">
       {/* Top-only gradient overlay for consistent height */}
       <div className="absolute inset-x-0 top-0 h-[640px] -z-10 bg-gradient-to-b from-brand-emerald-50 via-white to-white pointer-events-none overflow-hidden">
         <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-50"
@@ -84,9 +154,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
             >
               {selectedVilleSlug ? "Voir le comparatif" : "Choisissez une ville"}
             </Button>
-            <Button variant="outline" className="h-12 px-6 rounded-full shadow-sm" asChild>
-              <Link href="/inscription">Ajouter votre conciergerie</Link>
-            </Button>
+            <div className="flex flex-col items-center">
+              <Button variant="outline" className="h-12 px-6 rounded-full shadow-sm" asChild>
+                <Link href="/inscription">Ajouter votre conciergerie</Link>
+              </Button>
+              {/* Texte avec le nombre de conciergeries sous le bouton Ajouter */}
+              <div className="mt-2 text-center">
+                <p className="text-xs text-gray-500">
+                  Déjà <span className="font-semibold text-brand-chartreuse">{displayedCount}</span> conciergerie{displayedCount > 1 ? 's' : ''} référencée{displayedCount > 1 ? 's' : ''}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

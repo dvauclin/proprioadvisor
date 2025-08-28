@@ -3,6 +3,7 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import InscriptionHeader from "./InscriptionHeader";
+import AnimatedCounter from "@/components/ui-kit/AnimatedCounter";
 
 interface InscriptionLayoutProps {
   children: ReactNode;
@@ -32,6 +33,17 @@ const InscriptionLayout: React.FC<InscriptionLayoutProps> = ({ children }) => {
       <div className="container mx-auto px-4 relative z-10">
         <section className="max-w-4xl mx-auto">
           <InscriptionHeader />
+          
+          {/* Compteur animé juste avant le formulaire */}
+          <div className="text-center mb-8">
+            <AnimatedCounter 
+              className="inline-block"
+              textClassName="text-lg text-gray-700"
+              numberClassName="font-bold text-brand-chartreuse text-xl"
+              suffix=" sur la plateforme"
+            />
+          </div>
+          
           {children}
         </section>
       </div>
