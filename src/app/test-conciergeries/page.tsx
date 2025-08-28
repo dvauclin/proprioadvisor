@@ -48,7 +48,7 @@ export default function TestConciergeries() {
         
       } catch (error) {
         console.error("Test error:", error);
-        setData({ error: error.message });
+        setData({ error: error instanceof Error ? error.message : String(error) });
       } finally {
         setLoading(false);
       }

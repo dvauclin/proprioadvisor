@@ -8,6 +8,7 @@ const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export const supabase = (() => {
   if (!url || !anon) {
+    console.warn('Supabase not configured: set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY');
     // Export a safe stub that throws only when used
     return new Proxy({}, {
       get() {
@@ -15,6 +16,15 @@ export const supabase = (() => {
       },
     }) as unknown as ReturnType<typeof createClient<Database>>;
   }
+  
+  // Validate URL format
+  try {
+    new URL(url);
+  } catch (error) {
+    console.error('Invalid Supabase URL:', url);
+    throw new Error(`Invalid Supabase URL: ${url}`);
+  }
+  
   return createClient<Database>(url, anon, {
     auth: {
       persistSession: true,
