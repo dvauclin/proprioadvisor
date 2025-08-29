@@ -20,7 +20,7 @@ const Connexion = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showResetForm, setShowResetForm] = useState(false);
   
-  const { signIn, resetPassword, loading, isUserConciergerie } = useAuth();
+  const { signIn, resetPassword, loading, getRedirectPath } = useAuth();
   const router = useRouter();
 
   // Suppression du useEffect qui redirige automatiquement pour éviter les boucles
@@ -42,18 +42,25 @@ const Connexion = () => {
           setError(error.message);
         }
       } else {
-        // Connexion réussie - vérifier si c'est une conciergerie et rediriger
-        const isConciergerie = await isUserConciergerie(email);
-        
-        if (isConciergerie) {
-          setSuccess('Connexion réussie ! Redirection vers votre espace de souscription...');
-          // Rediriger vers la page de souscription après un court délai
-          setTimeout(() => {
-            router.push('/subscription');
-          }, 1500);
-        } else {
-          setSuccess('Connexion réussie !');
-        }
+        // Connexion réussie - attendre que le profil soit chargé
+        // On utilise un petit délai pour s'assurer que le profil est mis à jour
+        setTimeout(async () => {
+          const redirectPath = await getRedirectPath(email);
+          
+          if (redirectPath === '/admin') {
+            setSuccess('Connexion réussie ! Redirection vers le panneau d\'administration...');
+            setTimeout(() => {
+              router.push('/admin');
+            }, 1500);
+          } else if (redirectPath === '/subscription') {
+            setSuccess('Connexion réussie ! Redirection vers votre espace de souscription...');
+            setTimeout(() => {
+              router.push('/subscription');
+            }, 1500);
+          } else {
+            setSuccess('Connexion réussie !');
+          }
+        }, 500);
       }
     } catch (error: any) {
       setError('Une erreur est survenue lors de la connexion');

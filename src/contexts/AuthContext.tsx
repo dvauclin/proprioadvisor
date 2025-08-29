@@ -24,6 +24,7 @@ export interface AuthContextType {
   resetPassword: (email: string) => Promise<{ error: any }>;
   updatePassword: (newPassword: string) => Promise<{ error: any }>;
   isUserConciergerie: (email: string) => Promise<boolean>;
+  getRedirectPath: (email: string) => Promise<string>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -260,6 +261,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const isAdmin = profile?.role === 'admin';
 
+  const getRedirectPath = async (email: string): Promise<string> => {
+    // Si l'utilisateur est admin, rediriger vers le panneau d'admin
+    if (profile?.role === 'admin') {
+      return '/admin';
+    }
+    
+    // Sinon, vérifier si c'est une conciergerie
+    const isConciergerie = await isUserConciergerie(email);
+    if (isConciergerie) {
+      return '/subscription';
+    }
+    
+    // Par défaut, rester sur la page actuelle
+    return '/';
+  };
+
   const value = {
     user,
     session,
@@ -272,6 +289,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     resetPassword,
     updatePassword,
     isUserConciergerie,
+    getRedirectPath,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

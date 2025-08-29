@@ -20,7 +20,8 @@ const AdminLoginForm = () => {
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
-  const { signIn } = useAuth();
+  const { signIn, getRedirectPath } = useAuth();
+  const router = useRouter();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +39,19 @@ const AdminLoginForm = () => {
         } else {
           setError(error.message);
         }
+      } else {
+        // Connexion réussie - attendre que le profil soit chargé
+        setTimeout(async () => {
+          const redirectPath = await getRedirectPath(email);
+          
+          if (redirectPath === '/admin') {
+            // Redirection automatique vers le panneau d'admin
+            router.push('/admin');
+          } else {
+            // Si ce n'est pas un admin, afficher un message d'erreur
+            setError('Vous n\'avez pas les droits d\'administrateur');
+          }
+        }, 500);
       }
     } catch (error: any) {
       setError('Une erreur est survenue lors de la connexion');
