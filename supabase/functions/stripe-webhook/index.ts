@@ -5,6 +5,7 @@ import { logStep } from "./utils/logging.ts";
 import { handleCheckoutSessionCompleted } from "./handlers/checkout-session-completed.ts";
 import { handleSubscriptionCreated } from "./handlers/subscription-created.ts";
 import { handleSubscriptionUpdated } from "./handlers/subscription-updated.ts";
+import { handleSubscriptionDeleted } from "./handlers/subscription-deleted.ts";
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -63,6 +64,10 @@ serve(async (req) => {
       case "customer.subscription.updated":
         const updatedSubscription = event.data.object as Stripe.Subscription;
         return await handleSubscriptionUpdated(updatedSubscription);
+
+      case "customer.subscription.deleted":
+        const deletedSubscription = event.data.object as Stripe.Subscription;
+        return await handleSubscriptionDeleted(deletedSubscription);
 
       default:
         logStep("Unhandled event type", { eventType: event.type });
