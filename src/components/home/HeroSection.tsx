@@ -165,11 +165,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
                 )}
               </Button>
               {/* Texte avec le nombre de conciergeries sous le bouton Ajouter */}
-              <div className="mt-2 text-center">
-                <p className="text-xs text-gray-500">
-                  Déjà <span className="font-semibold text-brand-chartreuse">{displayedCount}</span> conciergerie{displayedCount > 1 ? 's' : ''} référencée{displayedCount > 1 ? 's' : ''}
-                </p>
-              </div>
+              {!user && (
+                <div className="mt-2 text-center">
+                  <p className="text-xs text-gray-500">
+                    Déjà <span className="font-semibold text-brand-chartreuse">{displayedCount}</span> conciergerie{displayedCount > 1 ? 's' : ''} référencée{displayedCount > 1 ? 's' : ''}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

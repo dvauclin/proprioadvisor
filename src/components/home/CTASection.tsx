@@ -77,35 +77,33 @@ const CTASection: React.FC = () => {
   }, [isVisible, conciergeriesCount]);
 
   return (
-    <section ref={sectionRef} className="py-12 bg-brand-chartreuse/10 relative overflow-hidden my-0">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Vous gérez une conciergerie Airbnb ?</h2>
-          <p className="text-xl text-gray-600 mb-6">
-            Inscrivez votre entreprise gratuitement sur ProprioAdvisor pour augmenter votre visibilité et <a href="https://proprioadvisor.fr/trouver-des-clients-conciergerie-airbnb" className="underline">trouver de nouveaux clients</a>.
-          </p>
-          <div className="flex flex-col items-center">
-            <Button className="text-lg px-6 py-3" asChild>
-              {user ? (
-                <Link href="/ma-conciergerie">
-                  Modifier ma conciergerie
-                </Link>
-              ) : (
-                <Link href="/inscription">
-                  Ajouter ma conciergerie
-                </Link>
-              )}
-            </Button>
-            {/* Texte avec le nombre de conciergeries sous le bouton */}
-            <div className="mt-3 text-center">
-              <p className="text-sm text-gray-600">
-                Déjà <span className="font-semibold text-brand-chartreuse">{displayedCount}</span> conciergerie{displayedCount > 1 ? 's' : ''} référencée{displayedCount > 1 ? 's' : ''} sur la plateforme
+    <>
+      {!user && (
+        <section ref={sectionRef} className="py-12 bg-brand-chartreuse/10 relative overflow-hidden my-0">
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-4">Vous gérez une conciergerie Airbnb ?</h2>
+              <p className="text-xl text-gray-600 mb-6">
+                Inscrivez votre entreprise gratuitement sur ProprioAdvisor pour augmenter votre visibilité et <a href="https://proprioadvisor.fr/trouver-des-clients-conciergerie-airbnb" className="underline">trouver de nouveaux clients</a>.
               </p>
+              <div className="flex flex-col items-center">
+                <Button className="text-lg px-6 py-3" asChild>
+                  <Link href="/inscription">
+                    Ajouter ma conciergerie
+                  </Link>
+                </Button>
+                {/* Texte avec le nombre de conciergeries sous le bouton */}
+                <div className="mt-3 text-center">
+                  <p className="text-sm text-gray-600">
+                    Déjà <span className="font-semibold text-brand-chartreuse">{displayedCount}</span> conciergerie{displayedCount > 1 ? 's' : ''} référencée{displayedCount > 1 ? 's' : ''} sur la plateforme
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 };
 
