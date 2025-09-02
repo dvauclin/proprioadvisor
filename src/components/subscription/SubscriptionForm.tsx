@@ -40,7 +40,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
         backlink: false,
         conciergeriePageLink: false
       },
-      customAmount: "5",
+      customAmount: "10",
       useCustomAmount: false,
       websiteUrl: "",
       phoneNumberValue: "",

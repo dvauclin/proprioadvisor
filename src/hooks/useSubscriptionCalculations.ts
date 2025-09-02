@@ -88,7 +88,7 @@ export const useSubscriptionCalculations = ({
       // Always update the custom amount when options change, regardless of which
       // option is selected (default or custom)
       if (optionsChanged) {
-        const suggestedAmount = Math.max(defaultFee + 5, 5);
+        const suggestedAmount = Math.max(defaultFee + 10, 10);
         form.setValue("customAmount", String(suggestedAmount), { shouldValidate: true });
         lastValidCustomAmount.current = String(suggestedAmount);
         optionsJustChanged.current = true;
@@ -99,7 +99,7 @@ export const useSubscriptionCalculations = ({
       if (useCustomAmount) {
         // Always use the current custom amount value for calculations
         const customFeeStr = form.getValues("customAmount");
-        const customFee = customFeeStr ? Number(customFeeStr) : defaultFee + 5;
+        const customFee = customFeeStr ? Number(customFeeStr) : defaultFee + 10;
         finalFee = Math.max(customFee, 0); // Ensure custom amount is not negative
       }
       
