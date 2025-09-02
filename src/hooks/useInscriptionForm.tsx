@@ -273,7 +273,7 @@ export const useInscriptionForm = () => {
         await triggerConciergerieCreation({
           conciergerie_id: conciergerie.id,
           nom: conciergerie.nom,
-          email: conciergerie.mail,
+          email: conciergerie.mail || '',
           telephone_contact: conciergerie.telephone_contact || '',
           nom_contact: conciergerie.nom_contact || '',
           type_logement_accepte: conciergerie.type_logement_accepte || '',
