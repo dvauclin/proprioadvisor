@@ -203,6 +203,19 @@ export const useInscriptionForm = () => {
 
       console.log("handleSubmit: Conciergerie créée avec succès:", conciergerie);
       
+      // 🔥 TRACKING GTM - Inscription réussie
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          'event': 'inscription_reussie',
+          'conciergerie_id': conciergerie.id,
+          'conciergerie_nom': conciergerie.nom,
+          'conciergerie_mail': conciergerie.mail,
+          'conciergerie_ville': conciergerie.villes_ids?.[0] || 'N/A',
+          'timestamp': new Date().toISOString(),
+          'formules_count': formules.length
+        });
+      }
+      
       // Sauvegarder les formules si elles existent
       console.log("handleSubmit: Vérification des formules à sauvegarder, count:", formules.length);
       if (formules.length > 0) {

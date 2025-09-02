@@ -185,6 +185,21 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
     timestamp: new Date().toISOString()
   });
 
+  // 🔥 TRACKING GTM - Premier paiement réussi
+  // Vérifier si c'est le premier paiement (pas de montant mensuel précédent)
+  if (subscription.monthly_amount === 0 && subscription.pending_monthly_amount > 0) {
+    // C'est le premier paiement réussi
+    await triggerWebhook({
+      type: 'premier_paiement_reussi',
+      subscription_id: subscription.id,
+      conciergerie_id: subscription.conciergerie_id,
+      total_points: totalPoints,
+      monthly_amount: subscription.pending_monthly_amount,
+      is_first_payment: true,
+      timestamp: new Date().toISOString()
+    });
+  }
+
   return new Response(JSON.stringify({ received: true }), {
     status: 200,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
