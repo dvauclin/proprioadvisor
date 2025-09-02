@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { Conciergerie, Formule } from "@/types";
 import { transformConciergerieFromDB, transformConciergerieForDB, transformFormuleForDB } from "./conciergerieTransformService";
-import { triggerConciergerieModification, triggerWebhook } from "@/utils/webhookService";
+import { triggerConciergerieModification, triggerConciergerieValidation } from "@/utils/webhookService";
 
 export const getConciergeriesToValidate = async (): Promise<Conciergerie[]> => {
   console.log("Fetching conciergeries to validate...");
@@ -126,7 +126,7 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
 
     // Trigger webhook after successful validation
     try {
-      console.log("ðŸš€ Triggering validation webhook for:", conciergerie.nom);
+              console.log("🔗 Triggering validation webhook for:", conciergerie.nom);
       
       // Get selected cities data with slug for URL
       const { data: villes } = await supabase
@@ -147,18 +147,16 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
         url: `https://proprioadvisor.fr/conciergerie/${ville.slug}`
       }));
 
-      await triggerWebhook({
-        type: "validation_inscription",
-        nom: conciergerie.nom,
-        email: conciergerie.mail || '',
-        villesSelectionnees: villesFormatted,
-        conciergerieID: id,
-        nombrePoints: subscription?.total_points || 0,
-        montantAbonnement: subscription?.monthly_amount || 0,
-        timestamp: new Date().toISOString(),
-      });
+              await triggerConciergerieValidation({
+          nom: conciergerie.nom,
+          email: conciergerie.mail || '',
+          villesSelectionnees: villesFormatted,
+          conciergerieID: id,
+          nombrePoints: subscription?.total_points || 0,
+          montantAbonnement: subscription?.monthly_amount || 0,
+        });
 
-      console.log("âœ… Validation webhook sent successfully");
+              console.log("✅ Validation webhook sent successfully");
     } catch (webhookError) {
       console.error("âŒ Webhook error:", webhookError);
       // Don't fail the validation if webhook fails

@@ -5,32 +5,61 @@ export interface WebhookData {
   [key: string]: any;
 }
 
-// Fonction principale pour déclencher les webhooks
-export const triggerWebhook = async (data: WebhookData) => {
-  const webhookUrl =
-    process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || process.env.N8N_WEBHOOK_URL;
-
-  if (!webhookUrl) {
-    console.warn('N8N webhook URL not configured');
-    return;
-  }
-
-  try {
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Webhook error: ${response.status} ${response.statusText}`);
-    }
-  } catch (err) {
-    console.error('Webhook trigger failed:', err);
-  }
+// Configuration des webhooks
+const WEBHOOK_CONFIG = {
+  url: process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || process.env.N8N_WEBHOOK_URL,
+  timeout: 10000, // 10 secondes
+  retries: 2
 };
 
-// Webhooks essentiels uniformisés
+// Fonction principale pour déclencher les webhooks avec gestion d'erreur améliorée
+export const triggerWebhook = async (data: WebhookData): Promise<boolean> => {
+  if (!WEBHOOK_CONFIG.url) {
+    console.warn('⚠️ N8N webhook URL not configured');
+    return false;
+  }
+
+  for (let attempt = 0; attempt <= WEBHOOK_CONFIG.retries; attempt++) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), WEBHOOK_CONFIG.timeout);
+
+      const response = await fetch(WEBHOOK_CONFIG.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`Webhook error: ${response.status} ${response.statusText}`);
+      }
+
+      console.log(`✅ Webhook ${data.type} envoyé avec succès`);
+      return true;
+
+    } catch (err) {
+      const error = err as Error;
+      console.error(`❌ Tentative ${attempt + 1}/${WEBHOOK_CONFIG.retries + 1} échouée pour ${data.type}:`, error.message);
+      
+      if (attempt === WEBHOOK_CONFIG.retries) {
+        console.error(`💥 Webhook ${data.type} définitivement échoué après ${WEBHOOK_CONFIG.retries + 1} tentatives`);
+        return false;
+      }
+
+      // Attendre avant de réessayer (backoff exponentiel)
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+    }
+  }
+
+  return false;
+};
+
+// ============================================================================
+// WEBHOOKS ESSENTIELS UNIFORMISÉS
+// ============================================================================
 
 // 1. Création conciergerie
 export const triggerConciergerieCreation = async (data: {
@@ -49,8 +78,8 @@ export const triggerConciergerieCreation = async (data: {
   url_avis: string | null;
   villes_ids: string[];
   nombre_formules: number;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'inscription_conciergerie',
     timestamp: new Date().toISOString(),
     ...data
@@ -62,8 +91,8 @@ export const triggerConciergerieModification = async (data: {
   conciergerie_id: string;
   nom: string;
   email: string;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'modification_conciergerie',
     timestamp: new Date().toISOString(),
     ...data
@@ -75,8 +104,8 @@ export const triggerUserAccountCreation = async (data: {
   user_id: string;
   email: string;
   conciergerie_id?: string;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'creation_compte',
     timestamp: new Date().toISOString(),
     ...data
@@ -90,8 +119,8 @@ export const triggerFirstPaymentSuccess = async (data: {
   amount: number;
   total_points: number;
   is_first_payment: boolean;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'checkout_session_completed',
     timestamp: new Date().toISOString(),
     ...data
@@ -112,8 +141,8 @@ export const triggerSubscriptionCreated = async (data: {
   phone_number: boolean;
   backlink_home: boolean;
   backlink_gmb: boolean;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'subscription_created',
     timestamp: new Date().toISOString(),
     ...data
@@ -134,8 +163,8 @@ export const triggerSubscriptionUpdated = async (data: {
   phone_number: boolean;
   backlink_home: boolean;
   backlink_gmb: boolean;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'subscription_updated',
     timestamp: new Date().toISOString(),
     ...data
@@ -156,8 +185,8 @@ export const triggerSubscriptionCancelled = async (data: {
   phone_number: boolean;
   backlink_home: boolean;
   backlink_gmb: boolean;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'subscription_cancelled',
     timestamp: new Date().toISOString(),
     ...data
@@ -169,8 +198,8 @@ export const triggerLeadSubmitted = async (data: {
   nom: string;
   email: string;
   conciergerie_id?: string;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'lead_submitted',
     timestamp: new Date().toISOString(),
     ...data
@@ -181,8 +210,8 @@ export const triggerLeadSubmitted = async (data: {
 export const triggerMultipleLeadsSubmitted = async (data: {
   total_leads: number;
   conciergeries: Array<{ nom: string; email: string }>;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'multiple_leads_submitted',
     timestamp: new Date().toISOString(),
     ...data
@@ -195,11 +224,65 @@ export const triggerContactMessageSent = async (data: {
   email: string;
   sujet: string;
   message: string;
-}) => {
-  await triggerWebhook({
+}): Promise<boolean> => {
+  return await triggerWebhook({
     type: 'contact_message_sent',
     timestamp: new Date().toISOString(),
     ...data
   });
 };
+
+// 11. Validation conciergerie
+export const triggerConciergerieValidation = async (data: {
+  nom: string;
+  email: string;
+  villesSelectionnees: Array<{ nom: string; url: string }>;
+  conciergerieID: string;
+  nombrePoints: number;
+  montantAbonnement: number;
+}): Promise<boolean> => {
+  return await triggerWebhook({
+    type: 'validation_conciergerie',
+    timestamp: new Date().toISOString(),
+    ...data
+  });
+};
+
+
+
+// 12. Avis soumis
+export const triggerAvisSubmitted = async (data: {
+  conciergerie_id: string;
+  emetteur: string;
+  note: number;
+  commentaire: string;
+}): Promise<boolean> => {
+  return await triggerWebhook({
+    type: 'avis_submitted',
+    timestamp: new Date().toISOString(),
+    avis: {
+      ...data,
+      date: new Date().toISOString()
+    }
+  });
+};
+
+// ============================================================================
+// UTILITAIRES
+// ============================================================================
+
+// Fonction pour vérifier la configuration des webhooks
+export const checkWebhookConfiguration = (): boolean => {
+  const isConfigured = !!WEBHOOK_CONFIG.url;
+  if (!isConfigured) {
+    console.warn('⚠️ Configuration webhook manquante. Vérifiez N8N_WEBHOOK_URL');
+  }
+  return isConfigured;
+};
+
+// Fonction pour obtenir la configuration des webhooks
+export const getWebhookConfiguration = () => ({
+  ...WEBHOOK_CONFIG,
+  url: WEBHOOK_CONFIG.url ? '***CONFIGURÉ***' : 'NON CONFIGURÉ'
+});
 
