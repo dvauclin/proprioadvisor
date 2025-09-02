@@ -8,11 +8,13 @@ import { Menu, X } from "lucide-react";
 import { Badge } from "@/components/ui-kit/badge";
 import UserMenu from "@/components/auth/UserMenu";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const { favoritesCount } = useFavorites();
+  const { user } = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -64,47 +66,80 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <nav className="ml-10 flex items-baseline space-x-4" role="menubar">
-                                <Link
+              {user ? (
+                // Navigation pour utilisateurs connectés
+                <>
+                  <Link
+                    href="/ma-conciergerie"
+                    role="menuitem"
+                    aria-current={isActive("/ma-conciergerie") ? "page" : undefined}
+                    className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                      isActive("/ma-conciergerie")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                  >
+                    Modifier ma conciergerie
+                  </Link>
+                  <Link
+                    href="/subscription"
+                    role="menuitem"
+                    aria-current={isActive("/subscription") ? "page" : undefined}
+                    className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                      isActive("/subscription")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                  >
+                    Modifier ma souscription
+                  </Link>
+                </>
+              ) : (
+                // Navigation pour utilisateurs non connectés
+                <>
+                  <Link
                     href="/gestion-airbnb"
                     role="menuitem"
                     aria-current={isActive("/gestion-airbnb") ? "page" : undefined}
                     className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                  isActive("/gestion-airbnb")
-                    ? "text-primary bg-primary/10"
-                    : "text-gray-600 hover:text-primary hover:bg-primary/5"
-                } transition-colors`}
-              >
-                Guide Airbnb
-              </Link>
-                                <Link
+                      isActive("/gestion-airbnb")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                  >
+                    Guide Airbnb
+                  </Link>
+                  <Link
                     href="/simulateur-airbnb"
                     role="menuitem"
                     aria-current={isActive("/simulateur-airbnb") ? "page" : undefined}
                     className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                  isActive("/simulateur-airbnb")
-                    ? "text-primary bg-primary/10"
-                    : "text-gray-600 hover:text-primary hover:bg-primary/5"
-                } transition-colors`}
-              >
-                Simulateur Airbnb
-              </Link>
-                                <Link
+                      isActive("/simulateur-airbnb")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                  >
+                    Simulateur Airbnb
+                  </Link>
+                  <Link
                     href="/favoris"
                     role="menuitem"
                     aria-current={isActive("/favoris") ? "page" : undefined}
                     className={`px-3 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                  isActive("/favoris")
-                    ? "text-primary bg-primary/10"
-                    : "text-gray-600 hover:text-primary hover:bg-primary/5"
-                } transition-colors flex items-center gap-1`}
-              >
-                Favoris
-                {favoritesCount > 0 && (
-                  <Badge variant="secondary" className="ml-1 bg-red-500 text-white text-xs">
-                    {favoritesCount}
-                  </Badge>
-                )}
-              </Link>
+                      isActive("/favoris")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors flex items-center gap-1`}
+                  >
+                    Favoris
+                    {favoritesCount > 0 && (
+                      <Badge variant="secondary" className="ml-1 bg-red-500 text-white text-xs">
+                        {favoritesCount}
+                      </Badge>
+                    )}
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
 
@@ -144,44 +179,75 @@ const Navbar = () => {
             ref={menuRef}
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link
-                href="/gestion-airbnb"
-                className={`block px-3 py-2 rounded-full text-base font-medium ${
-                  isActive("/gestion-airbnb")
-                    ? "text-primary bg-primary/10"
-                    : "text-gray-600 hover:text-primary hover:bg-primary/5"
-                } transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Guide Airbnb
-              </Link>
-              <Link
-                href="/simulateur-airbnb"
-                className={`block px-3 py-2 rounded-full text-base font-medium ${
-                  isActive("/simulateur-airbnb")
-                    ? "text-primary bg-primary/10"
-                    : "text-gray-600 hover:text-primary hover:bg-primary/5"
-                } transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Simulateur Airbnb
-              </Link>
-              <Link
-                href="/favoris"
-                className={`block px-3 py-2 rounded-full text-base font-medium ${
-                  isActive("/favoris")
-                    ? "text-primary bg-primary/10"
-                    : "text-gray-600 hover:text-primary hover:bg-primary/5"
-                } transition-colors flex items-center justify-between`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span>Favoris</span>
-                {favoritesCount > 0 && (
-                  <Badge variant="secondary" className="bg-red-500 text-white text-xs">
-                    {favoritesCount}
-                  </Badge>
-                )}
-              </Link>
+              {user ? (
+                // Navigation mobile pour utilisateurs connectés
+                <>
+                  <Link
+                    href="/ma-conciergerie"
+                    className={`block px-3 py-2 rounded-full text-base font-medium ${
+                      isActive("/ma-conciergerie")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Modifier ma conciergerie
+                  </Link>
+                  <Link
+                    href="/subscription"
+                    className={`block px-3 py-2 rounded-full text-base font-medium ${
+                      isActive("/subscription")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Modifier ma souscription
+                  </Link>
+                </>
+              ) : (
+                // Navigation mobile pour utilisateurs non connectés
+                <>
+                  <Link
+                    href="/gestion-airbnb"
+                    className={`block px-3 py-2 rounded-full text-base font-medium ${
+                      isActive("/gestion-airbnb")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Guide Airbnb
+                  </Link>
+                  <Link
+                    href="/simulateur-airbnb"
+                    className={`block px-3 py-2 rounded-full text-base font-medium ${
+                      isActive("/simulateur-airbnb")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Simulateur Airbnb
+                  </Link>
+                  <Link
+                    href="/favoris"
+                    className={`block px-3 py-2 rounded-full text-base font-medium ${
+                      isActive("/favoris")
+                        ? "text-primary bg-primary/10"
+                        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+                    } transition-colors flex items-center justify-between`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span>Favoris</span>
+                    {favoritesCount > 0 && (
+                      <Badge variant="secondary" className="bg-red-500 text-white text-xs">
+                        {favoritesCount}
+                      </Badge>
+                    )}
+                  </Link>
+                </>
+              )}
             </div>
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-4">

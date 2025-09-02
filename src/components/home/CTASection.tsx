@@ -4,8 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui-kit/button";
 import { getValidatedConciergeriesCount } from "@/services/conciergerieService";
+import { useAuth } from "@/contexts/AuthContext";
 
 const CTASection: React.FC = () => {
+  const { user } = useAuth();
   const [conciergeriesCount, setConciergeriesCount] = useState<number>(0);
   const [displayedCount, setDisplayedCount] = useState<number>(0);
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -84,9 +86,15 @@ const CTASection: React.FC = () => {
           </p>
           <div className="flex flex-col items-center">
             <Button className="text-lg px-6 py-3" asChild>
-              <Link href="/inscription">
-                Ajouter ma conciergerie
-              </Link>
+              {user ? (
+                <Link href="/ma-conciergerie">
+                  Modifier ma conciergerie
+                </Link>
+              ) : (
+                <Link href="/inscription">
+                  Ajouter ma conciergerie
+                </Link>
+              )}
             </Button>
             {/* Texte avec le nombre de conciergeries sous le bouton */}
             <div className="mt-3 text-center">

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui-kit/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui-kit/select";
 import { Ville } from "@/types";
 import { getValidatedConciergeriesCount } from "@/services/conciergerieService";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface HeroSectionProps {
   selectedVille: string | null;
@@ -15,6 +16,7 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) => {
   const router = useRouter();
+  const { user } = useAuth();
   const [selectedVilleSlug, setSelectedVilleSlug] = useState<string | null>(selectedVille);
   const [conciergeriesCount, setConciergeriesCount] = useState<number>(0);
   const [displayedCount, setDisplayedCount] = useState<number>(0);
@@ -156,7 +158,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ selectedVille, allVilles }) =
             </Button>
             <div className="flex flex-col items-center">
               <Button variant="outline" className="h-12 px-6 rounded-full shadow-sm" asChild>
-                <Link href="/inscription">Ajouter votre conciergerie</Link>
+                {user ? (
+                  <Link href="/ma-conciergerie">Modifier ma conciergerie</Link>
+                ) : (
+                  <Link href="/inscription">Ajouter votre conciergerie</Link>
+                )}
               </Button>
               {/* Texte avec le nombre de conciergeries sous le bouton Ajouter */}
               <div className="mt-2 text-center">

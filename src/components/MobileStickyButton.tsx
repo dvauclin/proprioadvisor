@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui-kit/button";
-import { Heart, Plus } from "lucide-react";
+import { Heart, Plus, Edit } from "lucide-react";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -47,7 +47,19 @@ const MobileStickyButton = () => {
 
   return (
     <div className="fixed bottom-4 right-4 z-50 safe-area-bottom safe-area-right">
-      {favoritesCount === 0 && !user ? (
+      {user ? (
+        // Bouton pour utilisateurs connectés
+        <Button
+          asChild
+          className="rounded-full shadow-lg"
+        >
+          <a href="/ma-conciergerie">
+            <Edit className="mr-2 h-5 w-5" />
+            Modifier ma conciergerie
+          </a>
+        </Button>
+      ) : favoritesCount === 0 ? (
+        // Bouton pour utilisateurs non connectés sans favoris
         <Button
           asChild
           className="rounded-full shadow-lg"
@@ -58,6 +70,7 @@ const MobileStickyButton = () => {
           </a>
         </Button>
       ) : favoritesCount > 0 ? (
+        // Bouton favoris pour utilisateurs non connectés avec favoris
         <Button
           className="rounded-full shadow-lg"
           onClick={() => {
