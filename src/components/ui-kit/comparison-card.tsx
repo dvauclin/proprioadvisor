@@ -157,7 +157,7 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
                 <h3 className="font-semibold text-lg break-words min-w-0 flex-1">{conciergerie?.nom || "Conciergerie"}</h3>
               )}
               <div className="flex items-center gap-1 flex-shrink-0">
-                {showWebsite && (
+                {showWebsite && !isNonRecommande && (
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -175,7 +175,7 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
                     </Tooltip>
                   </TooltipProvider>
                 )}
-                {showPhone && (
+                {showPhone && !isNonRecommande && (
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
