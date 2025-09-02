@@ -6,7 +6,7 @@ import { useToast } from '@/components/ui-kit/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { SubscriptionFormValues } from '@/types/subscription';
 import { handleUserAuthentication } from '@/utils/subscriptionAuthHelper';
-import { triggerSubscriptionUpdated, triggerSubscriptionCreated } from '@/utils/webhookService';
+import { triggerSubscriptionUpdated } from '@/utils/webhookService';
 
 interface UseSubscriptionSubmitProps {
   totalMonthlyFee: number;
