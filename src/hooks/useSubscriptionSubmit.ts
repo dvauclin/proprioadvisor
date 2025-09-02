@@ -6,7 +6,7 @@ import { useToast } from '@/components/ui-kit/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { SubscriptionFormValues } from '@/types/subscription';
 import { handleUserAuthentication } from '@/utils/subscriptionAuthHelper';
-import { triggerWebhook } from '@/utils/webhookService';
+import { triggerSubscriptionUpdated, triggerSubscriptionCreated } from '@/utils/webhookService';
 
 interface UseSubscriptionSubmitProps {
   totalMonthlyFee: number;
@@ -182,14 +182,19 @@ export const useSubscriptionSubmit = ({
         
         // Déclencher le webhook
         try {
-          await triggerWebhook({
-            type: 'subscription_update',
+          await triggerSubscriptionUpdated({
             subscription_id: subscriptionId,
             conciergerie_id: conciergerieId,
+            amount: 0,
             total_points: totalPoints,
-            monthly_amount: 0,
-            is_update: isUpdate,
-            is_free: true
+            is_free: true,
+            email: conciergerieEmail,
+            basic_listing: false,
+            partner_listing: false,
+            website_link: false,
+            phone_number: false,
+            backlink_home: false,
+            backlink_gmb: false
           });
         } catch (webhookError) {
           console.error("Erreur lors du déclenchement du webhook:", webhookError);
@@ -242,18 +247,7 @@ export const useSubscriptionSubmit = ({
       console.log("Checkout response:", data);
 
       if (data?.url) {
-        // Déclencher le webhook pour les souscriptions payantes
-        try {
-          await triggerWebhook({
-            type: 'subscription_checkout',
-            conciergerie_id: conciergerieId,
-            total_points: totalPoints,
-            monthly_amount: totalMonthlyFee,
-            checkout_url: data.url
-          });
-        } catch (webhookError) {
-          console.error("Erreur lors du déclenchement du webhook:", webhookError);
-        }
+        // Webhook supprimé - pas dans la liste essentielle
         
         // Redirect to URL
         if (data.url.includes('/success')) {

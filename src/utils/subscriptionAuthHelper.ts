@@ -1,5 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { AuthContextType } from '@/contexts/AuthContext';
+import { triggerUserAccountCreation } from '@/utils/webhookService';
 
 interface HandleUserAuthenticationParams {
   email: string;
@@ -41,6 +42,16 @@ export const handleUserAuthentication = async ({
         });
         return { userLoggedIn: false, errorOccurred: true };
       } else if (newUser.user && !createUserError) {
+        // Déclencher le webhook de création de compte
+        try {
+          await triggerUserAccountCreation({
+            user_id: newUser.user.id,
+            email: email
+          });
+        } catch (webhookError) {
+          console.error("Erreur lors du déclenchement du webhook de création de compte:", webhookError);
+        }
+        
         await signIn(email, password); // Attempt to sign in again after successful sign-up
         toast({
           title: "Compte créé et connexion réussie",

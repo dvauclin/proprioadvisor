@@ -10,7 +10,7 @@ import { FormuleFormData } from "@/components/formule/FormuleFormSchema";
 import { getAllVilles } from "@/services/villeService";
 import { Ville } from "@/types";
 import { transformFormuleForDB } from "@/services/conciergerieTransformService";
-import { triggerWebhook } from "@/utils/webhookService";
+import { triggerConciergerieCreation } from "@/utils/webhookService";
 
 interface InscriptionFormData {
   nom: string;
@@ -270,24 +270,22 @@ export const useInscriptionForm = () => {
       try {
         console.log("🔗 Déclenchement du webhook d'inscription pour:", conciergerie.nom);
         
-        await triggerWebhook({
-          type: 'inscription_conciergerie',
+        await triggerConciergerieCreation({
           conciergerie_id: conciergerie.id,
           nom: conciergerie.nom,
           email: conciergerie.mail,
-          telephone_contact: conciergerie.telephone_contact,
-          nom_contact: conciergerie.nom_contact,
-          type_logement_accepte: conciergerie.type_logement_accepte,
-          deduction_frais: conciergerie.deduction_frais,
-          accepte_gestion_partielle: conciergerie.accepte_gestion_partielle,
-          accepte_residence_principale: conciergerie.accepte_residence_principale,
-          superficie_min: conciergerie.superficie_min,
-          nombre_chambres_min: conciergerie.nombre_chambres_min,
-          zone_couverte: conciergerie.zone_couverte,
-          url_avis: conciergerie.url_avis,
+          telephone_contact: conciergerie.telephone_contact || '',
+          nom_contact: conciergerie.nom_contact || '',
+          type_logement_accepte: conciergerie.type_logement_accepte || '',
+          deduction_frais: conciergerie.deduction_frais || false,
+          accepte_gestion_partielle: conciergerie.accepte_gestion_partielle || false,
+          accepte_residence_principale: conciergerie.accepte_residence_principale || false,
+          superficie_min: conciergerie.superficie_min || 0,
+          nombre_chambres_min: conciergerie.nombre_chambres_min || 0,
+          zone_couverte: conciergerie.zone_couverte || '',
+          url_avis: conciergerie.url_avis || '',
           villes_ids: selectedVillesIds,
-          nombre_formules: formules.length,
-          timestamp: new Date().toISOString()
+          nombre_formules: formules.length
         });
         
         console.log("✅ Webhook d'inscription envoyé avec succès");

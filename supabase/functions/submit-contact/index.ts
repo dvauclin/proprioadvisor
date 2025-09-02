@@ -96,13 +96,11 @@ serve(async (req) => {
     try {
       const webhookData = {
         type: "contact_message_sent",
-        contact: {
-          nom: nom.trim(),
-          email: email.trim(),
-          sujet: sujet.trim(),
-          message: message.trim()
-        },
-        date: new Date().toISOString()
+        nom: nom.trim(),
+        email: email.trim(),
+        sujet: sujet.trim(),
+        message: message.trim(),
+        timestamp: new Date().toISOString()
       };
 
       console.log('🔗 Déclenchement du webhook:', webhookData);

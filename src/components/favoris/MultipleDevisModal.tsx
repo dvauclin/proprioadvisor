@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui-kit/separator";
 import { toast } from "sonner";
 import { submitLead } from "@/services/leadService";
 import { supabase } from "@/integrations/supabase/client";
-import { triggerWebhook } from "@/utils/webhookService";
+import { triggerMultipleLeadsSubmitted } from "@/utils/webhookService";
 import { Formule, Conciergerie } from "@/types";
 import { Loader2, LayoutDashboard, Clock, Home, Square, Bed, MapPin, Building, Phone, Mail, User, Send, ClipboardList } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui-kit/select";
@@ -163,11 +163,9 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
         email: formule.conciergeries?.mail || "Email inconnu"
       })) || [];
 
-      await triggerWebhook({
-        type: "multiple_leads_submitted",
-        totalLeads: selectedFormules.length,
-        conciergeries: conciergeriesInfo,
-        timestamp: new Date().toISOString()
+      await triggerMultipleLeadsSubmitted({
+        total_leads: selectedFormules.length,
+        conciergeries: conciergeriesInfo
       });
 
       toast.success("Votre demande de devis a été envoyée avec succès");

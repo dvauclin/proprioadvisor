@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { Loader2, LayoutDashboard, Clock, Home, Square, Bed, MapPin, Building, Phone, Mail, User, Send, ClipboardList } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui-kit/select";
 import { Checkbox } from "@/components/ui-kit/checkbox";
-import { triggerWebhook } from "@/utils/webhookService";
+import { triggerLeadSubmitted } from "@/utils/webhookService";
 
 // Array of service options with only the requested options
 const serviceOptions = [{
@@ -126,11 +126,10 @@ export const DevisForm: React.FC<DevisFormProps> = ({
           .single();
 
         // Trigger the webhook with lead data
-        await triggerWebhook({
-          type: "lead_submitted",
+        await triggerLeadSubmitted({
           nom: conciergerieData?.conciergeries?.nom || conciergerieName,
           email: conciergerieData?.conciergeries?.mail || conciergerieEmail,
-          timestamp: new Date().toISOString()
+          conciergerie_id: formuleId
         });
         
         toast.success("Votre demande de devis a été envoyée avec succès");

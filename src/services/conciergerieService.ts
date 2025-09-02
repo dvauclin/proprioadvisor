@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { Conciergerie, Formule } from "@/types";
 import { transformConciergerieFromDB, transformConciergerieForDB, transformFormuleForDB } from "./conciergerieTransformService";
-import { triggerWebhook } from "@/utils/webhookService";
+import { triggerConciergerieModification, triggerWebhook } from "@/utils/webhookService";
 
 export const getConciergeriesToValidate = async (): Promise<Conciergerie[]> => {
   console.log("Fetching conciergeries to validate...");
@@ -217,14 +217,10 @@ export const saveConciergerie = async (conciergerieData: Conciergerie & { formul
 
       // Trigger webhook for conciergerie modification
       try {
-        await triggerWebhook({
-          type: "modification_conciergerie",
-          conciergerie: {
-            id: conciergerieData.id,
-            nom: conciergerieData.nom,
-            email: conciergerieData.mail,
-          },
-          date: new Date().toISOString(),
+        await triggerConciergerieModification({
+          conciergerie_id: conciergerieData.id,
+          nom: conciergerieData.nom,
+          email: conciergerieData.mail || '',
         });
       } catch (webhookError) {
         console.error("Erreur lors de l'envoi du webhook:", webhookError);

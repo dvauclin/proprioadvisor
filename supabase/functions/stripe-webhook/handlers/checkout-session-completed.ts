@@ -1,7 +1,7 @@
 import Stripe from "https://esm.sh/stripe@14.21.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { logStep } from "../utils/logging.ts";
-import { triggerWebhook } from "../utils/webhook.ts";
+import { triggerFirstPaymentSuccess } from "../utils/webhook.ts";
 import { corsHeaders } from "../utils/cors.ts";
 
 export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) {
@@ -128,7 +128,8 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
     sessionId: session.id
   });
 
-  // Update conciergerie score and auto-validate if payment confirmed
+  // ❌ VALIDATION AUTOMATIQUE SUPPRIMÉE - Les conciergeries ne sont plus validées automatiquement
+  // Même avec un paiement confirmé, la validation doit être manuelle par l'admin
   let conciergerieEmail = null;
   try {
     const { data: conciergerie } = await supabase
@@ -139,64 +140,29 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
     
     conciergerieEmail = conciergerie?.mail;
 
-    // Auto-validate conciergerie when payment is confirmed
-    const updateData: any = {};
-    if (!conciergerie?.validated) {
-      updateData.validated = true;
-      logStep("Auto-validating conciergerie due to confirmed payment", { 
-        conciergerieId: subscription.conciergerie_id 
-      });
-    }
+    logStep("Conciergerie payment confirmed but NOT auto-validated - manual validation required", { 
+      conciergerieId: subscription.conciergerie_id,
+      currentValidationStatus: conciergerie?.validated
+    });
 
-    // Ne pas mettre à jour score_manuel - ce champ doit rester modifiable manuellement uniquement
-    if (Object.keys(updateData).length > 0) {
-      const { error: updateError } = await supabase
-        .from('conciergeries')
-        .update(updateData)
-        .eq('id', subscription.conciergerie_id);
-      
-      if (updateError) {
-        logStep("Error updating conciergerie", { error: updateError });
-      } else {
-        logStep("Updated conciergerie", { 
-          conciergerieId: subscription.conciergerie_id, 
-          autoValidated: !conciergerie?.validated
-        });
-      }
-    }
+    // Aucune mise à jour automatique de la validation
+    // L'admin doit valider manuellement la conciergerie
   } catch (updateError) {
-    logStep("Error during conciergerie update", { error: updateError });
+    logStep("Error fetching conciergerie data", { error: updateError });
   }
 
-  // Trigger webhook for payment confirmation
-  await triggerWebhook({
-    type: "subscription_payment",
-    conciergerieId: subscription.conciergerie_id,
-    amount: subscription.pending_monthly_amount,
-    totalPoints,
-    isFree: false,
-    email: conciergerieEmail,
-    basic_listing: data.basic_listing || false,
-    partner_listing: data.partner_listing || false,
-    website_link: data.website_link || false,
-    phone_number: data.phone_number || false,
-    backlink_home: data.backlink || false,
-    backlink_gmb: data.conciergerie_page_link || false,
-    timestamp: new Date().toISOString()
-  });
+  // Webhook supprimé - pas dans la liste essentielle
 
   // 🔥 TRACKING GTM - Premier paiement réussi
   // Vérifier si c'est le premier paiement (pas de montant mensuel précédent)
   if (subscription.monthly_amount === 0 && subscription.pending_monthly_amount > 0) {
     // C'est le premier paiement réussi
-    await triggerWebhook({
-      type: 'premier_paiement_reussi',
+    await triggerFirstPaymentSuccess({
       subscription_id: subscription.id,
       conciergerie_id: subscription.conciergerie_id,
+      amount: subscription.pending_monthly_amount,
       total_points: totalPoints,
-      monthly_amount: subscription.pending_monthly_amount,
-      is_first_payment: true,
-      timestamp: new Date().toISOString()
+      is_first_payment: true
     });
   }
 

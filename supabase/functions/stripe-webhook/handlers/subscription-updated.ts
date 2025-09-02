@@ -1,7 +1,7 @@
 import Stripe from "https://esm.sh/stripe@14.21.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { logStep } from "../utils/logging.ts";
-import { triggerWebhook } from "../utils/webhook.ts";
+import { triggerSubscriptionUpdated } from "../utils/webhook.ts";
 import { corsHeaders } from "../utils/cors.ts";
 
 export async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
@@ -52,20 +52,19 @@ export async function handleSubscriptionUpdated(subscription: Stripe.Subscriptio
   }
 
   // Trigger webhook for subscription update
-  await triggerWebhook({
-    type: "subscription_updated",
-    conciergerieId: dbSubscription.conciergerie_id,
+  await triggerSubscriptionUpdated({
+    subscription_id: dbSubscription.id,
+    conciergerie_id: dbSubscription.conciergerie_id,
     amount: dbSubscription.monthly_amount,
-    totalPoints: dbSubscription.total_points,
-    isFree: dbSubscription.monthly_amount === 0,
-    email: conciergerieEmail,
+    total_points: dbSubscription.total_points,
+    is_free: dbSubscription.monthly_amount === 0,
+    email: conciergerieEmail || '',
     basic_listing: dbSubscription.basic_listing || false,
     partner_listing: dbSubscription.partner_listing || false,
     website_link: dbSubscription.website_link || false,
     phone_number: dbSubscription.phone_number || false,
     backlink_home: dbSubscription.backlink || false,
-    backlink_gmb: dbSubscription.conciergerie_page_link || false,
-    timestamp: new Date().toISOString()
+    backlink_gmb: dbSubscription.conciergerie_page_link || false
   });
 
   return new Response(JSON.stringify({ received: true }), {

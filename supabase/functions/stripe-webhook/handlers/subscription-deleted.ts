@@ -1,7 +1,7 @@
 import Stripe from "https://esm.sh/stripe@14.21.0";
 import { createClient } from "https://esm.sh/@supabase/supabase/supabase-js@2.45.0";
 import { logStep } from "../utils/logging.ts";
-import { triggerWebhook } from "../utils/webhook.ts";
+import { triggerSubscriptionCancelled } from "../utils/webhook.ts";
 import { corsHeaders } from "../utils/cors.ts";
 
 export async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
@@ -73,20 +73,19 @@ export async function handleSubscriptionDeleted(subscription: Stripe.Subscriptio
   logStep("Successfully cancelled subscription in Supabase", { subscriptionId: dbSubscription.id });
 
   // Trigger webhook for subscription cancellation
-  await triggerWebhook({
-    type: "subscription_cancelled",
-    conciergerieId: dbSubscription.conciergerie_id,
+  await triggerSubscriptionCancelled({
+    subscription_id: dbSubscription.id,
+    conciergerie_id: dbSubscription.conciergerie_id,
     amount: 0,
-    totalPoints: dbSubscription.points_options || 0,
-    isFree: true,
-    email: conciergerieEmail,
+    total_points: dbSubscription.points_options || 0,
+    is_free: true,
+    email: conciergerieEmail || '',
     basic_listing: dbSubscription.basic_listing || false,
     partner_listing: dbSubscription.partner_listing || false,
     website_link: dbSubscription.website_link || false,
     phone_number: dbSubscription.phone_number || false,
     backlink_home: dbSubscription.backlink || false,
-    backlink_gmb: dbSubscription.conciergerie_page_link || false,
-    timestamp: new Date().toISOString()
+    backlink_gmb: dbSubscription.conciergerie_page_link || false
   });
 
   return new Response(JSON.stringify({ received: true }), {
