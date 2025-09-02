@@ -18,7 +18,7 @@ const InscriptionInfoSections: React.FC<InscriptionInfoSectionsProps> = () => {
               <strong className="text-green-600">L'inscription et le référencement sont 100% gratuits.</strong> Un abonnement est proposé pour maximiser votre visibilité.
             </p>
             <p>
-              Le montant est à titre indicatif <strong>(5 à 20/mois)</strong> car il s'agit d'un système d'enchère flexible : vous êtes libre de saisir un montant plus ou moins élevé selon votre budget et vos objectifs.
+              Le montant est à titre indicatif <strong>(5 à +20€/mois)</strong> car il s'agit d'un système d'enchère flexible : vous êtes libre de saisir un montant plus ou moins élevé selon votre budget et vos objectifs.
             </p>
             <div className="bg-green-50 p-4 rounded-lg border border-green-200">
               <div className="flex items-center gap-2 mb-2">
@@ -57,7 +57,7 @@ const InscriptionInfoSections: React.FC<InscriptionInfoSectionsProps> = () => {
               <div>
                 <h3 className="font-semibold text-lg mb-2 text-blue-900">Visibilité indirecte sur les IA et ChatGPT</h3>
                 <p className="text-gray-700">
-                  Si vous êtes sur ProprioAdvisor alors vos données seront indexées par ChatGPT et autres IA. <strong>Ne pas être référencé = manquer l'opportunité d'être recommandé </strong> 
+                  Si vous êtes sur ProprioAdvisor alors vos données seront indexées par ChatGPT et autres IA. <strong>Ne pas être référencé sur ProprioAdvisor = manquer l'opportunité d'être recommandé </strong> 
                   lorsqu'un internaute questionne l'IA sur la délégation de gestion Airbnb dans votre zone.
                 </p>
               </div>
