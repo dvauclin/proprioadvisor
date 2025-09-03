@@ -17,6 +17,8 @@ export const inscriptionSchema = z.object({
   villesIds: z.array(z.string()), // Remove .min(1) to allow empty array
   zoneCouverte: z.string().optional(),
   urlAvis: z.string().url("L'URL n'est pas valide").optional().or(z.literal("")),
+  siteWeb: z.boolean().default(false),
+  urlSiteWeb: z.string().url("L'URL n'est pas valide").optional().or(z.literal("")),
 });
 
 export type FormValues = z.infer<typeof inscriptionSchema>;

@@ -256,6 +256,10 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
           <p><span className="font-medium">Email de contact:</span> {conciergerie.mail || ''}</p>
           <p><span className="font-medium">Nom du contact:</span> {conciergerie.nomContact || 'Non spécifié'}</p>
           <p><span className="font-medium">Téléphone du contact:</span> {conciergerie.telephoneContact || 'Non spécifié'}</p>
+          <p><span className="font-medium">Site web:</span> {conciergerie.siteWeb ? 'Oui' : 'Non'}</p>
+          {conciergerie.siteWeb && conciergerie.urlSiteWeb && (
+            <p><span className="font-medium">URL du site web:</span> <a href={conciergerie.urlSiteWeb} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{conciergerie.urlSiteWeb}</a></p>
+          )}
           <p><span className="font-medium">Score Final:</span> {conciergerie.score}</p>
           {conciergerie.scoreManuel != null && (
             <p className="text-sm text-gray-600">(Score manuel défini : {conciergerie.scoreManuel})</p>

@@ -48,6 +48,8 @@ export interface Conciergerie {
   zoneCouverte?: string;
   deductionFrais?: string;
   urlAvis?: string;
+  siteWeb?: boolean;
+  urlSiteWeb?: string;
   validated?: boolean;
   formules?: Formule[];
   villes?: Ville[];

@@ -436,6 +436,8 @@ export const useEditConciergerieForm = (
         nomContact: values.nomContact || "",
         telephoneContact: values.telephoneContact || "",
         urlAvis: values.urlAvis || "",
+        siteWeb: values.siteWeb || false,
+        urlSiteWeb: values.urlSiteWeb || "",
         villeId: conciergerie?.villeId || (values.villesIds?.[0] || ''),
         validated: conciergerie?.validated || false,
         formules: formules,
