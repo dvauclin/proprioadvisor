@@ -78,7 +78,7 @@ const SubscriptionSuccess = () => {
             .single();
 
           if (!conciergerieError && conciergerieData) {
-            setConciergerie(conciergerieData);
+            setConciergerie(conciergerieData as unknown as ConciergerieDetails);
           }
         }
 
