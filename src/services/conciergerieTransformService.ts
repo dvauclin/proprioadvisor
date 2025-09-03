@@ -99,6 +99,9 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
     telephoneContact: conciergerie.telephone_contact || '',
     // Add URL avis mapping
     urlAvis: conciergerie.url_avis || '',
+    // Add site web fields mapping
+    siteWeb: conciergerie.site_web || false,
+    urlSiteWeb: conciergerie.url_site_web || '',
     // Note: villes relation is not available in current schema
     villes: [],
     // Add creation date
@@ -131,6 +134,9 @@ export const transformConciergerieForDB = (conciergerie: Conciergerie | any) => 
     telephone_contact: conciergerie.telephoneContact || null,
     // Add URL avis mapping
     url_avis: conciergerie.urlAvis || null,
+    // Add site web fields mapping
+    site_web: conciergerie.siteWeb || false,
+    url_site_web: conciergerie.urlSiteWeb || null,
   };
   
   console.log("Transforming conciergerie for DB:", dbData);

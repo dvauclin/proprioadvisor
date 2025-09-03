@@ -28,6 +28,8 @@ interface InscriptionFormData {
   villesIds: string[];
   zoneCouverte?: string;
   urlAvis?: string;
+  siteWeb: boolean;
+  urlSiteWeb: string;
 }
 
 // Type étendu pour inclure l'id
@@ -87,7 +89,9 @@ export const useInscriptionForm = () => {
       nombreChambresMin: 0,
       villesIds: [],
       zoneCouverte: "",
-      urlAvis: ""
+      urlAvis: "",
+      siteWeb: false,
+      urlSiteWeb: ""
     }
   });
 
@@ -176,6 +180,8 @@ export const useInscriptionForm = () => {
         nombre_chambres_min: formData.nombreChambresMin,
         zone_couverte: formData.zoneCouverte || '',
         url_avis: formData.urlAvis,
+        site_web: formData.siteWeb,
+        url_site_web: formData.urlSiteWeb,
         validated: false,
         villes_ids: selectedVillesIds
       };

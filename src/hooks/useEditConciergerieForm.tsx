@@ -28,6 +28,8 @@ export const adminConciergerieSchema = inscriptionSchema.extend({
   nomContact: z.string().optional(),
   telephoneContact: z.string().optional(),
   urlAvis: z.string().optional(),
+  siteWeb: z.boolean().default(false),
+  urlSiteWeb: z.string().optional(),
 });
 
 export type AdminConciergerieFormValues = z.infer<typeof adminConciergerieSchema>;
@@ -68,6 +70,8 @@ export const useEditConciergerieForm = (
       nomContact: "",
       telephoneContact: "",
       urlAvis: "",
+      siteWeb: false,
+      urlSiteWeb: "",
     },
     mode: "onChange"
   });
@@ -94,6 +98,8 @@ export const useEditConciergerieForm = (
         nomContact: conciergerie.nomContact || "",
         telephoneContact: conciergerie.telephoneContact || "",
         urlAvis: conciergerie.urlAvis || "",
+        siteWeb: conciergerie.siteWeb || false,
+        urlSiteWeb: conciergerie.urlSiteWeb || "",
       });
     }
   }, [conciergerie, form]);
@@ -436,7 +442,7 @@ export const useEditConciergerieForm = (
         nomContact: values.nomContact || "",
         telephoneContact: values.telephoneContact || "",
         urlAvis: values.urlAvis || "",
-        siteWeb: values.siteWeb || false,
+        siteWeb: values.siteWeb,
         urlSiteWeb: values.urlSiteWeb || "",
         villeId: conciergerie?.villeId || (values.villesIds?.[0] || ''),
         validated: conciergerie?.validated || false,

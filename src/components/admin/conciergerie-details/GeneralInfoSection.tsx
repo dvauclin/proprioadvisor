@@ -249,6 +249,51 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
             />
             <label className="text-sm font-medium">Accepte les résidences principales</label>
           </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Site web</label>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => updateField && updateField('siteWeb', false)}
+                    className={`px-3 py-1 rounded border text-sm ${conciergerie.siteWeb === false ? 'bg-gray-200 text-gray-900 border-gray-300' : 'bg-transparent text-gray-600 border-gray-300 hover:bg-gray-100'}`}
+                    aria-pressed={conciergerie.siteWeb === false}
+                  >
+                    Non
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateField && updateField('siteWeb', true)}
+                    className={`px-3 py-1 rounded border text-sm ${conciergerie.siteWeb === true ? 'bg-gray-200 text-gray-900 border-gray-300' : 'bg-transparent text-gray-600 border-gray-300 hover:bg-gray-100'}`}
+                    aria-pressed={conciergerie.siteWeb === true}
+                  >
+                    Oui
+                  </button>
+                </div>
+              </div>
+              
+              {conciergerie.siteWeb && (
+                <div>
+                  <label className="block text-sm font-medium mb-1">URL du site web</label>
+                  <div className="flex">
+                    <span className="inline-flex items-center px-3 py-2 text-sm text-gray-500 bg-gray-50 border border-r-0 border-gray-300 rounded-l-md">
+                      https://
+                    </span>
+                    <input
+                      type="text"
+                      className="w-full p-2 border rounded-l-none"
+                      value={conciergerie.urlSiteWeb?.replace('https://', '') || ''}
+                      onChange={(e) => updateField && updateField('urlSiteWeb', `https://${e.target.value}`)}
+                      placeholder="www.exemple.com"
+                      autoComplete="off"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       ) : (
         <div className="space-y-2">
