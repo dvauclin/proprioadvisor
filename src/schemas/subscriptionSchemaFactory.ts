@@ -6,7 +6,7 @@ export const createSubscriptionSchema = (isExistingSubscription: boolean, hasEma
     options: z.object({
       websiteLink: z.boolean().default(false),
       phoneNumber: z.boolean().default(false),
-      backlink: z.boolean().default(true)
+      backlink: z.boolean().default(false)
     }),
     customAmount: z.string().optional().refine(val => !val || Number(val) >= 0 && Number(val) <= 1000, {
       message: "Le montant doit être entre 0 et 1000"
