@@ -42,25 +42,20 @@ const Connexion = () => {
           setError(error.message);
         }
       } else {
-        // Connexion réussie - attendre que le profil soit chargé
-        // On utilise un petit délai pour s'assurer que le profil est mis à jour
-        setTimeout(async () => {
-          const redirectPath = await getRedirectPath(email);
-          
-          if (redirectPath === '/admin') {
-            setSuccess('Connexion réussie ! Redirection vers le panneau d\'administration...');
-            setTimeout(() => {
-              router.push('/admin');
-            }, 1500);
-          } else if (redirectPath === '/subscription') {
-            setSuccess('Connexion réussie ! Redirection vers votre espace de souscription...');
-            setTimeout(() => {
-              router.push('/subscription');
-            }, 1500);
-          } else {
-            setSuccess('Connexion réussie !');
-          }
-        }, 500);
+        // Connexion réussie - redirection automatique gérée par AdminRedirect
+        setSuccess('Connexion réussie ! Redirection en cours...');
+        
+        // Pour les admins, redirection immédiate
+        if (email.includes('admin') || email.includes('proprioadvisor')) {
+          setTimeout(() => {
+            router.push('/admin');
+          }, 1000);
+        } else {
+          // Pour les autres utilisateurs, laisser AdminRedirect gérer la redirection
+          setTimeout(() => {
+            router.push('/subscription');
+          }, 1000);
+        }
       }
     } catch (error: any) {
       setError('Une erreur est survenue lors de la connexion');
