@@ -58,8 +58,6 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
     return customAmountValue;
   }, [useCustomAmount, customAmount]);
   
-  const isPaidPlan = useCustomAmount && Number(customAmount) >= 1;
-  
   const {
     handleSubscription,
     loading
