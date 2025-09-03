@@ -35,7 +35,7 @@ const logStep = (step: string, details?: any) => {
 
 // Calculate points from options
 const calculateOptionsPoints = (subscriptionData: any): number => {
-  return (subscriptionData.backlink ? 5 : 0) + (subscriptionData.conciergerie_page_link ? 5 : 0);
+  return (subscriptionData.backlink ? 5 : 0);
 };
 
 serve(async (req) => {
@@ -161,7 +161,7 @@ serve(async (req) => {
           // Trigger webhook for subscription modification
           logStep("Preparing webhook data for free subscription", { 
             websiteLink: subscriptionData.website_link,
-            backlink: subscriptionData.backlink,
+    
             subscriptionData 
           });
           
@@ -172,12 +172,9 @@ serve(async (req) => {
             totalPoints: optionsPoints,
             isFree: true,
             email: conciergerie.mail,
-            basic_listing: subscriptionData.basic_listing || false,
-            partner_listing: subscriptionData.partner_listing || false,
             website_link: subscriptionData.website_link || false,
             phone_number: subscriptionData.phone_number || false,
-            backlink_home: subscriptionData.backlink || false,
-            backlink_gmb: subscriptionData.conciergerie_page_link || false,
+            backlink: subscriptionData.backlink || false,
             timestamp: new Date().toISOString()
           });
 
@@ -258,12 +255,9 @@ serve(async (req) => {
             totalPoints,
             isFree: false,
             email: conciergerie.mail,
-            basic_listing: subscriptionData.basic_listing || false,
-            partner_listing: subscriptionData.partner_listing || false,
             website_link: subscriptionData.website_link || false,
             phone_number: subscriptionData.phone_number || false,
-            backlink_home: subscriptionData.backlink || false,
-            backlink_gmb: subscriptionData.conciergerie_page_link || false,
+            backlink: subscriptionData.backlink || false,
             timestamp: new Date().toISOString()
           });
 
@@ -328,12 +322,9 @@ serve(async (req) => {
           totalPoints,
           isFree: currentAmount === 0,
           email: conciergerie.mail,
-          basic_listing: subscriptionData.basic_listing || false,
-          partner_listing: subscriptionData.partner_listing || false,
           website_link: subscriptionData.website_link || false,
           phone_number: subscriptionData.phone_number || false,
-          backlink_home: subscriptionData.backlink || false,
-          backlink_gmb: subscriptionData.conciergerie_page_link || false,
+          backlink: subscriptionData.backlink || false,
           timestamp: new Date().toISOString()
         });
 
@@ -383,12 +374,9 @@ serve(async (req) => {
           totalPoints: optionsPoints,
           isFree: true,
           email: conciergerie.mail,
-          basic_listing: subscriptionData.basic_listing || false,
-          partner_listing: subscriptionData.partner_listing || false,
           website_link: subscriptionData.website_link || false,
           phone_number: subscriptionData.phone_number || false,
-          backlink_home: subscriptionData.backlink || false,
-          backlink_gmb: subscriptionData.conciergerie_page_link || false,
+          backlink: subscriptionData.backlink || false,
           timestamp: new Date().toISOString()
         });
 
@@ -485,12 +473,9 @@ serve(async (req) => {
         totalPoints: optionsPoints + requestedAmount,
         isFree: false,
         email: conciergerie.mail,
-        basic_listing: subscriptionData.basic_listing || false,
-        partner_listing: subscriptionData.partner_listing || false,
         website_link: subscriptionData.website_link || false,
         phone_number: subscriptionData.phone_number || false,
-        backlink_home: subscriptionData.backlink || false,
-        backlink_gmb: subscriptionData.conciergerie_page_link || false,
+        backlink: subscriptionData.backlink || false,
         timestamp: new Date().toISOString()
       });
 

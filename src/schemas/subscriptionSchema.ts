@@ -3,12 +3,9 @@ import { z } from "zod";
 
 export const subscriptionSchema = z.object({
   options: z.object({
-    basicListing: z.boolean().default(true),
-    partnerListing: z.boolean().default(true),
     websiteLink: z.boolean().default(false),
     phoneNumber: z.boolean().default(false),
-    backlink: z.boolean().default(true),
-    conciergeriePageLink: z.boolean().default(false)
+    backlink: z.boolean().default(true)
   }),
   customAmount: z.string().optional().refine(val => !val || Number(val) >= 0 && Number(val) <= 1000, {
     message: "Le montant doit être entre 0 et 1000"

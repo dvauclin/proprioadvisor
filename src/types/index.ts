@@ -195,22 +195,21 @@ export interface ContactMessage {
 export interface Subscription {
   id: string;
   conciergerie_id: string;
-  basic_listing: boolean;
-  partner_listing: boolean;
   phone_number: boolean;
   website_link: boolean;
   backlink: boolean;
-  conciergerie_page_link: boolean;
   monthly_amount: number;
   use_custom_amount: boolean;
   total_points: number;
   points_options: number;
-  payment_status: string;
+  payment_status: 'completed' | 'pending' | 'failed' | 'cancelled' | 'past_due' | 'unpaid' | 'incomplete' | 'expired' | 'active';
   website_url?: string | null;
   phone_number_value?: string | null;
   stripe_session_id?: string | null;
   pending_monthly_amount?: number | null;
   pending_stripe_session_id?: string | null;
+  stripe_subscription_id?: string | null;
+  subscription_renewal_day?: number | null;
   created_at: string;
   updated_at: string;
 }

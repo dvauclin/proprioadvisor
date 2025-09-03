@@ -36,12 +36,9 @@ export const triggerSubscriptionCreated = async (data: {
   total_points: number;
   is_free: boolean;
   email: string;
-  basic_listing: boolean;
-  partner_listing: boolean;
   website_link: boolean;
   phone_number: boolean;
-  backlink_home: boolean;
-  backlink_gmb: boolean;
+  backlink: boolean;
 }) => {
   await triggerWebhook({
     type: 'subscription_created',
@@ -58,12 +55,9 @@ export const triggerSubscriptionUpdated = async (data: {
   total_points: number;
   is_free: boolean;
   email: string;
-  basic_listing: boolean;
-  partner_listing: boolean;
   website_link: boolean;
   phone_number: boolean;
-  backlink_home: boolean;
-  backlink_gmb: boolean;
+  backlink: boolean;
 }) => {
   await triggerWebhook({
     type: 'subscription_updated',
@@ -80,12 +74,9 @@ export const triggerSubscriptionCancelled = async (data: {
   total_points: number;
   is_free: boolean;
   email: string;
-  basic_listing: boolean;
-  partner_listing: boolean;
   website_link: boolean;
   phone_number: boolean;
-  backlink_home: boolean;
-  backlink_gmb: boolean;
+  backlink: boolean;
 }) => {
   await triggerWebhook({
     type: 'subscription_cancelled',

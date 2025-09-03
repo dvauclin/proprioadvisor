@@ -27,12 +27,10 @@ export const processDirectSubscription = async ({
 }: ProcessDirectSubscriptionParams): Promise<void> => {
   const subscriptionData = {
     conciergerie_id: conciergerieId,
-    basic_listing: values.options.basicListing,
-    partner_listing: values.options.partnerListing,
-    website_link: values.options.websiteLink,
-    phone_number: values.options.phoneNumber,
-    backlink: values.options.backlink,
-    conciergerie_page_link: values.options.conciergeriePageLink,
+            website_link: values.options.websiteLink,
+        phone_number: values.options.phoneNumber,
+        backlink: values.options.backlink,
+    
     monthly_amount: totalMonthlyFee,
     use_custom_amount: values.useCustomAmount,
     total_points: totalPoints,

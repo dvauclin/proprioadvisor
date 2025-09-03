@@ -122,7 +122,6 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
   logStep("Subscription payment confirmed successfully", { 
     subscriptionId: subscription.id,
     confirmedAmount: data.monthly_amount,
-    totalPoints: data.total_points,
     renewalDay: data.subscription_renewal_day,
     stripeSubscriptionId: data.stripe_subscription_id,
     sessionId: session.id
@@ -157,11 +156,14 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
   // Vérifier si c'est le premier paiement (pas de montant mensuel précédent)
   if (subscription.monthly_amount === 0 && subscription.pending_monthly_amount > 0) {
     // C'est le premier paiement réussi
+    // Calculer les points totaux dynamiquement
+    const totalPoints = subscription.points_options + subscription.pending_monthly_amount;
+    
     await triggerFirstPaymentSuccess({
       subscription_id: subscription.id,
       conciergerie_id: subscription.conciergerie_id,
       amount: subscription.pending_monthly_amount,
-      total_points: totalPoints,
+      total_points: totalPoints, // Calculé dynamiquement
       is_first_payment: true
     });
   }

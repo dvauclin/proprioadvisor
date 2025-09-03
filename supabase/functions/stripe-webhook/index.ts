@@ -6,6 +6,8 @@ import { handleCheckoutSessionCompleted } from "./handlers/checkout-session-comp
 import { handleSubscriptionCreated } from "./handlers/subscription-created.ts";
 import { handleSubscriptionUpdated } from "./handlers/subscription-updated.ts";
 import { handleSubscriptionDeleted } from "./handlers/subscription-deleted.ts";
+import { handleInvoicePaymentFailed } from "./handlers/invoice-payment-failed.ts";
+import { handleSubscriptionStatusChanged } from "./handlers/subscription-status-changed.ts";
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -63,11 +65,19 @@ serve(async (req) => {
 
       case "customer.subscription.updated":
         const updatedSubscription = event.data.object as Stripe.Subscription;
+        // Vérifier si le statut a changé vers un état problématique
+        if (['past_due', 'unpaid', 'canceled', 'incomplete', 'incomplete_expired'].includes(updatedSubscription.status)) {
+          return await handleSubscriptionStatusChanged(updatedSubscription);
+        }
         return await handleSubscriptionUpdated(updatedSubscription);
 
       case "customer.subscription.deleted":
         const deletedSubscription = event.data.object as Stripe.Subscription;
         return await handleSubscriptionDeleted(deletedSubscription);
+
+      case "invoice.payment_failed":
+        const invoice = event.data.object as Stripe.Invoice;
+        return await handleInvoicePaymentFailed(invoice);
 
       default:
         logStep("Unhandled event type", { eventType: event.type });

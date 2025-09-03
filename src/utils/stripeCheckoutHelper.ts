@@ -47,14 +47,12 @@ export const initiateStripeCheckout = async ({
       amount: amount,
       score: totalPoints,
       conciergerieId: conciergerieId,
-      subscriptionData: {
-        basic_listing: values.options.basicListing,
-        partner_listing: values.options.partnerListing,
-        website_link: values.options.websiteLink,
+              subscriptionData: {
+                  website_link: values.options.websiteLink,
         phone_number: values.options.phoneNumber,
         backlink: values.options.backlink,
-        conciergerie_page_link: values.options.conciergeriePageLink,
-        monthly_amount: totalMonthlyFee,
+  
+          monthly_amount: totalMonthlyFee,
         use_custom_amount: values.useCustomAmount,
         total_points: totalPoints,
         website_url: normalizedWebsiteUrl || null,

@@ -47,6 +47,9 @@ const Admin = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Backlink update state
+  const [updatingBacklink, setUpdatingBacklink] = useState<string | null>(null);
+
   // Auto-migration on component mount
   useEffect(() => {
     const performMigration = async () => {
@@ -646,6 +649,47 @@ const Admin = () => {
       deleteConciergerieM.mutate(id);
     }
   };
+
+  const handleToggleBacklink = async (subscriptionId: string, newBacklinkValue: boolean) => {
+    setUpdatingBacklink(subscriptionId);
+    try {
+      const newPointsOptions = newBacklinkValue ? 5 : 0;
+      
+      // Mettre à jour la souscription dans la base de données
+      const { error } = await supabase
+        .from('subscriptions')
+        .update({
+          backlink: newBacklinkValue,
+          points_options: newPointsOptions,
+          total_points: newPointsOptions + (subscriptions.find(s => s.id === subscriptionId)?.monthly_amount || 0),
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', subscriptionId);
+
+      if (error) {
+        throw error;
+      }
+
+      // Rafraîchir les données
+      queryClient.invalidateQueries({
+        queryKey: ["subscriptions"]
+      });
+
+      toast({
+        title: "Backlink mis à jour",
+        description: `Le backlink a été ${newBacklinkValue ? 'activé' : 'désactivé'} et les points ont été recalculés.`,
+      });
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour du backlink:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de mettre à jour le backlink. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    } finally {
+      setUpdatingBacklink(null);
+    }
+  };
   return <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-8">Panneau d'administration</h1>
       
@@ -1086,7 +1130,7 @@ const Admin = () => {
             <CardHeader>
               <CardTitle>Souscriptions</CardTitle>
               <CardDescription>
-                Consultez les souscriptions des conciergeries.
+                Consultez et modifiez les souscriptions des conciergeries.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -1095,16 +1139,19 @@ const Admin = () => {
                     <TableRow>
                       <TableHead>Conciergerie</TableHead>
                       <TableHead>Montant</TableHead>
-                      <TableHead>Points</TableHead>
+                      <TableHead>Points Options</TableHead>
+                      <TableHead>Total Points</TableHead>
                       <TableHead>Statut</TableHead>
                       <TableHead>Date</TableHead>
+                      <TableHead>Backlink</TableHead>
                       <TableHead>Détails</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {subscriptions.map(sub => <TableRow key={sub.id}>
                         <TableCell className="font-medium">{sub.conciergerie_nom}</TableCell>
-                        <TableCell>{sub.monthly_amount}</TableCell>
+                        <TableCell>{sub.monthly_amount}€</TableCell>
+                        <TableCell>{sub.points_options || 0}</TableCell>
                         <TableCell>{sub.total_points}</TableCell>
                         <TableCell>
                           <Badge variant={sub.payment_status === 'completed' ? 'default' : sub.payment_status === 'pending' ? 'secondary' : 'destructive'}>
@@ -1113,15 +1160,27 @@ const Admin = () => {
                         </TableCell>
                         <TableCell>{new Date(sub.created_at).toLocaleDateString()}</TableCell>
                         <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Badge variant={sub.backlink ? 'default' : 'secondary'}>
+                              {sub.backlink ? 'Oui' : 'Non'}
+                            </Badge>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleToggleBacklink(sub.id, !sub.backlink)}
+                              disabled={updatingBacklink === sub.id}
+                            >
+                              {updatingBacklink === sub.id ? '...' : sub.backlink ? 'Désactiver' : 'Activer'}
+                            </Button>
+                          </div>
+                        </TableCell>
+                        <TableCell>
                            <pre className="text-xs bg-gray-50 p-2 rounded">
                              {JSON.stringify({
-                        basic_listing: sub.basic_listing,
-                        partner_listing: sub.partner_listing,
-                        phone_number: sub.phone_number,
-                        website_link: sub.website_link,
-                        backlink: sub.backlink,
-                        conciergerie_page_link: sub.conciergerie_page_link
-                      }, null, 2)}
+                               phone_number: sub.phone_number,
+                               website_link: sub.website_link,
+                               backlink: sub.backlink
+                             }, null, 2)}
                            </pre>
                         </TableCell>
                       </TableRow>)}

@@ -51,12 +51,22 @@ serve(async (req) => {
     // Get active subscriptions for this customer
     const subscriptions = await stripe.subscriptions.list({
       customer: customerId,
-      status: 'active',
-      limit: 1
+      status: 'all', // Récupérer tous les statuts pour pouvoir filtrer
+      limit: 100
     });
 
-    const hasActiveSubscription = subscriptions.data.length > 0;
-    logStep("Active subscription check result", { hasActiveSubscription, subscriptionCount: subscriptions.data.length });
+    // Filtrer pour ne garder que les abonnements vraiment actifs
+    const activeSubscriptions = subscriptions.data.filter(sub => 
+      ['active', 'trialing'].includes(sub.status)
+    );
+
+    const hasActiveSubscription = activeSubscriptions.length > 0;
+    logStep("Active subscription check result", { 
+      hasActiveSubscription, 
+      subscriptionCount: activeSubscriptions.length,
+      totalSubscriptions: subscriptions.data.length,
+      subscriptionStatuses: subscriptions.data.map(s => ({ id: s.id, status: s.status }))
+    });
 
     return new Response(JSON.stringify({ hasActiveSubscription }), {
       headers: { "Content-Type": "application/json", ...corsHeaders },

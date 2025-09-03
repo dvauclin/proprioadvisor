@@ -59,12 +59,10 @@ export async function handleSubscriptionUpdated(subscription: Stripe.Subscriptio
     total_points: dbSubscription.total_points,
     is_free: dbSubscription.monthly_amount === 0,
     email: conciergerieEmail || '',
-    basic_listing: dbSubscription.basic_listing || false,
-    partner_listing: dbSubscription.partner_listing || false,
     website_link: dbSubscription.website_link || false,
     phone_number: dbSubscription.phone_number || false,
-    backlink_home: dbSubscription.backlink || false,
-    backlink_gmb: dbSubscription.conciergerie_page_link || false
+    backlink: dbSubscription.backlink || false,
+            
   });
 
   return new Response(JSON.stringify({ received: true }), {

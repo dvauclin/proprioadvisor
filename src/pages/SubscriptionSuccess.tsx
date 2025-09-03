@@ -14,12 +14,10 @@ interface SubscriptionDetails {
   total_points: number;
   payment_status: string;
   subscription_renewal_day?: number | null;
-  basic_listing?: boolean;
-  partner_listing?: boolean;
   website_link?: boolean;
   phone_number?: boolean;
   backlink?: boolean;
-  conciergerie_page_link?: boolean;
+
   created_at: string;
 }
 

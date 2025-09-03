@@ -6,7 +6,7 @@ import { Form } from "@/components/ui-kit/form";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { VisibilityOptionsSection } from "@/components/subscription/VisibilityOptionsSection";
+import { SubscriptionOptions } from "@/components/subscription/SubscriptionOptions";
 import { PaidPlanOptionsSection } from "@/components/subscription/PaidPlanOptionsSection";
 import { PasswordForm } from "@/components/subscription/PasswordForm";
 import { useSubscriptionSubmit } from "@/hooks/useSubscriptionSubmit";
@@ -19,12 +19,14 @@ interface SubscriptionFormProps {
   conciergerieId: string | null;
   conciergerieEmail: string;
   currentMonthlyPayment: number;
+  currentTotalPoints?: number;
 }
 export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   existingSubscription,
   conciergerieId,
   conciergerieEmail,
-  currentMonthlyPayment
+  currentMonthlyPayment,
+  currentTotalPoints = 0
 }) => {
   const subscriptionSchema = useMemo(() => {
     return createSubscriptionSchema(!!existingSubscription, !!conciergerieEmail);
@@ -33,12 +35,9 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
     resolver: zodResolver(subscriptionSchema),
     defaultValues: {
       options: {
-        basicListing: true,
-        partnerListing: false,
         websiteLink: false,
         phoneNumber: false,
-        backlink: false,
-        conciergeriePageLink: false
+        backlink: false
       },
       customAmount: "10",
       useCustomAmount: false,
@@ -61,9 +60,9 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   // Calculate current points based on watched form values
   const currentPoints = useMemo(() => {
     const customAmountValue = useCustomAmount ? Number(customAmount) || 0 : 0;
-    const optionPoints = (options.backlink ? 5 : 0) + (options.conciergeriePageLink ? 5 : 0);
+    const optionPoints = (options.backlink ? 5 : 0);
     return optionPoints + customAmountValue;
-  }, [options.backlink, options.conciergeriePageLink, useCustomAmount, customAmount]);
+  }, [options.backlink, useCustomAmount, customAmount]);
   const isPaidPlan = useCustomAmount && Number(customAmount) >= 1;
   const {
     handleSubscription,
@@ -78,7 +77,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   return <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-100 px-[12px] py-[12px]">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubscription)} className="space-y-6 md:space-y-6 space-y-3">
-          <VisibilityOptionsSection form={form} currentPoints={currentPoints} currentMonthlyPayment={currentMonthlyPayment} renewalDay={existingSubscription?.subscription_renewal_day} />
+                     <SubscriptionOptions form={form} conciergerieId={conciergerieId || ""} />
 
           <PaidPlanOptionsSection form={form} isPaid={isPaidPlan} />
 

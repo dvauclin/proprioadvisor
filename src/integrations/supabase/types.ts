@@ -377,13 +377,10 @@ export type Database = {
       subscriptions: {
         Row: {
           backlink: boolean
-          basic_listing: boolean
           conciergerie_id: string
-          conciergerie_page_link: boolean
           created_at: string
           id: string
           monthly_amount: number
-          partner_listing: boolean
           payment_status: string
           pending_monthly_amount: number | null
           pending_stripe_session_id: string | null
@@ -401,13 +398,10 @@ export type Database = {
         }
         Insert: {
           backlink?: boolean
-          basic_listing?: boolean
           conciergerie_id: string
-          conciergerie_page_link?: boolean
           created_at?: string
           id?: string
           monthly_amount: number
-          partner_listing?: boolean
           payment_status?: string
           pending_monthly_amount?: number | null
           pending_stripe_session_id?: string | null
@@ -425,13 +419,10 @@ export type Database = {
         }
         Update: {
           backlink?: boolean
-          basic_listing?: boolean
           conciergerie_id?: string
-          conciergerie_page_link?: boolean
           created_at?: string
           id?: string
           monthly_amount?: number
-          partner_listing?: boolean
           payment_status?: string
           pending_monthly_amount?: number | null
           pending_stripe_session_id?: string | null

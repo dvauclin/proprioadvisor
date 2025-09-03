@@ -1,12 +1,9 @@
 
 export interface SubscriptionFormValues {
   options: {
-    basicListing: boolean;
-    partnerListing: boolean;
     websiteLink: boolean;
     phoneNumber: boolean;
     backlink: boolean;
-    conciergeriePageLink: boolean;
   };
   websiteUrl: string;
   phoneNumberValue: string;

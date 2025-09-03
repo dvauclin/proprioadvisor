@@ -1,4 +1,5 @@
 import { Conciergerie, Formule } from "@/types";
+import { getValidTotalPoints } from '@/utils/subscriptionUtils';
 
 // Service pour transformer les données entre Supabase et l'interface TypeScript
 export const transformFormuleFromDB = (formule: any): Formule => ({
@@ -48,11 +49,8 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
       .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
     if (latestSubscription) {
-      if (latestSubscription.payment_status === 'completed') {
-        calculatedScore = latestSubscription.total_points ?? 0;
-      } else {
-        calculatedScore = (latestSubscription.total_points ?? 0) - (latestSubscription.monthly_amount ?? 0);
-      }
+      // Utiliser les nouveaux utilitaires pour calculer les points valides
+      calculatedScore = getValidTotalPoints(latestSubscription);
       
       if (conciergerie.nom?.toLowerCase().includes('aurora')) {
         console.log("xRx Aurora subscription score calculation:", {
@@ -60,6 +58,7 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
           paymentStatus: latestSubscription.payment_status,
           totalPoints: latestSubscription.total_points,
           monthlyAmount: latestSubscription.monthly_amount,
+          pointsOptions: latestSubscription.points_options,
           calculatedScore
         });
       }

@@ -4,6 +4,8 @@ import { useSearchParams } from 'next/navigation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui-kit/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
+import { Subscription } from '@/types';
+import { getValidMonthlyAmount, isSubscriptionActive, getValidTotalPoints } from '@/utils/subscriptionUtils';
 
 export const useSubscriptionData = () => {
   const searchParams = useSearchParams();
@@ -12,8 +14,9 @@ export const useSubscriptionData = () => {
   const [conciergerieId, setConciergerieId] = useState<string | null>(null);
   const [conciergerieName, setConciergerieName] = useState<string>("");
   const [conciergerieEmail, setConciergerieEmail] = useState<string>("");
-  const [existingSubscription, setExistingSubscription] = useState<any>(null);
+  const [existingSubscription, setExistingSubscription] = useState<Subscription | null>(null);
   const [currentMonthlyPayment, setCurrentMonthlyPayment] = useState<number>(0);
+  const [currentTotalPoints, setCurrentTotalPoints] = useState<number>(0);
   const [renewalDay, setRenewalDay] = useState<number | null>(null);
   const [isLoadingSubscriptionData, setIsLoadingSubscriptionData] = useState<boolean>(true);
 
@@ -101,13 +104,30 @@ export const useSubscriptionData = () => {
               variant: "destructive"
             });
           } else if (subscriptionResult.data) {
-            setExistingSubscription(subscriptionResult.data);
-            const currentPayment = subscriptionResult.data.payment_status === 'completed' ? subscriptionResult.data.monthly_amount : 0;
+            const subscription = subscriptionResult.data as Subscription;
+            setExistingSubscription(subscription);
+            
+            // Utiliser les utilitaires pour vérifier le statut
+            const currentPayment = getValidMonthlyAmount(subscription);
+            const totalPoints = getValidTotalPoints(subscription);
+            
             setCurrentMonthlyPayment(currentPayment);
-            setRenewalDay(subscriptionResult.data.subscription_renewal_day);
+            setCurrentTotalPoints(totalPoints);
+            setRenewalDay(subscription.subscription_renewal_day || null);
+            
+            // Log pour debug
+            console.log("[useSubscriptionData] Subscription status:", {
+              payment_status: subscription.payment_status,
+              monthly_amount: subscription.monthly_amount,
+              points_options: subscription.points_options,
+              currentPayment,
+              totalPoints,
+              isActive: isSubscriptionActive(subscription)
+            });
           } else {
             setExistingSubscription(null);
             setCurrentMonthlyPayment(0);
+            setCurrentTotalPoints(0);
             setRenewalDay(null);
           }
         } else {
@@ -117,6 +137,7 @@ export const useSubscriptionData = () => {
           setConciergerieEmail("");
           setExistingSubscription(null);
           setCurrentMonthlyPayment(0);
+          setCurrentTotalPoints(0);
           setRenewalDay(null);
         }
       } catch (error) {
@@ -144,6 +165,7 @@ export const useSubscriptionData = () => {
     conciergerieEmail,
     existingSubscription,
     currentMonthlyPayment,
+    currentTotalPoints,
     renewalDay,
     isLoadingSubscriptionData
   };

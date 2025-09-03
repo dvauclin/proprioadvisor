@@ -77,12 +77,9 @@ export const useSubscriptionSubmit = ({
 
       // Prepare subscription data
       const subscriptionData = {
-        basic_listing: values.options.basicListing,
-        partner_listing: values.options.partnerListing,
         website_link: values.options.websiteLink,
         phone_number: values.options.phoneNumber,
         backlink: values.options.backlink,
-        conciergerie_page_link: values.options.conciergeriePageLink,
         use_custom_amount: values.useCustomAmount,
         website_url: normalizedWebsiteUrl || null,
         phone_number_value: values.phoneNumberValue || null
@@ -189,12 +186,9 @@ export const useSubscriptionSubmit = ({
             total_points: totalPoints,
             is_free: true,
             email: conciergerieEmail,
-            basic_listing: false,
-            partner_listing: false,
             website_link: false,
             phone_number: false,
-            backlink_home: false,
-            backlink_gmb: false
+
           });
         } catch (webhookError) {
           console.error("Erreur lors du déclenchement du webhook:", webhookError);

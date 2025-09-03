@@ -161,13 +161,9 @@ serve(async (req) => {
         totalPoints: subscriptionData.total_points,
         isFree: (amount / 100) === 0,
         email: conciergerieEmail,
-        backlink_home: subscriptionData.website_link || false,
-        backlink_gmb: subscriptionData.backlink || false,
-        basic_listing: subscriptionData.basic_listing || false,
-        partner_listing: subscriptionData.partner_listing || false,
         phone_number: subscriptionData.phone_number || false,
         website_link: subscriptionData.website_link || false,
-        conciergerie_page_link: subscriptionData.conciergerie_page_link || false,
+        backlink: subscriptionData.backlink || false,
         timestamp: new Date().toISOString()
       });
 
