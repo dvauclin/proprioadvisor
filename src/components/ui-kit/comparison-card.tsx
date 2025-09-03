@@ -98,8 +98,8 @@ const ComparisonCard: React.FC<ComparisonCardProps> = ({
   const showPhone = Boolean(subscription?.phone_number && subscription?.phone_number_value);
   const showWebsite = Boolean(subscription?.website_link && subscription?.website_url);
   
-  // Vérifier si la conciergerie est non recommandée (total_points < 1)
-  const isNonRecommande = (subscription?.total_points || 0) < 1;
+  // Vérifier si la conciergerie est non recommandée (score_manuel ou total_points < 1)
+  const isNonRecommande = (conciergerie?.scoreManuel ?? (subscription?.total_points || 0)) < 1;
 
   // États pour les modales
   const [showReviewsModal, setShowReviewsModal] = React.useState(false);

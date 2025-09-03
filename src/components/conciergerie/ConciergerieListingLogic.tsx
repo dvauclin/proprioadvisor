@@ -161,7 +161,7 @@ const useConciergerieListingLogic = (ville: string): UseConciergerieListingLogic
       if (conciergerieId) {
         const averageRating = conciergerieRatings.get(conciergerieId) || 0;
         const subscription = subscriptionsMap.get(conciergerieId);
-        const isRecommended = (subscription?.total_points || 0) >= 1;
+        const isRecommended = (formule.conciergerie?.scoreManuel ?? (subscription?.total_points || 0)) >= 1;
         const effectiveRating = isRecommended ? averageRating : 0; // Non recommandée => note 0
         if (effectiveRating < filters.noteMin) {
           console.log("? Formule filtrée par note:", formule.nom, "effective:", effectiveRating, "(avg:", averageRating, "rec:", isRecommended, ") min:", filters.noteMin);
