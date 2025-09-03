@@ -13,6 +13,9 @@ const NonAdminRedirect = () => {
     // Attendre que l'authentification soit terminée
     if (loading) return;
 
+    // Vérifier que pathname est défini
+    if (!pathname) return;
+
     // Si l'utilisateur est connecté et est admin
     if (user && profile?.role === 'admin') {
       // Pages publiques que les admins ne devraient pas voir

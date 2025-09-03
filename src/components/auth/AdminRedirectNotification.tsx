@@ -14,6 +14,9 @@ const AdminRedirectNotification = () => {
   useEffect(() => {
     if (loading) return;
 
+    // Vérifier que pathname est défini
+    if (!pathname) return;
+
     // Si l'utilisateur est connecté et est admin
     if (user && profile?.role === 'admin') {
       // Si l'utilisateur n'est pas sur une page admin
