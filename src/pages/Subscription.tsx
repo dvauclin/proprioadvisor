@@ -21,8 +21,6 @@ const Subscription = () => {
     conciergerieName,
     conciergerieEmail,
     existingSubscription,
-    currentMonthlyPayment,
-    currentTotalPoints,
     isLoadingSubscriptionData
   } = useSubscriptionData();
   const { user } = useAuth();
@@ -111,8 +109,6 @@ const Subscription = () => {
             existingSubscription={existingSubscription} 
             conciergerieId={conciergerieId} 
             conciergerieEmail={conciergerieEmail} 
-            currentMonthlyPayment={currentMonthlyPayment}
-            currentTotalPoints={currentTotalPoints}
           />}
           
           <SubscriptionFAQ />

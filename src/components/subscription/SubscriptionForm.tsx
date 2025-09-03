@@ -18,15 +18,11 @@ interface SubscriptionFormProps {
   existingSubscription: any;
   conciergerieId: string | null;
   conciergerieEmail: string;
-  currentMonthlyPayment: number;
-  currentTotalPoints?: number;
 }
 export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   existingSubscription,
   conciergerieId,
-  conciergerieEmail,
-  currentMonthlyPayment,
-  currentTotalPoints = 0
+  conciergerieEmail
 }) => {
   const subscriptionSchema = useMemo(() => {
     return createSubscriptionSchema(!!existingSubscription, !!conciergerieEmail);
@@ -77,7 +73,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   return <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-100 px-[12px] py-[12px]">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubscription)} className="space-y-6 md:space-y-6 space-y-3">
-                     <SubscriptionOptions form={form} conciergerieId={conciergerieId || ""} />
+                     <SubscriptionOptions form={form} />
 
           <PaidPlanOptionsSection form={form} isPaid={isPaidPlan} />
 

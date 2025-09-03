@@ -6,12 +6,10 @@ import { SubscriptionFormValues } from '@/types/subscription';
 
 interface SubscriptionOptionsProps {
   form: UseFormReturn<SubscriptionFormValues>;
-  conciergerieId: string;
 }
 
 export const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({
-  form,
-  conciergerieId
+  form
 }) => {
   return (
     <div className="border border-gray-200 rounded-lg p-6 md:p-6 p-3 bg-white px-[12px] py-[12px]">
