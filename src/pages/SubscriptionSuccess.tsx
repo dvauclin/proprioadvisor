@@ -168,12 +168,12 @@ const SubscriptionSuccess = () => {
           <CardContent className="space-y-6">
             {/* Informations de la conciergerie */}
             {conciergerie && (
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-blue-900 mb-2 flex items-center">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h3 className="font-semibold text-gray-900 mb-2 flex items-center">
                   <Star className="h-5 w-5 mr-2" />
                   {conciergerie.nom}
                 </h3>
-                <p className="text-blue-700 flex items-center">
+                <p className="text-gray-700 flex items-center">
                   <Mail className="h-4 w-4 mr-2" />
                   {conciergerie.mail}
                 </p>
@@ -228,12 +228,12 @@ const SubscriptionSuccess = () => {
                   </div>
                 )}
 
-                {/* Section de bonus de points - uniquement visible lors de la création */}
-                {!isUpdate && subscription && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p className="text-blue-800 mb-4">
-                      <strong>Voulez-vous passer de {subscription.total_points} points à {subscription.total_points + 5} points ?</strong>
-                    </p>
+                                 {/* Section de bonus de points - uniquement visible lors de la création */}
+                 {!isUpdate && subscription && (
+                   <div className="bg-gradient-to-br from-brand-chartreuse/10 to-brand-chartreuse/5 border border-brand-chartreuse/20 rounded-xl p-8 shadow-sm">
+                     <p className="text-gray-900 mb-4 text-lg">
+                       <strong>Voulez-vous passer de {subscription.total_points} points à {subscription.total_points + 5} points ?</strong>
+                     </p>
                     
                     {/* Boutons Oui/Non */}
                     <div className="flex space-x-3 mb-4">
@@ -259,56 +259,56 @@ const SubscriptionSuccess = () => {
                       </button>
                     </div>
                     
-                    {/* Instructions conditionnelles - affichées seulement si Oui */}
-                    {wantsBonusPoints === true && (
-                      <div className="bg-white p-3 rounded border border-blue-200">
-                        <p className="text-sm text-blue-900 mb-2">
-                          {conciergerie?.site_web 
-                            ? "Ajoutez un lien sur la page d'accueil de votre site web menant à ProprioAdvisor :"
-                            : "Ajoutez le lien de votre page ProprioAdvisor dans la section 'Site web' de votre profil Google :"
-                          }
-                        </p>
-                        
-                        {conciergerie?.site_web ? (
-                          <div className="space-y-3">
-                            <p className="text-xs text-blue-600 bg-gray-100 px-2 py-1 rounded inline-block">
-                              https://proprioadvisor.fr
-                            </p>
-                            <div className="text-xs text-blue-700 bg-blue-50 p-2 rounded">
-                              <p className="text-xs text-blue-600 mb-2">
-                                <strong>Types de liens acceptés :</strong> Lien texte, image ou bouton.
-                              </p>
-                              <p className="text-xs text-blue-600 mb-2">
-                                <strong>Emplacement :</strong> Dans une section partenaires ou dans le pied de page.
-                              </p>
-                              <p className="text-xs text-blue-600 mt-2">
-                                <strong>Important :</strong> Le lien doit être visible et cliquable depuis votre page d'accueil.
-                              </p>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="space-y-2">
-                            <p className="text-xs text-blue-600 bg-gray-100 px-2 py-1 rounded inline-block">
-                              {`${window.location.origin}/conciergerie-details/${conciergerie?.nom?.toLowerCase().replace(/\s+/g, '-')}`}
-                            </p>
-                            <div className="text-xs text-blue-700 bg-blue-50 p-2 rounded">
-                              <p className="font-medium mb-1">Étapes pour modifier votre profil Google :</p>
-                              <ol className="list-decimal list-inside space-y-1">
-                                <li>Connectez-vous à Google My Business</li>
-                                <li>Sélectionnez votre établissement</li>
-                                <li>Cliquez sur "Informations" dans le menu</li>
-                                <li>Dans la section "Site web", ajoutez le lien ci-dessus</li>
-                                <li>Cliquez sur "Enregistrer"</li>
-                              </ol>
-                            </div>
-                          </div>
-                        )}
-                        
-                        <p className="text-sm text-blue-900 mt-3">
-                          Contactez ensuite <a href="mailto:contact@proprioadvisor.fr" className="text-blue-600 underline">contact@proprioadvisor.fr</a> pour valider vos points.
-                        </p>
-                      </div>
-                    )}
+                                         {/* Instructions conditionnelles - affichées seulement si Oui */}
+                     {wantsBonusPoints === true && (
+                       <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                         <p className="text-sm text-gray-900 mb-3">
+                           {conciergerie?.site_web 
+                             ? "Ajoutez un lien sur la page d'accueil de votre site web menant à ProprioAdvisor :"
+                             : "Ajoutez le lien de votre page ProprioAdvisor dans la section 'Site web' de votre profil Google :"
+                           }
+                         </p>
+                         
+                         {conciergerie?.site_web ? (
+                           <div className="space-y-3">
+                             <p className="text-xs text-gray-700 bg-gray-100 px-3 py-2 rounded-lg inline-block font-mono">
+                               https://proprioadvisor.fr
+                             </p>
+                             <div className="text-xs text-gray-700 bg-gray-50 p-3 rounded-lg">
+                               <p className="text-xs text-gray-700 mb-2">
+                                 <strong>Types de liens acceptés :</strong> Lien texte, image ou bouton.
+                               </p>
+                               <p className="text-xs text-gray-700 mb-2">
+                                 <strong>Emplacement :</strong> Dans une section partenaires ou dans le pied de page.
+                               </p>
+                               <p className="text-xs text-gray-700 mt-2">
+                                 <strong>Important :</strong> Le lien doit être visible et cliquable depuis votre page d'accueil.
+                               </p>
+                             </div>
+                           </div>
+                         ) : (
+                           <div className="space-y-2">
+                             <p className="text-xs text-gray-700 bg-gray-100 px-3 py-2 rounded-lg inline-block font-mono">
+                               {`${window.location.origin}/conciergerie-details/${conciergerie?.nom?.toLowerCase().replace(/\s+/g, '-')}`}
+                             </p>
+                             <div className="text-xs text-gray-700 bg-gray-50 p-3 rounded-lg">
+                               <p className="font-medium mb-1">Étapes pour modifier votre profil Google :</p>
+                               <ol className="list-decimal list-inside space-y-1">
+                                 <li>Connectez-vous à Google My Business</li>
+                                 <li>Sélectionnez votre établissement</li>
+                                 <li>Cliquez sur "Informations" dans le menu</li>
+                                 <li>Dans la section "Site web", ajoutez le lien ci-dessus</li>
+                                 <li>Cliquez sur "Enregistrer"</li>
+                               </ol>
+                             </div>
+                           </div>
+                         )}
+                         
+                         <p className="text-sm text-gray-900 mt-3">
+                           Contactez ensuite <a href="mailto:contact@proprioadvisor.fr" className="text-gray-700 underline hover:text-gray-900">contact@proprioadvisor.fr</a> pour valider vos points.
+                         </p>
+                       </div>
+                     )}
                   </div>
                 )}
               </div>
