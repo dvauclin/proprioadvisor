@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Button } from "@/components/ui-kit/button";
 import { Form } from "@/components/ui-kit/form";
 import { Loader2 } from "lucide-react";
@@ -13,6 +13,7 @@ import { useSubscriptionSubmit } from "@/hooks/useSubscriptionSubmit";
 import { useFormPreFill } from "@/hooks/useFormPreFill";
 import { createSubscriptionSchema } from "@/schemas/subscriptionSchemaFactory";
 import { SubscriptionFormValues } from "@/types/subscription";
+import { calculateRankingPositions, groupRankingTargets } from "@/services/rankingService";
 
 interface SubscriptionFormProps {
   existingSubscription: any;
@@ -59,6 +60,34 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
     const customAmountValue = useCustomAmount ? Number(customAmount) || 0 : 0;
     return customAmountValue;
   }, [useCustomAmount, customAmount]);
+
+  // État pour les données de classement
+  const [rankingData, setRankingData] = useState<{
+    position1: any;
+    position3: any;
+    villes: string[];
+  } | null>(null);
+  const [loadingRanking, setLoadingRanking] = useState(false);
+
+  // Charger les données de classement
+  useEffect(() => {
+    if (!conciergerieId) return;
+
+    const fetchRankingData = async () => {
+      setLoadingRanking(true);
+      try {
+        const targets = await calculateRankingPositions(conciergerieId);
+        const grouped = groupRankingTargets(targets);
+        setRankingData(grouped);
+      } catch (error) {
+        console.error('Erreur lors du chargement des données de classement:', error);
+      } finally {
+        setLoadingRanking(false);
+      }
+    };
+
+    fetchRankingData();
+  }, [conciergerieId]);
   
   const {
     handleSubscription,
@@ -96,7 +125,15 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
                   <div className="space-y-1 leading-none flex-1">
                     <FormLabel className="text-base">
                       J'accepte de passer à un abonnement payant
-                      <div className="text-gray-600 text-xs mt-1">Si vous souhaitez être considéré comme une conciergerie partenaire et recevoir des prospects.</div>
+                      <div className="text-gray-600 text-xs mt-1">
+                        {rankingData && rankingData.villes.length > 0 ? (
+                          <>
+                            Pour classer <strong>{conciergerieName}</strong> comme conciergerie partenaire et recommandée à {rankingData.villes.join(', ')}.
+                          </>
+                        ) : (
+                          `Pour classer ${conciergerieName} comme conciergerie partenaire et recommandée.`
+                        )}
+                      </div>
                       <div className="text-blue-600 font-medium text-sm mt-1 md:mt-1 mt-0.5">1€ = 1 point supplémentaire</div>
                     </FormLabel>
                   </div>
@@ -128,13 +165,61 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
               <p className={`text-sm font-medium ${currentPoints === 0 ? 'text-red-800' : 'text-blue-800'}`}>
                 Total de points : {currentPoints} points
               </p>
-              <p className={`text-xs mt-2 ${currentPoints === 0 ? 'text-red-600' : 'text-blue-600'}`}>
-                {currentPoints === 0 
-                  ? "Avec 0 point vous ne serez pas considéré comme une conciergerie partenaire. Les clients ne pourront pas vous contacter et vous serez placé tout en bas des listings. Votre visibilité est quasi nulle. Il faut au moins 1 point pour être considéré comme une conciergerie partenaire." 
-                  : "Si une autre conciergerie de votre ville a moins de points elle sera positionnée derrière, si elle en a plus elle sera positionnée devant. Plus vous avez de points, plus vous maximisez votre visibilité."
-                }
-              </p>
+              <div className={`text-xs mt-2 ${currentPoints === 0 ? 'text-red-600' : 'text-blue-600'}`}>
+                {currentPoints === 0 ? (
+                  <p>
+                    Avec 0 point vous ne serez pas considéré comme une conciergerie partenaire. Les clients ne pourront pas vous contacter et vous serez placé tout en bas des listings. Votre visibilité est quasi nulle. Il faut au moins 1 point pour être considéré comme une conciergerie partenaire.
+                  </p>
+                ) : (
+                  <div>
+                    {loadingRanking ? (
+                      <div className="flex items-center gap-2">
+                        <Loader2 className="h-3 w-3 animate-spin" />
+                        <span>Calcul des positions de classement...</span>
+                      </div>
+                    ) : rankingData && rankingData.villes.length > 0 ? (
+                      <div className="space-y-1">
+                        {rankingData.position1 && (
+                          <div className={`text-sm ${currentPoints >= rankingData.position1.requiredPoints ? "animate-pulse text-yellow-600 font-semibold" : ""}`}>
+                            <p>
+                              Pour atteindre la 1ère position {rankingData.villes.length === 1 ? `à ${rankingData.villes[0]}` : 'dans les villes sélectionnées'}, il vous faut <strong>{rankingData.position1.requiredPoints}</strong> <strong>points</strong>.
+                            </p>
+                            {currentPoints >= rankingData.position1.requiredPoints && (
+                              <p className="text-yellow-600 mt-1">
+                                🏆 <span className="animate-bounce inline-block">Objectif atteint !</span>
+                              </p>
+                            )}
+                          </div>
+                        )}
+                        {rankingData.position3 && (
+                          <div className={`text-sm ${currentPoints >= rankingData.position3.requiredPoints ? "animate-pulse text-orange-600 font-semibold" : ""}`}>
+                            <p>
+                              Pour figurer dans le Top 3 {rankingData.villes.length === 1 ? `à ${rankingData.villes[0]}` : 'dans les villes sélectionnées'}, il vous faut <strong>{rankingData.position3.requiredPoints}</strong> <strong>points</strong>.
+                            </p>
+                            {currentPoints >= rankingData.position3.requiredPoints && (
+                              <p className="text-orange-600 mt-1">
+                                🥉 <span className="animate-bounce inline-block">Objectif atteint !</span>
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p>
+                        Si une autre conciergerie de votre ville a moins de points elle sera positionnée derrière, si elle en a plus elle sera positionnée devant. Plus vous avez de points, plus vous maximisez votre visibilité.
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
+
+            {/* Cadre mémo séparé */}
+            {rankingData && rankingData.villes.length > 0 && (
+              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
+                💡 Plus vous êtes classé haut, plus vous êtes visible sur les IA et moteurs de recherche.
+              </div>
+            )}
           </div>
 
           {/* <PaidPlanOptionsSection form={form} isPaid={isPaidPlan} /> */}
