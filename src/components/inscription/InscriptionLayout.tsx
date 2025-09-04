@@ -40,7 +40,7 @@ const InscriptionLayout: React.FC<InscriptionLayoutProps> = ({ children }) => {
               className="inline-block"
               textClassName="text-lg text-gray-700"
               numberClassName="font-bold text-brand-chartreuse text-xl"
-              suffix=" sur la plateforme"
+              suffix=" reçoivent des clients grâce à ProprioAdvisor"
             />
           </div>
           

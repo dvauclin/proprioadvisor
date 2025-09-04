@@ -4,12 +4,32 @@ import React, { useRef } from "react";
 import { useInscriptionForm } from "@/hooks/useInscriptionForm";
 import InscriptionLayout from "@/components/inscription/InscriptionLayout";
 import InscriptionFormContainer from "@/components/inscription/InscriptionFormContainer";
-import InscriptionStepOneForm from "@/components/inscription/InscriptionStepOneForm";
 import InscriptionInfoSections from "@/components/inscription/InscriptionInfoSections";
-import StepTwo from "@/components/inscription/steps/StepTwo";
+import NewStepOne from "@/components/inscription/steps/NewStepOne";
+import NewStepTwo from "@/components/inscription/steps/NewStepTwo";
+import NewStepThree from "@/components/inscription/steps/NewStepThree";
+import StepProgress from "@/components/inscription/steps/StepProgress";
 
 const Inscription = () => {
   const formRef = useRef<HTMLDivElement>(null);
+  
+  const scrollToFormTop = () => {
+    if (formRef.current) {
+      const rect = formRef.current.getBoundingClientRect();
+      const elementPosition = window.scrollY + rect.top;
+      
+      // Calculer la hauteur du header
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 64;
+      
+      const offsetPosition = elementPosition - headerHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
   
   const {
     form,
@@ -29,7 +49,13 @@ const Inscription = () => {
     setStep,
     isStepOneValid,
     isUploadingLogo
-  } = useInscriptionForm();
+  } = useInscriptionForm(scrollToFormTop);
+
+  const stepTitles = [
+    "Que recherchez-vous comme bien ?",
+    "Quelles sont vos offres et services ?", 
+    "Comment vous contacter ?"
+  ];
 
   // Adapter function to convert index to formuleId
   const handleDeleteFormuleByIndex = (index: number) => {
@@ -55,27 +81,53 @@ const Inscription = () => {
     <InscriptionLayout onScrollToForm={scrollToForm}>
       <div ref={formRef}>
         <InscriptionFormContainer>
+          <StepProgress 
+            currentStep={step} 
+            totalSteps={3} 
+            stepTitles={stepTitles} 
+          />
+          
           {step === 1 ? (
-            <InscriptionStepOneForm 
+            <form onSubmit={form.handleSubmit(handleStepOne)}>
+              <NewStepOne
+                form={form}
+                villes={villes}
+                selectedVillesIds={selectedVillesIds}
+                villesLoading={villesLoading}
+                handleVilleSelection={handleVilleSelection}
+                isAdmin={false}
+                loading={loading}
+              />
+            </form>
+          ) : step === 2 ? (
+            <NewStepTwo
+              formules={formules}
+              onAddFormule={handleAddFormule}
+              onSubmit={() => {
+                setStep(3);
+                setTimeout(scrollToFormTop, 100);
+              }}
+              loading={loading}
+              onBack={() => {
+                setStep(1);
+                setTimeout(scrollToFormTop, 100);
+              }}
+              onDeleteFormule={handleDeleteFormuleByIndex}
+              submitText="Continuer"
+            />
+          ) : (
+            <NewStepThree
               form={form}
               logoPreview={logoPreview || ''}
               handleLogoChange={handleLogoChangeAdapter}
-              villes={villes}
-              selectedVillesIds={selectedVillesIds}
-              villesLoading={villesLoading}
-              handleVilleSelection={handleVilleSelection}
-              handleStepOne={handleStepOne}
-              isStepOneValid={Boolean(isStepOneValid)}
               isUploadingLogo={Boolean(isUploadingLogo)}
-            />
-          ) : (
-            <StepTwo
-              formules={formules}
-              onAddFormule={handleAddFormule}
               onSubmit={handleSubmit}
+              onBack={() => {
+                setStep(2);
+                setTimeout(scrollToFormTop, 100);
+              }}
               loading={loading}
-              onBack={() => setStep(1)}
-              onDeleteFormule={handleDeleteFormuleByIndex}
+              submitText="Finaliser l'inscription"
             />
           )}
         </InscriptionFormContainer>

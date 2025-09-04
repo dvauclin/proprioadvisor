@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEditConciergerieForm } from "@/hooks/useEditConciergerieForm";
 import { Conciergerie, Formule } from "@/types";
 import { Form } from "@/components/ui-kit/form";
-import StepOne from "@/components/inscription/steps/StepOne";
-import StepTwo from "@/components/inscription/steps/StepTwo";
+import NewStepOne from "@/components/inscription/steps/NewStepOne";
+import NewStepTwo from "@/components/inscription/steps/NewStepTwo";
+import NewStepThree from "@/components/inscription/steps/NewStepThree";
+import StepProgress from "@/components/inscription/steps/StepProgress";
 import { Button } from "@/components/ui-kit/button";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
@@ -27,6 +29,25 @@ const EditConciergerieForm: React.FC<EditConciergerieFormProps> = ({
   open
 }) => {
   const { isAdmin } = useAuth();
+  const formRef = useRef<HTMLDivElement>(null);
+  
+  const scrollToFormTop = () => {
+    if (formRef.current) {
+      const rect = formRef.current.getBoundingClientRect();
+      const elementPosition = window.scrollY + rect.top;
+      
+      // Calculer la hauteur du header
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 64;
+      
+      const offsetPosition = elementPosition - headerHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
   const {
     form,
     step,
@@ -56,8 +77,15 @@ const EditConciergerieForm: React.FC<EditConciergerieFormProps> = ({
     () => {
       if (onCancel) onCancel();
       if (onSuccess) onSuccess();
-    }
+    },
+    scrollToFormTop
   );
+
+  const stepTitles = [
+    "Que recherchez-vous comme bien ?",
+    "Quelles sont vos offres et services ?", 
+    "Comment vous contacter ?"
+  ];
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && handleCancel()}>
@@ -66,59 +94,72 @@ const EditConciergerieForm: React.FC<EditConciergerieFormProps> = ({
           <DialogTitle>{conciergerie ? "Modifier une conciergerie" : "Ajouter une conciergerie"}</DialogTitle>
         </DialogHeader>
 
-        <div className="py-4">
+        <div className="py-4" ref={formRef}>
+          <StepProgress 
+            currentStep={step} 
+            totalSteps={3} 
+            stepTitles={stepTitles} 
+          />
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleStepOne)}>
-              {step === 1 ? (
-                <div className="space-y-6">
-                  <StepOne
-                    form={form}
-                    logoPreview={logoPreview}
-                    handleLogoChange={handleLogoChange}
-                    villes={villes}
-                    selectedVillesIds={selectedVillesIds}
-                    villesLoading={villesLoading}
-                    handleVilleSelection={handleVilleSelection}
-                    isUploadingLogo={isUploadingLogo}
-                    isAdmin={isAdmin}
-                  />
-                  
-                  <div className="flex justify-between pt-6 border-t">
-                    <Button variant="outline" type="button" onClick={handleCancel}>
-                      Annuler
-                    </Button>
-                    <Button type="submit">
-                      Continuer
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <StepTwo
-                  formules={managedFormules.map(f => ({
-                    nom: f.nom,
-                    commission: f.commission,
-                    dureeGestionMin: f.dureeGestionMin,
-                    servicesInclus: f.servicesInclus,
-                    fraisMenageHeure: f.fraisMenageHeure,
-                    fraisDemarrage: f.fraisDemarrage,
-                    abonnementMensuel: f.abonnementMensuel,
-                    fraisSupplementaireLocation: f.fraisSupplementaireLocation,
-                    fraisReapprovisionnement: f.fraisReapprovisionnement,
-                    forfaitReapprovisionnement: f.forfaitReapprovisionnement,
-                    locationLinge: f.locationLinge,
-                    prixLocationLinge: f.prixLocationLinge,
-                    tva: f.tva || undefined
-                  }))}
-                  onAddFormule={handleAddFormule}
-                  onEditFormule={handleEditFormule}
-                  onDeleteFormule={handleDeleteFormule}
-                  onSubmit={handleSubmit}
+            {step === 1 ? (
+              <form onSubmit={form.handleSubmit(handleStepOne)}>
+                <NewStepOne
+                  form={form}
+                  villes={villes}
+                  selectedVillesIds={selectedVillesIds}
+                  villesLoading={villesLoading}
+                  handleVilleSelection={handleVilleSelection}
+                  isAdmin={isAdmin}
+                  onCancel={handleCancel}
                   loading={loading}
-                  onBack={() => setStep(1)}
-                  submitText={conciergerie ? "Enregistrer les modifications" : "Ajouter la conciergerie"}
                 />
-              )}
-            </form>
+              </form>
+            ) : step === 2 ? (
+              <NewStepTwo
+                formules={managedFormules.map(f => ({
+                  nom: f.nom,
+                  commission: f.commission,
+                  dureeGestionMin: f.dureeGestionMin,
+                  servicesInclus: f.servicesInclus,
+                  fraisMenageHeure: f.fraisMenageHeure,
+                  fraisDemarrage: f.fraisDemarrage,
+                  abonnementMensuel: f.abonnementMensuel,
+                  fraisSupplementaireLocation: f.fraisSupplementaireLocation,
+                  fraisReapprovisionnement: f.fraisReapprovisionnement,
+                  forfaitReapprovisionnement: f.forfaitReapprovisionnement,
+                  locationLinge: f.locationLinge,
+                  prixLocationLinge: f.prixLocationLinge,
+                  tva: f.tva || undefined
+                }))}
+                onAddFormule={handleAddFormule}
+                onEditFormule={handleEditFormule}
+                onDeleteFormule={handleDeleteFormule}
+                onSubmit={() => {
+                  setStep(3);
+                  setTimeout(scrollToFormTop, 100);
+                }}
+                loading={loading}
+                onBack={() => {
+                  setStep(1);
+                  setTimeout(scrollToFormTop, 100);
+                }}
+                submitText="Continuer"
+              />
+            ) : (
+              <NewStepThree
+                form={form}
+                logoPreview={logoPreview}
+                handleLogoChange={handleLogoChange}
+                isUploadingLogo={isUploadingLogo}
+                onSubmit={handleSubmit}
+                onBack={() => {
+                  setStep(2);
+                  setTimeout(scrollToFormTop, 100);
+                }}
+                loading={loading}
+                submitText={conciergerie ? "Enregistrer les modifications" : "Ajouter la conciergerie"}
+              />
+            )}
           </Form>
         </div>
       </DialogContent>

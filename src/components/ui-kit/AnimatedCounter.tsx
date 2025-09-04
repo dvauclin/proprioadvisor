@@ -91,7 +91,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   return (
     <div ref={counterRef} className={className}>
       <p className={textClassName}>
-        {prefix} <span className={numberClassName}>{displayedCount}</span> conciergerie{showPlural && displayedCount > 1 ? 's' : ''} référencée{showPlural && displayedCount > 1 ? 's' : ''}{suffix}
+        {prefix} <span className={numberClassName}>{displayedCount}</span> conciergerie{showPlural && displayedCount > 1 ? 's' : ''}{suffix}
       </p>
     </div>
   );

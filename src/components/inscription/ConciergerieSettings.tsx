@@ -40,26 +40,6 @@ const ConciergerieSettings = () => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="deductionFrais"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Déduction des frais</FormLabel>
-              <FormControl>
-                <select
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
-                  {...field}
-                >
-                  <option value="deductTous">Déduction de tous les frais</option>
-                  <option value="deductMenage">Déduction du ménage seulement</option>
-                  <option value="inclus">Frais inclus</option>
-                </select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

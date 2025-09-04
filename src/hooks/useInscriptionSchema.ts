@@ -8,7 +8,6 @@ export const inscriptionSchema = z.object({
   nomContact: z.string().min(2, "Le nom du contact doit contenir au moins 2 caractères"),
   telephoneContact: z.string().min(10, "Le numéro de téléphone doit contenir au moins 10 caractères"),
   typeLogementAccepte: z.enum(["standard", "luxe", "tous"]),
-  deductionFrais: z.enum(["deductTous", "deductMenage", "inclus"]),
   // tva removed from step 1 schema; handled per formule on step 2
   accepteGestionPartielle: z.boolean(),
   accepteResidencePrincipale: z.boolean(),

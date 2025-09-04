@@ -38,7 +38,8 @@ export const useEditConciergerieForm = (
   conciergerie: Conciergerie | null,
   initialFormules: Formule[] = [],
   onSave?: (data: Conciergerie & { formules: Formule[] }) => void,
-  onCancel?: () => void
+  onCancel?: () => void,
+  scrollToFormTop?: () => void
 ) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -58,7 +59,6 @@ export const useEditConciergerieForm = (
       mail: "",
       logo: "",
       typeLogementAccepte: "standard",
-      deductionFrais: "deductTous",
 
       accepteGestionPartielle: false,
       accepteResidencePrincipale: false,
@@ -86,7 +86,6 @@ export const useEditConciergerieForm = (
         mail: conciergerie.mail || "",
         logo: conciergerie.logo || "",
         typeLogementAccepte: (conciergerie.typeLogementAccepte as "standard" | "luxe" | "tous") || "standard",
-        deductionFrais: (conciergerie.deductionFrais as "inclus" | "deductTous" | "deductMenage") || "deductTous",
 
         accepteGestionPartielle: conciergerie.accepteGestionPartielle || false,
         accepteResidencePrincipale: conciergerie.accepteResidencePrincipale || false,
@@ -174,30 +173,16 @@ export const useEditConciergerieForm = (
   const handleStepOne = async (data: AdminConciergerieFormValues) => {
     console.log("Step one data:", data);
     
-    // Improved logo selection logic with better prioritization
-    let finalLogoUrl = "";
-    
-    if (logoUrl) {
-      // New logo was successfully uploaded
-      finalLogoUrl = logoUrl;
-      console.log("Using new uploaded Supabase Storage logo:", logoUrl);
-    } else if (uploadError) {
-      // Upload failed, but keep existing logo if any
-      finalLogoUrl = conciergerie?.logo || "";
-      console.log("Upload failed, keeping existing logo:", finalLogoUrl);
-    } else if (conciergerie?.logo) {
-      // No new upload attempted, keep existing logo
-      finalLogoUrl = conciergerie.logo;
-      console.log("No new upload, keeping existing logo:", finalLogoUrl);
-    }
-    
-    data.logo = finalLogoUrl;
-
     // Add selected cities
     data.villesIds = selectedVillesIds;
     
-    console.log("Step one completed with logo URL:", finalLogoUrl);
+    console.log("Step one completed, moving to step 2");
     setStep(2);
+    
+    // Scroll to form top if function is provided
+    if (scrollToFormTop) {
+      setTimeout(scrollToFormTop, 100);
+    }
   };
 
   const handleAddFormule = async (formuleData: any) => {
@@ -431,7 +416,6 @@ export const useEditConciergerieForm = (
         mail: values.mail,
         logo: finalLogoUrl,
         typeLogementAccepte: values.typeLogementAccepte,
-        deductionFrais: values.deductionFrais,
         accepteGestionPartielle: values.accepteGestionPartielle,
         accepteResidencePrincipale: values.accepteResidencePrincipale,
         superficieMin: values.superficieMin,

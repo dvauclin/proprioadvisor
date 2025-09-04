@@ -38,7 +38,7 @@ interface FormuleWithId extends FormuleFormData {
   tva?: "TTC" | "HT";
 }
 
-export const useInscriptionForm = () => {
+export const useInscriptionForm = (scrollToFormTop?: () => void) => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [formules, setFormules] = useState<FormuleWithId[]>([]);
@@ -324,13 +324,15 @@ export const useInscriptionForm = () => {
                         form.watch("nomContact") &&
                         form.watch("telephoneContact");
 
-  // Wrapper pour setStep qui inclut le scroll vers le haut
+  // Wrapper pour setStep qui inclut le scroll vers le haut du formulaire
   const setStepWithScroll = useCallback((newStep: number) => {
     setStep(newStep);
-    if (typeof window !== 'undefined') {
+    if (scrollToFormTop) {
+      setTimeout(scrollToFormTop, 100);
+    } else if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, []);
+  }, [scrollToFormTop]);
 
   return {
     form,

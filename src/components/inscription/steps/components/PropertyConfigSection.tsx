@@ -3,6 +3,7 @@ import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui-kit/form";
 import { Input } from "@/components/ui-kit/input";
+import { Checkbox } from "@/components/ui-kit/checkbox";
 import { Home } from "lucide-react";
 import { propertyTypeOptions } from "@/services/supabaseService";
 import { 
@@ -21,8 +22,8 @@ const PropertyConfigSection: React.FC<PropertyConfigSectionProps> = ({ form }) =
   return (
     <div className="space-y-4">
       <div className="flex items-center mb-2">
-                    <Home className="mr-2 h-5 w-5 text-brand-chartreuse" />
-        <h3 className="text-lg font-medium">Configuration du logement</h3>
+        <Home className="mr-2 h-5 w-5 text-brand-chartreuse" />
+        <h3 className="text-lg font-medium">Configuration des logements recherchés</h3>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -80,6 +81,43 @@ const PropertyConfigSection: React.FC<PropertyConfigSectionProps> = ({ form }) =
               <FormMessage />
             </FormItem>
           )}
+        />
+      </div>
+
+      {/* Options d'acceptation */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <FormField 
+          control={form.control} 
+          name="accepteGestionPartielle" 
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>
+                  Accepte la gestion partielle
+                </FormLabel>
+              </div>
+            </FormItem>
+          )} 
+        />
+
+        <FormField 
+          control={form.control} 
+          name="accepteResidencePrincipale" 
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>
+                  Accepte les résidences principales
+                </FormLabel>
+              </div>
+            </FormItem>
+          )} 
         />
       </div>
     </div>
