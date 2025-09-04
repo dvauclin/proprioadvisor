@@ -37,7 +37,8 @@ export const getValidatedConciergeries = async (): Promise<Conciergerie[]> => {
       formules (*),
       subscriptions (*)
     `)
-    .eq('validated', true);
+    .eq('validated', true)
+    .order('created_at', { ascending: false });
     // âŒ REMOVED: .order('nom') - let frontend handle sorting by score
 
   if (error) {
