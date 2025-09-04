@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -8,7 +8,6 @@ const AdminRedirect = () => {
   const { user, profile, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const hasRedirectedRef = useRef(false);
 
   useEffect(() => {
     // Attendre que l'authentification soit terminée
