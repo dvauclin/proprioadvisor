@@ -47,7 +47,6 @@ const Inscription = () => {
     villes,
     villesLoading,
     setStep,
-    isStepOneValid,
     isUploadingLogo
   } = useInscriptionForm(scrollToFormTop);
 
