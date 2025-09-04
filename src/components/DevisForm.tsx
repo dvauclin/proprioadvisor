@@ -63,15 +63,13 @@ interface DevisFormProps {
   formuleName: string;
   onSuccess: () => void;
   conciergerieId: string;
-  conciergerieEmail: string;
 }
 
 export const DevisForm: React.FC<DevisFormProps> = ({
   formuleId,
   conciergerieName,
   formuleName,
-  onSuccess,
-  conciergerieEmail
+  onSuccess
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<FormValues>({

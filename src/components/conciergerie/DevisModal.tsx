@@ -40,8 +40,7 @@ const DevisModal: React.FC<DevisModalProps> = ({
             conciergerieName={formuleData.conciergerie.nom || ''} 
             formuleName={formuleData.nom || ''} 
             onSuccess={() => onOpenChange(false)} 
-            conciergerieId={selectedFormule.conciergerieId} 
-            conciergerieEmail={formuleData.conciergerie.mail || ''}
+            conciergerieId={selectedFormule.conciergerieId}
           />
         )}
       </ResponsiveDialogContent>
