@@ -126,7 +126,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none flex-1">
-                                         <FormLabel className="text-base">
+                    <FormLabel className="text-base">
                        Je souhaite profiter des avantages de l'abonnement payant
                       <div className="text-gray-600 text-xs mt-1">
                         {rankingData && rankingData.villes.length > 0 ? (
@@ -245,7 +245,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
                                 <div className="md:flex md:items-center md:justify-between">
                                   <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                                    <span>Figurer top 3 : {rankingData.position3.requiredPoints} points</span>
+                                    <span>Figurer top 3 : {rankingData.position3.requiredPoints} point{rankingData.position3.requiredPoints > 1 ? 's' : ''}</span>
                                   </div>
                                   {currentPoints >= rankingData.position3.requiredPoints && (
                                     <div className="text-orange-600 font-semibold mt-1 md:mt-0 md:ml-2">
@@ -258,7 +258,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
                                 <div className="md:flex md:items-center md:justify-between">
                                   <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                                    <span>Atteindre 1ère position : {rankingData.position1.requiredPoints} points</span>
+                                    <span>Atteindre 1ère position : {rankingData.position1.requiredPoints} point{rankingData.position1.requiredPoints > 1 ? 's' : ''}</span>
                                   </div>
                                   {currentPoints >= rankingData.position1.requiredPoints && (
                                     <div className="text-yellow-600 font-semibold mt-1 md:mt-0 md:ml-2">
@@ -267,13 +267,13 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
                                   )}
                                 </div>
                               )}
-                              {rankingData.positionSecure && (
+                              {(rankingData.positionSecure || rankingData.position1) && (
                                 <div className="md:flex md:items-center md:justify-between">
                                   <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                    <span>Sécuriser 1ère position : {rankingData.positionSecure.requiredPoints} points</span>
+                                    <span>Sécuriser 1ère position : {rankingData.positionSecure?.requiredPoints || (rankingData.position1?.requiredPoints ? rankingData.position1.requiredPoints + 10 : 0)} point{(rankingData.positionSecure?.requiredPoints || (rankingData.position1?.requiredPoints ? rankingData.position1.requiredPoints + 10 : 0)) > 1 ? 's' : ''}</span>
                                   </div>
-                                  {currentPoints >= rankingData.positionSecure.requiredPoints && (
+                                  {currentPoints >= (rankingData.positionSecure?.requiredPoints || (rankingData.position1?.requiredPoints ? rankingData.position1.requiredPoints + 10 : 0)) && (
                                     <div className="text-green-600 font-semibold mt-1 md:mt-0 md:ml-2">
                                       🛡️ Atteint !
                                     </div>

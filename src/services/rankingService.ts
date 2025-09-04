@@ -113,7 +113,8 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
         conciergerieId: conciergerie?.id,
         conciergerieNom: conciergerie?.nom,
         score: effectiveScore,
-        isCurrent: conciergerie?.id === currentConciergerieId
+        isCurrent: conciergerie?.id === currentConciergerieId,
+        createdAt: conciergerie?.created_at || new Date().toISOString()
       };
     });
 
@@ -125,8 +126,7 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
       }
       
       // Second: If effective scores are equal, compare conciergerie creation dates (oldest first)
-      // Pour simplifier, on utilise l'ID de la formule comme critère de départage
-      return a.id.localeCompare(b.id);
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
     });
 
     // Calculer les positions nécessaires pour être 1er, top 3, top 10
@@ -134,7 +134,9 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
     
     // Position 1 (1ère formule)
     const firstPosition = formulesWithScores[0];
-    if (firstPosition && !firstPosition.isCurrent) {
+    if (firstPosition) {
+
+      // Objectif 1ère position - toujours affiché
       targets.push({
         targetPosition: 1,
         requiredPoints: firstPosition.score + 1,
@@ -146,7 +148,7 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
         }
       });
 
-      // Sécuriser 1ère position (1ère position + 10 points)
+      // Sécuriser 1ère position - toujours affiché
       targets.push({
         targetPosition: 'secure',
         requiredPoints: firstPosition.score + 11, // +1 pour être premier, +10 pour sécuriser
@@ -159,13 +161,13 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
       });
     }
 
-    // Position 3 (3ème formule)
+    // Position 3 (3ème formule) - toujours affiché sauf si même points que 1ère position
     if (formulesWithScores.length >= 3) {
       const thirdPosition = formulesWithScores[2];
-      if (thirdPosition && !thirdPosition.isCurrent) {
+      if (thirdPosition && thirdPosition.score !== firstPosition.score) {
         targets.push({
           targetPosition: 3,
-          requiredPoints: thirdPosition.score + 1,
+          requiredPoints: Math.max(1, thirdPosition.score + 1),
           villeName: ville.nom,
           villeId: villeId,
           currentLeader: {
@@ -177,7 +179,7 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
     } else if (formulesWithScores.length > 0) {
       // Si moins de 3 formules, être 3ème nécessite au moins 1 point
       const lastPosition = formulesWithScores[formulesWithScores.length - 1];
-      if (!lastPosition.isCurrent) {
+      if (lastPosition.score !== firstPosition.score) {
         targets.push({
           targetPosition: 3,
           requiredPoints: Math.max(1, lastPosition.score + 1),
