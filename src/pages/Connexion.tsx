@@ -42,16 +42,16 @@ const Connexion = () => {
           setError(error.message);
         }
       } else {
-        // Connexion réussie - redirection automatique gérée par AdminRedirect
+        // Connexion réussie
         setSuccess('Connexion réussie ! Redirection en cours...');
         
-        // Pour les admins, redirection immédiate
+        // Pour les admins, redirection vers le panneau d'admin
         if (email.includes('admin') || email.includes('proprioadvisor')) {
           setTimeout(() => {
             router.push('/admin');
           }, 1000);
         } else {
-          // Pour les autres utilisateurs, laisser AdminRedirect gérer la redirection
+          // Pour les autres utilisateurs, redirection vers subscription
           setTimeout(() => {
             router.push('/subscription');
           }, 1000);

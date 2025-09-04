@@ -13,9 +13,6 @@ import StructuredData from "@/components/seo/StructuredData"
 import { orgJsonLd, websiteJsonLd } from "@/lib/structured-data-models"
 import Providers from "@/components/providers/Providers"
 import PageWrapper from "@/components/PageWrapper"
-import AdminRedirect from "@/components/auth/AdminRedirect"
-import NonAdminRedirect from "@/components/auth/NonAdminRedirect"
-import AdminRedirectNotification from "@/components/auth/AdminRedirectNotification"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -137,9 +134,6 @@ export default function RootLayout({
           />
         </noscript>
         <Providers>
-          <AdminRedirect />
-          <NonAdminRedirect />
-          <AdminRedirectNotification />
           <PageWrapper>
             <div className="flex flex-col min-h-screen">
               <Navbar />
