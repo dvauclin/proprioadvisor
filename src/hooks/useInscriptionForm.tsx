@@ -7,8 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { FormuleFormData } from "@/components/formule/FormuleFormSchema";
-import { getAllVilles } from "@/services/villeService";
-import { Ville } from "@/types";
+import { getVillesForInscription } from "@/services/villeServiceOptimized";
+import { VilleForInscription } from "@/services/villeServiceOptimized";
 import { transformFormuleForDB } from "@/services/conciergerieTransformService";
 import { triggerConciergerieCreation } from "@/utils/webhookService";
 
@@ -49,19 +49,21 @@ export const useInscriptionForm = () => {
   }, [formules]);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [selectedVillesIds, setSelectedVillesIds] = useState<string[]>([]);
-  const [villes, setVilles] = useState<Ville[]>([]);
-  const [villesLoading, setVillesLoading] = useState(true);
+  const [villes, setVilles] = useState<VilleForInscription[]>([]);
+  const [villesLoading, setVillesLoading] = useState(false);
   const [isUploadingLogo, setIsUploadingLogo] = useState(false);
   
   const { signUp } = useAuth();
   const router = useRouter();
 
-  // Charger les villes au montage du composant
+  // Charger les villes de manière paresseuse
   useEffect(() => {
     const loadVilles = async () => {
+      if (villes.length > 0) return; // Déjà chargé
+      
       setVillesLoading(true);
       try {
-        const villesData = await getAllVilles();
+        const villesData = await getVillesForInscription();
         setVilles(villesData);
       } catch (error) {
         console.error("Erreur lors du chargement des villes:", error);
@@ -71,8 +73,10 @@ export const useInscriptionForm = () => {
       }
     };
 
-    loadVilles();
-  }, []);
+    // Délai pour permettre le rendu initial
+    const timer = setTimeout(loadVilles, 100);
+    return () => clearTimeout(timer);
+  }, [villes.length]);
 
   const form = useForm<InscriptionFormData>({
     defaultValues: {

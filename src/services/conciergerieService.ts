@@ -134,12 +134,26 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
         .select('id, nom, slug')
         .in('id', conciergerie.villes_ids || []);
 
-      // Get subscription data
-      const { data: subscription } = await supabase
+      // Get subscription data - une conciergerie ne peut avoir qu'un seul abonnement
+      const { data: subscription, error: subscriptionError } = await supabase
         .from('subscriptions')
         .select('total_points, monthly_amount')
         .eq('conciergerie_id', id)
         .single();
+
+      console.log("🔍 Subscription query result:", {
+        conciergerieId: id,
+        subscription,
+        subscriptionError,
+        hasSubscription: !!subscription
+      });
+
+      // Si pas d'abonnement trouvé, c'est normal (conciergerie sans abonnement)
+      if (subscriptionError && subscriptionError.code === 'PGRST116') {
+        console.log("ℹ️ Aucun abonnement trouvé pour cette conciergerie (normal)");
+      } else if (subscriptionError) {
+        console.error("❌ Erreur lors de la récupération de l'abonnement:", subscriptionError);
+      }
 
       // Format cities with URLs
       const villesFormatted = (villes || []).map(ville => ({
@@ -147,14 +161,18 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
         url: `https://proprioadvisor.fr/conciergerie/${ville.slug}`
       }));
 
-              await triggerConciergerieValidation({
-          nom: conciergerie.nom,
-          email: conciergerie.mail || '',
-          villesSelectionnees: villesFormatted,
-          conciergerieID: id,
-          nombrePoints: subscription?.total_points || 0,
-          montantAbonnement: subscription?.monthly_amount || 0,
-        });
+      const webhookData = {
+        nom: conciergerie.nom,
+        email: conciergerie.mail || '',
+        villesSelectionnees: villesFormatted,
+        conciergerieID: id,
+        nombrePoints: subscription?.total_points || 0,
+        montantAbonnement: subscription?.monthly_amount || 0,
+      };
+
+      console.log("📤 Webhook data being sent:", webhookData);
+
+      await triggerConciergerieValidation(webhookData);
 
               console.log("✅ Validation webhook sent successfully");
     } catch (webhookError) {

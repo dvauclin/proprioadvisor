@@ -1,7 +1,7 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Ville } from "@/types";
+import { VilleForInscription } from "@/services/villeServiceOptimized";
 import GeographicCoverageSection from "./components/GeographicCoverageSection";
 import PropertyConfigSection from "./components/PropertyConfigSection";
 import AcceptanceOptionsSection from "./components/AcceptanceOptionsSection";
@@ -13,7 +13,7 @@ interface StepOneProps {
   form: UseFormReturn<any>;
   logoPreview: string;
   handleLogoChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  villes: Ville[];
+  villes: VilleForInscription[];
   selectedVillesIds: string[];
   villesLoading: boolean;
   handleVilleSelection: (villeId: string) => void;

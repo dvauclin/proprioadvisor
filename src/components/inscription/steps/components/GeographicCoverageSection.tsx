@@ -6,18 +6,11 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Input } from "@/components/ui-kit/input";
 import { MapPin, Building2, Search } from "lucide-react";
 import { normalizeForSearch } from "@/utils/conciergerieUtils";
-
-// Type optimisé pour les villes
-interface VilleSelectorItem {
-  id: string;
-  nom: string;
-  departementNumero?: string;
-  departementNom?: string;
-}
+import { VilleForInscription } from "@/services/villeServiceOptimized";
 
 interface GeographicCoverageSectionProps {
   form: UseFormReturn<any>;
-  villes: VilleSelectorItem[];
+  villes: VilleForInscription[];
   selectedVillesIds: string[];
   villesLoading: boolean;
   handleVilleSelection: (villeId: string) => void;
@@ -59,7 +52,7 @@ const GeographicCoverageSection: React.FC<GeographicCoverageSectionProps> = ({
     });
   }, [villes, searchTerm]);
 
-  const formatVilleName = (ville: VilleSelectorItem) => {
+  const formatVilleName = (ville: VilleForInscription) => {
     return ville.departementNumero ? `${ville.departementNumero} - ${ville.nom}` : ville.nom;
   };
 

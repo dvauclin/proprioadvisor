@@ -4,13 +4,13 @@ import { Form } from "@/components/ui-kit/form";
 import { Button } from "@/components/ui-kit/button";
 import { UseFormReturn } from "react-hook-form";
 import StepOne from "@/components/inscription/steps/StepOne";
-import { Ville } from "@/types";
+import { VilleForInscription } from "@/services/villeServiceOptimized";
 
 interface InscriptionStepOneFormProps {
   form: UseFormReturn<any>;
   logoPreview: string;
   handleLogoChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  villes: Ville[];
+  villes: VilleForInscription[];
   selectedVillesIds: string[];
   villesLoading: boolean;
   handleVilleSelection: (villeId: string) => void;
