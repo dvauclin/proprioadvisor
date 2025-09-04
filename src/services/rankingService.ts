@@ -148,10 +148,15 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
         }
       });
 
-      // Sécuriser 1ère position - toujours affiché
+      // Sécuriser 1ère position - calculé comme atteindre 1ère position + figurer top 3
+      const pointsPourAtteindre1ere = firstPosition.score + 1;
+      const pointsPourTop3 = formulesWithScores.length >= 3 
+        ? Math.max(1, formulesWithScores[2].score + 1)
+        : Math.max(1, formulesWithScores[formulesWithScores.length - 1].score + 1);
+      
       targets.push({
         targetPosition: 'secure',
-        requiredPoints: firstPosition.score + 11, // +1 pour être premier, +10 pour sécuriser
+        requiredPoints: pointsPourAtteindre1ere + pointsPourTop3,
         villeName: ville.nom,
         villeId: villeId,
         currentLeader: {
