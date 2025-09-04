@@ -6,7 +6,6 @@ import NewStepOne from "@/components/inscription/steps/NewStepOne";
 import NewStepTwo from "@/components/inscription/steps/NewStepTwo";
 import NewStepThree from "@/components/inscription/steps/NewStepThree";
 import StepProgress from "@/components/inscription/steps/StepProgress";
-import { Button } from "@/components/ui-kit/button";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui-kit/dialog";
 import { useAuth } from "@/contexts/AuthContext";
