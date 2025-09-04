@@ -37,26 +37,20 @@ const NewStepOne: React.FC<NewStepOneProps> = ({
       </div>
 
       {/* Couverture géographique */}
-      <div className="bg-white p-6 rounded-lg border border-gray-200">
-        <GeographicCoverageSection 
-          form={form}
-          villes={villes}
-          selectedVillesIds={selectedVillesIds}
-          villesLoading={villesLoading}
-          handleVilleSelection={handleVilleSelection}
-        />
-      </div>
+      <GeographicCoverageSection 
+        form={form}
+        villes={villes}
+        selectedVillesIds={selectedVillesIds}
+        villesLoading={villesLoading}
+        handleVilleSelection={handleVilleSelection}
+      />
 
       {/* Configuration des logements acceptés */}
-      <div className="bg-white p-6 rounded-lg border border-gray-200">
-        <PropertyConfigSection form={form} />
-      </div>
+      <PropertyConfigSection form={form} />
 
       {/* Score - Admin only field */}
       {isAdmin && (
-        <div className="bg-white p-6 rounded-lg border border-gray-200">
-          <ScoreFieldSection form={form} />
-        </div>
+        <ScoreFieldSection form={form} />
       )}
 
       {/* Navigation buttons */}
