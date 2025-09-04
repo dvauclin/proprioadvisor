@@ -54,17 +54,20 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   // Watch form values for reactive calculation
   const useCustomAmount = form.watch("useCustomAmount");
   const customAmount = form.watch("customAmount");
+  const backlink = form.watch("options.backlink");
 
   // Calculate current points based on watched form values
   const currentPoints = useMemo(() => {
     const customAmountValue = useCustomAmount ? Number(customAmount) || 0 : 0;
-    return customAmountValue;
-  }, [useCustomAmount, customAmount]);
+    const bonusPoints = backlink ? 5 : 0;
+    return customAmountValue + bonusPoints;
+  }, [useCustomAmount, customAmount, backlink]);
 
   // État pour les données de classement
   const [rankingData, setRankingData] = useState<{
     position1: any;
     position3: any;
+    positionSecure: any;
     villes: string[];
   } | null>(null);
   const [loadingRanking, setLoadingRanking] = useState(false);
@@ -106,7 +109,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
         <form onSubmit={form.handleSubmit(handleSubscription)} className="space-y-6 md:space-y-6 space-y-3">
           
           {/* Section de sélection du montant d'abonnement */}
-          <div className="border border-gray-200 rounded-lg p-6 md:p-6 p-3 bg-white px-[12px] py-[12px]">
+          <div className="p-4 md:p-4 p-2">
             <h3 className="text-lg font-semibold mb-4">Montant de l'abonnement</h3>
             
             <div className="space-y-4 md:space-y-4 space-y-2">
@@ -123,8 +126,8 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none flex-1">
-                    <FormLabel className="text-base">
-                      J'accepte de passer à un abonnement payant
+                                         <FormLabel className="text-base">
+                       Je souhaite profiter des avantages de l'abonnement payant
                       <div className="text-gray-600 text-xs mt-1">
                         {rankingData && rankingData.villes.length > 0 ? (
                           <>
@@ -161,11 +164,18 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
             </div>
 
             {/* Message dynamique en bas */}
-            <div className={`mt-6 md:mt-6 mt-3 p-4 md:p-4 p-2 rounded-lg ${currentPoints === 0 ? 'bg-red-50 border border-red-200' : 'bg-blue-50 border border-blue-200'}`}>
-              <p className={`text-sm font-medium ${currentPoints === 0 ? 'text-red-800' : 'text-blue-800'}`}>
-                Total de points : {currentPoints} points
+            <div className={`mt-6 md:mt-6 mt-3 p-4 md:p-4 p-2 rounded-lg ${currentPoints === 0 ? 'bg-red-50 border border-red-200' : 'bg-gray-50 border border-gray-200'}`}>
+              <p className={`text-sm font-medium ${currentPoints === 0 ? 'text-red-800' : 'text-gray-800'}`}>
+                Total de points : <span className={`font-semibold ${currentPoints === 0 ? 'text-red-600' : 'text-blue-600'}`}>
+                  {currentPoints} point{currentPoints > 1 ? 's' : ''}
+                  {backlink && useCustomAmount && Number(customAmount) > 0 && (
+                    <span className="text-xs font-normal text-gray-500 ml-1">
+                      (incluant les 5 points bonus gagnés pour le lien ajouté)
+                    </span>
+                  )}
+                </span>
               </p>
-              <div className={`text-xs mt-2 ${currentPoints === 0 ? 'text-red-600' : 'text-blue-600'}`}>
+              <div className={`text-xs mt-2 ${currentPoints === 0 ? 'text-red-600' : 'text-gray-600'}`}>
                 {currentPoints === 0 ? (
                   <p>
                     Avec 0 point vous ne serez pas considéré comme une conciergerie partenaire. Les clients ne pourront pas vous contacter et vous serez placé tout en bas des listings. Votre visibilité est quasi nulle. Il faut au moins 1 point pour être considéré comme une conciergerie partenaire.
@@ -179,28 +189,98 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
                       </div>
                     ) : rankingData && rankingData.villes.length > 0 ? (
                       <div className="space-y-1">
-                        {rankingData.position1 && (
-                          <div className={`text-sm ${currentPoints >= rankingData.position1.requiredPoints ? "animate-pulse text-yellow-600 font-semibold" : ""}`}>
-                            <p>
-                              Pour atteindre la 1ère position {rankingData.villes.length === 1 ? `à ${rankingData.villes[0]}` : 'dans les villes sélectionnées'}, il vous faut <strong>{rankingData.position1.requiredPoints}</strong> <strong>points</strong>.
-                            </p>
-                            {currentPoints >= rankingData.position1.requiredPoints && (
-                              <p className="text-yellow-600 mt-1">
-                                🏆 <span className="animate-bounce inline-block">Objectif atteint !</span>
-                              </p>
-                            )}
-                          </div>
-                        )}
-                        {rankingData.position3 && (
-                          <div className={`text-sm ${currentPoints >= rankingData.position3.requiredPoints ? "animate-pulse text-orange-600 font-semibold" : ""}`}>
-                            <p>
-                              Pour figurer dans le Top 3 {rankingData.villes.length === 1 ? `à ${rankingData.villes[0]}` : 'dans les villes sélectionnées'}, il vous faut <strong>{rankingData.position3.requiredPoints}</strong> <strong>points</strong>.
-                            </p>
-                            {currentPoints >= rankingData.position3.requiredPoints && (
-                              <p className="text-orange-600 mt-1">
-                                🥉 <span className="animate-bounce inline-block">Objectif atteint !</span>
-                              </p>
-                            )}
+                        {(rankingData.position1 || rankingData.position3) && (
+                          <div className="space-y-3">
+                            <div className="text-sm">
+                              <span className="font-medium">
+                                Objectifs de classement {rankingData.villes.length === 1 ? `à ${rankingData.villes[0]}` : 'dans les villes sélectionnées'}
+                              </span>
+                            </div>
+                            
+                            {/* Barre de progression unique */}
+                            <div className="relative w-full bg-gray-200 rounded-full h-4">
+                              {/* Barre de progression actuelle */}
+                              <div 
+                                className="h-4 rounded-full transition-all duration-500 bg-gradient-to-r from-gray-400 to-gray-600"
+                                style={{ 
+                                  width: `${Math.min(100, (currentPoints / Math.max(rankingData.position1?.requiredPoints || 0, rankingData.position3?.requiredPoints || 0, rankingData.positionSecure?.requiredPoints || 0)) * 100)}%` 
+                                }}
+                              ></div>
+                              
+                              {/* Marqueur Top 3 - seulement si différent de la 1ère position */}
+                              {rankingData.position3 && rankingData.position1 && rankingData.position3.requiredPoints !== rankingData.position1.requiredPoints && (
+                                <div 
+                                  className="absolute top-0 w-1 h-4 bg-orange-500 rounded-full"
+                                  style={{ 
+                                    left: `${(rankingData.position3.requiredPoints / Math.max(rankingData.position1?.requiredPoints || 0, rankingData.position3?.requiredPoints || 0, rankingData.positionSecure?.requiredPoints || 0)) * 100}%` 
+                                  }}
+                                ></div>
+                              )}
+                              
+                              {/* Marqueur 1ère position */}
+                              {rankingData.position1 && (
+                                <div 
+                                  className="absolute top-0 w-1 h-4 bg-yellow-500 rounded-full"
+                                  style={{ 
+                                    left: `${(rankingData.position1.requiredPoints / Math.max(rankingData.position1?.requiredPoints || 0, rankingData.position3?.requiredPoints || 0, rankingData.positionSecure?.requiredPoints || 0)) * 100}%` 
+                                  }}
+                                ></div>
+                              )}
+                              
+                              {/* Marqueur Sécuriser 1ère position */}
+                              {rankingData.positionSecure && (
+                                <div 
+                                  className="absolute top-0 w-1 h-4 bg-green-500 rounded-full"
+                                  style={{ 
+                                    left: `${(rankingData.positionSecure.requiredPoints / Math.max(rankingData.position1?.requiredPoints || 0, rankingData.position3?.requiredPoints || 0, rankingData.positionSecure?.requiredPoints || 0)) * 100}%` 
+                                  }}
+                                ></div>
+                              )}
+                            </div>
+                            
+                            {/* Légende des objectifs */}
+                            <div className="space-y-1 text-sm">
+                              {/* Afficher Top 3 seulement si différent de la 1ère position */}
+                              {rankingData.position3 && (!rankingData.position1 || rankingData.position3.requiredPoints !== rankingData.position1.requiredPoints) && (
+                                <div className="md:flex md:items-center md:justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                    <span>Figurer top 3 : {rankingData.position3.requiredPoints} points</span>
+                                  </div>
+                                  {currentPoints >= rankingData.position3.requiredPoints && (
+                                    <div className="text-orange-600 font-semibold mt-1 md:mt-0 md:ml-2">
+                                      🥉 Atteint !
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                              {rankingData.position1 && (
+                                <div className="md:flex md:items-center md:justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <span>Atteindre 1ère position : {rankingData.position1.requiredPoints} points</span>
+                                  </div>
+                                  {currentPoints >= rankingData.position1.requiredPoints && (
+                                    <div className="text-yellow-600 font-semibold mt-1 md:mt-0 md:ml-2">
+                                      🏆 Atteint !
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                              {rankingData.positionSecure && (
+                                <div className="md:flex md:items-center md:justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <span>Sécuriser 1ère position : {rankingData.positionSecure.requiredPoints} points</span>
+                                  </div>
+                                  {currentPoints >= rankingData.positionSecure.requiredPoints && (
+                                    <div className="text-green-600 font-semibold mt-1 md:mt-0 md:ml-2">
+                                      🛡️ Atteint !
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         )}
                       </div>
@@ -215,7 +295,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
             </div>
 
             {/* Cadre mémo séparé */}
-            {rankingData && rankingData.villes.length > 0 && (
+            {rankingData && rankingData.villes.length > 0 && currentPoints > 0 && (
               <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
                 💡 Plus vous êtes classé haut, plus vous êtes visible sur les IA et moteurs de recherche.
               </div>

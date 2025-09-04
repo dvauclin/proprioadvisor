@@ -17,7 +17,7 @@ const SubscriptionFAQ: React.FC = () => {
               <strong className="text-green-600">L'inscription et le référencement sont 100% gratuits.</strong> Un abonnement est proposé pour maximiser votre visibilité.
             </p>
             <p>
-              Le montant est à titre indicatif <strong>(5 à +20€/mois)</strong> car il s'agit d'un système d'enchère flexible : vous êtes libre de saisir un montant plus ou moins élevé selon votre budget et vos objectifs.
+              Le montant est à titre indicatif car il s'agit d'un système d'enchère flexible : vous êtes libre de saisir un montant plus ou moins élevé selon votre budget et vos objectifs.
             </p>
             <div className="bg-green-50 p-4 rounded-lg border border-green-200">
               <div className="flex items-center gap-2 mb-2">

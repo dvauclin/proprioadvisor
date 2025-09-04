@@ -10,7 +10,7 @@ export interface RankingPosition {
 }
 
 export interface RankingTarget {
-  targetPosition: 1 | 3 | 10;
+  targetPosition: 1 | 3 | 'secure';
   requiredPoints: number;
   villeName: string;
   villeId: string;
@@ -145,6 +145,18 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
           points: firstPosition.score
         }
       });
+
+      // Sécuriser 1ère position (1ère position + 10 points)
+      targets.push({
+        targetPosition: 'secure',
+        requiredPoints: firstPosition.score + 11, // +1 pour être premier, +10 pour sécuriser
+        villeName: ville.nom,
+        villeId: villeId,
+        currentLeader: {
+          conciergerieName: firstPosition.conciergerieNom,
+          points: firstPosition.score
+        }
+      });
     }
 
     // Position 3 (3ème formule)
@@ -193,10 +205,12 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
 export function groupRankingTargets(targets: RankingTarget[]): {
   position1: RankingTarget | null;
   position3: RankingTarget | null;
+  positionSecure: RankingTarget | null;
   villes: string[];
 } {
   const position1Targets = targets.filter(t => t.targetPosition === 1);
   const position3Targets = targets.filter(t => t.targetPosition === 3);
+  const positionSecureTargets = targets.filter(t => t.targetPosition === 'secure');
   
   // Récupérer toutes les villes uniques
   const villes = [...new Set(targets.map(t => t.villeName))];
@@ -209,6 +223,11 @@ export function groupRankingTargets(targets: RankingTarget[]): {
       : null,
     position3: position3Targets.length > 0 
       ? position3Targets.reduce((max, current) => 
+          current.requiredPoints > max.requiredPoints ? current : max
+        )
+      : null,
+    positionSecure: positionSecureTargets.length > 0 
+      ? positionSecureTargets.reduce((max, current) => 
           current.requiredPoints > max.requiredPoints ? current : max
         )
       : null,
