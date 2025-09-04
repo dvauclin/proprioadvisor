@@ -102,10 +102,18 @@ serve(async (req) => {
 
     // Déclencher le webhook en arrière-plan
     try {
+      // Récupérer le nom de la conciergerie pour le webhook
+      const { data: conciergerie } = await supabase
+        .from('conciergeries')
+        .select('nom')
+        .eq('id', conciergerieId)
+        .single();
+
       const webhookData = {
         type: "avis_submitted",
         avis: {
           conciergerie_id: conciergerieId,
+          conciergerie_nom: conciergerie?.nom || '',
           emetteur: emetteur.trim(),
           note: note,
           commentaire: commentaire?.trim() || '',

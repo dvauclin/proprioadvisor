@@ -132,15 +132,17 @@ serve(async (req) => {
 
       logStep("Successfully updated subscription in Supabase", { subscriptionId: existingSubscriptionId });
 
-      // Get conciergerie email for webhook and check validation
+      // Get conciergerie email and name for webhook and check validation
       let conciergerieEmail = null;
+      let conciergerieNom = null;
       if (conciergerieId) {
         const { data: conciergerie } = await supabaseAdmin
           .from('conciergeries')
-          .select('mail, validated')
+          .select('mail, nom, validated')
           .eq('id', conciergerieId)
           .single();
         conciergerieEmail = conciergerie?.mail;
+        conciergerieNom = conciergerie?.nom;
 
         // ❌ NE PAS VALIDER ICI - La validation se fera uniquement après confirmation du paiement
         // Log pour indiquer que la validation attendra la confirmation du paiement
@@ -157,6 +159,7 @@ serve(async (req) => {
       await triggerWebhook({
         type: "subscription_updated",
         conciergerieId,
+        conciergerieNom: conciergerieNom || '',
         amount: amount / 100,
         totalPoints: subscriptionData.total_points,
         isFree: (amount / 100) === 0,

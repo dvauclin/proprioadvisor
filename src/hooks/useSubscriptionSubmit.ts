@@ -13,6 +13,7 @@ interface UseSubscriptionSubmitProps {
   totalPoints: number;
   conciergerieId: string | null;
   conciergerieEmail: string;
+  conciergerieNom: string;
   existingSubscription: any;
 }
 
@@ -21,6 +22,7 @@ export const useSubscriptionSubmit = ({
   totalPoints,
   conciergerieId,
   conciergerieEmail,
+  conciergerieNom,
   existingSubscription
 }: UseSubscriptionSubmitProps) => {
   const router = useRouter();
@@ -182,6 +184,7 @@ export const useSubscriptionSubmit = ({
           await triggerSubscriptionUpdated({
             subscription_id: subscriptionId,
             conciergerie_id: conciergerieId,
+            conciergerie_nom: conciergerieNom || '',
             amount: 0,
             total_points: totalPoints,
             is_free: true,

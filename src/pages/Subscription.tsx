@@ -108,7 +108,8 @@ const Subscription = () => {
           {(conciergerieId || !existingSubscription) && <SubscriptionForm 
             existingSubscription={existingSubscription} 
             conciergerieId={conciergerieId} 
-            conciergerieEmail={conciergerieEmail} 
+            conciergerieEmail={conciergerieEmail}
+            conciergerieName={conciergerieName}
           />}
           
           <SubscriptionFAQ />

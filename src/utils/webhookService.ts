@@ -131,6 +131,7 @@ export const triggerFirstPaymentSuccess = async (data: {
 export const triggerSubscriptionCreated = async (data: {
   subscription_id: string;
   conciergerie_id: string;
+  conciergerie_nom: string;
   amount: number;
   total_points: number;
   is_free: boolean;
@@ -150,6 +151,7 @@ export const triggerSubscriptionCreated = async (data: {
 export const triggerSubscriptionUpdated = async (data: {
   subscription_id: string;
   conciergerie_id: string;
+  conciergerie_nom: string;
   amount: number;
   total_points: number;
   is_free: boolean;
@@ -169,6 +171,7 @@ export const triggerSubscriptionUpdated = async (data: {
 export const triggerSubscriptionCancelled = async (data: {
   subscription_id: string;
   conciergerie_id: string;
+  conciergerie_nom: string;
   amount: number;
   total_points: number;
   is_free: boolean;
@@ -189,6 +192,7 @@ export const triggerLeadSubmitted = async (data: {
   nom: string;
   email: string;
   conciergerie_id?: string;
+  conciergerie_nom?: string;
 }): Promise<boolean> => {
   return await triggerWebhook({
     type: 'lead_submitted',
@@ -244,6 +248,7 @@ export const triggerConciergerieValidation = async (data: {
 // 12. Avis soumis
 export const triggerAvisSubmitted = async (data: {
   conciergerie_id: string;
+  conciergerie_nom: string;
   emetteur: string;
   note: number;
   commentaire: string;

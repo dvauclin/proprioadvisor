@@ -29,16 +29,18 @@ export async function handleSubscriptionUpdated(subscription: Stripe.Subscriptio
     });
   }
 
-  // Get conciergerie email and check if validation is needed
+  // Get conciergerie email and name, check if validation is needed
   let conciergerieEmail = null;
+  let conciergerieNom = null;
   try {
     const { data: conciergerie } = await supabase
       .from('conciergeries')
-      .select('mail, validated')
+      .select('mail, nom, validated')
       .eq('id', dbSubscription.conciergerie_id)
       .single();
     
     conciergerieEmail = conciergerie?.mail;
+    conciergerieNom = conciergerie?.nom;
 
     // ❌ NE PAS VALIDER ICI - La validation se fera uniquement après confirmation du paiement
     // Log pour indiquer que la validation attendra la confirmation du paiement
@@ -55,6 +57,7 @@ export async function handleSubscriptionUpdated(subscription: Stripe.Subscriptio
   await triggerSubscriptionUpdated({
     subscription_id: dbSubscription.id,
     conciergerie_id: dbSubscription.conciergerie_id,
+    conciergerie_nom: conciergerieNom || '',
     amount: dbSubscription.monthly_amount,
     total_points: dbSubscription.total_points,
     is_free: dbSubscription.monthly_amount === 0,

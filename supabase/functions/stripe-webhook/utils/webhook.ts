@@ -32,6 +32,7 @@ export const triggerWebhook = async (data: any) => {
 export const triggerSubscriptionCreated = async (data: {
   subscription_id: string;
   conciergerie_id: string;
+  conciergerie_nom: string;
   amount: number;
   total_points: number;
   is_free: boolean;
@@ -51,6 +52,7 @@ export const triggerSubscriptionCreated = async (data: {
 export const triggerSubscriptionUpdated = async (data: {
   subscription_id: string;
   conciergerie_id: string;
+  conciergerie_nom: string;
   amount: number;
   total_points: number;
   is_free: boolean;
@@ -70,6 +72,7 @@ export const triggerSubscriptionUpdated = async (data: {
 export const triggerSubscriptionCancelled = async (data: {
   subscription_id: string;
   conciergerie_id: string;
+  conciergerie_nom: string;
   amount: number;
   total_points: number;
   is_free: boolean;

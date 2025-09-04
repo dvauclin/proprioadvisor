@@ -127,9 +127,10 @@ export const DevisForm: React.FC<DevisFormProps> = ({
 
         // Trigger the webhook with lead data
         await triggerLeadSubmitted({
-          nom: conciergerieData?.conciergeries?.nom || conciergerieName,
-          email: conciergerieData?.conciergeries?.mail || conciergerieEmail,
-          conciergerie_id: formuleId
+          nom: values.nom,
+          email: values.email,
+          conciergerie_id: formuleId,
+          conciergerie_nom: conciergerieData?.conciergeries?.nom || conciergerieName
         });
         
         toast.success("Votre demande de devis a été envoyée avec succès");

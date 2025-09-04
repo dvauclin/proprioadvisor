@@ -18,11 +18,13 @@ interface SubscriptionFormProps {
   existingSubscription: any;
   conciergerieId: string | null;
   conciergerieEmail: string;
+  conciergerieName: string;
 }
 export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
   existingSubscription,
   conciergerieId,
-  conciergerieEmail
+  conciergerieEmail,
+  conciergerieName
 }) => {
   const subscriptionSchema = useMemo(() => {
     return createSubscriptionSchema(!!existingSubscription, !!conciergerieEmail);
@@ -66,6 +68,7 @@ export const SubscriptionForm: React.FC<SubscriptionFormProps> = ({
     totalPoints: currentPoints,
     conciergerieId,
     conciergerieEmail,
+    conciergerieNom: conciergerieName,
     existingSubscription
   });
   
