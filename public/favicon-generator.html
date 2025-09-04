@@ -1,29 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Favicon Generator</title>
+    <title>Favicon Generator - ProprioAdvisor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        canvas { border: 1px solid #ccc; margin: 10px 0; }
+        button { padding: 10px 20px; background: #7FFF00; color: #000; border: none; cursor: pointer; }
+    </style>
 </head>
 <body>
+    <h1>Générateur de Favicon ProprioAdvisor</h1>
     <canvas id="favicon" width="32" height="32"></canvas>
+    <br>
+    <button onclick="generateFavicon()">Télécharger favicon.ico</button>
+    <button onclick="generateAppleTouchIcon()">Télécharger apple-touch-icon.png</button>
+    
     <script>
         const canvas = document.getElementById('favicon');
         const ctx = canvas.getContext('2d');
         
-        // Fond noir
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(0, 0, 32, 32);
+        // Dessiner le favicon
+        function drawFavicon() {
+            // Fond noir
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, 32, 32);
+            
+            // Cercle vert chartreuse
+            ctx.fillStyle = '#7FFF00';
+            ctx.beginPath();
+            ctx.arc(16, 16, 12, 0, 2 * Math.PI);
+            ctx.fill();
+        }
         
-        // Cercle vert chartreuse
-        ctx.fillStyle = '#7FFF00';
-        ctx.beginPath();
-        ctx.arc(16, 16, 12, 0, 2 * Math.PI);
-        ctx.fill();
+        function generateFavicon() {
+            drawFavicon();
+            const link = document.createElement('a');
+            link.download = 'favicon.ico';
+            link.href = canvas.toDataURL('image/x-icon');
+            link.click();
+        }
         
-        // Convertir en favicon
-        const link = document.createElement('a');
-        link.download = 'favicon.ico';
-        link.href = canvas.toDataURL('image/x-icon');
-        link.click();
+        function generateAppleTouchIcon() {
+            // Créer un canvas plus grand pour Apple Touch Icon
+            const appleCanvas = document.createElement('canvas');
+            appleCanvas.width = 180;
+            appleCanvas.height = 180;
+            const appleCtx = appleCanvas.getContext('2d');
+            
+            // Fond noir
+            appleCtx.fillStyle = '#000000';
+            appleCtx.fillRect(0, 0, 180, 180);
+            
+            // Cercle vert chartreuse
+            appleCtx.fillStyle = '#7FFF00';
+            appleCtx.beginPath();
+            appleCtx.arc(90, 90, 68, 0, 2 * Math.PI);
+            appleCtx.fill();
+            
+            const link = document.createElement('a');
+            link.download = 'apple-touch-icon.png';
+            link.href = appleCanvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Dessiner au chargement
+        drawFavicon();
     </script>
 </body>
-</html> 
+</html>
