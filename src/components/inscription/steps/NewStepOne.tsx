@@ -14,7 +14,6 @@ interface NewStepOneProps {
   villesLoading: boolean;
   handleVilleSelection: (villeId: string) => void;
   isAdmin?: boolean;
-  onSubmit?: () => void;
   onCancel?: () => void;
   loading?: boolean;
 }
@@ -26,7 +25,6 @@ const NewStepOne: React.FC<NewStepOneProps> = ({
   villesLoading,
   handleVilleSelection,
   isAdmin = false,
-  onSubmit,
   onCancel,
   loading = false
 }) => {
