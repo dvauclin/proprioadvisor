@@ -51,11 +51,6 @@ const Inscription = () => {
     isUploadingLogo
   } = useInscriptionForm(scrollToFormTop);
 
-  const stepTitles = [
-    "Que recherchez-vous comme bien ?",
-    "Quelles sont vos offres et services ?", 
-    "Comment vous contacter ?"
-  ];
 
   // Adapter function to convert index to formuleId
   const handleDeleteFormuleByIndex = (index: number) => {
@@ -84,7 +79,6 @@ const Inscription = () => {
           <StepProgress 
             currentStep={step} 
             totalSteps={3} 
-            stepTitles={stepTitles} 
           />
           
           {step === 1 ? (

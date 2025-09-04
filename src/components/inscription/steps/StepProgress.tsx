@@ -3,13 +3,11 @@ import React from "react";
 interface StepProgressProps {
   currentStep: number;
   totalSteps: number;
-  stepTitles: string[];
 }
 
 const StepProgress: React.FC<StepProgressProps> = ({
   currentStep,
-  totalSteps,
-  stepTitles
+  totalSteps
 }) => {
   const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
 
