@@ -34,6 +34,13 @@ const InscriptionLayout: React.FC<InscriptionLayoutProps> = ({ children }) => {
         <section className="max-w-4xl mx-auto">
           <InscriptionHeader />
           
+          {/* Description de ProprioAdvisor */}
+          <div className="text-center mb-6">
+            <p className="text-xl text-gray-800 font-medium leading-relaxed">
+              ProprioAdvisor est le comparateur de conciergeries n°1, le plus consulté, le plus complet. Vous ne pouvez pas ne pas y être.
+            </p>
+          </div>
+          
           {/* Compteur animé juste avant le formulaire */}
           <div className="text-center mb-8">
             <AnimatedCounter 

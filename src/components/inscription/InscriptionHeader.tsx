@@ -17,7 +17,7 @@ const InscriptionHeader: React.FC<InscriptionHeaderProps> = () => {
             Inscription gratuite en 3 min
           </div>
           <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">
-            Options payantes facultatives
+            0% de commission sur vos contrats
           </div>
         </div>
       </div>
