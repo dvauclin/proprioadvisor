@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useHasLeads } from '@/hooks/useHasLeads';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +22,7 @@ interface ConciergerieUserMenuProps {
 
 const ConciergerieUserMenu: React.FC<ConciergerieUserMenuProps> = ({ onMobileMenuClose }) => {
   const { profile, signOut } = useAuth();
+  const { hasLeads, loading } = useHasLeads();
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -64,12 +66,14 @@ const ConciergerieUserMenu: React.FC<ConciergerieUserMenuProps> = ({ onMobileMen
             <span>Modifier ma souscription</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/mes-leads" className="cursor-pointer" onClick={onMobileMenuClose}>
-            <User className="mr-2 h-4 w-4" />
-            <span>Mes leads</span>
-          </Link>
-        </DropdownMenuItem>
+        {!loading && hasLeads && (
+          <DropdownMenuItem asChild>
+            <Link href="/mes-leads" className="cursor-pointer" onClick={onMobileMenuClose}>
+              <User className="mr-2 h-4 w-4" />
+              <span>Mes leads</span>
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
