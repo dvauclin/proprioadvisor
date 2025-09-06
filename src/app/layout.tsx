@@ -104,8 +104,6 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         {/* Favicon configuration - multiple formats for better compatibility */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#7FFF00" />
@@ -114,8 +112,7 @@ export default function RootLayout({
         <meta httpEquiv="Pragma" content="no-cache" />
         <meta httpEquiv="Expires" content="0" />
         {/* Additional favicon cache busting */}
-        <link rel="icon" href="/favicon.svg?v=1757006368914" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/favicon.ico?v=1757006368914" type="image/x-icon" />
+        <link rel="icon" href="/favicon.svg?v=1757006368917" type="image/svg+xml" />
         <StructuredData scriptId="ld-global" data={[orgJsonLd(), websiteJsonLd()]} />
         <Script
           id="gtm-script"
