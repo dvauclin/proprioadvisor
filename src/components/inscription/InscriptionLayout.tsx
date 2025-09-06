@@ -37,7 +37,7 @@ const InscriptionLayout: React.FC<InscriptionLayoutProps> = ({ children, onScrol
           {/* Description de ProprioAdvisor */}
           <div className="text-center mb-6">
             <p className="text-xl text-gray-800 font-medium leading-relaxed">
-              ProprioAdvisor est le comparateur de conciergeries n°1, le plus consulté, le plus complet. Vous ne pouvez pas ne pas y être, surtout si vous...
+              ProprioAdvisor est le comparateur de conciergeries Airbnb n°1, le plus consulté, le plus complet. Vous ne pouvez pas ne pas y être, surtout si vous...
             </p>
             <div className="mt-6">
               <div className="flex flex-row justify-center items-center gap-3 sm:gap-8">

@@ -10,7 +10,7 @@ const InscriptionHeader: React.FC<InscriptionHeaderProps> = () => {
       {/* Hero Section */}
       <div className="mb-12 px-0">
         <h1 className="text-4xl font-bold mb-4 text-gray-900">
-          Rejoignez le réseau de conciergeries Airbnb de ProprioAdvisor
+          Rejoignez ProprioAdvisor
         </h1>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
           <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">
