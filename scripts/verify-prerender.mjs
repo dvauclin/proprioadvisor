@@ -26,7 +26,7 @@ const checkUrl = async (path) => {
     const response = await axios.get(url, {
       // Simuler un bot pour s'assurer de déclencher la fonction de pré-rendu
       headers: {
-        'User-Agent': 'Lovable-Prerender-Checker/1.0'
+        'User-Agent': 'ProprioAdvisor-Prerender-Checker/1.0'
       }
     });
 
