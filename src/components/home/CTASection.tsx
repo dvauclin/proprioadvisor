@@ -95,7 +95,7 @@ const CTASection: React.FC = () => {
                 {/* Texte avec le nombre de conciergeries sous le bouton */}
                 <div className="mt-3 text-center">
                   <p className="text-sm text-gray-600">
-                    Déjà <span className="font-semibold text-brand-chartreuse">{displayedCount}</span> conciergerie{displayedCount > 1 ? 's' : ''} reçoivent des clients grâce à ProprioAdvisor
+                    Devenez la <span className="font-semibold text-brand-chartreuse">{displayedCount + 1}e</span> conciergerie qui reçoit des clients grâce à ProprioAdvisor
                   </p>
                 </div>
               </div>

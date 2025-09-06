@@ -72,7 +72,7 @@ const Inscription = () => {
   };
 
   return (
-    <InscriptionLayout onScrollToForm={scrollToForm}>
+    <InscriptionLayout onScrollToForm={scrollToFormTop}>
       <div ref={formRef}>
         <InscriptionFormContainer>
           <StepProgress 
