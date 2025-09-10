@@ -5,6 +5,13 @@ import ArticleHeader from '@/components/blog/ArticleHeader'
 import ArticleContentFrame from '@/components/blog/ArticleContentFrame'
 import Breadcrumbs from '@/components/ui-kit/breadcrumbs'
 import ClientArticleWrapper from '@/components/blog/ClientArticleWrapper'
+import StructuredData from '@/components/seo/StructuredData'
+import { 
+  blogPostingJsonLd, 
+  faqJsonLd, 
+  articleWebPageJsonLd, 
+  breadcrumbsJsonLd 
+} from '@/lib/structured-data-models'
 
 interface ArticlePageProps {
   params: {
@@ -22,25 +29,67 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     };
   }
 
+  // Calculer le temps de lecture
+  const formatReadingTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const wordCount = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+    return Math.ceil(wordCount / wordsPerMinute);
+  };
+
+  const readingTime = formatReadingTime(article.contenu || '');
+  const description = article.excerpt || article.resume || article.titre;
+  const keywords = [
+    'conciergerie',
+    'airbnb', 
+    'location courte durée',
+    'gestion locative',
+    'propriétaire',
+    'blog',
+    'article',
+    'conseils',
+    'rentabilité'
+  ];
+
+  // Ajouter des mots-clés spécifiques si disponibles
+  if ((article as any).keywords) {
+    const articleKeywords = Array.isArray((article as any).keywords) 
+      ? (article as any).keywords 
+      : (article as any).keywords.split(',').map((k: string) => k.trim());
+    keywords.push(...articleKeywords);
+  }
+
   return {
     title: `${article.titre} | ProprioAdvisor`,
-    description: article.excerpt || article.titre,
-    keywords: ['conciergerie', 'airbnb', 'location courte durée', 'blog', 'article'],
+    description: description,
+    keywords: keywords,
+    authors: [{ name: 'David Vauclin' }],
+    category: 'Conciergerie Airbnb',
     openGraph: {
       title: article.titre,
-      description: article.excerpt || article.titre,
+      description: description,
       url: `https://proprioadvisor.fr/${params.slug}`,
       type: 'article',
       images: article.image ? [article.image] : [],
+      publishedTime: article.date_creation || article.createdAt || article.datePublication,
+      modifiedTime: article.date_modification || article.updatedAt || article.datePublication,
+      authors: ['David Vauclin'],
+      section: 'Conciergerie Airbnb',
+      tags: keywords,
     },
     twitter: {
       card: 'summary_large_image',
       title: article.titre,
-      description: article.excerpt || article.titre,
+      description: description,
       images: article.image ? [article.image] : [],
+      creator: '@proprioadvisor',
     },
     alternates: {
       canonical: `/${params.slug}`,
+    },
+    other: {
+      'article:reading_time': `${readingTime} min`,
+      'article:author': 'David Vauclin',
+      'article:section': 'Conciergerie Airbnb',
     },
   };
 }
@@ -81,8 +130,38 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     }
   ];
 
+  // Calculer le temps de lecture
+  const formatReadingTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const wordCount = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+    return Math.ceil(wordCount / wordsPerMinute);
+  };
+
+  const readingTime = formatReadingTime(article.contenu || '');
+
+  // Générer les données structurées
+  const structuredData = [
+    // Breadcrumbs
+    breadcrumbsJsonLd(breadcrumbItems.map(item => ({ name: item.label, url: item.href }))),
+    
+    // Page web de l'article
+    articleWebPageJsonLd(article),
+    
+    // Article BlogPosting
+    blogPostingJsonLd(article, { 
+      imageUrl: article.image, 
+      readingTime: readingTime 
+    }),
+    
+    // FAQ si disponible
+    faqJsonLd(article)
+  ].filter(Boolean); // Enlever les valeurs null/undefined
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      {/* Données structurées */}
+      <StructuredData data={structuredData} />
+      
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}

@@ -156,6 +156,207 @@ export function articleJsonLd(article: any, opts?: { imageUrl?: string }) {
   return data;
 }
 
+// Fonction améliorée pour les articles de blog avec BlogPosting
+export function blogPostingJsonLd(article: any, opts?: { imageUrl?: string; readingTime?: number }) {
+  const image = imageOrPlaceholder(opts?.imageUrl || article?.image);
+  const webPageId = `${BASE_URL}/${article?.slug}`;
+  const articleId = `${BASE_URL}/${article?.slug}#article`;
+  
+  const data: any = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": articleId,
+    headline: article?.titre,
+    description: article?.excerpt || article?.resume || article?.titre,
+    image,
+    inLanguage: LANG,
+    author: { 
+      "@type": "Person", 
+      name: "David Vauclin",
+      jobTitle: "Expert en location courte durée",
+      url: "https://proprioadvisor.fr/a-propos"
+    },
+    publisher: { "@id": `${BASE_URL}/#organization` },
+    datePublished: iso(article?.date_creation || article?.createdAt || article?.datePublication),
+    dateModified: iso(article?.date_modification || article?.updatedAt || article?.datePublication) ||
+                  iso(article?.date_creation || article?.createdAt),
+    mainEntityOfPage: { "@type": "WebPage", "@id": webPageId },
+    articleSection: "Conciergerie Airbnb",
+    about: {
+      "@type": "Thing",
+      name: "Conciergerie Airbnb",
+      description: "Services de gestion de locations courte durée"
+    },
+    audience: AUDIENCE,
+    keywords: ["conciergerie", "airbnb", "location courte durée", "gestion locative", "propriétaire"],
+  };
+
+  // Ajouter le temps de lecture si fourni
+  if (opts?.readingTime) {
+    data.timeRequired = `PT${opts.readingTime}M`;
+  }
+
+  // Ajouter des mots-clés spécifiques si disponibles
+  if (article?.keywords) {
+    data.keywords = Array.isArray(article.keywords) 
+      ? article.keywords.join(", ") 
+      : article.keywords;
+  }
+
+  return data;
+}
+
+// Fonction pour les FAQ structurées
+export function faqJsonLd(article: any) {
+  const faqs = [];
+  
+  // Extraire les questions/réponses de l'article
+  for (let i = 1; i <= 5; i++) {
+    const question = article?.[`question_${i}`];
+    const reponse = article?.[`reponse_${i}`];
+    
+    if (question && reponse) {
+      faqs.push({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: reponse.replace(/<[^>]*>/g, '') // Enlever le HTML pour le texte
+        }
+      });
+    }
+  }
+
+  if (faqs.length === 0) return null;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs,
+    inLanguage: LANG,
+    about: {
+      "@type": "Thing",
+      name: "Conciergerie Airbnb",
+      description: "Questions fréquentes sur les services de conciergerie"
+    }
+  };
+}
+
+// Fonction pour la page web de l'article
+export function articleWebPageJsonLd(article: any) {
+  const webPageId = `${BASE_URL}/${article?.slug}`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": webPageId,
+    name: article?.titre,
+    description: article?.excerpt || article?.resume || article?.titre,
+    url: webPageId,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "Thing",
+      name: "Conciergerie Airbnb",
+      description: "Services de gestion de locations courte durée"
+    },
+    audience: AUDIENCE,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Blog",
+          item: `${BASE_URL}/blog`
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: article?.titre,
+          item: webPageId
+        }
+      ]
+    }
+  };
+}
+
+// Fonction pour la page blog (CollectionPage)
+export function blogCollectionPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${BASE_URL}/blog#collection`,
+    name: "Blog ProprioAdvisor",
+    description: "Articles et conseils sur la conciergerie Airbnb et la location courte durée",
+    url: `${BASE_URL}/blog`,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "Thing",
+      name: "Conciergerie Airbnb",
+      description: "Services de gestion de locations courte durée"
+    },
+    audience: AUDIENCE,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Blog",
+          item: `${BASE_URL}/blog`
+        }
+      ]
+    }
+  };
+}
+
+// Fonction pour la liste des articles du blog
+export function blogItemListJsonLd(articles: any[]) {
+  const itemListElement = articles.slice(0, 10).map((article, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "BlogPosting",
+      "@id": `${BASE_URL}/${article.slug}#article`,
+      headline: article.titre,
+      description: article.excerpt || article.resume || article.titre,
+      url: `${BASE_URL}/${article.slug}`,
+      image: imageOrPlaceholder(article.image),
+      datePublished: iso(article.date_creation || article.createdAt || article.datePublication),
+      dateModified: iso(article.date_modification || article.updatedAt || article.datePublication) ||
+                   iso(article.date_creation || article.createdAt),
+      author: { 
+        "@type": "Person", 
+        name: "David Vauclin",
+        jobTitle: "Expert en location courte durée"
+      },
+      publisher: { "@id": `${BASE_URL}/#organization` },
+      inLanguage: LANG,
+      articleSection: "Conciergerie Airbnb"
+    }
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${BASE_URL}/blog#itemlist`,
+    name: "Articles du blog ProprioAdvisor",
+    description: "Liste des articles sur la conciergerie Airbnb et la location courte durée",
+    url: `${BASE_URL}/blog`,
+    numberOfItems: itemListElement.length,
+    itemListElement,
+    inLanguage: LANG,
+    about: {
+      "@type": "Thing",
+      name: "Conciergerie Airbnb",
+      description: "Services de gestion de locations courte durée"
+    },
+    audience: AUDIENCE
+  };
+}
+
 // Types used by listing builder
 export interface GroupedConciergerieEntry {
   conciergerie: {

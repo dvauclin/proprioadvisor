@@ -40,32 +40,11 @@ export const createWebPageStructuredData = (title: string, description: string, 
   }
 });
 
-// Données structurées pour un article de blog
-export const createArticleStructuredData = (article: any, imageUrl?: string) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: article.titre,
-  description: article.description,
-  image: imageUrl || 'https://proprioadvisor.fr/default-article-image.jpg',
-  author: {
-    '@type': 'Person',
-    name: 'David Vauclin'
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'ProprioAdvisor',
-    logo: {
-      '@type': 'ImageObject',
-      url: 'https://proprioadvisor.fr/logo.png'
-    }
-  },
-  datePublished: article.date_creation,
-  dateModified: article.date_modification || article.date_creation,
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': `https://proprioadvisor.fr/${article.slug}`
-  }
-});
+// DEPRECATED: Utiliser les nouvelles fonctions dans structured-data-models.ts
+// - blogPostingJsonLd() pour les articles de blog
+// - articleJsonLd() pour les articles génériques
+// - faqJsonLd() pour les FAQ
+// - articleWebPageJsonLd() pour les pages web d'articles
 
 // Données structurées pour un fil d'Ariane
 export const createBreadcrumbStructuredData = (items: Array<{ name: string; url?: string }>) => ({

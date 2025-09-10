@@ -7,7 +7,11 @@ import { getAllArticles } from "@/services/supabaseService";
 import { Article } from "@/types";
 import { Loader2 } from "lucide-react";
 import StructuredData from "@/components/seo/StructuredData";
-import { breadcrumbsJsonLd } from "@/lib/structured-data-models";
+import { 
+  breadcrumbsJsonLd, 
+  blogCollectionPageJsonLd, 
+  blogItemListJsonLd 
+} from "@/lib/structured-data-models";
 import Breadcrumbs from "@/components/ui-kit/breadcrumbs";
 
 const Blog: React.FC = () => {
@@ -43,9 +47,18 @@ const Blog: React.FC = () => {
     label: "Blog",
     href: "/blog"
   }];
-  const breadcrumbStructuredData = breadcrumbsJsonLd(
-    breadcrumbItems.map(item => ({ name: item.label, url: item.href }))
-  );
+  
+  // Générer les données structurées pour la page blog
+  const structuredData = [
+    // Breadcrumbs
+    breadcrumbsJsonLd(breadcrumbItems.map(item => ({ name: item.label, url: item.href }))),
+    
+    // CollectionPage pour la page blog
+    blogCollectionPageJsonLd(),
+    
+    // ItemList pour la liste des articles
+    blogItemListJsonLd(safeArticles)
+  ];
 
   return <div className="py-[32px]">
       <Head>
@@ -54,7 +67,7 @@ const Blog: React.FC = () => {
         <link rel="canonical" href="https://proprioadvisor.fr/blog" />
       </Head>
       
-      <StructuredData data={breadcrumbStructuredData} />
+      <StructuredData data={structuredData} />
       
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
