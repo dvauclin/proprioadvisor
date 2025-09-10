@@ -930,6 +930,7 @@ export function webAppJsonLd() {
 
 // Fonction pour la page d'accueil
 export function homePageJsonLd() {
+  const now = new Date().toISOString();
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -939,6 +940,7 @@ export function homePageJsonLd() {
     url: BASE_URL,
     inLanguage: LANG,
     isPartOf: { "@id": `${BASE_URL}/#website` },
+    dateModified: now,
     about: {
       "@type": "Organization",
       name: "ProprioAdvisor",
@@ -984,6 +986,7 @@ export function homePageJsonLd() {
 
 // Fonction pour la page d'inscription
 export function inscriptionPageJsonLd() {
+  const now = new Date().toISOString();
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -993,6 +996,7 @@ export function inscriptionPageJsonLd() {
     url: `${BASE_URL}/inscription`,
     inLanguage: LANG,
     isPartOf: { "@id": `${BASE_URL}/#website` },
+    dateModified: now,
     about: {
       "@type": "Service",
       name: "Inscription ProprioAdvisor",
@@ -1021,6 +1025,7 @@ export function inscriptionPageJsonLd() {
 
 // Fonction pour la page à propos
 export function aboutPageJsonLd() {
+  const now = new Date().toISOString();
   return {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -1030,6 +1035,7 @@ export function aboutPageJsonLd() {
     url: `${BASE_URL}/a-propos`,
     inLanguage: LANG,
     isPartOf: { "@id": `${BASE_URL}/#website` },
+    dateModified: now,
     about: {
       "@type": "Organization",
       name: "ProprioAdvisor",
@@ -1068,6 +1074,7 @@ export function aboutPageJsonLd() {
 
 // Fonction pour la page de contact
 export function contactPageJsonLd() {
+  const now = new Date().toISOString();
   return {
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -1077,6 +1084,7 @@ export function contactPageJsonLd() {
     url: `${BASE_URL}/contact`,
     inLanguage: LANG,
     isPartOf: { "@id": `${BASE_URL}/#website` },
+    dateModified: now,
     about: {
       "@type": "Organization",
       name: "ProprioAdvisor",
@@ -1105,6 +1113,41 @@ export function contactPageJsonLd() {
         }
       ]
     }
+  };
+}
+
+// Fonction pour optimiser les images avec ImageObject schema
+export function imageObjectJsonLd(imageUrl: string, altText?: string, caption?: string) {
+  if (!imageUrl) return null;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    url: imageUrl.startsWith('http') ? imageUrl : `${BASE_URL}${imageUrl}`,
+    ...(altText ? { name: altText } : {}),
+    ...(caption ? { caption: caption } : {}),
+    contentUrl: imageUrl.startsWith('http') ? imageUrl : `${BASE_URL}${imageUrl}`,
+    encodingFormat: "image/jpeg", // Par défaut, peut être amélioré avec détection du type
+    isPartOf: { "@id": `${BASE_URL}/#website` }
+  };
+}
+
+// Fonction pour créer un carousel d'images structuré
+export function imageGalleryJsonLd(images: Array<{ url: string; alt?: string; caption?: string }>, pageUrl: string) {
+  if (!images || images.length === 0) return null;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: "Galerie d'images",
+    description: "Collection d'images de la page",
+    url: pageUrl,
+    numberOfItems: images.length,
+    itemListElement: images.map((image, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: imageObjectJsonLd(image.url, image.alt, image.caption)
+    }))
   };
 }
 

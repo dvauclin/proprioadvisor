@@ -15,7 +15,8 @@ import {
   conciergerieLocalBusinessJsonLd, 
   breadcrumbsJsonLd,
   conciergerieWebPageJsonLd,
-  conciergerieDetailedServiceJsonLd
+  conciergerieDetailedServiceJsonLd,
+  conciergerieReviewsJsonLd
 } from "@/lib/structured-data-models";
 import CommissionSection from "@/components/ui-kit/comparison-card/commission-section";
 import DurationSection from "@/components/ui-kit/comparison-card/duration-section";
@@ -41,6 +42,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
 
   const [averageRating, setAverageRating] = React.useState<number | undefined>();
   const [reviewCount, setReviewCount] = React.useState<number>(0);
+  const [reviews, setReviews] = React.useState<any[]>([]);
   const [structuredDataDetails, setStructuredDataDetails] = React.useState<any>(null);
   const [showDevisModal, setShowDevisModal] = React.useState(false);
   const [selectedFormule, setSelectedFormule] = React.useState<{ formuleId: string; conciergerieId: string; } | null>(null);
@@ -76,15 +78,25 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           console.log("Conciergerie ID:", foundConciergerie.id);
           setConciergerie(foundConciergerie);
 
-          // Fetch avis data for ratings
+          // Fetch avis data for ratings and structured data
           const {
             data: avisDataForRating
-          } = await supabase.from('avis').select('note').eq('conciergerie_id', foundConciergerie.id).eq('valide', true);
+          } = await supabase.from('avis').select('note, commentaire, auteur, date_creation').eq('conciergerie_id', foundConciergerie.id).eq('valide', true);
           
           if (avisDataForRating && avisDataForRating.length > 0) {
             setReviewCount(avisDataForRating.length);
             const avgRating = avisDataForRating.reduce((sum, avis) => sum + avis.note, 0) / avisDataForRating.length;
             setAverageRating(avgRating);
+            
+            // Format reviews for structured data
+            const formattedReviews = avisDataForRating.map(avis => ({
+              id: `avis-${avis.date_creation}-${avis.note}`,
+              note: avis.note,
+              commentaire: avis.commentaire,
+              auteur: avis.auteur,
+              date: avis.date_creation
+            }));
+            setReviews(formattedReviews);
           }
 
 
@@ -209,7 +221,13 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
                 description: foundConciergerie.description,
                 zoneCouverte: foundConciergerie.zoneCouverte,
                 telephoneContact: foundConciergerie.telephoneContact
-              })
+              }),
+              
+              // Avis structurés (si disponibles)
+              reviews.length > 0 ? conciergerieReviewsJsonLd({
+                nom: foundConciergerie.nom,
+                slug: conciergerieSlug
+              }, reviews) : null
             ].filter(Boolean); // Enlever les valeurs null/undefined
 
             setStructuredDataDetails(structuredData);
