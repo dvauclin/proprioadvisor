@@ -25,11 +25,40 @@ import SubscriptionLinkGenerator from "@/components/admin/SubscriptionLinkGenera
 import LeadDetailsDialog from "@/components/admin/LeadDetailsDialog";
 import StarRating from "@/components/ui-kit/star-rating";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui-kit/table";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+
 const Admin = () => {
+  const { user, profile, loading } = useAuth();
+  const router = useRouter();
   const {
     toast
   } = useToast();
   const queryClient = useQueryClient();
+
+  // Vérification de sécurité : rediriger si l'utilisateur n'est pas admin
+  useEffect(() => {
+    if (!loading && (!user || profile?.role !== 'admin')) {
+      router.push('/');
+    }
+  }, [user, profile, loading, router]);
+
+  // Afficher un loader pendant le chargement
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p>Chargement...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Si l'utilisateur n'est pas admin, ne rien afficher (redirection en cours)
+  if (!user || profile?.role !== 'admin') {
+    return null;
+  }
 
   // State for modals and forms
   const [showEditForm, setShowEditForm] = useState(false);

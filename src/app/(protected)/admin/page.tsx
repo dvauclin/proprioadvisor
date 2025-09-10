@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Admin from '@/pages/Admin'
+import ProtectedRoute from '@/components/auth/ProtectedRoute'
 
 export const metadata: Metadata = {
   title: 'Administration | Proprioadvisor',
@@ -16,6 +17,10 @@ export const metadata: Metadata = {
 }
 
 export default function AdminPage() {
-  return <Admin />
+  return (
+    <ProtectedRoute requireAdmin={true}>
+      <Admin />
+    </ProtectedRoute>
+  )
 } 
 
