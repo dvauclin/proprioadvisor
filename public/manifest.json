@@ -1,0 +1,17 @@
+{
+  "name": "ProprioAdvisor",
+  "short_name": "ProprioAdvisor",
+  "description": "SEUL comparateur de conciergeries Airbnb",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#7FFF00",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
