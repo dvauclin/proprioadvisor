@@ -235,6 +235,8 @@ export const triggerConciergerieValidation = async (data: {
   conciergerieID: string;
   nombrePoints: number;
   montantAbonnement: number;
+  siteWeb: boolean;
+  urlSiteWeb: string;
 }): Promise<boolean> => {
   return await triggerWebhook({
     type: 'validation_conciergerie',

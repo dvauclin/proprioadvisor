@@ -169,6 +169,8 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
         conciergerieID: id,
         nombrePoints: subscription?.total_points || 0,
         montantAbonnement: subscription?.monthly_amount || 0,
+        siteWeb: (conciergerie as any).site_web || false,
+        urlSiteWeb: (conciergerie as any).url_site_web || '',
       };
 
       console.log("📤 Webhook data being sent:", webhookData);
