@@ -81,7 +81,7 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
           // Fetch avis data for ratings and structured data
           const {
             data: avisDataForRating
-          } = await supabase.from('avis').select('note, commentaire, auteur, date_creation').eq('conciergerie_id', foundConciergerie.id).eq('valide', true);
+          } = await supabase.from('avis').select('note, commentaire, emetteur, date').eq('conciergerie_id', foundConciergerie.id).eq('valide', true);
           
           if (avisDataForRating && avisDataForRating.length > 0) {
             setReviewCount(avisDataForRating.length);
@@ -90,11 +90,11 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
             
             // Format reviews for structured data
             const formattedReviews = avisDataForRating.map(avis => ({
-              id: `avis-${avis.date_creation}-${avis.note}`,
+              id: `avis-${avis.date}-${avis.note}`,
               note: avis.note,
               commentaire: avis.commentaire,
-              auteur: avis.auteur,
-              date: avis.date_creation
+              auteur: avis.emetteur,
+              date: avis.date
             }));
             setReviews(formattedReviews);
           }
