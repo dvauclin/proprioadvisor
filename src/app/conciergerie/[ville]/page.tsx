@@ -36,23 +36,56 @@ export async function generateMetadata({ params }: ConciergeriePageProps): Promi
       
       const canonicalUrl = `https://proprioadvisor.fr/conciergerie/${villeSlug}`;
       
+      // Mots-clés enrichis avec informations géographiques
+      const keywords = [
+        `conciergerie airbnb ${villeData.nom}`,
+        `conciergerie ${villeData.nom}`,
+        `gestion locative ${villeData.nom}`,
+        `airbnb management ${villeData.nom}`,
+        `location courte durée ${villeData.nom}`,
+        `conciergerie airbnb`,
+        `gestion locative`,
+        `airbnb management`,
+        `location courte durée`,
+        `propriétaire airbnb`,
+        `rentabilité airbnb`,
+        ...(villeData.departementNom ? [`conciergerie ${villeData.departementNom}`, `gestion locative ${villeData.departementNom}`] : [])
+      ];
+
       return {
         title: pageTitle,
         description: pageDescription,
-        keywords: [`conciergerie airbnb, ${villeData.nom}, location courte durée, gestion locative, airbnb management`],
+        keywords: keywords,
+        authors: [{ name: 'David Vauclin' }],
+        category: 'Conciergerie Airbnb',
         openGraph: {
           title: pageTitle,
           description: pageDescription,
           url: canonicalUrl,
           type: 'website',
+          siteName: 'ProprioAdvisor',
+          locale: 'fr_FR',
+          ...(villeData.latitude && villeData.longitude ? {
+            latitude: villeData.latitude,
+            longitude: villeData.longitude
+          } : {}),
         },
         twitter: {
           card: 'summary_large_image',
           title: pageTitle,
           description: pageDescription,
+          creator: '@proprioadvisor',
         },
         alternates: {
           canonical: canonicalUrl,
+        },
+        other: {
+          'geo.region': villeData.departementNom || 'France',
+          'geo.placename': villeData.nom,
+          ...(villeData.latitude && villeData.longitude ? {
+            'geo.position': `${villeData.latitude};${villeData.longitude}`,
+            'ICBM': `${villeData.latitude}, ${villeData.longitude}`
+          } : {}),
         },
       };
     }

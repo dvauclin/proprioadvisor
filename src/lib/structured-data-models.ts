@@ -357,6 +357,222 @@ export function blogItemListJsonLd(articles: any[]) {
   };
 }
 
+// Fonction pour les données structurées Place d'une ville
+export function cityPlaceJsonLd(ville: { 
+  nom: string; 
+  slug: string; 
+  description?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  departementNom?: string;
+  departementNumero?: string;
+}) {
+  const placeId = `${BASE_URL}/conciergerie/${ville.slug}#place`;
+  
+  const data: any = {
+    "@context": "https://schema.org",
+    "@type": "City",
+    "@id": placeId,
+    name: ville.nom,
+    description: ville.description || `Ville de ${ville.nom} en France`,
+    url: `${BASE_URL}/conciergerie/${ville.slug}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: ville.nom,
+      addressCountry: "FR",
+      ...(ville.departementNom ? { addressRegion: ville.departementNom } : {}),
+      ...(ville.departementNumero ? { postalCode: ville.departementNumero } : {})
+    },
+    containedInPlace: {
+      "@type": "Country",
+      name: "France"
+    }
+  };
+
+  // Ajouter les coordonnées géographiques si disponibles
+  if (ville.latitude && ville.longitude) {
+    data.geo = {
+      "@type": "GeoCoordinates",
+      latitude: ville.latitude,
+      longitude: ville.longitude
+    };
+  }
+
+  // Ajouter le département si disponible
+  if (ville.departementNom) {
+    data.containedInPlace = {
+      "@type": "AdministrativeArea",
+      name: ville.departementNom,
+      containedInPlace: {
+        "@type": "Country",
+        name: "France"
+      }
+    };
+  }
+
+  return data;
+}
+
+// Fonction pour la page web de ville
+export function cityWebPageJsonLd(ville: { 
+  nom: string; 
+  slug: string; 
+  description?: string | null;
+  conciergerie_count?: number;
+}) {
+  const webPageId = `${BASE_URL}/conciergerie/${ville.slug}`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": webPageId,
+    name: `Conciergeries Airbnb à ${ville.nom}`,
+    description: ville.description || `Découvrez les meilleures conciergeries Airbnb à ${ville.nom}. Comparez gratuitement les services, tarifs et avis.`,
+    url: webPageId,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "City",
+      name: ville.nom,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: ville.nom,
+        addressCountry: "FR"
+      }
+    },
+    audience: AUDIENCE,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Accueil",
+          item: BASE_URL
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Conciergeries",
+          item: `${BASE_URL}/annuaire`
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: ville.nom,
+          item: webPageId
+        }
+      ]
+    },
+    ...(ville.conciergerie_count ? { 
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: ville.conciergerie_count,
+        name: `Conciergeries Airbnb à ${ville.nom}`
+      }
+    } : {})
+  };
+}
+
+// Fonction pour la page de collection de ville
+export function cityCollectionPageJsonLd(ville: { 
+  nom: string; 
+  slug: string; 
+  description?: string | null;
+  conciergerie_count?: number;
+}) {
+  const collectionId = `${BASE_URL}/conciergerie/${ville.slug}#collection`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": collectionId,
+    name: `Conciergeries Airbnb à ${ville.nom}`,
+    description: ville.description || `Collection des meilleures conciergeries Airbnb à ${ville.nom}. Comparaison détaillée des services, tarifs et avis clients.`,
+    url: `${BASE_URL}/conciergerie/${ville.slug}`,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "City",
+      name: ville.nom,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: ville.nom,
+        addressCountry: "FR"
+      }
+    },
+    audience: AUDIENCE,
+    mainEntity: {
+      "@type": "ItemList",
+      name: `Conciergeries Airbnb à ${ville.nom}`,
+      description: `Liste des conciergeries disponibles à ${ville.nom}`,
+      ...(ville.conciergerie_count ? { numberOfItems: ville.conciergerie_count } : {})
+    }
+  };
+}
+
+// Fonction pour les services de conciergerie dans une ville
+export function conciergerieServiceJsonLd(ville: { nom: string; slug: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${BASE_URL}/conciergerie/${ville.slug}#service`,
+    name: `Services de conciergerie Airbnb à ${ville.nom}`,
+    description: `Services complets de gestion de locations Airbnb à ${ville.nom}. Accueil voyageurs, ménage, maintenance, gestion des réservations.`,
+    provider: { "@id": `${BASE_URL}/#organization` },
+    areaServed: {
+      "@type": "City",
+      name: ville.nom,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: ville.nom,
+        addressCountry: "FR"
+      }
+    },
+    serviceType: "Conciergerie Airbnb",
+    category: "Services de gestion locative",
+    audience: AUDIENCE,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Services de conciergerie Airbnb",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Accueil des voyageurs",
+            description: "Réception et accueil des voyageurs Airbnb"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ménage et entretien",
+            description: "Nettoyage et entretien entre les locations"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Gestion des réservations",
+            description: "Gestion complète des réservations Airbnb"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Maintenance",
+            description: "Maintenance et réparations du bien"
+          }
+        }
+      ]
+    }
+  };
+}
+
 // Types used by listing builder
 export interface GroupedConciergerieEntry {
   conciergerie: {
@@ -513,6 +729,182 @@ export function conciergerieLocalBusinessJsonLd(
   return data;
 }
 
+// Fonction pour la page web de détails de conciergerie
+export function conciergerieWebPageJsonLd(conciergerie: { 
+  nom: string; 
+  slug: string; 
+  description?: string | null;
+  zoneCouverte?: string | null;
+}) {
+  const webPageId = `${BASE_URL}/conciergerie-details/${conciergerie.slug}`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": webPageId,
+    name: `${conciergerie.nom} - Conciergerie Airbnb`,
+    description: conciergerie.description || `Découvrez ${conciergerie.nom}, conciergerie Airbnb spécialisée dans la gestion de locations courte durée.`,
+    url: webPageId,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "LocalBusiness",
+      name: conciergerie.nom,
+      serviceType: "Conciergerie Airbnb",
+      areaServed: {
+        "@type": "Place",
+        name: conciergerie.zoneCouverte || "France"
+      }
+    },
+    audience: AUDIENCE,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Accueil",
+          item: BASE_URL
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Conciergeries",
+          item: `${BASE_URL}/annuaire`
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: conciergerie.nom,
+          item: webPageId
+        }
+      ]
+    }
+  };
+}
+
+// Fonction pour les services détaillés de conciergerie
+export function conciergerieDetailedServiceJsonLd(conciergerie: { 
+  nom: string; 
+  slug: string; 
+  description?: string | null;
+  zoneCouverte?: string | null;
+  telephoneContact?: string | null;
+}) {
+  const serviceId = `${BASE_URL}/conciergerie-details/${conciergerie.slug}#service`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": serviceId,
+    name: `Services de conciergerie Airbnb - ${conciergerie.nom}`,
+    description: conciergerie.description || `Services complets de gestion de locations Airbnb par ${conciergerie.nom}. Accueil voyageurs, ménage, maintenance, gestion des réservations.`,
+    provider: {
+      "@type": "LocalBusiness",
+      name: conciergerie.nom,
+      url: `${BASE_URL}/conciergerie-details/${conciergerie.slug}`,
+      ...(conciergerie.telephoneContact ? { telephone: conciergerie.telephoneContact } : {})
+    },
+    areaServed: {
+      "@type": "Place",
+      name: conciergerie.zoneCouverte || "France"
+    },
+    serviceType: "Conciergerie Airbnb",
+    category: "Services de gestion locative",
+    audience: AUDIENCE,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Services de conciergerie Airbnb",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Accueil des voyageurs",
+            description: "Réception et accueil personnalisé des voyageurs Airbnb"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ménage et entretien",
+            description: "Nettoyage professionnel et entretien entre les locations"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Gestion des réservations",
+            description: "Gestion complète des réservations et communication avec les voyageurs"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Maintenance et réparations",
+            description: "Maintenance préventive et réparations d'urgence"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Optimisation des revenus",
+            description: "Stratégies de pricing et optimisation du taux d'occupation"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Gestion administrative",
+            description: "Gestion des contrats, factures et obligations légales"
+          }
+        }
+      ]
+    }
+  };
+}
+
+// Fonction pour les avis structurés
+export function conciergerieReviewsJsonLd(conciergerie: { 
+  nom: string; 
+  slug: string; 
+}, reviews: Array<{
+  id: string;
+  note: number;
+  commentaire?: string;
+  auteur?: string;
+  date?: string;
+}>) {
+  if (!reviews || reviews.length === 0) return null;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${BASE_URL}/conciergerie-details/${conciergerie.slug}`,
+    name: conciergerie.nom,
+    review: reviews.map(review => ({
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: review.note,
+        bestRating: 5,
+        worstRating: 1
+      },
+      author: {
+        "@type": "Person",
+        name: review.auteur || "Client anonyme"
+      },
+      reviewBody: review.commentaire || "",
+      datePublished: review.date || new Date().toISOString()
+    }))
+  };
+}
+
 export function webAppJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -533,6 +925,186 @@ export function webAppJsonLd() {
     ],
     audience: AUDIENCE,
     inLanguage: LANG,
+  };
+}
+
+// Fonction pour la page d'accueil
+export function homePageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${BASE_URL}/#homepage`,
+    name: "ProprioAdvisor - Comparateur de conciergeries Airbnb",
+    description: "ProprioAdvisor vous aide à trouver la meilleure conciergerie pour votre bien en location courte durée. Comparaison gratuite des services, tarifs et avis.",
+    url: BASE_URL,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "Organization",
+      name: "ProprioAdvisor",
+      description: "Comparateur de conciergeries Airbnb en France"
+    },
+    audience: AUDIENCE,
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Services ProprioAdvisor",
+      description: "Comparateur de conciergeries, simulateur de revenus, annuaire spécialisé",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@type": "Service",
+            name: "Comparateur de conciergeries",
+            description: "Comparez gratuitement les meilleures conciergeries Airbnb"
+          }
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          item: {
+            "@type": "Service",
+            name: "Simulateur de revenus",
+            description: "Estimez vos revenus potentiels sur Airbnb"
+          }
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          item: {
+            "@type": "Service",
+            name: "Annuaire spécialisé",
+            description: "Découvrez toutes les conciergeries par ville"
+          }
+        }
+      ]
+    }
+  };
+}
+
+// Fonction pour la page d'inscription
+export function inscriptionPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${BASE_URL}/inscription`,
+    name: "Inscription - ProprioAdvisor",
+    description: "Inscrivez-vous sur ProprioAdvisor pour accéder à nos services de comparaison de conciergeries Airbnb et optimiser votre location courte durée.",
+    url: `${BASE_URL}/inscription`,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "Service",
+      name: "Inscription ProprioAdvisor",
+      description: "Service d'inscription pour accéder aux fonctionnalités avancées"
+    },
+    audience: AUDIENCE,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Accueil",
+          item: BASE_URL
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Inscription",
+          item: `${BASE_URL}/inscription`
+        }
+      ]
+    }
+  };
+}
+
+// Fonction pour la page à propos
+export function aboutPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${BASE_URL}/a-propos`,
+    name: "À propos de ProprioAdvisor",
+    description: "Découvrez l'histoire, la mission et les valeurs de ProprioAdvisor, le comparateur de conciergeries Airbnb de référence en France.",
+    url: `${BASE_URL}/a-propos`,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "Organization",
+      name: "ProprioAdvisor",
+      description: "Comparateur de conciergeries Airbnb en France",
+      founder: {
+        "@type": "Person",
+        name: "David Vauclin",
+        jobTitle: "Expert en location courte durée"
+      },
+      foundingDate: "2024",
+      areaServed: {
+        "@type": "Country",
+        name: "France"
+      }
+    },
+    audience: AUDIENCE,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Accueil",
+          item: BASE_URL
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "À propos",
+          item: `${BASE_URL}/a-propos`
+        }
+      ]
+    }
+  };
+}
+
+// Fonction pour la page de contact
+export function contactPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": `${BASE_URL}/contact`,
+    name: "Contact - ProprioAdvisor",
+    description: "Contactez l'équipe ProprioAdvisor pour toute question sur nos services de comparaison de conciergeries Airbnb et d'optimisation de location courte durée.",
+    url: `${BASE_URL}/contact`,
+    inLanguage: LANG,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    about: {
+      "@type": "Organization",
+      name: "ProprioAdvisor",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        email: "contact@proprioadvisor.fr",
+        availableLanguage: "French"
+      }
+    },
+    audience: AUDIENCE,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Accueil",
+          item: BASE_URL
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Contact",
+          item: `${BASE_URL}/contact`
+        }
+      ]
+    }
   };
 }
 

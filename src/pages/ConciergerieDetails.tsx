@@ -11,7 +11,12 @@ import { getAllConciergeries, getAllVilles } from "@/lib/data";
 import { findConciergerieBySlug } from "@/utils/conciergerieUtils";
 import { supabase } from "@/integrations/supabase/client";
 import StructuredData from "@/components/seo/StructuredData";
-import { conciergerieLocalBusinessJsonLd, breadcrumbsJsonLd } from "@/lib/structured-data-models";
+import { 
+  conciergerieLocalBusinessJsonLd, 
+  breadcrumbsJsonLd,
+  conciergerieWebPageJsonLd,
+  conciergerieDetailedServiceJsonLd
+} from "@/lib/structured-data-models";
 import CommissionSection from "@/components/ui-kit/comparison-card/commission-section";
 import DurationSection from "@/components/ui-kit/comparison-card/duration-section";
 import FeesSection from "@/components/ui-kit/comparison-card/fees-section";
@@ -167,8 +172,47 @@ const ConciergerieDetails: React.FC<ConciergerieDetailsProps> = ({ conciergerieS
             const aggregate = (reviewCount > 0 && averageRating)
               ? { ratingValue: Number(averageRating.toFixed(1)), reviewCount }
               : null;
-            const sd = conciergerieLocalBusinessJsonLd(foundConciergerie, (formules || []).map(f => ({ nom: f.nom, commission: f.commission })), undefined, { aggregateRating: aggregate });
-            setStructuredDataDetails(sd);
+            
+            // Créer le slug pour la conciergerie
+            const conciergerieSlug = foundConciergerie.nom
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/[^a-z0-9\s-]/g, "")
+              .trim()
+              .replace(/\s+/g, "-")
+              .replace(/-+/g, "-")
+              .replace(/^-+|-+$/g, "");
+
+            // Générer toutes les données structurées
+            const structuredData = [
+              // LocalBusiness principal
+              conciergerieLocalBusinessJsonLd(
+                foundConciergerie, 
+                (formules || []).map(f => ({ nom: f.nom, commission: f.commission })), 
+                undefined, 
+                { aggregateRating: aggregate }
+              ),
+              
+              // WebPage
+              conciergerieWebPageJsonLd({
+                nom: foundConciergerie.nom,
+                slug: conciergerieSlug,
+                description: foundConciergerie.description,
+                zoneCouverte: foundConciergerie.zoneCouverte
+              }),
+              
+              // Services détaillés
+              conciergerieDetailedServiceJsonLd({
+                nom: foundConciergerie.nom,
+                slug: conciergerieSlug,
+                description: foundConciergerie.description,
+                zoneCouverte: foundConciergerie.zoneCouverte,
+                telephoneContact: foundConciergerie.telephoneContact
+              })
+            ].filter(Boolean); // Enlever les valeurs null/undefined
+
+            setStructuredDataDetails(structuredData);
           };
           generateStructuredData();
         }

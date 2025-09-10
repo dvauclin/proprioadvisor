@@ -3,7 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import StructuredData from "@/components/seo/StructuredData";
-import { breadcrumbsJsonLd, listingItemListJsonLd } from "@/lib/structured-data-models";
+import { 
+  breadcrumbsJsonLd, 
+  listingItemListJsonLd,
+  cityPlaceJsonLd,
+  cityWebPageJsonLd,
+  cityCollectionPageJsonLd,
+  conciergerieServiceJsonLd
+} from "@/lib/structured-data-models";
 
 import { Ville, Formule, Conciergerie } from "@/types";
 
@@ -71,12 +78,50 @@ const ConciergerieListingMeta: React.FC<ConciergerieListingMetaProps> = ({
             };
           });
 
-          const data = listingItemListJsonLd(
-            { nom: ville.nom, slug: ville.slug!, description: ville.description },
-            grouped,
-            { dateModified: getLastUpdateDateISO() }
-          );
-          setStructuredDataListing(data);
+          // Générer toutes les données structurées pour la ville
+          const structuredData = [
+            // Place de la ville
+            cityPlaceJsonLd({
+              nom: ville.nom,
+              slug: ville.slug!,
+              description: ville.description,
+              latitude: ville.latitude,
+              longitude: ville.longitude,
+              departementNom: ville.departementNom,
+              departementNumero: ville.departementNumero
+            }),
+            
+            // Page web de la ville
+            cityWebPageJsonLd({
+              nom: ville.nom,
+              slug: ville.slug!,
+              description: ville.description,
+              conciergerie_count: ville.conciergerie_count
+            }),
+            
+            // Collection page
+            cityCollectionPageJsonLd({
+              nom: ville.nom,
+              slug: ville.slug!,
+              description: ville.description,
+              conciergerie_count: ville.conciergerie_count
+            }),
+            
+            // Services de conciergerie
+            conciergerieServiceJsonLd({
+              nom: ville.nom,
+              slug: ville.slug!
+            }),
+            
+            // Liste des conciergeries
+            listingItemListJsonLd(
+              { nom: ville.nom, slug: ville.slug!, description: ville.description },
+              grouped,
+              { dateModified: getLastUpdateDateISO() }
+            )
+          ];
+
+          setStructuredDataListing(structuredData);
         } catch (error) {
           console.error('Error generating structured data:', error);
           // Fallback vers null pour éviter les erreurs
