@@ -125,8 +125,32 @@ const VilleSelectorOptimized: React.FC<VilleSelectorOptimizedProps> = ({ form })
                       <p className="mt-2 text-sm text-gray-600">Chargement des villes...</p>
                     </div>
                   ) : filteredVilles.length === 0 ? (
-                    <div className="py-4 text-center text-gray-500">
-                      {searchTerm ? "Aucune ville trouvée" : "Aucune ville disponible"}
+                    <div>
+                      <div className="py-4 text-center text-gray-500">
+                        {searchTerm ? "Aucune ville trouvée" : "Aucune ville disponible"}
+                      </div>
+                      {/* Option "Autre ville" quand aucune ville ne correspond au filtre */}
+                      <div 
+                        className={`flex items-center space-x-3 p-2 rounded-md transition-colors cursor-pointer ${
+                          selectedVillesIds.includes("other")
+                            ? 'bg-green-50 border border-green-200' 
+                            : 'hover:bg-gray-50'
+                        }`}
+                        onClick={() => handleVilleSelection("other")}
+                      >
+                        <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
+                          selectedVillesIds.includes("other")
+                            ? 'bg-green-600 border-green-600' 
+                            : 'border-gray-300'
+                        }`}>
+                          {selectedVillesIds.includes("other") && <Check className="h-3 w-3 text-white" />}
+                        </div>
+                        <span className={`text-sm flex-1 ${
+                          selectedVillesIds.includes("other") ? 'text-green-800 font-medium' : 'text-gray-700'
+                        }`}>
+                          XX - Autre ville
+                        </span>
+                      </div>
                     </div>
                   ) : (
                     <div className="space-y-2">
@@ -157,28 +181,30 @@ const VilleSelectorOptimized: React.FC<VilleSelectorOptimizedProps> = ({ form })
                           </div>
                         );
                       })}
-                      {/* Option "Autre ville" */}
-                      <div 
-                        className={`flex items-center space-x-3 p-2 rounded-md transition-colors cursor-pointer ${
-                          selectedVillesIds.includes("other")
-                            ? 'bg-green-50 border border-green-200' 
-                            : 'hover:bg-gray-50'
-                        }`}
-                        onClick={() => handleVilleSelection("other")}
-                      >
-                        <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
-                          selectedVillesIds.includes("other")
-                            ? 'bg-green-600 border-green-600' 
-                            : 'border-gray-300'
-                        }`}>
-                          {selectedVillesIds.includes("other") && <Check className="h-3 w-3 text-white" />}
+                      {/* Option "Autre ville" - affichée seulement sans filtre */}
+                      {!searchTerm && (
+                        <div 
+                          className={`flex items-center space-x-3 p-2 rounded-md transition-colors cursor-pointer ${
+                            selectedVillesIds.includes("other")
+                              ? 'bg-green-50 border border-green-200' 
+                              : 'hover:bg-gray-50'
+                          }`}
+                          onClick={() => handleVilleSelection("other")}
+                        >
+                          <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
+                            selectedVillesIds.includes("other")
+                              ? 'bg-green-600 border-green-600' 
+                              : 'border-gray-300'
+                          }`}>
+                            {selectedVillesIds.includes("other") && <Check className="h-3 w-3 text-white" />}
+                          </div>
+                          <span className={`text-sm flex-1 ${
+                            selectedVillesIds.includes("other") ? 'text-green-800 font-medium' : 'text-gray-700'
+                          }`}>
+                            XX - Autre ville
+                          </span>
                         </div>
-                        <span className={`text-sm flex-1 ${
-                          selectedVillesIds.includes("other") ? 'text-green-800 font-medium' : 'text-gray-700'
-                        }`}>
-                          XX - Autre ville
-                        </span>
-                      </div>
+                      )}
                     </div>
                   )}
                 </div>

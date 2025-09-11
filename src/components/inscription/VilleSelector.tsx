@@ -97,8 +97,23 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
                 {villesLoading ? (
                   <div className="py-2 text-center">Chargement des villes...</div>
                 ) : filteredAndSortedVilles.length === 0 ? (
-                  <div className="py-2 text-center text-gray-500">
-                    {searchTerm ? "Aucune ville trouvée" : "Aucune ville disponible"}
+                  <div>
+                    <div className="py-2 text-center text-gray-500">
+                      {searchTerm ? "Aucune ville trouvée" : "Aucune ville disponible"}
+                    </div>
+                    {/* Option "Autre ville" quand aucune ville ne correspond au filtre */}
+                    <div className="flex items-center space-x-2 p-1">
+                      <input 
+                        type="checkbox" 
+                        id="ville-other"
+                        checked={selectedVillesIds.includes("other")}
+                        onChange={() => handleVilleSelection("other")}
+                        className="rounded border-gray-300 text-primary focus:ring-primary"
+                      />
+                      <label htmlFor="ville-other" className="text-sm">
+                        XX - Autre ville
+                      </label>
+                    </div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -116,19 +131,21 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
                         </label>
                       </div>
                     ))}
-                    {/* Option "Autre ville" */}
-                    <div className="flex items-center space-x-2 p-1">
-                      <input 
-                        type="checkbox" 
-                        id="ville-other"
-                        checked={selectedVillesIds.includes("other")}
-                        onChange={() => handleVilleSelection("other")}
-                        className="rounded border-gray-300 text-primary focus:ring-primary"
-                      />
-                      <label htmlFor="ville-other" className="text-sm">
-                        XX - Autre ville
-                      </label>
-                    </div>
+                    {/* Option "Autre ville" - affichée seulement sans filtre */}
+                    {!searchTerm && (
+                      <div className="flex items-center space-x-2 p-1">
+                        <input 
+                          type="checkbox" 
+                          id="ville-other"
+                          checked={selectedVillesIds.includes("other")}
+                          onChange={() => handleVilleSelection("other")}
+                          className="rounded border-gray-300 text-primary focus:ring-primary"
+                        />
+                        <label htmlFor="ville-other" className="text-sm">
+                          XX - Autre ville
+                        </label>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
