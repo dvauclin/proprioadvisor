@@ -116,6 +116,19 @@ const VilleSelector: React.FC<VilleSelectorProps> = ({
                         </label>
                       </div>
                     ))}
+                    {/* Option "Autre ville" */}
+                    <div className="flex items-center space-x-2 p-1">
+                      <input 
+                        type="checkbox" 
+                        id="ville-other"
+                        checked={selectedVillesIds.includes("other")}
+                        onChange={() => handleVilleSelection("other")}
+                        className="rounded border-gray-300 text-primary focus:ring-primary"
+                      />
+                      <label htmlFor="ville-other" className="text-sm">
+                        XX - Autre ville
+                      </label>
+                    </div>
                   </div>
                 )}
               </div>
