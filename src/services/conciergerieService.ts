@@ -130,10 +130,23 @@ export const validateConciergerie = async (id: string): Promise<{ success: boole
               console.log("🔗 Triggering validation webhook for:", conciergerie.nom);
       
       // Get selected cities data with slug for URL
-      const { data: villes } = await supabase
-        .from('villes')
-        .select('id, nom, slug')
-        .in('id', conciergerie.villes_ids || []);
+      // Filter out sentinel values like "other" that are not real city IDs
+      const villeIdsFiltered = (conciergerie.villes_ids || []).filter((id: string) => id && id !== 'other');
+
+      let villes: { id: string; nom: string; slug: string }[] | null = [];
+      if (villeIdsFiltered.length > 0) {
+        const { data, error: villesError } = await supabase
+          .from('villes')
+          .select('id, nom, slug')
+          .in('id', villeIdsFiltered);
+
+        if (villesError) {
+          console.error("❌ Erreur lors de la récupération des villes sélectionnées:", villesError, { villeIdsFiltered });
+        }
+        villes = data || [];
+      } else {
+        console.log("ℹ️ Aucune ville réelle sélectionnée (hors 'other').", { villes_ids: conciergerie.villes_ids });
+      }
 
       // Get subscription data - une conciergerie ne peut avoir qu'un seul abonnement
       const { data: subscription, error: subscriptionError } = await supabase
