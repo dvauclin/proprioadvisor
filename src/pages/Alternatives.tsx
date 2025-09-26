@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui-kit/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui-kit/table";
 
 const Alternatives: React.FC = () => {
   return (
@@ -20,6 +21,68 @@ const Alternatives: React.FC = () => {
           <h1 className="text-4xl font-bold text-center mb-8">ProprioAdvisor et ses alternatives</h1>
 
           <div className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Comparatif rapide (vue propriétaires)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableCaption>Résumé des différences clés pour un propriétaire de LCD.</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Critères</TableHead>
+                      <TableHead>ProprioAdvisor</TableHead>
+                      <TableHead>Co-hôte Airbnb</TableHead>
+                      <TableHead>QuelConcierge</TableHead>
+                      <TableHead>QuelleConciergerie</TableHead>
+                      <TableHead>Driing</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">Approche</TableCell>
+                      <TableCell>Comparateur indépendant, filtres avancés</TableCell>
+                      <TableCell>Solution intégrée Airbnb (co-gestion)</TableCell>
+                      <TableCell>Courtage en devis automatisé</TableCell>
+                      <TableCell>Comparateur axé data et transparence</TableCell>
+                      <TableCell>Annuaire ouvert, contact direct</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Multi-plateformes</TableCell>
+                      <TableCell>Oui (vision marché globale)</TableCell>
+                      <TableCell>Plutôt non (centré Airbnb)</TableCell>
+                      <TableCell>Oui (dépend des devis reçus)</TableCell>
+                      <TableCell>Oui</TableCell>
+                      <TableCell>Oui</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Comparaison</TableCell>
+                      <TableCell>Manuelle guidée par critères</TableCell>
+                      <TableCell>Par le feeling avec un co-hôte</TableCell>
+                      <TableCell>Automatique via devis concurrents</TableCell>
+                      <TableCell>Pilotée par données et analyses</TableCell>
+                      <TableCell>Directe par échanges avec prestataires</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Délai pour options</TableCell>
+                      <TableCell>Immédiat (annuaire + filtres)</TableCell>
+                      <TableCell>Rapide si co-hôte disponible</TableCell>
+                      <TableCell>Quelques heures (réception devis)</TableCell>
+                      <TableCell>Immédiat (outils + estimation)</TableCell>
+                      <TableCell>Immédiat (annuaire/cartes)</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Idéal pour</TableCell>
+                      <TableCell>Comparer finement et garder la décision</TableCell>
+                      <TableCell>Proprio déjà sur Airbnb, besoin clé-en-main</TableCell>
+                      <TableCell>Optimiser le prix sans y passer du temps</TableCell>
+                      <TableCell>Choix rationnel orienté qualité/data</TableCell>
+                      <TableCell>Contact humain direct et autonomie</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl">Contexte</CardTitle>
@@ -72,6 +135,53 @@ const Alternatives: React.FC = () => {
                 <p>
                   Driing enfin apporte l’approche annuaire ouvert et communautaire. Cette plateforme est particulièrement intéressante pour les propriétaires qui souhaitent contacter directement plusieurs conciergeries locales et discuter librement avec elles, ou pour ceux qui sont sensibles à la philosophie sans commission. Driing donne une grande autonomie aux propriétaires dans la recherche (navigation par carte, profil détaillés) tout en restant simple d’utilisation. C’est l’outil idéal si l’on veut prendre contact personnellement avec des conciergeries pour comparer non seulement les offres, mais aussi le feeling humain ou la réactivité, par exemple. Pour les conciergeries, Driing représente une opportunité de marketing en ligne à faible coût, s’intégrant dans un écosystème plus large (celui de Driing, qui prône l’indépendance vis-à-vis des grandes plateformes). Cela correspondra particulièrement aux conciergeries qui valorisent un lien direct avec les clients et qui misent sur leur présentation détaillée pour convaincre.
                 </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Comparatif (vue conciergeries)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableCaption>Ce que chaque plateforme implique pour une conciergerie.</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Critères</TableHead>
+                      <TableHead>ProprioAdvisor</TableHead>
+                      <TableHead>Co-hôte Airbnb</TableHead>
+                      <TableHead>QuelConcierge</TableHead>
+                      <TableHead>QuelleConciergerie</TableHead>
+                      <TableHead>Driing</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">Positionnement</TableCell>
+                      <TableCell>Visibilité gratuite, axée qualité/réputation</TableCell>
+                      <TableCell>Co-gestion dans écosystème Airbnb</TableCell>
+                      <TableCell>Concurrence par devis, effort commercial</TableCell>
+                      <TableCell>Image premium, ciblage propriétaires éduqués</TableCell>
+                      <TableCell>Marketing à faible coût, lien direct</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Facturation plateforme</TableCell>
+                      <TableCell>0€ côté conciergerie</TableCell>
+                      <TableCell>Part du co-hôte (côté opérateur)</TableCell>
+                      <TableCell>Variable selon modèle de courtage</TableCell>
+                      <TableCell>Selon offres (orienté valeur)</TableCell>
+                      <TableCell>Généralement sans commission</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Type de leads</TableCell>
+                      <TableCell>Comparatifs, critères précis</TableCell>
+                      <TableCell>Hôtes Airbnb existants</TableCell>
+                      <TableCell>Sensibles au prix/devis</TableCell>
+                      <TableCell>Qualifiés par data/contenu</TableCell>
+                      <TableCell>Contact direct, découverte locale</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
 
