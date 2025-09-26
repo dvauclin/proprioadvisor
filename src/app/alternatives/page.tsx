@@ -4,9 +4,9 @@ import StructuredData from '@/components/seo/StructuredData'
 import { breadcrumbsJsonLd, BASE_URL, LANG } from '@/lib/structured-data-models'
 
 export const metadata: Metadata = {
-  title: 'ProprioAdvisor et ses alternatives',
+  title: 'Comparatif des plateformes pour trouver des clients en conciergerie',
   description:
-    "Comparatif des alternatives à ProprioAdvisor (co-hôte Airbnb, QuelConcierge, QuelleConciergerie, Driing) et leurs approches pour connecter propriétaires et conciergeries.",
+    "Comparatif des alternatives (co-hôte Airbnb, QuelConcierge, QuelleConciergerie, Driing) et leurs approches pour connecter propriétaires et conciergeries.",
   keywords: [
     'alternatives proprioadvisor',
     'co-hôte airbnb',
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     'comparateur conciergerie',
   ],
   openGraph: {
-    title: 'ProprioAdvisor et ses alternatives',
+    title: 'Comparatif des plateformes pour trouver des clients en conciergerie',
     description:
-      "Comparatif des alternatives à ProprioAdvisor (co-hôte Airbnb, QuelConcierge, QuelleConciergerie, Driing).",
+      "Comparatif des alternatives (co-hôte Airbnb, QuelConcierge, QuelleConciergerie, Driing).",
     url: 'https://proprioadvisor.fr/alternatives',
     siteName: 'ProprioAdvisor',
     locale: 'fr_FR',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ProprioAdvisor et ses alternatives',
+    title: 'Comparatif des plateformes pour trouver des clients en conciergerie',
     description:
-      "Comparatif des alternatives à ProprioAdvisor (co-hôte Airbnb, QuelConcierge, QuelleConciergerie, Driing).",
+      "Comparatif des alternatives (co-hôte Airbnb, QuelConcierge, QuelleConciergerie, Driing).",
     creator: '@proprioadvisor',
   },
   alternates: {
@@ -46,9 +46,9 @@ export default function AlternativesPage() {
   const webPage = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'ProprioAdvisor et ses alternatives',
+    name: 'Comparatif des plateformes pour trouver des clients en conciergerie',
     description:
-      'Comparatif des alternatives à ProprioAdvisor et leurs approches pour connecter propriétaires et conciergeries.',
+      'Comparatif des alternatives et leurs approches pour connecter propriétaires et conciergeries.',
     url: `${BASE_URL}/alternatives`,
     inLanguage: LANG,
     isPartOf: { '@id': `${BASE_URL}/#website` },

@@ -18,7 +18,7 @@ const Alternatives: React.FC = () => {
 
       <div className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-8">ProprioAdvisor et ses alternatives</h1>
+          <h1 className="text-4xl font-bold text-center mb-8">Comparatif des plateformes pour trouver des clients en conciergerie</h1>
 
           <div className="space-y-8">
             <Card>
