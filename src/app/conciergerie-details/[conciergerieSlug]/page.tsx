@@ -4,13 +4,14 @@ import { getAllConciergeries } from '@/lib/data'
 import { findConciergerieBySlug } from '@/utils/conciergerieUtils'
 
 interface ConciergerieDetailsPageProps {
-  params: {
+  params: Promise<{
     conciergerieSlug: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: ConciergerieDetailsPageProps): Promise<Metadata> {
-  const conciergerieSlug = decodeURIComponent(params.conciergerieSlug)
+  const { conciergerieSlug: conciergerieSlugParam } = await params;
+  const conciergerieSlug = decodeURIComponent(conciergerieSlugParam)
   
   try {
     // Récupérer les données de la conciergerie
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: ConciergerieDetailsPageProps)
         openGraph: {
           title,
           description,
-          url: `https://proprioadvisor.fr/conciergerie-details/${params.conciergerieSlug}`,
+          url: `https://proprioadvisor.fr/conciergerie-details/${conciergerieSlugParam}`,
           type: 'website',
           siteName: 'ProprioAdvisor',
           locale: 'fr_FR',
@@ -61,12 +62,12 @@ export async function generateMetadata({ params }: ConciergerieDetailsPageProps)
           creator: '@proprioadvisor',
         },
         alternates: {
-          canonical: `/conciergerie-details/${params.conciergerieSlug}`,
+          canonical: `/conciergerie-details/${conciergerieSlugParam}`,
         },
         other: {
           'business:contact_data:locality': conciergerie.zoneCouverte || 'France',
           'business:contact_data:country_name': 'France',
-          'business:contact_data:website': `https://proprioadvisor.fr/conciergerie-details/${params.conciergerieSlug}`,
+          'business:contact_data:website': `https://proprioadvisor.fr/conciergerie-details/${conciergerieSlugParam}`,
         },
       }
     }
@@ -82,14 +83,15 @@ export async function generateMetadata({ params }: ConciergerieDetailsPageProps)
     openGraph: {
       title: `Conciergerie ${conciergerieSlug} | Proprioadvisor`,
       description: `Découvrez les détails de cette conciergerie Airbnb`,
-      url: `https://proprioadvisor.com/conciergerie-details/${params.conciergerieSlug}`,
+      url: `https://proprioadvisor.com/conciergerie-details/${conciergerieSlugParam}`,
     },
     alternates: {
-      canonical: `/conciergerie-details/${params.conciergerieSlug}`,
+      canonical: `/conciergerie-details/${conciergerieSlugParam}`,
     },
   }
 }
 
-export default function ConciergerieDetailsPage({ params }: ConciergerieDetailsPageProps) {
-  return <ConciergerieDetails conciergerieSlug={params.conciergerieSlug} />
+export default async function ConciergerieDetailsPage({ params }: ConciergerieDetailsPageProps) {
+  const { conciergerieSlug } = await params;
+  return <ConciergerieDetails conciergerieSlug={conciergerieSlug} />
 } 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import StructuredData from '@/components/seo/StructuredData'
 import { inscriptionPageJsonLd } from '@/lib/structured-data-models'
+import InscriptionClient from './InscriptionClient'
 
 export const metadata: Metadata = {
   title: 'Inscription | ProprioAdvisor - Accès aux services premium',
@@ -39,14 +39,12 @@ export const metadata: Metadata = {
 }
 
 export default function InscriptionPage() {
-  const Inscription = dynamic(() => import('@/pages/Inscription'), { ssr: false })
-  
   const structuredData = [inscriptionPageJsonLd()];
 
   return (
     <>
       <StructuredData data={structuredData} />
-      <Inscription />
+      <InscriptionClient />
     </>
   )
 } 

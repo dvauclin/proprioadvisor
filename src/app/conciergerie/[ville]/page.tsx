@@ -3,13 +3,14 @@ import ConciergerieListing from "@/pages/ConciergerieListing";
 import { getAllVilles } from "@/lib/data";
 
 interface ConciergeriePageProps {
-  params: {
+  params: Promise<{
     ville: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: ConciergeriePageProps): Promise<Metadata> {
-  const villeSlug = decodeURIComponent(params.ville);
+  const { ville: villeParam } = await params;
+  const villeSlug = decodeURIComponent(villeParam);
   
   try {
     const villesData = await getAllVilles();
@@ -126,6 +127,7 @@ export async function generateMetadata({ params }: ConciergeriePageProps): Promi
   };
 }
 
-export default function ConciergeriePage({ params }: ConciergeriePageProps) {
-  return <ConciergerieListing ville={params.ville} />;
+export default async function ConciergeriePage({ params }: ConciergeriePageProps) {
+  const { ville } = await params;
+  return <ConciergerieListing ville={ville} />;
 } 

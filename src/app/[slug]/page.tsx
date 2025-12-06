@@ -14,13 +14,14 @@ import {
 } from '@/lib/structured-data-models'
 
 interface ArticlePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const article = await getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   
   if (!article) {
     return {
@@ -67,7 +68,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     openGraph: {
       title: article.titre,
       description: description,
-      url: `https://proprioadvisor.fr/${params.slug}`,
+      url: `https://proprioadvisor.fr/${slug}`,
       type: 'article',
       images: article.image ? [article.image] : [],
       publishedTime: article.date_creation || article.createdAt || article.datePublication,
@@ -84,7 +85,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       creator: '@proprioadvisor',
     },
     alternates: {
-      canonical: `/${params.slug}`,
+      canonical: `/${slug}`,
     },
     other: {
       'article:reading_time': `${readingTime} min`,
@@ -107,7 +108,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 export const revalidate = 60;
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const article = await getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   
   if (!article) {
     notFound();
@@ -126,7 +128,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     },
     {
       label: article.titre,
-      href: `/${params.slug}`
+      href: `/${slug}`
     }
   ];
 

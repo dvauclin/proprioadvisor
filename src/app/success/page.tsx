@@ -4,8 +4,9 @@ import SubscriptionSuccess from '@/pages/SubscriptionSuccess'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ searchParams }: { searchParams: { updated?: string } }): Promise<Metadata> {
-  const isUpdate = searchParams.updated === 'true';
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ updated?: string }> }): Promise<Metadata> {
+  const resolvedSearchParams = await searchParams;
+  const isUpdate = resolvedSearchParams.updated === 'true';
   
   return {
     title: isUpdate ? 'Modification de votre souscription ProprioAdvisor' : 'Création de votre souscription ProprioAdvisor',
