@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Index from '@/pages/Index'
 
 export const metadata: Metadata = {
-  title: 'Proprioadvisor | SEUL comparateur de conciergeries Airbnb',
+  title: 'Proprioadvisor | Comparateur de conciergeries Airbnb',
   description: 'Proprioadvisor vous aide à trouver la meilleure conciergerie pour votre bien en location courte durée',
   keywords: ['conciergerie', 'airbnb', 'location courte durée', 'comparateur', 'propriétaire'],
   openGraph: {
