@@ -128,7 +128,8 @@ export const DevisForm: React.FC<DevisFormProps> = ({
           nom: values.nom,
           email: values.email,
           conciergerie_id: formuleId,
-          conciergerie_nom: conciergerieData?.conciergeries?.nom || conciergerieName
+          conciergerie_nom: conciergerieData?.conciergeries?.nom || conciergerieName,
+          conciergerie_email: conciergerieData?.conciergeries?.mail
         });
         
         toast.success("Votre demande de devis a été envoyée avec succès");

@@ -160,10 +160,13 @@ const MultipleDevisModal: React.FC<MultipleDevisModalProps> = ({
       // Trigger webhook for multiple lead submission
       const conciergeriesInfo = conciergeriesData?.map(formule => ({
         nom: formule.conciergeries?.nom || "Nom inconnu",
-        email: formule.conciergeries?.mail || "Email inconnu"
+        email: formule.conciergeries?.mail || "Email inconnu",
+        conciergerie_email: formule.conciergeries?.mail || "Email inconnu"
       })) || [];
 
       await triggerMultipleLeadsSubmitted({
+        nom: values.nom,
+        email: values.email,
         total_leads: selectedFormules.length,
         conciergeries: conciergeriesInfo
       });

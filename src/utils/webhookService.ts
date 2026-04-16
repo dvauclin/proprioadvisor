@@ -193,6 +193,7 @@ export const triggerLeadSubmitted = async (data: {
   email: string;
   conciergerie_id?: string;
   conciergerie_nom?: string;
+  conciergerie_email?: string;
 }): Promise<boolean> => {
   return await triggerWebhook({
     type: 'lead_submitted',
@@ -203,8 +204,10 @@ export const triggerLeadSubmitted = async (data: {
 
 // 9. Envoi multiple de leads
 export const triggerMultipleLeadsSubmitted = async (data: {
+  nom?: string;
+  email?: string;
   total_leads: number;
-  conciergeries: Array<{ nom: string; email: string }>;
+  conciergeries: Array<{ nom: string; email: string; conciergerie_email?: string }>;
 }): Promise<boolean> => {
   return await triggerWebhook({
     type: 'multiple_leads_submitted',
