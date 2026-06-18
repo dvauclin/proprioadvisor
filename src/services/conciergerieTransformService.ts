@@ -42,33 +42,31 @@ export const transformConciergerieFromDB = (conciergerie: any): Conciergerie => 
     });
   }
   
-  // NOUVELLE LOGIQUE: Score manuel uniquement si pas de souscription
+  // Score effectif : le maximum entre les points de souscription valides et le score manuel.
+  // Le score manuel sert de plancher et est toujours comptabilisé, même en présence d'une souscription.
+  let subscriptionPoints = 0;
   if (conciergerie.subscriptions && conciergerie.subscriptions.length > 0) {
-    // Si l'entreprise a une souscription, utiliser uniquement le score automatique
     const latestSubscription = conciergerie.subscriptions
       .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
-      
+
     if (latestSubscription) {
       // Utiliser les nouveaux utilitaires pour calculer les points valides
-      calculatedScore = getValidTotalPoints(latestSubscription);
-      
-      if (conciergerie.nom?.toLowerCase().includes('aurora')) {
-        console.log("xRx Aurora subscription score calculation:", {
-          latestSubscription,
-          paymentStatus: latestSubscription.payment_status,
-          totalPoints: latestSubscription.total_points,
-          monthlyAmount: latestSubscription.monthly_amount,
-          pointsOptions: latestSubscription.points_options,
-          calculatedScore
-        });
-      }
+      subscriptionPoints = getValidTotalPoints(latestSubscription);
     }
-  } else if (conciergerie.score_manuel !== null && conciergerie.score_manuel !== undefined) {
-    // Score manuel uniquement si pas de souscription
-    calculatedScore = conciergerie.score_manuel;
-    if (conciergerie.nom?.toLowerCase().includes('aurora')) {
-      console.log("xRx Aurora using scoreManuel (no subscription):", calculatedScore);
-    }
+  }
+
+  const manualScore = (conciergerie.score_manuel !== null && conciergerie.score_manuel !== undefined)
+    ? conciergerie.score_manuel
+    : 0;
+
+  calculatedScore = Math.max(subscriptionPoints, manualScore);
+
+  if (conciergerie.nom?.toLowerCase().includes('aurora')) {
+    console.log("xRx Aurora score calculation:", {
+      subscriptionPoints,
+      manualScore,
+      calculatedScore
+    });
   }
   
   if (conciergerie.nom?.toLowerCase().includes('aurora')) {

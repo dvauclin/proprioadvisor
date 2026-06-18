@@ -101,8 +101,8 @@ export const getAllConciergeries = async (): Promise<Conciergerie[]> => {
   // x DIAGNOSTIC: Log all conciergeries with effective scores
   console.log("x ALL CONCIERGERIES EFFECTIVE SCORES:");
   transformedData.forEach(c => {
-    const effectiveScore = c.scoreManuel ?? 0;
-    console.log(`  - ${c.nom}: effectiveScore=${effectiveScore} (scoreManuel=${c.scoreManuel}), createdAt=${c.createdAt}`);
+    // Score effectif = max(points souscription, score manuel), déjà calculé dans c.score
+    console.log(`  - ${c.nom}: effectiveScore=${c.score} (scoreManuel=${c.scoreManuel}), createdAt=${c.createdAt}`);
   });
   
   return transformedData;

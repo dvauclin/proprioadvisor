@@ -49,14 +49,14 @@ const ConciergerieList: React.FC<ConciergerieListProps> = ({
 
 
 
-  // NOUVELLE LOGIQUE: Score manuel uniquement si pas de souscription
+  // Score effectif : le maximum entre les points de souscription et le score manuel
   const sortedFormules = [...formules].sort((a, b) => {
     const subscriptionA = a.conciergerie?.id ? subscriptions.get(a.conciergerie.id) : null;
     const subscriptionB = b.conciergerie?.id ? subscriptions.get(b.conciergerie.id) : null;
-    
-    // Determine effective score: score manuel uniquement si pas de souscription
-    const effectiveScoreA = subscriptionA ? (subscriptionA.total_points || 0) : (a.conciergerie?.scoreManuel ?? 0);
-    const effectiveScoreB = subscriptionB ? (subscriptionB.total_points || 0) : (b.conciergerie?.scoreManuel ?? 0);
+
+    // Le score manuel sert de plancher et est toujours comptabilisé, même avec une souscription
+    const effectiveScoreA = Math.max(subscriptionA?.total_points || 0, a.conciergerie?.scoreManuel ?? 0);
+    const effectiveScoreB = Math.max(subscriptionB?.total_points || 0, b.conciergerie?.scoreManuel ?? 0);
 
     // First: Compare effective scores (highest first)
     if (effectiveScoreA !== effectiveScoreB) {

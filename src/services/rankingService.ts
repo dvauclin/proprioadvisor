@@ -102,10 +102,12 @@ async function calculateVilleRanking(villeId: string, currentConciergerieId: str
       const conciergerie = formule.conciergeries;
       const subscription = conciergerie?.subscriptions?.[0];
       
-      // Même logique que ConciergerieList.tsx : score manuel uniquement si pas de souscription
-      const effectiveScore = subscription?.payment_status === 'completed' 
-        ? (subscription.total_points || 0) 
-        : (conciergerie?.score_manuel ?? 0);
+      // Même logique que ConciergerieList.tsx : max(points souscription valides, score manuel)
+      // Le score manuel sert de plancher, même quand une souscription existe
+      const subscriptionPoints = subscription?.payment_status === 'completed'
+        ? (subscription.total_points || 0)
+        : 0;
+      const effectiveScore = Math.max(subscriptionPoints, conciergerie?.score_manuel ?? 0);
 
       return {
         id: formule.id,
